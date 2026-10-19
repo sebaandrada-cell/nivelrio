@@ -48,6 +48,7 @@ Entradas que la especificación no nombra y que un usuario real encontrará. Cad
 | `fuente/fuentes/avisos.py` | AEMET CAP e INUNCAT |
 | `fuente/alertas.py` | máquina de estados N0-N3 y SD |
 | `fuente/umbrales.py` | umbrales estimados desde series históricas |
+| `fuente/fuentes/prevision.py` | lluvia prevista (Open-Meteo) y caudal esperado (GloFAS vía Open-Meteo); solo informativa |
 | `fuente/actualizar.py` | orquestación, persistencia atómica, política de publicación |
 | `fuente/notificar.py` | redacta el issue de GitHub por cambio de nivel |
 | `fuente/web/logica.js` | funciones puras de la página (formato, edad, rótulos) |
@@ -68,7 +69,7 @@ Entradas que la especificación no nombra y que un usuario real encontrará. Cad
   - `class FuenteError(Exception)`
   - `@dataclass(frozen=True) class Umbrales: bajo: float | None; medio: float | None; alto: float | None; tipo: str  # "oficial" | "estimado" | "en_estudio"`
   - `@dataclass(frozen=True) class Lectura: estacion_id: str; valor: float; unidad: str; t_utc: datetime; fuente: str`
-  - `@dataclass(frozen=True) class Estacion: id: str; rio: str; nombre: str; cuenca: str; fuente: str; muestreo_min: int; umbrales: Umbrales; componente: str | None; id_cha: str | None`  (`componente` = código Sentilo, `id_cha` = `fldTCodigo` de la CHJ)
+  - `@dataclass(frozen=True) class Estacion: id: str; rio: str; nombre: str; cuenca: str; fuente: str; muestreo_min: int; umbrales: Umbrales; componente: str | None; id_cha: str | None; lat: float; lon: float; zona: str`  (`componente` = código Sentilo, `id_cha` = `fldTCodigo` de la CHJ)
   - `@dataclass(frozen=True) class Aviso: origen: str; nivel: str; zona: str; descripcion: str; t_utc: datetime`  (`nivel` ∈ `"amarillo" "naranja" "rojo"`)
 - Produce (`estaciones.py`): `cargar(ruta: str) -> list[Estacion]`. Lanza `ValueError` si hay ids repetidos, si `fuente` no es `"aca"` o `"chj"`, si una estación `aca` no trae `componente`, si una `chj` no trae `id_cha`, o si `umbrales` tiene `tipo` distinto de los tres válidos o valores no crecientes (`bajo < medio < alto`).
 
@@ -193,23 +194,51 @@ Reglas que implementa `evaluar` (todas de la especificación):
 - [ ] **Paso 3: implementar `estimar`** con `statistics.quantiles`. El script se escribe sin prueba automática (usa red) y se verifica a mano en la tarea 11.
 - [ ] **Paso 4: ejecutar.** Esperado: PASAN. Commit `feat: umbrales estimados desde la serie histórica`.
 
+## Tarea 6 bis: Previsión de lluvia y caudal esperado (solo informativa)
+
+**Regla de diseño (decisión de Sebastian, 2026-10-20):** la previsión se muestra, pero **nunca cambia el nivel de alerta ni dispara una notificación**. Solo puede añadir la etiqueta «Podría llegar a <nivel>». No existe una previsión oficial de caudales para estos ríos; el caudal esperado sale de GloFAS (malla de unos 5 km, un dato por día), que no capta crecidas rápidas de rambla, y así debe decirlo la página.
+
+**Archivos:**
+- Crear: `fuente/fuentes/prevision.py`, `tests/test_prevision.py`, `tests/fixtures/openmeteo_forecast.json`, `tests/fixtures/openmeteo_flood.json`
+- Modificar: `fuente/estaciones.json` (cada estación gana `lat`, `lon` sobre el cauce y `zona` ∈ `tarragona|barcelona|girona|interior|valencia`), `fuente/estaciones.py` (validar los tres campos nuevos)
+
+**Interfaces:**
+- Consume: `Estacion` (con `lat`, `lon`, `zona`, `umbrales`), `Umbrales`, `FuenteError`.
+- Produce:
+  - `url_lluvia(lat: float, lon: float) -> str`: `https://api.open-meteo.com/v1/forecast` con `daily=precipitation_sum,precipitation_probability_max`, `forecast_days=3`, `timezone=Europe/Madrid`.
+  - `url_caudal(lat: float, lon: float) -> str`: `https://flood-api.open-meteo.com/v1/flood` con `daily=river_discharge,river_discharge_max`, `forecast_days=3`.
+  - `parse_lluvia(texto: str) -> list[tuple[str, float, int]]`: `(fecha, mm, probabilidad_pct)` por día; valores nulos se leen como `0.0` y `0`.
+  - `parse_caudal(texto: str) -> tuple[float, float] | None`: `(mínimo, máximo)` de los 3 días en m³/s; `None` si todo es nulo.
+  - `coherente(q_observado: float | None, q_modelo: float) -> bool`: falso si `q_observado` es `None` o si la diferencia supera 5 m³/s **y** el cociente sale de `[0.2, 5]`. Evita que la malla de 5 km enganche otro río (punto ciego 6).
+  - `nivel_posible(umbrales: Umbrales, q_max: float) -> int`: 0-3 con los umbrales de la estación; `0` si `umbrales.tipo == "en_estudio"`.
+  - `bajar(estaciones: list[Estacion], abrir=urllib.request.urlopen) -> dict[str, dict]`: `estacion_id -> {"lluvia": [...], "caudal": (min, max) | None}`. Una petición por par `lat,lon`. El fallo de una estación deja su entrada en `None` sin frenar las demás; si fallan todas lanza `FuenteError`.
+- Formato de `data/prevision.json`: `{"generado_utc": iso, "fuente": "Open-Meteo (CC BY 4.0)", "zonas": {"tarragona": [{"fecha", "mm", "prob"}, ...]}, "estaciones": {"<id>": {"lluvia_48h_mm": float, "caudal": [min, max] | null, "puede_llegar": 1|2|3|null}}}`. En `zonas`, `mm` es el máximo entre las estaciones de la zona.
+
+- [ ] **Paso 0: fixtures reales.** Desde un entorno con red permitida (el runner de Actions), guardar una respuesta real de cada endpoint para un punto del Besòs. Comprobar que `river_discharge_max` existe en el endpoint de inundaciones; si no, usar solo `river_discharge` y cambiar `url_caudal` y `parse_caudal`. Comprobar también con el Llobregat y el Ter que `river_discharge` tiene el orden de magnitud del río y no el de un vecino.
+- [ ] **Paso 1: pruebas que fallan.** `test_parse_lluvia_tres_dias`, `test_parse_lluvia_nulos_son_cero`, `test_parse_caudal_todo_nulo_es_none`, `test_coherente_descarta_modelo_desproporcionado` (observado 20, modelo 400 → `False`), `test_coherente_acepta_caudales_pequenos` (observado 2, modelo 6 → `True`), `test_nivel_posible` (Tordera `55/160/320`: 170 → 2; 320 → 3; 30 → 0), `test_en_estudio_no_etiqueta`, `test_fallo_de_una_estacion_no_rompe_las_otras`, `test_todas_fallan_lanza_fuenteerror`.
+- [ ] **Paso 2: ejecutar** `python -m pytest tests/test_prevision.py -v`. Esperado: FALLA.
+- [ ] **Paso 3: implementar.**
+- [ ] **Paso 4: ejecutar.** Esperado: PASAN.
+- [ ] **Paso 5: commit** `feat: previsión de lluvia y caudal esperado (informativa)`.
+
 ## Tarea 7: Orquestador y persistencia
 
 **Archivos:**
 - Crear: `fuente/actualizar.py`, `tests/test_actualizar.py`
-- Datos que escribe: `data/latest.json`, `data/state.json`, `data/avisos.json`, `data/history/AAAA-MM.json`
+- Datos que escribe: `data/latest.json`, `data/state.json`, `data/avisos.json`, `data/history/AAAA-MM.json`, `data/prevision.json`
 
 **Interfaces:**
 - Consume: todo lo anterior.
 - Produce:
   - `escribir_json(ruta: str, obj) -> None`: archivo temporal en el mismo directorio y `os.replace` (atómica).
-  - `ejecutar(ahora: datetime, estaciones: list[Estacion], fuentes: dict, dir_data: str) -> list[Cambio]`, donde `fuentes` es `{"aca": callable, "aca_ventana": callable(sensor, desde, hasta), "chj": callable, "avisos": callable}` (inyectables para pruebas) y `Cambio = {"estacion_id", "nivel_antes", "nivel_despues", "sd", "elevado_por_aviso"}`.
+  - `ejecutar(ahora: datetime, estaciones: list[Estacion], fuentes: dict, dir_data: str) -> list[Cambio]`, donde `fuentes` es `{"aca": callable, "aca_ventana": callable(sensor, desde, hasta), "chj": callable, "avisos": callable, "prevision": callable}` (inyectables para pruebas) y `Cambio = {"estacion_id", "nivel_antes", "nivel_despues", "sd", "elevado_por_aviso"}`.
   - `debe_publicar(cambios: list[Cambio], ahora: datetime) -> bool`: verdadero si hay algún cambio de nivel o de `sd`, o si `ahora.minute < 15` (primera ejecución de cada hora).
   - `main()`: lee `fuente/estaciones.json`, llama a `ejecutar`, escribe `data/` y `GITHUB_OUTPUT` con `publicar=true|false` y el JSON de cambios en `data/cambios.json`.
 - Formato de `latest.json`: `{"generado_utc": iso, "estaciones": [{"id", "rio", "nombre", "cuenca", "valor", "unidad", "t_utc", "edad_min", "nivel": 0-3, "sd": bool, "umbrales": {"bajo","medio","alto","tipo"}, "elevado_por_aviso": bool, "fuente"}], "avisos": [{"origen","nivel","zona","descripcion","t_utc"}], "fuentes_ok": {"aca": bool, "chj": bool, "avisos": bool}}`.
 - El historial guarda, por estación y por hora, el valor máximo observado: `{"<estacion_id>": [["2026-10-19T20:00:00Z", 40.49], ...]}`.
 
-- [ ] **Paso 1: pruebas que fallan.** `test_fuente_que_falla_no_frena_a_las_demas` (la fuente `chj` lanza `FuenteError`: las estaciones CHJ quedan `sd=True` y las ACA tienen nivel; punto ciego 4), `test_cambio_de_nivel_se_reporta`, `test_debe_publicar_solo_si_cambia_o_es_hora_en_punto` (casos: sin cambios a las 20:20 → falso; sin cambios a las 20:05 → verdadero; con cambio a las 20:20 → verdadero), `test_historial_guarda_maximo_horario`, `test_escritura_atomica_no_deja_archivo_a_medias` (simula excepción entre escribir el temporal y `os.replace`; el archivo original sigue íntegro; punto ciego 5), `test_inuncat_en_alerta_eleva_estaciones_catalanas_pero_no_las_valencianas`, `test_ventana_solo_para_estaciones_cerca_del_umbral` (con `fuentes["aca_ventana"]` falso: se llama solo para estaciones con nivel ≥ 1 o valor ≥ 80 % del umbral `bajo`, y el máximo de la ventana sustituye al último valor al evaluar).
+- Regla de la previsión: `ejecutar` llama a `prevision` solo en la primera ejecución de cada hora (`ahora.minute < 15`); el resto reutiliza `data/prevision.json`. Calcula `puede_llegar` como `nivel_posible(...)` solo si es mayor que el nivel actual y el caudal es `coherente`; si no, `null`. **La previsión no entra en `evaluar` ni en `cambios`.** Si `prevision` falla, se conserva el último archivo y `fuentes_ok["prevision"] = False`; no afecta a las alertas.
+- [ ] **Paso 1: pruebas que fallan.** `test_prevision_no_modifica_niveles_ni_cambios` (previsión con caudal máximo enorme: niveles y `cambios` idénticos a los de una ejecución sin previsión), `test_fallo_de_prevision_no_frena_alertas`, `test_prevision_solo_a_la_hora`, `test_fuente_que_falla_no_frena_a_las_demas` (la fuente `chj` lanza `FuenteError`: las estaciones CHJ quedan `sd=True` y las ACA tienen nivel; punto ciego 4), `test_cambio_de_nivel_se_reporta`, `test_debe_publicar_solo_si_cambia_o_es_hora_en_punto` (casos: sin cambios a las 20:20 → falso; sin cambios a las 20:05 → verdadero; con cambio a las 20:20 → verdadero), `test_historial_guarda_maximo_horario`, `test_escritura_atomica_no_deja_archivo_a_medias` (simula excepción entre escribir el temporal y `os.replace`; el archivo original sigue íntegro; punto ciego 5), `test_inuncat_en_alerta_eleva_estaciones_catalanas_pero_no_las_valencianas`, `test_ventana_solo_para_estaciones_cerca_del_umbral` (con `fuentes["aca_ventana"]` falso: se llama solo para estaciones con nivel ≥ 1 o valor ≥ 80 % del umbral `bajo`, y el máximo de la ventana sustituye al último valor al evaluar).
 - [ ] **Paso 2: ejecutar** `python -m pytest tests/test_actualizar.py -v`. Esperado: FALLA.
 - [ ] **Paso 3: implementar.** Cada fuente se llama dentro de `try/except FuenteError`; el error se registra en `fuentes_ok`.
 - [ ] **Paso 4: ejecutar.** Esperado: PASAN.
@@ -245,7 +274,7 @@ Reglas que implementa `evaluar` (todas de la especificación):
   - `ordenarPorPeligro(estaciones): array`: por nivel descendente, luego `sd`, luego río.
   - `tipoUmbralTexto(tipo: "oficial"|"estimado"|"en_estudio", lang): string` (`"estimado, no oficial"`, `"umbral en estudio"`).
   - `idiomaInicial(search: string, guardado: string | null): "es"|"ca"`: `?lang=ca` manda sobre lo guardado; por defecto `"es"`.
-- La página (`page.html`) hace `fetch("data/latest.json", {cache: "no-store"})` cada 5 minutos y renderiza: resumen (conteo por nivel y avisos oficiales vigentes con fuente y hora), una tarjeta por río con su estación más relevante, y detalle por estación con gráfico de d3 de los datos de `data/history/` con líneas de umbral. Si `fuentes_ok` marca una fuente caída, muestra un banner. El pie y los créditos salen de `textos.json`. `localStorage` solo se usa dentro de `try/catch` para recordar el idioma.
+- La página (`page.html`) hace `fetch("data/latest.json", {cache: "no-store"})` cada 5 minutos y renderiza: resumen (conteo por nivel y avisos oficiales vigentes con fuente y hora), una tabla de lluvia prevista por zona (3 días), una tarjeta por río con su estación más relevante (con lluvia 48 h, caudal esperado marcado «orientativo» y, si `puede_llegar` no es nulo, la etiqueta «Podría llegar a <nivel>»), y detalle por estación con gráfico de d3 de los datos de `data/history/` con líneas de umbral. Si `fuentes_ok` marca una fuente caída, muestra un banner. El pie y los créditos salen de `textos.json`. `localStorage` solo se usa dentro de `try/catch` para recordar el idioma.
 
 - [ ] **Paso 1: pruebas que fallan.** En `logica.test.js` (con `node:test`): `edadTexto(7,"es") === "hace 7 min"`, `edadTexto(190,"es") === "hace 3 h 10 min"`, `nivelRotulo(2,false,"es").texto === "Aviso"`, `nivelRotulo(3,true,"es").texto === "Sin datos"`, `ordenarPorPeligro` (caso explícito: entrada `[N0, N3, N1]` → salida `[N3, N1, N0]`; a igual nivel, las estaciones con `sd` van después de las que tienen dato), `idiomaInicial("?lang=ca","es") === "ca"`, `idiomaInicial("", null) === "es"`. En `test_pagina.py`: `test_index_sin_analitica` (el HTML armado no contiene `clarity.ms`, `cloudflareinsights` ni `static.cloudflare`), `test_pie_en_es_y_ca` (`textos.json` tiene la clave del pie en ambos idiomas y contiene «Protecció Civil»), `test_creditos_incluyen_a_ambos_autores` (contiene «Pablo Dodda» y «Sebastian Andrada»), `test_scripts_pasan_node_check`, `test_nivel_no_depende_solo_del_color` (cada rótulo de nivel tiene `simbolo`).
 - [ ] **Paso 2: ejecutar** `node --test tests/web/` y `python -m pytest tests/test_pagina.py -v`. Esperado: FALLAN.
@@ -302,6 +331,8 @@ Estaciones (`componente` de Sentilo; todas con `muestreo_min` leído del catálo
 - [ ] **Paso 4: ejecutar** `python -m pytest -v`. Esperado: todo pasa.
 - [ ] **Paso 5: commit** `feat: catálogo real de estaciones y verificación`.
 
+En esta tarea cada estación de `estaciones.json` recibe también `lat`, `lon` (sobre el cauce, no en el pueblo) y `zona`; `verificar_estaciones.py` comprueba que existen y que `zona` es una de las cinco válidas.
+
 ## Tarea 12: Limpieza del heredado, documentación y créditos
 
 **Archivos:**
@@ -317,6 +348,8 @@ El `README.md` se reescribe en castellano (breve, en un estilo humano y directo)
 - [ ] **Paso 5: commit** `chore: quitar lo específico del Paraná y documentar el proyecto`.
 
 ---
+
+Atribución obligatoria en el pie: «Open-Meteo.com (CC BY 4.0)». La API gratuita de Open-Meteo es solo para uso no comercial.
 
 ## Antes de fusionar a `main`
 

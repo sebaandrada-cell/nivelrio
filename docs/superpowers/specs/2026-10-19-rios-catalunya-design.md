@@ -26,6 +26,7 @@ Lo que la página NO es: un sistema de alerta oficial. No sustituye a Protecció
 - Valencia como contexto: Túria, Xúquer, Poyo (fuente: SAIH Júcar, con umbrales oficiales de caudal).
 - Avisos oficiales mostrados tal cual: feeds CAP de AEMET (AFAC69 Cataluña, AFAC77 Comunitat Valenciana) y el plan INUNCAT activo (dataset `wj9c-j6vf`).
 - Alertas propias en tres niveles más "sin datos", con notificación.
+- Previsión informativa: lluvia prevista por zona y caudal esperado a 72 h (Open-Meteo y GloFAS). Nunca modifica el nivel de alerta ni dispara notificaciones; solo añade la etiqueta «Podría llegar a …».
 - Historial propio, porque ACA solo conserva 3 meses.
 
 ### Fase 2 (depende de gestiones externas)
@@ -33,7 +34,7 @@ Lo que la página NO es: un sistema de alerta oficial. No sustituye a Protecció
 - Segre, Ebre, Noguera Pallaresa y Noguera Ribagorçana: no hay feed encontrado. El SAIH Ebro no respondió desde el entorno de investigación. Primero se prueba desde un runner real de GitHub Actions; si falla, se pide acceso a la CHE.
 - Umbrales oficiales de ACA: se pide la tabla de "llindar d'alerta" y "llindar de perill" a ACA o Protecció Civil.
 - API de Meteocat (avisos por comarca): requiere registro y clave. Cabecera de autenticación y cuotas sin confirmar.
-- Previsión GloFAS vía Open-Meteo y reservas de embalses (`gn9e-3qhr`) como contexto, nunca como alerta.
+- Reservas de embalses (`gn9e-3qhr`) como contexto, nunca como alerta. Previsión de mayor resolución (EFAS, Meteocat) si se consigue acceso.
 
 ### Fuera de alcance
 
@@ -51,6 +52,7 @@ fuente/
   fuentes/aca.py       cliente Sentilo (último valor, ventana de 90 min, catálogo semanal)
   fuentes/chj.py       lee el array `aforos` de saih.chj.es/mapa-aforos, con reintentos
   fuentes/avisos.py    CAP de AEMET + dataset INUNCAT
+  fuentes/prevision.py lluvia (Open-Meteo) y caudal esperado (GloFAS); solo informativa
   alertas.py           máquina de estados (N0-N3, SD) con histéresis
   actualizar.py        orquesta todo y escribe data/
   page.html            diseño de Pablo, generalizado a varias estaciones
@@ -68,7 +70,7 @@ tests/
 
 1. Una llamada a `data/AFORAMENT-EST` (Sentilo) y filtro de los sensores clave. Para unas 25-30 estaciones, pide además la ventana de los últimos 75-90 minutos y calcula máximo y tendencia, para no perder picos entre ejecuciones.
 2. Una petición a `mapa-aforos` del SAIH Júcar con reintentos (el servidor corta cerca de 1 de cada 3 conexiones).
-3. Avisos: feeds CAP de AEMET y dataset INUNCAT.
+3. Avisos: feeds CAP de AEMET y dataset INUNCAT. Previsión: solo en la primera ejecución de cada hora, se consulta Open-Meteo (lluvia y GloFAS); el resto reutiliza el último `prevision.json`.
 4. Normaliza a un esquema común: `fuente`, `timestamp_utc`, `unidad`, `edad_dato`. Todo se guarda en UTC; los timestamps de Sentilo se tratan como UTC.
 5. Evalúa alertas con `state.json`, escribe `latest.json` y agrega al historial. `index.html` es estático y lee `data/latest.json` por `fetch`; el cron solo commitea JSON y no reconstruye la página (así el repo no crece con cada ejecución).
 6. Si cambió un nivel de alerta, dispara la notificación.
@@ -120,6 +122,7 @@ El repo de Sebastian hoy sigue ejecutando el robot del Paraná sobre `main` (el 
 
 - Portada con un resumen: cuántas estaciones están en cada nivel y los avisos oficiales vigentes, con su fuente y su hora.
 - Una tarjeta por río, ordenadas por peligrosidad actual. Cada tarjeta muestra la estación más relevante, la lectura, la tendencia, la edad del dato, la fuente y el nivel con su rótulo ("oficial" o "estimado").
+- Tabla de lluvia prevista por zona (3 días) y, en cada tarjeta, lluvia a 48 h y caudal esperado a 72 h marcado como orientativo. Una nota explica que no existe previsión oficial de caudales y que GloFAS no capta crecidas rápidas de rambla.
 - Detalle por estación con el gráfico de 15 días y 3 meses con las líneas de umbral (el componente de Pablo, generalizado).
 - Pie permanente: "Informativo. Datos provisionales sin validar. No sustituye a Protecció Civil. Siga siempre sus instrucciones." y las atribuciones: ACA, SAIH CHJ, AEMET, Meteocat y Open-Meteo (CC BY 4.0) cuando se use.
 - Idiomas: castellano por defecto, con selector para pasar a catalán.
@@ -138,7 +141,7 @@ El repo de Sebastian hoy sigue ejecutando el robot del Paraná sobre `main` (el 
 - **Falsa seguridad:** el mayor riesgo. Mitigación: rótulo permanente, edad del dato visible y SD que no desactiva alertas.
 - **Datos provisionales:** ACA y CHJ avisan de que no están validados. CHJ no declara licencia ni prohíbe el uso; se pide permiso por escrito a ambas antes de publicar de forma amplia.
 - **Licencia de ACA:** el campo dice "ver términos de uso" y la página de licencias de la Generalitat no se leyó. Se lee antes de publicar.
-- **Open-Meteo:** gratis solo para uso no comercial.
+- **Open-Meteo:** gratis solo para uso no comercial; exige atribución CC BY 4.0. La malla de GloFAS (unos 5 km) puede enganchar otro río, por eso se descarta el caudal esperado si no es coherente con la lectura actual. No resuelve crecidas rápidas de rambla.
 - **Dependencia de endpoints no oficiales:** el array `aforos` de la CHJ está en el HTML de una página. Si cambian la página, el parseo falla; por eso el estado "sin datos" y una alerta de fallo del robot.
 - **Cobertura:** 4 de los 15 ríos no tendrán dato en la fase 1, y faltan puntos clave (Besalú, Castelló en el Fluvià, tramo bajo del Tordera, Alzira, Paiporta, Torrent). La página lo dice en lugar de ocultarlo.
 
@@ -149,3 +152,4 @@ El repo de Sebastian hoy sigue ejecutando el robot del Paraná sobre `main` (el 
 3. Nombre del sitio: "Rius de Catalunya". Rama de trabajo: `catalunya-rios`.
 4. Idioma: castellano por defecto, con opción de cambiar a catalán.
 5. Clave de Meteocat: se hace en una etapa posterior (fase 2).
+6. Previsión (2026-10-20): se incluye en la fase 1 solo como información. No eleva el nivel de alerta ni notifica. Solo muestra «Podría llegar a …».
