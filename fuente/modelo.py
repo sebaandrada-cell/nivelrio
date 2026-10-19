@@ -47,3 +47,4 @@ class Aviso:
     zona: str
     descripcion: str
     t_utc: datetime
+    region: str = ""  # "cat" | "val": a qué estaciones puede afectar; lo asigna quien arma la lista de avisos

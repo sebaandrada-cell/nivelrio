@@ -1,0 +1,286 @@
+#!/usr/bin/env python3
+"""Orquestador: descarga las fuentes, evalúa las alertas, escribe data/*.json y avisa si hay que publicar.
+
+Cada fuente se llama dentro de try/except FuenteError: una fuente caída deja sus estaciones en «sin datos»
+y no frena a las demás. La previsión es solo informativa y nunca entra en `evaluar` ni en `cambios`.
+"""
+import json
+import os
+import sys
+import tempfile
+from dataclasses import replace
+from datetime import datetime, timedelta, timezone
+
+from alertas import ESTADO_INICIAL, estado_a_dict, estado_desde_dict, evaluar
+from modelo import Aviso, FuenteError
+
+# INUNCAT en ALERTA es el estado habitual de Catalunya durante episodios largos: si forzara N3, todas las
+# estaciones saltarían a «Peligro» con caudales normales. Por defecto solo EMERGÈNCIA (rojo) eleva.
+INUNCAT_ALERTA_ELEVA = False
+VENTANA_MIN = 90          # minutos de historia de Sentilo que se miran para no perder picos entre ejecuciones
+CERCA_DEL_UMBRAL = 0.8    # fracción del umbral bajo desde la que se pide la ventana
+
+AQUI = os.path.dirname(os.path.abspath(__file__))
+RUTA_ESTACIONES = os.path.join(AQUI, "estaciones.json")
+DIR_DATA = os.path.join(AQUI, "..", "data")
+
+
+def _iso(d: datetime) -> str:
+    return d.astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def _desde_iso(s: str) -> datetime:
+    return datetime.fromisoformat(s.replace("Z", "+00:00"))
+
+
+def escribir_json(ruta: str, obj) -> None:
+    """Escritura atómica: temporal en el mismo directorio y os.replace. Si falla, el original queda intacto."""
+    carpeta = os.path.dirname(os.path.abspath(ruta))
+    os.makedirs(carpeta, exist_ok=True)
+    fd, tmp = tempfile.mkstemp(dir=carpeta, prefix=".tmp-", suffix=".json")
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as f:
+            json.dump(obj, f, ensure_ascii=False, indent=1)
+            f.write("\n")
+        os.replace(tmp, ruta)
+    except BaseException:
+        try:
+            os.unlink(tmp)
+        except OSError:
+            pass
+        raise
+
+
+def _leer(ruta: str, defecto):
+    try:
+        with open(ruta, encoding="utf-8") as f:
+            return json.load(f)
+    except (OSError, ValueError):
+        return defecto
+
+
+def _aviso_a_dict(a: Aviso) -> dict:
+    return {"origen": a.origen, "nivel": a.nivel, "zona": a.zona, "descripcion": a.descripcion,
+            "t_utc": _iso(a.t_utc), "region": a.region}
+
+
+def _aviso_desde_dict(d: dict) -> Aviso:
+    return Aviso(d["origen"], d["nivel"], d["zona"], d["descripcion"], _desde_iso(d["t_utc"]), d.get("region", ""))
+
+
+def _eleva(avisos: list[Aviso], est) -> bool:
+    region = "val" if est.zona == "valencia" else "cat"
+    for a in avisos:
+        if a.origen == "AEMET" and a.nivel == "rojo" and a.region == region:
+            return True
+        if a.origen == "INUNCAT" and region == "cat" and (a.nivel == "rojo" or (INUNCAT_ALERTA_ELEVA and a.nivel == "naranja")):
+            return True
+    return False
+
+
+def _lectura_para_evaluar(est, lectura, prev, ahora, ventana):
+    """Para estaciones ACA cerca del umbral, el máximo de la ventana sustituye al último valor."""
+    u = est.umbrales
+    if lectura is None or lectura.unidad != "m3s" or est.fuente != "aca" or u.bajo is None:
+        return lectura
+    if not (prev.nivel >= 1 or lectura.valor >= CERCA_DEL_UMBRAL * u.bajo):
+        return lectura
+    try:
+        puntos = ventana(est, ahora - timedelta(minutes=VENTANA_MIN), ahora)
+    except FuenteError:
+        return lectura
+    valores = [v for _, v in puntos]
+    return replace(lectura, valor=max([lectura.valor, *valores])) if valores else lectura
+
+
+def _historial(dir_data: str, ahora: datetime, puntos: dict[str, tuple[datetime, float]]) -> None:
+    ruta = os.path.join(dir_data, "history", ahora.astimezone(timezone.utc).strftime("%Y-%m") + ".json")
+    hist = _leer(ruta, {})
+    for id_, (t, valor) in puntos.items():
+        hora = _iso(t.replace(minute=0, second=0, microsecond=0))
+        filas = hist.setdefault(id_, [])
+        for fila in filas:
+            if fila[0] == hora:
+                fila[1] = max(fila[1], valor)
+                break
+        else:
+            filas.append([hora, valor])
+            filas.sort()
+    escribir_json(ruta, hist)
+
+
+def _puede_llegar(est, caudal, observado, nivel_actual):
+    """Etiqueta informativa. Se compara el observado con el mínimo del modelo (su caudal de base): si el
+    modelo prevé una crecida, su máximo se parece poco al caudal de hoy, y eso no lo hace incoherente."""
+    from fuentes import prevision
+    if not caudal or observado is None or not prevision.coherente(observado, caudal[0]):
+        return None
+    n = prevision.nivel_posible(est.umbrales, caudal[1])
+    return n if n > nivel_actual else None
+
+
+def _doc_prevision(ahora, estaciones, bruto) -> dict:
+    zonas: dict[str, list[dict]] = {}
+    por_est = {}
+    for e in estaciones:
+        p = bruto.get(e.id)
+        if not p:
+            por_est[e.id] = {"lluvia_48h_mm": None, "caudal": None, "puede_llegar": None}
+            continue
+        lluvia = p["lluvia"]
+        por_est[e.id] = {"lluvia_48h_mm": round(sum(mm for _, mm, _ in lluvia[:2]), 1),
+                         "caudal": list(p["caudal"]) if p["caudal"] else None, "puede_llegar": None}
+        dias = zonas.setdefault(e.zona, [])
+        for i, (fecha, mm, prob) in enumerate(lluvia):
+            if i < len(dias):
+                dias[i]["mm"], dias[i]["prob"] = max(dias[i]["mm"], mm), max(dias[i]["prob"], prob)
+            else:
+                dias.append({"fecha": fecha, "mm": mm, "prob": prob})
+    return {"generado_utc": _iso(ahora), "fuente": "Open-Meteo (CC BY 4.0)", "zonas": zonas, "estaciones": por_est}
+
+
+def ejecutar(ahora: datetime, estaciones: list, fuentes: dict, dir_data: str) -> list[dict]:
+    estados_json = _leer(os.path.join(dir_data, "state.json"), {})
+    previo = _leer(os.path.join(dir_data, "latest.json"), {})
+    ok = {}
+
+    # --- lecturas y umbrales vivos ---
+    lecturas, vivos = {}, {}
+    for clave in ("aca", "chj"):
+        ests = [e for e in estaciones if e.fuente == clave]
+        if not ests:
+            ok[clave] = True
+            continue
+        try:
+            ls, um = fuentes[clave](ests)
+            lecturas.update({x.estacion_id: x for x in ls})
+            vivos.update(um)
+            ok[clave] = True
+        except FuenteError:
+            ok[clave] = False
+
+    # --- avisos: si la fuente cae se conservan los últimos, un aviso rojo no desaparece por un corte ---
+    try:
+        avisos = list(fuentes["avisos"]())
+        ok["avisos"] = True
+    except FuenteError:
+        avisos = [_aviso_desde_dict(d) for d in _leer(os.path.join(dir_data, "avisos.json"), [])]
+        ok["avisos"] = False
+
+    # --- niveles ---
+    cambios, nuevos, filas, historial = [], {}, [], {}
+    for est in estaciones:
+        e = replace(est, umbrales=vivos.get(est.id, est.umbrales))
+        existia = est.id in estados_json
+        prev = estado_desde_dict(estados_json[est.id]) if existia else ESTADO_INICIAL
+        lectura = lecturas.get(est.id)
+        nuevo = evaluar(prev, _lectura_para_evaluar(e, lectura, prev, ahora, fuentes["aca_ventana"]), e, ahora,
+                        aviso_rojo=_eleva(avisos, e))
+        nuevos[est.id] = nuevo
+        if (nuevo.nivel != prev.nivel or nuevo.sd != prev.sd) and (existia or nuevo.nivel > 0):
+            cambios.append({"estacion_id": est.id, "nivel_antes": prev.nivel, "nivel_despues": nuevo.nivel,
+                            "sd": nuevo.sd, "elevado_por_aviso": nuevo.elevado_por_aviso})
+        if lectura is not None and lectura.unidad == "m3s":
+            valor, t = lectura.valor, lectura.t_utc
+        else:
+            valor, t = nuevo.ultimo_valor, nuevo.ultimo_t_utc
+        if lectura is not None and lectura.unidad == "m3s" and not nuevo.sd:
+            historial[est.id] = (lectura.t_utc, lectura.valor)
+        filas.append({
+            "id": est.id, "rio": est.rio, "nombre": est.nombre, "cuenca": est.cuenca, "zona": est.zona,
+            "valor": valor, "unidad": "m3s", "t_utc": _iso(t) if t else None,
+            "edad_min": int((ahora - t).total_seconds() // 60) if t else None,
+            "nivel": nuevo.nivel, "sd": nuevo.sd,
+            "umbrales": {"bajo": e.umbrales.bajo, "medio": e.umbrales.medio, "alto": e.umbrales.alto, "tipo": e.umbrales.tipo},
+            "elevado_por_aviso": nuevo.elevado_por_aviso, "fuente": est.fuente,
+        })
+
+    # --- previsión: informativa, una vez por hora; nunca toca niveles ni cambios ---
+    ruta_prev = os.path.join(dir_data, "prevision.json")
+    doc = _leer(ruta_prev, None)
+    ok["prevision"] = previo.get("fuentes_ok", {}).get("prevision", True)
+    if ahora.minute < 15:
+        try:
+            doc = _doc_prevision(ahora, estaciones, fuentes["prevision"](estaciones))
+            ok["prevision"] = True
+        except FuenteError:
+            ok["prevision"] = False
+    if doc:
+        por_id = {f["id"]: f for f in filas}
+        for est in estaciones:
+            p = doc["estaciones"].get(est.id)
+            if p is not None:
+                f = por_id[est.id]
+                e = replace(est, umbrales=vivos.get(est.id, est.umbrales))
+                p["puede_llegar"] = _puede_llegar(e, p.get("caudal"), f["valor"], f["nivel"])
+        escribir_json(ruta_prev, doc)
+
+    # --- persistencia ---
+    escribir_json(os.path.join(dir_data, "state.json"), {i: estado_a_dict(s) for i, s in nuevos.items()})
+    escribir_json(os.path.join(dir_data, "avisos.json"), [_aviso_a_dict(a) for a in avisos])
+    escribir_json(os.path.join(dir_data, "latest.json"), {
+        "generado_utc": _iso(ahora), "estaciones": filas,
+        "avisos": [_aviso_a_dict(a) for a in avisos], "fuentes_ok": ok})
+    _historial(dir_data, ahora, historial)
+    return cambios
+
+
+def debe_publicar(cambios: list[dict], ahora: datetime) -> bool:
+    return bool(cambios) or ahora.minute < 15
+
+
+def _fuentes_reales() -> dict:
+    from fuentes import aca, avisos, chj, prevision
+    cache = {}
+
+    def f_aca(ests):
+        cache["catalogo"] = aca.bajar(aca.URL_CATALOGO)
+        ultimos = aca.parse_ultimos(aca.bajar(aca.URL_ULTIMOS))
+        return aca.lecturas_para(ests, ultimos, cache["catalogo"]), {}
+
+    def f_ventana(est, desde, hasta):
+        catalogo = cache.get("catalogo")
+        sensor = aca.resolver_sensores(catalogo, est.componente)[0] if catalogo else None
+        return aca.parse_ventana(aca.bajar(aca.url_ventana(sensor, desde, hasta))) if sensor else []
+
+    def f_chj(ests):
+        aforos = chj.parse_aforos(chj.bajar_aforos())
+        vivos = {e.id: aforos[e.id_cha]["umbrales"] for e in ests if e.id_cha in aforos}
+        return chj.lecturas_para(ests, aforos), vivos
+
+    def f_avisos():
+        salida, fallo = [], False
+        for clave in ("cat", "val"):
+            try:
+                salida += [replace(a, region=clave) for a in avisos.parse_cap(avisos.bajar_cap(clave))]
+            except FuenteError:
+                fallo = True
+        try:
+            a = avisos.parse_inuncat(avisos.bajar_inuncat())
+            if a:
+                salida.append(replace(a, region="cat"))
+        except FuenteError:
+            fallo = True
+        if fallo:
+            raise FuenteError("avisos: alguna fuente falló; se conservan los últimos")
+        return salida
+
+    return {"aca": f_aca, "aca_ventana": f_ventana, "chj": f_chj, "avisos": f_avisos, "prevision": prevision.bajar}
+
+
+def main() -> int:
+    from estaciones import cargar
+    ahora = datetime.now(timezone.utc).replace(microsecond=0)
+    cambios = ejecutar(ahora, cargar(RUTA_ESTACIONES), _fuentes_reales(), DIR_DATA)
+    escribir_json(os.path.join(DIR_DATA, "cambios.json"), cambios)
+    publicar = debe_publicar(cambios, ahora)
+    print(f"{_iso(ahora)}: {len(cambios)} cambios, publicar={publicar}")
+    salida = os.environ.get("GITHUB_OUTPUT")
+    if salida:
+        with open(salida, "a", encoding="utf-8") as f:
+            f.write(f"publicar={'true' if publicar else 'false'}\n")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
