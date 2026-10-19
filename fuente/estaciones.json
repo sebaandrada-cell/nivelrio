@@ -1,8 +1,610 @@
 [
   {
-    "id": "llobregat-sant-joan-despi", "rio": "Llobregat", "nombre": "Sant Joan Despí", "cuenca": "Llobregat",
-    "fuente": "aca", "muestreo_min": 5, "componente": "082172-002", "id_cha": null,
-    "lat": 41.3695, "lon": 2.0635, "zona": "barcelona",
-    "umbrales": {"bajo": null, "medio": null, "alto": null, "tipo": "en_estudio"}
+    "id": "llobregat-sant-joan-despi",
+    "rio": "Llobregat",
+    "nombre": "Sant Joan Despí",
+    "cuenca": "Llobregat",
+    "fuente": "aca",
+    "muestreo_min": 5,
+    "componente": "082172-002",
+    "id_cha": null,
+    "lat": 41.35181,
+    "lon": 2.0466,
+    "zona": "barcelona",
+    "umbrales": {
+      "bajo": 138.246,
+      "medio": 324.503,
+      "alto": 513.433,
+      "tipo": "estimado"
+    }
+  },
+  {
+    "id": "llobregat-sant-vicenc-dels-horts",
+    "rio": "Llobregat",
+    "nombre": "Sant Vicenç dels Horts",
+    "cuenca": "Llobregat",
+    "fuente": "aca",
+    "muestreo_min": 5,
+    "componente": "082634-001",
+    "id_cha": null,
+    "lat": 41.38656,
+    "lon": 2.02336,
+    "zona": "barcelona",
+    "umbrales": {
+      "bajo": null,
+      "medio": null,
+      "alto": null,
+      "tipo": "en_estudio"
+    }
+  },
+  {
+    "id": "llobregat-castellbisbal",
+    "rio": "Llobregat",
+    "nombre": "Castellbisbal",
+    "cuenca": "Llobregat",
+    "fuente": "aca",
+    "muestreo_min": 5,
+    "componente": "080543-002",
+    "id_cha": null,
+    "lat": 41.4846,
+    "lon": 1.93309,
+    "zona": "barcelona",
+    "umbrales": {
+      "bajo": 40.21,
+      "medio": 102.773,
+      "alto": 265.791,
+      "tipo": "estimado"
+    }
+  },
+  {
+    "id": "llobregat-castellbell",
+    "rio": "Llobregat",
+    "nombre": "Castellbell",
+    "cuenca": "Llobregat",
+    "fuente": "aca",
+    "muestreo_min": 5,
+    "componente": "080538-005",
+    "id_cha": null,
+    "lat": 41.64656,
+    "lon": 1.8584,
+    "zona": "interior",
+    "umbrales": {
+      "bajo": 90.566,
+      "medio": 180.226,
+      "alto": 300.997,
+      "tipo": "estimado"
+    }
+  },
+  {
+    "id": "llobregat-guardiola",
+    "rio": "Llobregat",
+    "nombre": "Guardiola",
+    "cuenca": "Llobregat",
+    "fuente": "aca",
+    "muestreo_min": 5,
+    "componente": "080996-007",
+    "id_cha": null,
+    "lat": 42.21439,
+    "lon": 1.86971,
+    "zona": "interior",
+    "umbrales": {
+      "bajo": 46.081,
+      "medio": 68.953,
+      "alto": 123.744,
+      "tipo": "estimado"
+    }
+  },
+  {
+    "id": "cardener-cardona",
+    "rio": "Cardener",
+    "nombre": "Cardona",
+    "cuenca": "Llobregat",
+    "fuente": "aca",
+    "muestreo_min": 5,
+    "componente": "080478-006",
+    "id_cha": null,
+    "lat": 41.92067,
+    "lon": 1.69608,
+    "zona": "interior",
+    "umbrales": {
+      "bajo": 12.265,
+      "medio": 26.642,
+      "alto": 39.971,
+      "tipo": "estimado"
+    }
+  },
+  {
+    "id": "cardener-suria",
+    "rio": "Cardener",
+    "nombre": "Súria",
+    "cuenca": "Llobregat",
+    "fuente": "aca",
+    "muestreo_min": 5,
+    "componente": "082747-007",
+    "id_cha": null,
+    "lat": 41.81351,
+    "lon": 1.76273,
+    "zona": "interior",
+    "umbrales": {
+      "bajo": 17.142,
+      "medio": 45.894,
+      "alto": 92.134,
+      "tipo": "estimado"
+    }
+  },
+  {
+    "id": "anoia-sant-sadurni",
+    "rio": "Anoia",
+    "nombre": "Sant Sadurní",
+    "cuenca": "Llobregat",
+    "fuente": "aca",
+    "muestreo_min": 5,
+    "componente": "082401-002",
+    "id_cha": null,
+    "lat": 41.4435,
+    "lon": 1.78819,
+    "zona": "barcelona",
+    "umbrales": {
+      "bajo": 11.641,
+      "medio": 29.418,
+      "alto": 38.075,
+      "tipo": "estimado"
+    }
+  },
+  {
+    "id": "anoia-martorell",
+    "rio": "Anoia",
+    "nombre": "Martorell",
+    "cuenca": "Llobregat",
+    "fuente": "aca",
+    "muestreo_min": 5,
+    "componente": "081141-002",
+    "id_cha": null,
+    "lat": 41.4777,
+    "lon": 1.92929,
+    "zona": "barcelona",
+    "umbrales": {
+      "bajo": null,
+      "medio": null,
+      "alto": null,
+      "tipo": "en_estudio"
+    }
+  },
+  {
+    "id": "besos-santa-coloma",
+    "rio": "Besòs",
+    "nombre": "Santa Coloma",
+    "cuenca": "Besòs",
+    "fuente": "aca",
+    "muestreo_min": 5,
+    "componente": "082457-001",
+    "id_cha": null,
+    "lat": 41.4506,
+    "lon": 2.20059,
+    "zona": "barcelona",
+    "umbrales": {
+      "bajo": 44.926,
+      "medio": 72.464,
+      "alto": 86.286,
+      "tipo": "estimado"
+    }
+  },
+  {
+    "id": "ter-girona",
+    "rio": "Ter",
+    "nombre": "Girona",
+    "cuenca": "Ter",
+    "fuente": "aca",
+    "muestreo_min": 5,
+    "componente": "170792-002",
+    "id_cha": null,
+    "lat": 41.99021,
+    "lon": 2.81916,
+    "zona": "girona",
+    "umbrales": {
+      "bajo": 65.656,
+      "medio": 229.931,
+      "alto": 399.472,
+      "tipo": "estimado"
+    }
+  },
+  {
+    "id": "ter-colomers",
+    "rio": "Ter",
+    "nombre": "Colomers",
+    "cuenca": "Ter",
+    "fuente": "aca",
+    "muestreo_min": 5,
+    "componente": "170558-002",
+    "id_cha": null,
+    "lat": 42.07686,
+    "lon": 2.99116,
+    "zona": "girona",
+    "umbrales": {
+      "bajo": 113.785,
+      "medio": 330.689,
+      "alto": 708.852,
+      "tipo": "estimado"
+    }
+  },
+  {
+    "id": "ter-roda-de-ter",
+    "rio": "Ter",
+    "nombre": "Roda de Ter",
+    "cuenca": "Ter",
+    "fuente": "aca",
+    "muestreo_min": 5,
+    "componente": "081831-003",
+    "id_cha": null,
+    "lat": 41.98013,
+    "lon": 2.30814,
+    "zona": "interior",
+    "umbrales": {
+      "bajo": null,
+      "medio": null,
+      "alto": null,
+      "tipo": "en_estudio"
+    }
+  },
+  {
+    "id": "ter-torroella",
+    "rio": "Ter",
+    "nombre": "Torroella",
+    "cuenca": "Ter",
+    "fuente": "aca",
+    "muestreo_min": 5,
+    "componente": "171997-002",
+    "id_cha": null,
+    "lat": 42.03516,
+    "lon": 3.12538,
+    "zona": "girona",
+    "umbrales": {
+      "bajo": 129.781,
+      "medio": 227.084,
+      "alto": 372.344,
+      "tipo": "estimado"
+    }
+  },
+  {
+    "id": "fluvia-esponella",
+    "rio": "Fluvià",
+    "nombre": "Esponellà",
+    "cuenca": "Fluvià",
+    "fuente": "aca",
+    "muestreo_min": 5,
+    "componente": "170656-005",
+    "id_cha": null,
+    "lat": 42.17758,
+    "lon": 2.79865,
+    "zona": "girona",
+    "umbrales": {
+      "bajo": 114.127,
+      "medio": 196.298,
+      "alto": 406.866,
+      "tipo": "estimado"
+    }
+  },
+  {
+    "id": "fluvia-olot",
+    "rio": "Fluvià",
+    "nombre": "Olot",
+    "cuenca": "Fluvià",
+    "fuente": "aca",
+    "muestreo_min": 5,
+    "componente": "171143-002",
+    "id_cha": null,
+    "lat": 42.18866,
+    "lon": 2.51003,
+    "zona": "girona",
+    "umbrales": {
+      "bajo": 19.423,
+      "medio": 40.127,
+      "alto": 55.926,
+      "tipo": "estimado"
+    }
+  },
+  {
+    "id": "muga-pont-de-molins",
+    "rio": "Muga",
+    "nombre": "Pont de Molins",
+    "cuenca": "Muga",
+    "fuente": "aca",
+    "muestreo_min": 5,
+    "componente": "171352-003",
+    "id_cha": null,
+    "lat": 42.31552,
+    "lon": 2.91797,
+    "zona": "girona",
+    "umbrales": {
+      "bajo": 13.434,
+      "medio": 51.297,
+      "alto": 81.908,
+      "tipo": "estimado"
+    }
+  },
+  {
+    "id": "muga-castello-d-empuries",
+    "rio": "Muga",
+    "nombre": "Castelló d'Empúries",
+    "cuenca": "Muga",
+    "fuente": "aca",
+    "muestreo_min": 5,
+    "componente": "170470-003",
+    "id_cha": null,
+    "lat": 42.25438,
+    "lon": 3.072,
+    "zona": "girona",
+    "umbrales": {
+      "bajo": 103.538,
+      "medio": 334.967,
+      "alto": 376.116,
+      "tipo": "estimado"
+    }
+  },
+  {
+    "id": "muga-sant-llorenc",
+    "rio": "Muga",
+    "nombre": "Sant Llorenç",
+    "cuenca": "Muga",
+    "fuente": "aca",
+    "muestreo_min": 15,
+    "componente": "171714-001",
+    "id_cha": null,
+    "lat": 42.3165,
+    "lon": 2.78191,
+    "zona": "girona",
+    "umbrales": {
+      "bajo": 38.47,
+      "medio": 78.021,
+      "alto": 123.887,
+      "tipo": "estimado"
+    }
+  },
+  {
+    "id": "tordera-fogars-de-la-selva",
+    "rio": "Tordera",
+    "nombre": "Fogars de la Selva",
+    "cuenca": "Tordera",
+    "fuente": "aca",
+    "muestreo_min": 5,
+    "componente": "080826-002",
+    "id_cha": null,
+    "lat": 41.73896,
+    "lon": 2.69389,
+    "zona": "barcelona",
+    "umbrales": {
+      "bajo": 49.18,
+      "medio": 95.204,
+      "alto": 114.364,
+      "tipo": "estimado"
+    }
+  },
+  {
+    "id": "tordera-sant-celoni",
+    "rio": "Tordera",
+    "nombre": "Sant Celoni",
+    "cuenca": "Tordera",
+    "fuente": "aca",
+    "muestreo_min": 5,
+    "componente": "082021-001",
+    "id_cha": null,
+    "lat": 41.68034,
+    "lon": 2.48898,
+    "zona": "barcelona",
+    "umbrales": {
+      "bajo": 7.655,
+      "medio": 12.537,
+      "alto": 25.918,
+      "tipo": "estimado"
+    }
+  },
+  {
+    "id": "francoli-montblanc",
+    "rio": "Francolí",
+    "nombre": "Montblanc",
+    "cuenca": "Francolí",
+    "fuente": "aca",
+    "muestreo_min": 5,
+    "componente": "430862-001",
+    "id_cha": null,
+    "lat": 41.36478,
+    "lon": 1.17985,
+    "zona": "tarragona",
+    "umbrales": {
+      "bajo": null,
+      "medio": null,
+      "alto": null,
+      "tipo": "en_estudio"
+    }
+  },
+  {
+    "id": "francoli-tarragona",
+    "rio": "Francolí",
+    "nombre": "Tarragona",
+    "cuenca": "Francolí",
+    "fuente": "aca",
+    "muestreo_min": 5,
+    "componente": "431482-004",
+    "id_cha": null,
+    "lat": 41.14878,
+    "lon": 1.23628,
+    "zona": "tarragona",
+    "umbrales": {
+      "bajo": null,
+      "medio": null,
+      "alto": null,
+      "tipo": "en_estudio"
+    }
+  },
+  {
+    "id": "gaia-vilabella",
+    "rio": "Gaià",
+    "nombre": "Vilabella",
+    "cuenca": "Gaià",
+    "fuente": "aca",
+    "muestreo_min": 5,
+    "componente": "431652-001",
+    "id_cha": null,
+    "lat": 41.23397,
+    "lon": 1.33729,
+    "zona": "tarragona",
+    "umbrales": {
+      "bajo": null,
+      "medio": null,
+      "alto": null,
+      "tipo": "en_estudio"
+    }
+  },
+  {
+    "id": "foix-castellet-i-la-gornal",
+    "rio": "Foix",
+    "nombre": "Castellet i la Gornal",
+    "cuenca": "Foix",
+    "fuente": "aca",
+    "muestreo_min": 5,
+    "componente": "080581-003",
+    "id_cha": null,
+    "lat": 41.26561,
+    "lon": 1.63383,
+    "zona": "barcelona",
+    "umbrales": {
+      "bajo": null,
+      "medio": null,
+      "alto": null,
+      "tipo": "en_estudio"
+    }
+  },
+  {
+    "id": "turia-manises",
+    "rio": "Túria",
+    "nombre": "Manises",
+    "cuenca": "Túria",
+    "fuente": "chj",
+    "muestreo_min": 15,
+    "componente": null,
+    "id_cha": "0R06",
+    "lat": 39.52114,
+    "lon": -0.50561,
+    "zona": "valencia",
+    "umbrales": {
+      "bajo": null,
+      "medio": null,
+      "alto": null,
+      "tipo": "en_estudio"
+    }
+  },
+  {
+    "id": "turia-quart-de-poblet",
+    "rio": "Túria",
+    "nombre": "Quart de Poblet",
+    "cuenca": "Túria",
+    "fuente": "chj",
+    "muestreo_min": 15,
+    "componente": null,
+    "id_cha": "0E02",
+    "lat": 39.48408,
+    "lon": -0.43871,
+    "zona": "valencia",
+    "umbrales": {
+      "bajo": null,
+      "medio": null,
+      "alto": null,
+      "tipo": "en_estudio"
+    }
+  },
+  {
+    "id": "turia-vilamarxant",
+    "rio": "Túria",
+    "nombre": "Vilamarxant",
+    "cuenca": "Túria",
+    "fuente": "chj",
+    "muestreo_min": 15,
+    "componente": null,
+    "id_cha": "0O03",
+    "lat": 39.58144,
+    "lon": -0.6202,
+    "zona": "valencia",
+    "umbrales": {
+      "bajo": null,
+      "medio": null,
+      "alto": null,
+      "tipo": "en_estudio"
+    }
+  },
+  {
+    "id": "turia-bugarra",
+    "rio": "Túria",
+    "nombre": "Bugarra",
+    "cuenca": "Túria",
+    "fuente": "chj",
+    "muestreo_min": 15,
+    "componente": null,
+    "id_cha": "0A01",
+    "lat": 39.60601,
+    "lon": -0.78252,
+    "zona": "valencia",
+    "umbrales": {
+      "bajo": null,
+      "medio": null,
+      "alto": null,
+      "tipo": "en_estudio"
+    }
+  },
+  {
+    "id": "xuquer-algemesi",
+    "rio": "Xúquer",
+    "nombre": "Algemesí",
+    "cuenca": "Xúquer",
+    "fuente": "chj",
+    "muestreo_min": 15,
+    "componente": null,
+    "id_cha": "7A02",
+    "lat": 39.18819,
+    "lon": -0.40949,
+    "zona": "valencia",
+    "umbrales": {
+      "bajo": null,
+      "medio": null,
+      "alto": null,
+      "tipo": "en_estudio"
+    }
+  },
+  {
+    "id": "xuquer-salida-de-tous",
+    "rio": "Xúquer",
+    "nombre": "Salida de Tous",
+    "cuenca": "Xúquer",
+    "fuente": "chj",
+    "muestreo_min": 15,
+    "componente": null,
+    "id_cha": "7E04",
+    "lat": 39.12569,
+    "lon": -0.6451,
+    "zona": "valencia",
+    "umbrales": {
+      "bajo": null,
+      "medio": null,
+      "alto": null,
+      "tipo": "en_estudio"
+    }
+  },
+  {
+    "id": "poyo-n-iii",
+    "rio": "Poyo",
+    "nombre": "N-III",
+    "cuenca": "Poyo",
+    "fuente": "chj",
+    "muestreo_min": 15,
+    "componente": null,
+    "id_cha": "0O04",
+    "lat": 39.47341,
+    "lon": -0.58408,
+    "zona": "valencia",
+    "umbrales": {
+      "bajo": null,
+      "medio": null,
+      "alto": null,
+      "tipo": "en_estudio"
+    }
   }
 ]
