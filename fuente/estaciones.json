@@ -1,0 +1,8 @@
+[
+  {
+    "id": "llobregat-sant-joan-despi", "rio": "Llobregat", "nombre": "Sant Joan Despí", "cuenca": "Llobregat",
+    "fuente": "aca", "muestreo_min": 5, "componente": "082172-002", "id_cha": null,
+    "lat": 41.3695, "lon": 2.0635, "zona": "barcelona",
+    "umbrales": {"bajo": null, "medio": null, "alto": null, "tipo": "en_estudio"}
+  }
+]
