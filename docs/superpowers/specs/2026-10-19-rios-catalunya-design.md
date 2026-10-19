@@ -70,8 +70,10 @@ tests/
 2. Una petición a `mapa-aforos` del SAIH Júcar con reintentos (el servidor corta cerca de 1 de cada 3 conexiones).
 3. Avisos: feeds CAP de AEMET y dataset INUNCAT.
 4. Normaliza a un esquema común: `fuente`, `timestamp_utc`, `unidad`, `edad_dato`. Todo se guarda en UTC; los timestamps de Sentilo se tratan como UTC.
-5. Evalúa alertas con `state.json`, escribe `latest.json`, agrega al historial y rearma `index.html`.
+5. Evalúa alertas con `state.json`, escribe `latest.json` y agrega al historial. `index.html` es estático y lee `data/latest.json` por `fetch`; el cron solo commitea JSON y no reconstruye la página (así el repo no crece con cada ejecución).
 6. Si cambió un nivel de alerta, dispara la notificación.
+
+Política de publicación: cada ejecución descarga y evalúa, pero solo hace commit si cambió algún nivel o estado `SD`, o si es la primera ejecución de cada hora. Así un río en calma genera un commit por hora y uno en alerta, un commit por cada cambio.
 
 Cada ejecución es idempotente. Una fuente que falla no frena las demás: esa fuente queda en "sin datos" y el resto se publica.
 
@@ -94,7 +96,7 @@ Reglas:
 - **Subida:** inmediata cuando el valor supera la entrada en dos lecturas seguidas, o en una sola si la velocidad de subida es alta, siempre que el valor esté dentro del rango del instrumento.
 - **Bajada:** solo cuando el valor queda debajo del 85 % del umbral de entrada durante 3 lecturas o 3 horas, un nivel por vez, nunca de N3 a N0 de golpe.
 - **Sin datos no es "río tranquilo".** Al pasar a SD se conserva el último nivel conocido con la leyenda "último dato hace X". Si era N2 o N3, la alerta se mantiene. Si SD dura más de un periodo configurable, se emite un aviso aparte de "estación sin datos".
-- **Avisos oficiales:** AEMET, Meteocat e INUNCAT no se calculan, se muestran. Pueden elevar el nivel mostrado a N3 con la leyenda "elevado por aviso oficial". Si el caudal está en SD y hay aviso rojo, se escala igual.
+- **Avisos oficiales:** AEMET, Meteocat e INUNCAT no se calculan, se muestran. Pueden elevar el nivel mostrado a N3 con la leyenda "elevado por aviso oficial". Si el caudal está en SD y hay aviso rojo, se escala igual. En la fase 1 solo eleva INUNCAT en alerta o emergencia, y a todas las estaciones catalanas; los avisos de AEMET y Meteocat se muestran sin elevar, porque sus zonas todavía no están cruzadas con las comarcas (fase 2).
 - **Umbrales catalanes estimados:** salen de `hprm-xuw7` (medias diarias desde 2000) y `3yr3-vq6y` (5 minutos desde 2020). Tienen dos sesgos conocidos: las medias diarias subestiman los picos y los ríos regulados (Llobregat, Ter, Ebre) no siguen la estadística natural. Cada uno se muestra como "estimado, no oficial" con su método. Si ACA entrega la tabla oficial, se sustituye sin tocar el resto.
 - Los umbrales de la CHJ son de caudal, no de nivel, y algunos puntos figuran "en estudio"; esos no generan alerta propia.
 
