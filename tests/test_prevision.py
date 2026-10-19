@@ -166,3 +166,18 @@ def test_todas_fallan_lanza_fuenteerror():
     with pytest.raises(FuenteError):
         prevision.bajar([make_estacion(id="a"), make_estacion(id="b", lat=42.0)],
                         abrir=abrir_con(resp), dormir=sin_dormir)
+
+
+def test_parse_lluvia_valor_no_numerico_es_fuenteerror():
+    texto = json.dumps({"daily": {"time": ["2026-10-20"], "precipitation_sum": ["x"], "precipitation_probability_max": [1]}})
+    with pytest.raises(FuenteError):
+        prevision.parse_lluvia(texto)
+
+
+def test_presupuesto_de_tiempo_corta_las_peticiones_pendientes():
+    ests = [make_estacion(id="a", lat=41.0), make_estacion(id="b", lat=42.0), make_estacion(id="c", lat=43.0)]
+    reloj = iter([0, 0, 100, 200, 300])
+    res = prevision.bajar(ests, abrir=abrir_con(respuestas_normales), dormir=sin_dormir,
+                          presupuesto_s=150, reloj=lambda: next(reloj))
+    assert res["a"] is not None and res["b"] is not None
+    assert res["c"] is None

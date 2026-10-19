@@ -91,3 +91,13 @@ def test_la_pagina_pinta_simbolo_junto_al_texto(html):
 def test_pruebas_de_logica_js_pasan():
     r = subprocess.run([NODE, "--test", "tests/web/logica.test.js"], capture_output=True, text=True, cwd=RAIZ)
     assert r.returncode == 0, r.stdout[-2000:]
+
+
+def test_textos_no_prometen_mas_de_lo_que_hay():
+    for lang in ("es", "ca"):
+        t = TEXTOS[lang]
+        assert "oficiales" not in t["desc"] and "oficials" not in t["desc"]
+        assert "15" not in t["desc"]  # se publica cada hora salvo cambios
+        assert "Segre" not in t["zonas"]["interior"]
+        pie = " ".join(t["foot"])
+        assert "Segre" in pie and "Poyo" in pie  # límites de cobertura y de cuencas rápidas

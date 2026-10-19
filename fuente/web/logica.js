@@ -16,7 +16,7 @@
     es: { oficial: "oficial", estimado: "estimado, no oficial", en_estudio: "umbral en estudio" },
     ca: { oficial: "oficial", estimado: "estimat, no oficial", en_estudio: "llindar en estudi" },
   };
-  const LIMITE_DATOS_VIEJOS_MIN = 45;
+  const LIMITE_DATOS_VIEJOS_MIN = 90;
 
   function edadTexto(minutos, lang) {
     if (minutos === null || minutos === undefined || Number.isNaN(minutos)) return "—";
@@ -108,6 +108,19 @@
     return (ahoraMs - Date.parse(generadoIso)) / 60000 > LIMITE_DATOS_VIEJOS_MIN;
   }
 
-  return { edadTexto, nivelRotulo, tipoUmbralTexto, idiomaInicial, ordenarPorPeligro, resumenPorNivel,
+  // La edad se calcula en el navegador: «edad_min» del JSON queda congelada en el momento de generarlo.
+  function edadMin(iso, ahoraMs) {
+    if (!iso) return null;
+    return Math.max(0, Math.floor((ahoraMs - Date.parse(iso)) / 60000));
+  }
+
+  // Añade la lectura actual al historial horario: el historial guarda un punto por hora (el pico) y
+  // compararlo con el valor actual evita que un pico de hace 50 min haga parecer que el río «baja».
+  function serieConActual(hist, tIso, valor) {
+    if (valor == null) return hist;
+    return hist.concat([[tIso, valor]]);
+  }
+
+  return { edadMin, serieConActual, edadTexto, nivelRotulo, tipoUmbralTexto, idiomaInicial, ordenarPorPeligro, resumenPorNivel,
     agruparPorRio, tendencia, filtrarRango, nivelAviso, datosViejos };
 });

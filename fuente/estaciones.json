@@ -50,10 +50,10 @@
     "lon": 1.93309,
     "zona": "barcelona",
     "umbrales": {
-      "bajo": 40.21,
-      "medio": 102.773,
-      "alto": 265.791,
-      "tipo": "estimado"
+      "bajo": null,
+      "medio": null,
+      "alto": null,
+      "tipo": "en_estudio"
     }
   },
   {
@@ -354,10 +354,10 @@
     "lon": 2.78191,
     "zona": "girona",
     "umbrales": {
-      "bajo": 38.47,
-      "medio": 78.021,
-      "alto": 123.887,
-      "tipo": "estimado"
+      "bajo": null,
+      "medio": null,
+      "alto": null,
+      "tipo": "en_estudio"
     }
   },
   {

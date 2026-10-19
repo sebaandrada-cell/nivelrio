@@ -80,7 +80,7 @@ jobs:
 
       - id: notificar
         name: avisar por issue
-        if: steps.actualizar.outcome == 'success'
+        if: always() && steps.actualizar.outcome == 'success'
         timeout-minutes: 3
         env:
           GH_TOKEN: ${{ github.token }}

@@ -55,7 +55,10 @@ def parse_lluvia(texto: str) -> list[tuple[str, float, int]]:
     for i, fecha in enumerate(fechas):
         m = mm[i] if i < len(mm) and mm[i] is not None else 0.0
         p = prob[i] if i < len(prob) and prob[i] is not None else 0
-        out.append((fecha, float(m), int(p)))
+        try:
+            out.append((fecha, float(m), int(p)))
+        except (TypeError, ValueError) as e:
+            raise FuenteError(f"Open-Meteo: valor de lluvia no numérico ({m!r}, {p!r})") from e
     return out
 
 
@@ -69,7 +72,10 @@ def parse_caudal(texto: str):
         medias = maximos
     if not medias:
         return None
-    return float(min(medias)), float(max(maximos))
+    try:
+        return float(min(medias)), float(max(maximos))
+    except (TypeError, ValueError) as e:
+        raise FuenteError(f"Open-Meteo: caudal no numérico: {e}") from e
 
 
 def coherente(q_observado, q_modelo: float) -> bool:
@@ -95,15 +101,21 @@ def nivel_posible(umbrales: Umbrales, q_max: float) -> int:
     return 0
 
 
-def bajar(estaciones, abrir=urllib.request.urlopen, dormir=time.sleep) -> dict:
-    """estacion_id -> {"lluvia": [...], "caudal": (min, max) | None}, o None si falló la lluvia.
-    Una petición por cada par lat,lon. Si fallan todas las estaciones lanza FuenteError."""
+PRESUPUESTO_S = 150   # tope de tiempo total: pasado, los puntos que faltan quedan sin previsión
+
+
+def bajar(estaciones, abrir=urllib.request.urlopen, dormir=time.sleep, presupuesto_s=PRESUPUESTO_S,
+          reloj=time.monotonic) -> dict:
+    """estacion_id -> {"lluvia": [...], "caudal": (min, max) | None}, o None si falló la lluvia o se agotó el
+    presupuesto de tiempo. Una petición por cada par lat,lon. Si fallan todas lanza FuenteError."""
     por_punto: dict = {}
     resultado: dict = {}
+    inicio = reloj()
     for e in estaciones:
         clave = (round(e.lat, 4), round(e.lon, 4))
         if clave not in por_punto:
-            por_punto[clave] = _bajar_punto(e.lat, e.lon, abrir, dormir)
+            por_punto[clave] = (None if reloj() - inicio > presupuesto_s
+                                else _bajar_punto(e.lat, e.lon, abrir, dormir))
         resultado[e.id] = por_punto[clave]
     if estaciones and all(v is None for v in resultado.values()):
         raise FuenteError("Open-Meteo: falló la previsión de todas las estaciones")

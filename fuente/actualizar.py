@@ -17,6 +17,7 @@ from modelo import Aviso, FuenteError
 # INUNCAT en ALERTA es el estado habitual de Catalunya durante episodios largos: si forzara N3, todas las
 # estaciones saltarían a «Peligro» con caudales normales. Por defecto solo EMERGÈNCIA (rojo) eleva.
 INUNCAT_ALERTA_ELEVA = False
+PERIODO_HORARIO = timedelta(minutes=55)  # el cron de GitHub se retrasa: se mide el tiempo, no el minuto del reloj
 VENTANA_MIN = 90          # minutos de historia de Sentilo que se miran para no perder picos entre ejecuciones
 CERCA_DEL_UMBRAL = 0.8    # fracción del umbral bajo desde la que se pide la ventana
 
@@ -69,10 +70,10 @@ def _aviso_desde_dict(d: dict) -> Aviso:
 
 
 def _eleva(avisos: list[Aviso], est) -> bool:
+    """Spec §5, fase 1: solo INUNCAT eleva. Los avisos de AEMET se muestran pero no tocan los niveles,
+    porque sus zonas todavía no están cruzadas con las comarcas de cada río."""
     region = "val" if est.zona == "valencia" else "cat"
     for a in avisos:
-        if a.origen == "AEMET" and a.nivel == "rojo" and a.region == region:
-            return True
         if a.origen == "INUNCAT" and region == "cat" and (a.nivel == "rojo" or (INUNCAT_ALERTA_ELEVA and a.nivel == "naranja")):
             return True
     return False
@@ -89,7 +90,10 @@ def _lectura_para_evaluar(est, lectura, prev, ahora, ventana):
         puntos = ventana(est, ahora - timedelta(minutes=VENTANA_MIN), ahora)
     except FuenteError:
         return lectura
-    valores = [v for _, v in puntos]
+    # Solo cuentan las muestras posteriores a la última ya evaluada: cada muestra vale una vez, y una
+    # muestra suelta dentro de los 90 min no puede contar como lecturas consecutivas en ejecuciones distintas.
+    desde = prev.ultimo_t_utc
+    valores = [v for t, v in puntos if desde is None or t > desde]
     return replace(lectura, valor=max([lectura.valor, *valores])) if valores else lectura
 
 
@@ -199,11 +203,12 @@ def ejecutar(ahora: datetime, estaciones: list, fuentes: dict, dir_data: str) ->
     ruta_prev = os.path.join(dir_data, "prevision.json")
     doc = _leer(ruta_prev, None)
     ok["prevision"] = previo.get("fuentes_ok", {}).get("prevision", True)
-    if ahora.minute < 15:
+    generado = _desde_iso(doc["generado_utc"]) if doc and doc.get("generado_utc") else None
+    if generado is None or ahora - generado >= PERIODO_HORARIO:
         try:
             doc = _doc_prevision(ahora, estaciones, fuentes["prevision"](estaciones))
             ok["prevision"] = True
-        except FuenteError:
+        except Exception:  # noqa: BLE001 - la previsión es informativa: ningún fallo suyo puede frenar las alertas
             ok["prevision"] = False
     if doc:
         por_id = {f["id"]: f for f in filas}
@@ -225,8 +230,21 @@ def ejecutar(ahora: datetime, estaciones: list, fuentes: dict, dir_data: str) ->
     return cambios
 
 
-def debe_publicar(cambios: list[dict], ahora: datetime) -> bool:
-    return bool(cambios) or ahora.minute < 15
+def ultima_publicacion(dir_data: str):
+    t = _leer(os.path.join(dir_data, "meta.json"), {}).get("ultima_publicacion_utc")
+    try:
+        return _desde_iso(t) if t else None
+    except ValueError:
+        return None
+
+
+def registrar_publicacion(dir_data: str, ahora: datetime) -> None:
+    escribir_json(os.path.join(dir_data, "meta.json"), {"ultima_publicacion_utc": _iso(ahora)})
+
+
+def debe_publicar(cambios: list[dict], ahora: datetime, ultima=None) -> bool:
+    """Publica si hay cambios de nivel o si pasó más de ~una hora desde la última publicación."""
+    return bool(cambios) or ultima is None or ahora - ultima >= PERIODO_HORARIO
 
 
 def _fuentes_reales() -> dict:
@@ -273,7 +291,9 @@ def main() -> int:
     ahora = datetime.now(timezone.utc).replace(microsecond=0)
     cambios = ejecutar(ahora, cargar(RUTA_ESTACIONES), _fuentes_reales(), DIR_DATA)
     escribir_json(os.path.join(DIR_DATA, "cambios.json"), cambios)
-    publicar = debe_publicar(cambios, ahora)
+    publicar = debe_publicar(cambios, ahora, ultima_publicacion(DIR_DATA))
+    if publicar:
+        registrar_publicacion(DIR_DATA, ahora)
     print(f"{_iso(ahora)}: {len(cambios)} cambios, publicar={publicar}")
     salida = os.environ.get("GITHUB_OUTPUT")
     if salida:

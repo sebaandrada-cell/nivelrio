@@ -1,8 +1,8 @@
 {
   "es": {
     "title": "Rius de Catalunya",
-    "desc": "Caudal de los ríos de Catalunya con más riesgo de inundación, con contexto de Valencia (Túria, Xúquer, Poyo). Datos oficiales, actualizados cada 15 minutos.",
-    "sub": "Caudal de los ríos de Catalunya con más riesgo de inundación, más contexto de Valencia. Se actualiza cada 15 minutos.",
+    "desc": "Caudal de los ríos de Catalunya con más riesgo de inundación, con contexto de Valencia (Túria, Xúquer, Poyo). Lecturas de la ACA y la CHJ, actualizadas cada hora o antes si cambia un nivel.",
+    "sub": "Caudal de los ríos de Catalunya con más riesgo de inundación, más contexto de Valencia. Se actualiza cada hora, o antes si cambia un nivel.",
     "lang_label": "Idioma",
     "tile_desc": [
       "bajo el umbral",
@@ -22,7 +22,7 @@
       "tarragona": "Tarragona y litoral sur",
       "barcelona": "Barcelona y Maresme",
       "girona": "Girona y Empordà",
-      "interior": "Interior (Lleida, Segre, Cardener)",
+      "interior": "Interior (Lleida, Cardener)",
       "valencia": "València (Túria, Xúquer, Poyo)"
     },
     "est_title": "Ríos, de mayor a menor peligro",
@@ -65,6 +65,7 @@
     "error_load": "No se pudieron cargar los datos. Se reintentará en unos minutos.",
     "foot": [
       "<b>Informativo.</b> Datos provisionales sin validar. No sustituye a Protecció Civil. Siga siempre sus instrucciones. En una emergencia llame al 112.",
+      "<b>Límites.</b> Cuencas rápidas como la rambla del Poyo pueden crecer en menos de una hora, más rápido que esta página. Segre, Ebre y Noguera todavía no tienen estación en la página porque falta una fuente de datos fiable. Los ríos sin umbral muestran solo el caudal.",
       "Fuentes: Agència Catalana de l'Aigua (ACA), Confederación Hidrográfica del Júcar (SAIH), AEMET, Protecció Civil de Catalunya (INUNCAT) y Open-Meteo.com (CC BY 4.0). Los niveles Vigilancia, Aviso y Peligro son una escala propia de esta página, no una escala oficial. Los umbrales de Catalunya son estimaciones calculadas a partir de la serie histórica; los de Valencia son los oficiales de la CHJ.",
       "Hecho por Pablo Dodda. Adaptación para Catalunya: Sebastian Andrada. Licencia MIT."
     ],
@@ -80,8 +81,8 @@
   },
   "ca": {
     "title": "Rius de Catalunya",
-    "desc": "Cabal dels rius de Catalunya amb més risc d'inundació, amb context de València (Túria, Xúquer, Poyo). Dades oficials, actualitzades cada 15 minuts.",
-    "sub": "Cabal dels rius de Catalunya amb més risc d'inundació, més context de València. S'actualitza cada 15 minuts.",
+    "desc": "Cabal dels rius de Catalunya amb més risc d'inundació, amb context de València (Túria, Xúquer, Poyo). Lectures de l'ACA i la CHJ, actualitzades cada hora o abans si canvia un nivell.",
+    "sub": "Cabal dels rius de Catalunya amb més risc d'inundació, més context de València. S'actualitza cada hora, o abans si canvia un nivell.",
     "lang_label": "Idioma",
     "tile_desc": [
       "sota el llindar",
@@ -101,7 +102,7 @@
       "tarragona": "Tarragona i litoral sud",
       "barcelona": "Barcelona i Maresme",
       "girona": "Girona i Empordà",
-      "interior": "Interior (Lleida, Segre, Cardener)",
+      "interior": "Interior (Lleida, Cardener)",
       "valencia": "València (Túria, Xúquer, Poyo)"
     },
     "est_title": "Rius, de més a menys perill",
@@ -144,6 +145,7 @@
     "error_load": "No s'han pogut carregar les dades. Es tornarà a provar d'aquí a uns minuts.",
     "foot": [
       "<b>Informatiu.</b> Dades provisionals sense validar. No substitueix Protecció Civil. Seguiu sempre les seves instruccions. En una emergència truqueu al 112.",
+      "<b>Límits.</b> Les conques ràpides com la rambla del Poyo poden créixer en menys d'una hora, més de pressa que aquesta pàgina. Segre, Ebre i Noguera encara no tenen estació a la pàgina perquè falta una font de dades fiable. Els rius sense llindar només mostren el cabal.",
       "Fonts: Agència Catalana de l'Aigua (ACA), Confederación Hidrográfica del Júcar (SAIH), AEMET, Protecció Civil de Catalunya (INUNCAT) i Open-Meteo.com (CC BY 4.0). Els nivells Vigilància, Avís i Perill són una escala pròpia d'aquesta pàgina, no una escala oficial. Els llindars de Catalunya són estimacions calculades a partir de la sèrie històrica; els de València són els oficials de la CHJ.",
       "Fet per Pablo Dodda. Adaptació per a Catalunya: Sebastian Andrada. Llicència MIT."
     ],

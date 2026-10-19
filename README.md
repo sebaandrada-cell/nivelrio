@@ -1,6 +1,6 @@
 # Rius de Catalunya
 
-Panel público con el caudal de los ríos de Catalunya que más riesgo de inundación tienen, más tres ríos de Valencia como contexto (Túria, Xúquer y la rambla del Poyo). Se actualiza solo cada 15 minutos, no tiene servidor ni analítica, y está en castellano con opción a catalán.
+Panel público con el caudal de los ríos de Catalunya que más riesgo de inundación tienen, más tres ríos de Valencia como contexto (Túria, Xúquer y la rambla del Poyo). Se actualiza solo cada hora (o antes si cambia un nivel), no tiene servidor ni analítica, y está en castellano con opción a catalán.
 
 Es una adaptación de «Apurate José», el panel del Paraná que hizo Pablo Dodda. Se mantiene su diseño y la idea de página estática que se actualiza sola.
 
@@ -25,8 +25,8 @@ Es una adaptación de «Apurate José», el panel del Paraná que hizo Pablo Dod
 Es una escala propia de esta página, no una escala oficial. Cada nivel lleva texto y símbolo, nunca solo color.
 
 - **Valencia (CHJ):** los umbrales son los oficiales del SAIH, se leen en vivo.
-- **Catalunya (ACA):** no hay umbrales públicos por estación. Los de aquí son **estimados** a partir de los máximos anuales de la serie histórica de caudales diarios (mediana, percentil 80 y 95) y están marcados como «estimado, no oficial». Las medias diarias subestiman los picos y los ríos regulados no siguen esa estadística: son una referencia, no una norma. Las estaciones sin serie suficiente muestran el caudal sin nivel («umbral en estudio»).
-- **Avisos:** un aviso rojo de AEMET eleva a N3 las estaciones de su región. INUNCAT solo las eleva en fase de emergencia; la fase de alerta se muestra como aviso pero no cambia los niveles, porque es un estado habitual durante episodios largos.
+- **Catalunya (ACA):** no hay umbrales públicos por estación. Los de aquí son **estimados** a partir de los máximos anuales de la serie histórica de caudales diarios (mediana, percentil 80 y 95) y están marcados como «estimado, no oficial». Las medias diarias subestiman los picos y los ríos regulados no siguen esa estadística: son una referencia, no una norma. Castellbisbal (Llobregat) y Sant Llorenç (Muga) quedan en estudio porque su umbral estimado no era creíble. Las estaciones sin serie suficiente muestran el caudal sin nivel («umbral en estudio»).
+- **Avisos:** los de AEMET se muestran pero no cambian ningún nivel (sus zonas todavía no están cruzadas con las comarcas de cada río). INUNCAT eleva a N3 las estaciones de Catalunya solo en fase de emergencia; la fase de alerta se muestra como aviso pero no cambia los niveles, porque es un estado habitual durante episodios largos.
 - **Previsión:** es solo informativa. Nunca cambia un nivel ni dispara un aviso. Puede añadir la etiqueta «Podría llegar a …».
 
 ## Límites
@@ -42,7 +42,7 @@ Agència Catalana de l'Aigua (ACA, API Sentilo), SAIH de la Confederación Hidro
 
 ## Cómo funciona
 
-Un workflow de GitHub Actions corre cada 15 minutos (`.github/workflows/actualizar.yml`), ejecuta `fuente/actualizar.py` y escribe `data/*.json`. Solo hace commit si cambió algún nivel o es la primera ejecución de la hora; el estado entre ejecuciones se guarda en la caché de Actions. Si un cambio de nivel lo justifica, `fuente/notificar.py` abre un issue (quien sigue el repositorio recibe el aviso). La página (`index.html`) es estática y lee los JSON con `fetch`.
+Un workflow de GitHub Actions corre cada 15 minutos (`.github/workflows/actualizar.yml`), ejecuta `fuente/actualizar.py` y escribe `data/*.json`. Solo hace commit si cambió algún nivel o pasó más de ~55 minutos desde la última publicación (GitHub retrasa los cron, por eso se mide el tiempo y no el minuto del reloj); el estado entre ejecuciones se guarda en la caché de Actions. Si un cambio de nivel lo justifica, `fuente/notificar.py` abre un issue (quien sigue el repositorio recibe el aviso). La página (`index.html`) es estática y lee los JSON con `fetch`.
 
 ```
 fuente/alertas.py          máquina de niveles (función pura)

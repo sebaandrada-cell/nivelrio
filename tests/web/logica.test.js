@@ -115,9 +115,25 @@ test("nivelAviso traduce el color del aviso a nivel 1-3", () => {
   assert.equal(L.nivelAviso("x"), 0);
 });
 
-test("datosViejos avisa cuando el servidor lleva más de 45 min sin actualizar", () => {
+test("datosViejos avisa cuando el servidor lleva más de 90 min sin actualizar", () => {
   const ahora = Date.UTC(2026, 9, 19, 12, 0);
   assert.equal(L.datosViejos("2026-10-19T11:30:00Z", ahora), false);
-  assert.equal(L.datosViejos("2026-10-19T11:00:00Z", ahora), true);
+  assert.equal(L.datosViejos("2026-10-19T10:40:00Z", ahora), false); // se publica cada hora: 80 min aún es normal
+  assert.equal(L.datosViejos("2026-10-19T10:20:00Z", ahora), true);
   assert.equal(L.datosViejos(null, ahora), true);
+});
+
+test("edadMin se calcula con el reloj del navegador, no con el del servidor", () => {
+  const ahora = Date.UTC(2026, 9, 19, 12, 0);
+  assert.equal(L.edadMin("2026-10-19T11:16:00Z", ahora), 44);
+  assert.equal(L.edadMin(null, ahora), null);
+  assert.equal(L.edadMin("2026-10-19T12:05:00Z", ahora), 0);
+});
+
+test("serieConActual añade la lectura actual para que el pico horario no falsee la tendencia", () => {
+  const hist = [["2026-10-19T09:00:00Z", 95], ["2026-10-19T10:00:00Z", 100]];
+  const s = L.serieConActual(hist, "2026-10-19T10:50:00Z", 70);
+  assert.equal(s.length, 3);
+  assert.equal(L.tendencia(s), "baja");
+  assert.deepEqual(L.serieConActual(hist, "2026-10-19T10:50:00Z", null), hist);
 });

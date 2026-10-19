@@ -48,3 +48,9 @@ def test_solo_se_hace_commit_de_data(wf):
 
 def test_nunca_usa_force_push(wf):
     assert "--force" not in RUTA.read_text(encoding="utf-8")
+
+
+def test_notificar_corre_aunque_falle_la_publicacion(wf):
+    """Si el push falla, el estado ya está en la caché: sin always() el aviso se perdería para siempre."""
+    paso = next(p for p in pasos(wf) if p.get("id") == "notificar")
+    assert "always()" in paso["if"]

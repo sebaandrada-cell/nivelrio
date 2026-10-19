@@ -56,10 +56,10 @@
    "nivel": 0,
    "sd": false,
    "umbrales": {
-    "bajo": 40.21,
-    "medio": 102.773,
-    "alto": 265.791,
-    "tipo": "estimado"
+    "bajo": null,
+    "medio": null,
+    "alto": null,
+    "tipo": "en_estudio"
    },
    "elevado_por_aviso": false,
    "fuente": "aca"
@@ -392,10 +392,10 @@
    "nivel": 0,
    "sd": false,
    "umbrales": {
-    "bajo": 38.47,
-    "medio": 78.021,
-    "alto": 123.887,
-    "tipo": "estimado"
+    "bajo": null,
+    "medio": null,
+    "alto": null,
+    "tipo": "en_estudio"
    },
    "elevado_por_aviso": false,
    "fuente": "aca"

@@ -255,7 +255,7 @@ details.det > summary { cursor: pointer; font-size: var(--fs-cap); color: var(--
       ? tag(e.nivel, true) + `<span class="tag" style="--c:${COL[e.nivel]}" title="${esc(t().last_level)}"><span aria-hidden="true">${r.simbolo}</span> ${esc(r.texto)}</span>`
       : tag(e.nivel, false);
     const hist = D.hist[e.id] || [];
-    const tend = L.tendencia(hist);
+    const tend = L.tendencia(L.serieConActual(hist, e.t_utc, e.valor));
     const trTxt = e.sd || !tend ? "" : tend === "sube" ? `▲ ${t().rise}` : tend === "baja" ? `▼ ${t().fall}` : `● ${t().flat}`;
     const valor = e.valor == null
       ? `<div class="big" style="color:var(--sd)">—</div><div class="tr">${esc(t().no_value)}</div>`
@@ -271,7 +271,7 @@ details.det > summary { cursor: pointer; font-size: var(--fs-cap); color: var(--
       <div class="lad" aria-hidden="true">${lad}</div>${nota}
       ${bloquePrevision(e)}
       <div class="meta"><span>${esc(umbralesTexto(e.umbrales))}</span><span>${esc(L.tipoUmbralTexto(e.umbrales.tipo, lang))}</span></div>
-      <div class="meta"><span>${esc(L.edadTexto(e.edad_min, lang))}</span><span>${esc(t().source)}: ${e.fuente === "chj" ? "CHJ" : "ACA"}</span></div>
+      <div class="meta"><span>${esc(L.edadTexto(L.edadMin(e.t_utc, Date.now()), lang))}</span><span>${esc(t().source)}: ${e.fuente === "chj" ? "CHJ" : "ACA"}</span></div>
       ${detalle}
     </article>`;
   }
@@ -310,7 +310,7 @@ details.det > summary { cursor: pointer; font-size: var(--fs-cap); color: var(--
     const botones = t().chart_ranges.map((r, i) => `<button data-r="${i}" aria-pressed="${i === rango}">${esc(r)}</button>`).join("");
     body.innerHTML = `<div class="seg rng" role="group">${botones}</div>` + g.estaciones.map((e) =>
       `<div class="srow"><div class="h"><b>${esc(e.nombre)}</b>${tag(e.nivel, e.sd)}</div>
-        <div class="meta"><span>${e.valor == null ? "—" : num(e.valor) + " m³/s"}</span><span>${esc(L.edadTexto(e.edad_min, lang))}</span></div>
+        <div class="meta"><span>${e.valor == null ? "—" : num(e.valor) + " m³/s"}</span><span>${esc(L.edadTexto(L.edadMin(e.t_utc, Date.now()), lang))}</span></div>
         <div class="meta"><span>${esc(umbralesTexto(e.umbrales))}</span><span>${esc(L.tipoUmbralTexto(e.umbrales.tipo, lang))}</span></div>
         <div class="chbox" data-id="${esc(e.id)}"></div></div>`).join("");
     body.querySelectorAll(".chbox").forEach((el) => grafico(el, g.estaciones.find((e) => e.id === el.dataset.id)));

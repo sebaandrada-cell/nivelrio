@@ -132,11 +132,26 @@ def test_sd_conserva_el_ultimo_valor_conocido(tmp_path):
 
 # ---- publicar ----
 
-def test_debe_publicar_solo_si_cambia_o_es_hora_en_punto():
+def test_debe_publicar_si_hay_cambios_o_nunca_se_publico():
     cambio = [{"estacion_id": "a", "nivel_antes": 0, "nivel_despues": 1, "sd": False, "elevado_por_aviso": False}]
-    assert actualizar.debe_publicar([], utc(2026, 10, 19, 20, 20)) is False
-    assert actualizar.debe_publicar([], utc(2026, 10, 19, 20, 5)) is True
-    assert actualizar.debe_publicar(cambio, utc(2026, 10, 19, 20, 20)) is True
+    reciente = utc(2026, 10, 19, 20, 10)
+    assert actualizar.debe_publicar([], utc(2026, 10, 19, 20, 20), ultima=reciente) is False
+    assert actualizar.debe_publicar(cambio, utc(2026, 10, 19, 20, 20), ultima=reciente) is True
+    assert actualizar.debe_publicar([], utc(2026, 10, 19, 20, 20)) is True  # primera vez
+
+
+def test_debe_publicar_por_antiguedad_de_la_ultima_publicacion():
+    """El cron de GitHub se retrasa: no se puede depender de que caiga en los minutos 0-14."""
+    ahora = utc(2026, 10, 19, 20, 20)
+    assert actualizar.debe_publicar([], ahora, ultima=utc(2026, 10, 19, 19, 20)) is True
+    assert actualizar.debe_publicar([], ahora, ultima=utc(2026, 10, 19, 19, 50)) is False
+    assert actualizar.debe_publicar([], utc(2026, 10, 19, 20, 5), ultima=utc(2026, 10, 19, 20, 0)) is False
+
+
+def test_registrar_y_leer_ultima_publicacion(tmp_path):
+    assert actualizar.ultima_publicacion(str(tmp_path)) is None
+    actualizar.registrar_publicacion(str(tmp_path), utc(2026, 10, 19, 20, 20))
+    assert actualizar.ultima_publicacion(str(tmp_path)) == utc(2026, 10, 19, 20, 20)
 
 
 # ---- historial ----
@@ -197,14 +212,23 @@ def test_fallo_de_prevision_no_frena_alertas(tmp_path):
     assert despues["generado_utc"] == antes["generado_utc"]  # se conserva la última buena
 
 
-def test_prevision_solo_a_la_hora(tmp_path):
+def test_prevision_se_pide_cuando_tiene_mas_de_55_min_o_no_existe(tmp_path):
     llamadas = []
     f = fuentes(aca=[lec("a1", 5.0)])
     f["prevision"] = lambda ests: llamadas.append(1) or PREV
-    correr(tmp_path, [est_aca()], f, ahora=AHORA)  # minuto 20
-    assert llamadas == []
-    correr(tmp_path, [est_aca()], f, ahora=HORA_EN_PUNTO)  # minuto 5
+    correr(tmp_path, [est_aca()], f, ahora=AHORA)  # minuto 20 y sin archivo: se pide igual
     assert llamadas == [1]
+    correr(tmp_path, [est_aca()], f, ahora=AHORA + timedelta(minutes=15))
+    assert llamadas == [1]
+    correr(tmp_path, [est_aca()], f, ahora=AHORA + timedelta(minutes=60))
+    assert llamadas == [1, 1]
+
+
+def test_cualquier_error_de_la_prevision_no_tumba_la_ejecucion(tmp_path):
+    cambios = correr(tmp_path, [est_aca()], fuentes(aca=[lec("a1", 25.0)], prevision=ValueError("dato raro")), ahora=HORA_EN_PUNTO)
+    assert latest(tmp_path)["a1"]["valor"] == 25.0
+    assert leer(tmp_path, "latest.json")["fuentes_ok"]["prevision"] is False
+    assert cambios == []
 
 
 def test_prevision_json_formato_y_lluvia_48h(tmp_path):
@@ -276,12 +300,14 @@ def test_inuncat_emergencia_eleva_catalanas_pero_no_valencianas(tmp_path):
     assert [c["estacion_id"] for c in cambios] == ["a1"] and cambios[0]["elevado_por_aviso"] is True
 
 
-def test_aviso_rojo_de_aemet_eleva_solo_su_region(tmp_path):
+def test_aviso_rojo_de_aemet_se_muestra_pero_no_eleva(tmp_path):
+    """Spec §5, fase 1: las zonas de AEMET no están cruzadas con comarcas, así que solo se muestran."""
     ests = [est_aca(), est_chj()]
     correr(tmp_path, ests, fuentes(aca=[lec("a1", 3.0)], chj=[lec("c1", 3.0, fuente="chj")],
-                                   avisos=[aviso("AEMET", "rojo", "val")]))
+                                   avisos=[aviso("AEMET", "rojo", "val"), aviso("AEMET", "rojo", "cat")]))
     d = latest(tmp_path)
-    assert d["a1"]["nivel"] == 0 and d["c1"]["nivel"] == 3
+    assert d["a1"]["nivel"] == 0 and d["c1"]["nivel"] == 0
+    assert len(leer(tmp_path, "latest.json")["avisos"]) == 2
 
 
 def test_aviso_naranja_de_aemet_no_eleva(tmp_path):
@@ -333,4 +359,17 @@ def test_ventana_que_falla_no_frena_la_evaluacion(tmp_path):
         raise FuenteError("caido")
 
     correr(tmp_path, [est_aca()], fuentes(aca=[lec("a1", 9.0)], ventana=ventana))
+    assert latest(tmp_path)["a1"]["nivel"] == 0
+
+
+def test_ventana_no_cuenta_dos_veces_la_misma_muestra(tmp_path):
+    """Una muestra suelta dentro de la ventana de 90 min no puede valer como dos lecturas seguidas."""
+    e = est_aca(umbrales=Umbrales(100.0, 200.0, 400.0, "estimado"))
+    pico = lambda est, desde, hasta: [(AHORA - timedelta(minutes=10), 104.0)]  # noqa: E731
+    t0 = AHORA - timedelta(minutes=15)
+    correr(tmp_path, [e], fuentes(aca=[lec("a1", 80.0, ahora=t0)]), ahora=t0)
+    correr(tmp_path, [e], fuentes(aca=[lec("a1", 80.0)], ventana=pico), ahora=AHORA)
+    t2 = AHORA + timedelta(minutes=15)
+    cambios = correr(tmp_path, [e], fuentes(aca=[lec("a1", 80.0, ahora=t2)], ventana=pico), ahora=t2)
+    assert cambios == []
     assert latest(tmp_path)["a1"]["nivel"] == 0
