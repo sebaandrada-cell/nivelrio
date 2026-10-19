@@ -1,6 +1,6 @@
 # Panel de ríos de Catalunya: especificación de diseño
 
-Fecha: 2026-10-19. Estado: pendiente de revisión por Sebastian Andrada.
+Fecha: 2026-10-19. Estado: preguntas abiertas resueltas por Sebastian Andrada (sección 10); pendiente el plan de implementación.
 Base: el proyecto "Apurate José" de Pablo Dodda (MIT), copiado en `sebaandrada-cell/nivelrio`.
 Informe de fuentes que respalda esta especificación: `Fuentes ríos Catalunya inundaciones.md`.
 
@@ -120,7 +120,7 @@ El repo de Sebastian hoy sigue ejecutando el robot del Paraná sobre `main` (el 
 - Una tarjeta por río, ordenadas por peligrosidad actual. Cada tarjeta muestra la estación más relevante, la lectura, la tendencia, la edad del dato, la fuente y el nivel con su rótulo ("oficial" o "estimado").
 - Detalle por estación con el gráfico de 15 días y 3 meses con las líneas de umbral (el componente de Pablo, generalizado).
 - Pie permanente: "Informativo. Datos provisionales sin validar. No sustituye a Protecció Civil. Siga siempre sus instrucciones." y las atribuciones: ACA, SAIH CHJ, AEMET, Meteocat y Open-Meteo (CC BY 4.0) cuando se use.
-- Idiomas: catalán y castellano.
+- Idiomas: castellano por defecto, con selector para pasar a catalán.
 - Accesibilidad: el nivel nunca se comunica solo con color; lleva texto y símbolo.
 
 ## 8. Pruebas y verificación
@@ -140,10 +140,10 @@ El repo de Sebastian hoy sigue ejecutando el robot del Paraná sobre `main` (el 
 - **Dependencia de endpoints no oficiales:** el array `aforos` de la CHJ está en el HTML de una página. Si cambian la página, el parseo falla; por eso el estado "sin datos" y una alerta de fallo del robot.
 - **Cobertura:** 4 de los 15 ríos no tendrán dato en la fase 1, y faltan puntos clave (Besalú, Castelló en el Fluvià, tramo bajo del Tordera, Alzira, Paiporta, Torrent). La página lo dice en lugar de ocultarlo.
 
-## 10. Preguntas abiertas para Sebastian
+## 10. Decisiones de Sebastian (2026-10-19)
 
-1. Dominio y GitHub Pages: ¿usa un dominio propio o `sebaandrada-cell.github.io/nivelrio`?
-2. Notificaciones: ¿qué canal quiere? (issue de GitHub, correo, Telegram, push). Por defecto se propone un issue de GitHub que le llega por correo, sin secretos externos.
-3. Nombre del sitio y de la rama final. Por defecto, rama `catalunya-rios` y sitio "Rius de Catalunya".
-4. Idioma por defecto: catalán o castellano.
-5. Clave de Meteocat: si se registra, va como secreto de Actions (fase 2).
+1. Dominio: por ahora `sebaandrada-cell.github.io/nivelrio`. Dominio propio queda para más adelante.
+2. Notificaciones: un issue de GitHub por cambio de nivel, que llega por correo. Sin secretos externos.
+3. Nombre del sitio: "Rius de Catalunya". Rama de trabajo: `catalunya-rios`.
+4. Idioma: castellano por defecto, con opción de cambiar a catalán.
+5. Clave de Meteocat: se hace en una etapa posterior (fase 2).
