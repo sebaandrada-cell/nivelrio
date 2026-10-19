@@ -1,0 +1,861 @@
+{
+ "generado_utc": "2026-10-19T22:48:19Z",
+ "estaciones": [
+  {
+   "id": "llobregat-sant-joan-despi",
+   "rio": "Llobregat",
+   "nombre": "Sant Joan Despí",
+   "cuenca": "Llobregat",
+   "zona": "barcelona",
+   "valor": 41.64,
+   "unidad": "m3s",
+   "t_utc": "2026-10-19T22:40:00Z",
+   "edad_min": 8,
+   "nivel": 0,
+   "sd": false,
+   "umbrales": {
+    "bajo": 138.246,
+    "medio": 324.503,
+    "alto": 513.433,
+    "tipo": "estimado"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "aca"
+  },
+  {
+   "id": "llobregat-sant-vicenc-dels-horts",
+   "rio": "Llobregat",
+   "nombre": "Sant Vicenç dels Horts",
+   "cuenca": "Llobregat",
+   "zona": "barcelona",
+   "valor": 36.856,
+   "unidad": "m3s",
+   "t_utc": "2026-10-19T22:40:00Z",
+   "edad_min": 8,
+   "nivel": 0,
+   "sd": false,
+   "umbrales": {
+    "bajo": null,
+    "medio": null,
+    "alto": null,
+    "tipo": "en_estudio"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "aca"
+  },
+  {
+   "id": "llobregat-castellbisbal",
+   "rio": "Llobregat",
+   "nombre": "Castellbisbal",
+   "cuenca": "Llobregat",
+   "zona": "barcelona",
+   "valor": 26.127,
+   "unidad": "m3s",
+   "t_utc": "2026-10-19T22:40:00Z",
+   "edad_min": 8,
+   "nivel": 0,
+   "sd": false,
+   "umbrales": {
+    "bajo": 40.21,
+    "medio": 102.773,
+    "alto": 265.791,
+    "tipo": "estimado"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "aca"
+  },
+  {
+   "id": "llobregat-castellbell",
+   "rio": "Llobregat",
+   "nombre": "Castellbell",
+   "cuenca": "Llobregat",
+   "zona": "interior",
+   "valor": 20.905,
+   "unidad": "m3s",
+   "t_utc": "2026-10-19T22:40:00Z",
+   "edad_min": 8,
+   "nivel": 0,
+   "sd": false,
+   "umbrales": {
+    "bajo": 90.566,
+    "medio": 180.226,
+    "alto": 300.997,
+    "tipo": "estimado"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "aca"
+  },
+  {
+   "id": "llobregat-guardiola",
+   "rio": "Llobregat",
+   "nombre": "Guardiola",
+   "cuenca": "Llobregat",
+   "zona": "interior",
+   "valor": 62.711,
+   "unidad": "m3s",
+   "t_utc": "2026-10-19T22:40:00Z",
+   "edad_min": 8,
+   "nivel": 1,
+   "sd": false,
+   "umbrales": {
+    "bajo": 46.081,
+    "medio": 68.953,
+    "alto": 123.744,
+    "tipo": "estimado"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "aca"
+  },
+  {
+   "id": "cardener-cardona",
+   "rio": "Cardener",
+   "nombre": "Cardona",
+   "cuenca": "Llobregat",
+   "zona": "interior",
+   "valor": 4.942,
+   "unidad": "m3s",
+   "t_utc": "2026-10-19T22:35:00Z",
+   "edad_min": 13,
+   "nivel": 0,
+   "sd": false,
+   "umbrales": {
+    "bajo": 12.265,
+    "medio": 26.642,
+    "alto": 39.971,
+    "tipo": "estimado"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "aca"
+  },
+  {
+   "id": "cardener-suria",
+   "rio": "Cardener",
+   "nombre": "Súria",
+   "cuenca": "Llobregat",
+   "zona": "interior",
+   "valor": 3.405,
+   "unidad": "m3s",
+   "t_utc": "2026-10-19T22:40:00Z",
+   "edad_min": 8,
+   "nivel": 0,
+   "sd": false,
+   "umbrales": {
+    "bajo": 17.142,
+    "medio": 45.894,
+    "alto": 92.134,
+    "tipo": "estimado"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "aca"
+  },
+  {
+   "id": "anoia-sant-sadurni",
+   "rio": "Anoia",
+   "nombre": "Sant Sadurní",
+   "cuenca": "Llobregat",
+   "zona": "barcelona",
+   "valor": 2.325,
+   "unidad": "m3s",
+   "t_utc": "2026-10-19T22:40:00Z",
+   "edad_min": 8,
+   "nivel": 0,
+   "sd": false,
+   "umbrales": {
+    "bajo": 11.641,
+    "medio": 29.418,
+    "alto": 38.075,
+    "tipo": "estimado"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "aca"
+  },
+  {
+   "id": "anoia-martorell",
+   "rio": "Anoia",
+   "nombre": "Martorell",
+   "cuenca": "Llobregat",
+   "zona": "barcelona",
+   "valor": 7.579,
+   "unidad": "m3s",
+   "t_utc": "2026-10-19T22:40:00Z",
+   "edad_min": 8,
+   "nivel": 0,
+   "sd": false,
+   "umbrales": {
+    "bajo": null,
+    "medio": null,
+    "alto": null,
+    "tipo": "en_estudio"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "aca"
+  },
+  {
+   "id": "besos-santa-coloma",
+   "rio": "Besòs",
+   "nombre": "Santa Coloma",
+   "cuenca": "Besòs",
+   "zona": "barcelona",
+   "valor": 11.995,
+   "unidad": "m3s",
+   "t_utc": "2026-10-19T22:35:00Z",
+   "edad_min": 13,
+   "nivel": 0,
+   "sd": false,
+   "umbrales": {
+    "bajo": 44.926,
+    "medio": 72.464,
+    "alto": 86.286,
+    "tipo": "estimado"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "aca"
+  },
+  {
+   "id": "ter-girona",
+   "rio": "Ter",
+   "nombre": "Girona",
+   "cuenca": "Ter",
+   "zona": "girona",
+   "valor": 4.884,
+   "unidad": "m3s",
+   "t_utc": "2026-10-19T22:40:00Z",
+   "edad_min": 8,
+   "nivel": 0,
+   "sd": false,
+   "umbrales": {
+    "bajo": 65.656,
+    "medio": 229.931,
+    "alto": 399.472,
+    "tipo": "estimado"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "aca"
+  },
+  {
+   "id": "ter-colomers",
+   "rio": "Ter",
+   "nombre": "Colomers",
+   "cuenca": "Ter",
+   "zona": "girona",
+   "valor": 9.385,
+   "unidad": "m3s",
+   "t_utc": "2026-10-19T22:40:00Z",
+   "edad_min": 8,
+   "nivel": 0,
+   "sd": false,
+   "umbrales": {
+    "bajo": 113.785,
+    "medio": 330.689,
+    "alto": 708.852,
+    "tipo": "estimado"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "aca"
+  },
+  {
+   "id": "ter-roda-de-ter",
+   "rio": "Ter",
+   "nombre": "Roda de Ter",
+   "cuenca": "Ter",
+   "zona": "interior",
+   "valor": 23.359,
+   "unidad": "m3s",
+   "t_utc": "2026-10-19T22:30:00Z",
+   "edad_min": 18,
+   "nivel": 0,
+   "sd": true,
+   "umbrales": {
+    "bajo": null,
+    "medio": null,
+    "alto": null,
+    "tipo": "en_estudio"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "aca"
+  },
+  {
+   "id": "ter-torroella",
+   "rio": "Ter",
+   "nombre": "Torroella",
+   "cuenca": "Ter",
+   "zona": "girona",
+   "valor": 9.201,
+   "unidad": "m3s",
+   "t_utc": "2026-10-19T22:40:00Z",
+   "edad_min": 8,
+   "nivel": 0,
+   "sd": false,
+   "umbrales": {
+    "bajo": 129.781,
+    "medio": 227.084,
+    "alto": 372.344,
+    "tipo": "estimado"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "aca"
+  },
+  {
+   "id": "fluvia-esponella",
+   "rio": "Fluvià",
+   "nombre": "Esponellà",
+   "cuenca": "Fluvià",
+   "zona": "girona",
+   "valor": 4.34,
+   "unidad": "m3s",
+   "t_utc": "2026-10-19T22:40:00Z",
+   "edad_min": 8,
+   "nivel": 0,
+   "sd": false,
+   "umbrales": {
+    "bajo": 114.127,
+    "medio": 196.298,
+    "alto": 406.866,
+    "tipo": "estimado"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "aca"
+  },
+  {
+   "id": "fluvia-olot",
+   "rio": "Fluvià",
+   "nombre": "Olot",
+   "cuenca": "Fluvià",
+   "zona": "girona",
+   "valor": 1.191,
+   "unidad": "m3s",
+   "t_utc": "2026-10-19T22:40:00Z",
+   "edad_min": 8,
+   "nivel": 0,
+   "sd": false,
+   "umbrales": {
+    "bajo": 19.423,
+    "medio": 40.127,
+    "alto": 55.926,
+    "tipo": "estimado"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "aca"
+  },
+  {
+   "id": "muga-pont-de-molins",
+   "rio": "Muga",
+   "nombre": "Pont de Molins",
+   "cuenca": "Muga",
+   "zona": "girona",
+   "valor": 0.243,
+   "unidad": "m3s",
+   "t_utc": "2026-10-19T22:40:00Z",
+   "edad_min": 8,
+   "nivel": 0,
+   "sd": false,
+   "umbrales": {
+    "bajo": 13.434,
+    "medio": 51.297,
+    "alto": 81.908,
+    "tipo": "estimado"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "aca"
+  },
+  {
+   "id": "muga-castello-d-empuries",
+   "rio": "Muga",
+   "nombre": "Castelló d'Empúries",
+   "cuenca": "Muga",
+   "zona": "girona",
+   "valor": 1.153,
+   "unidad": "m3s",
+   "t_utc": "2026-10-19T22:40:00Z",
+   "edad_min": 8,
+   "nivel": 0,
+   "sd": false,
+   "umbrales": {
+    "bajo": 103.538,
+    "medio": 334.967,
+    "alto": 376.116,
+    "tipo": "estimado"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "aca"
+  },
+  {
+   "id": "muga-sant-llorenc",
+   "rio": "Muga",
+   "nombre": "Sant Llorenç",
+   "cuenca": "Muga",
+   "zona": "girona",
+   "valor": 0.672,
+   "unidad": "m3s",
+   "t_utc": "2026-10-19T22:45:00Z",
+   "edad_min": 3,
+   "nivel": 0,
+   "sd": false,
+   "umbrales": {
+    "bajo": 38.47,
+    "medio": 78.021,
+    "alto": 123.887,
+    "tipo": "estimado"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "aca"
+  },
+  {
+   "id": "tordera-fogars-de-la-selva",
+   "rio": "Tordera",
+   "nombre": "Fogars de la Selva",
+   "cuenca": "Tordera",
+   "zona": "barcelona",
+   "valor": 6.468,
+   "unidad": "m3s",
+   "t_utc": "2026-10-19T22:45:00Z",
+   "edad_min": 3,
+   "nivel": 0,
+   "sd": false,
+   "umbrales": {
+    "bajo": 49.18,
+    "medio": 95.204,
+    "alto": 114.364,
+    "tipo": "estimado"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "aca"
+  },
+  {
+   "id": "tordera-sant-celoni",
+   "rio": "Tordera",
+   "nombre": "Sant Celoni",
+   "cuenca": "Tordera",
+   "zona": "barcelona",
+   "valor": 1.449,
+   "unidad": "m3s",
+   "t_utc": "2026-10-19T22:40:00Z",
+   "edad_min": 8,
+   "nivel": 0,
+   "sd": false,
+   "umbrales": {
+    "bajo": 7.655,
+    "medio": 12.537,
+    "alto": 25.918,
+    "tipo": "estimado"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "aca"
+  },
+  {
+   "id": "francoli-montblanc",
+   "rio": "Francolí",
+   "nombre": "Montblanc",
+   "cuenca": "Francolí",
+   "zona": "tarragona",
+   "valor": 2.586,
+   "unidad": "m3s",
+   "t_utc": "2026-10-19T22:40:00Z",
+   "edad_min": 8,
+   "nivel": 0,
+   "sd": false,
+   "umbrales": {
+    "bajo": null,
+    "medio": null,
+    "alto": null,
+    "tipo": "en_estudio"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "aca"
+  },
+  {
+   "id": "francoli-tarragona",
+   "rio": "Francolí",
+   "nombre": "Tarragona",
+   "cuenca": "Francolí",
+   "zona": "tarragona",
+   "valor": 9.139,
+   "unidad": "m3s",
+   "t_utc": "2026-10-19T22:00:00Z",
+   "edad_min": 48,
+   "nivel": 0,
+   "sd": true,
+   "umbrales": {
+    "bajo": null,
+    "medio": null,
+    "alto": null,
+    "tipo": "en_estudio"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "aca"
+  },
+  {
+   "id": "gaia-vilabella",
+   "rio": "Gaià",
+   "nombre": "Vilabella",
+   "cuenca": "Gaià",
+   "zona": "tarragona",
+   "valor": 1.894,
+   "unidad": "m3s",
+   "t_utc": "2026-10-19T22:40:00Z",
+   "edad_min": 8,
+   "nivel": 0,
+   "sd": false,
+   "umbrales": {
+    "bajo": null,
+    "medio": null,
+    "alto": null,
+    "tipo": "en_estudio"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "aca"
+  },
+  {
+   "id": "foix-castellet-i-la-gornal",
+   "rio": "Foix",
+   "nombre": "Castellet i la Gornal",
+   "cuenca": "Foix",
+   "zona": "barcelona",
+   "valor": 2.86,
+   "unidad": "m3s",
+   "t_utc": "2026-10-19T22:45:00Z",
+   "edad_min": 3,
+   "nivel": 0,
+   "sd": false,
+   "umbrales": {
+    "bajo": null,
+    "medio": null,
+    "alto": null,
+    "tipo": "en_estudio"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "aca"
+  },
+  {
+   "id": "turia-manises",
+   "rio": "Túria",
+   "nombre": "Manises",
+   "cuenca": "Túria",
+   "zona": "valencia",
+   "valor": 5.212020999999999,
+   "unidad": "m3s",
+   "t_utc": "2026-10-19T22:45:00Z",
+   "edad_min": 3,
+   "nivel": 0,
+   "sd": false,
+   "umbrales": {
+    "bajo": 50.0,
+    "medio": 100.0,
+    "alto": 200.0,
+    "tipo": "oficial"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "chj"
+  },
+  {
+   "id": "turia-quart-de-poblet",
+   "rio": "Túria",
+   "nombre": "Quart de Poblet",
+   "cuenca": "Túria",
+   "zona": "valencia",
+   "valor": 0.5210687999999999,
+   "unidad": "m3s",
+   "t_utc": "2026-10-19T22:40:00Z",
+   "edad_min": 8,
+   "nivel": 0,
+   "sd": false,
+   "umbrales": {
+    "bajo": 100.0,
+    "medio": 500.0,
+    "alto": 1000.0,
+    "tipo": "oficial"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "chj"
+  },
+  {
+   "id": "turia-vilamarxant",
+   "rio": "Túria",
+   "nombre": "Vilamarxant",
+   "cuenca": "Túria",
+   "zona": "valencia",
+   "valor": 6.419461599999999,
+   "unidad": "m3s",
+   "t_utc": "2026-10-19T21:10:00Z",
+   "edad_min": 98,
+   "nivel": 0,
+   "sd": true,
+   "umbrales": {
+    "bajo": 40.0,
+    "medio": 80.0,
+    "alto": 150.0,
+    "tipo": "oficial"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "chj"
+  },
+  {
+   "id": "turia-bugarra",
+   "rio": "Túria",
+   "nombre": "Bugarra",
+   "cuenca": "Túria",
+   "zona": "valencia",
+   "valor": 4.1622216,
+   "unidad": "m3s",
+   "t_utc": "2026-10-19T22:45:00Z",
+   "edad_min": 3,
+   "nivel": 0,
+   "sd": false,
+   "umbrales": {
+    "bajo": 30.0,
+    "medio": 50.0,
+    "alto": 80.0,
+    "tipo": "oficial"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "chj"
+  },
+  {
+   "id": "xuquer-algemesi",
+   "rio": "Xúquer",
+   "nombre": "Algemesí",
+   "cuenca": "Xúquer",
+   "zona": "valencia",
+   "valor": 50.007961,
+   "unidad": "m3s",
+   "t_utc": "2026-10-19T22:45:00Z",
+   "edad_min": 3,
+   "nivel": 0,
+   "sd": false,
+   "umbrales": {
+    "bajo": 200.0,
+    "medio": 300.0,
+    "alto": 400.0,
+    "tipo": "oficial"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "chj"
+  },
+  {
+   "id": "xuquer-salida-de-tous",
+   "rio": "Xúquer",
+   "nombre": "Salida de Tous",
+   "cuenca": "Xúquer",
+   "zona": "valencia",
+   "valor": 3.0183249999999995,
+   "unidad": "m3s",
+   "t_utc": "2026-10-19T22:45:00Z",
+   "edad_min": 3,
+   "nivel": 0,
+   "sd": false,
+   "umbrales": {
+    "bajo": 50.0,
+    "medio": 150.0,
+    "alto": 250.0,
+    "tipo": "oficial"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "chj"
+  },
+  {
+   "id": "poyo-n-iii",
+   "rio": "Poyo",
+   "nombre": "N-III",
+   "cuenca": "Poyo",
+   "zona": "valencia",
+   "valor": 0.0,
+   "unidad": "m3s",
+   "t_utc": "2026-10-19T22:45:00Z",
+   "edad_min": 3,
+   "nivel": 0,
+   "sd": false,
+   "umbrales": {
+    "bajo": 30.0,
+    "medio": 70.0,
+    "alto": 150.0,
+    "tipo": "oficial"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "chj"
+  }
+ ],
+ "avisos": [
+  {
+   "origen": "AEMET",
+   "nivel": "amarillo",
+   "zona": "Prelitoral de Barcelona",
+   "descripcion": "Lluvias: Aviso de precipitación acumulada en 12 horas de nivel amarillo de 19:00 19-10-2026 CEST (UTC+2) a 08:59 20-10-2026 CEST (UTC+2).",
+   "t_utc": "2026-10-19T17:00:00Z",
+   "region": "cat"
+  },
+  {
+   "origen": "AEMET",
+   "nivel": "amarillo",
+   "zona": "Litoral de Barcelona",
+   "descripcion": "Lluvias: Aviso de precipitación acumulada en 12 horas de nivel amarillo de 19:00 19-10-2026 CEST (UTC+2) a 08:59 20-10-2026 CEST (UTC+2).",
+   "t_utc": "2026-10-19T17:00:00Z",
+   "region": "cat"
+  },
+  {
+   "origen": "AEMET",
+   "nivel": "amarillo",
+   "zona": "Litoral sur de Girona",
+   "descripcion": "Lluvias: Aviso de precipitación acumulada en 12 horas de nivel amarillo de 19:00 19-10-2026 CEST (UTC+2) a 08:59 20-10-2026 CEST (UTC+2).",
+   "t_utc": "2026-10-19T17:00:00Z",
+   "region": "cat"
+  },
+  {
+   "origen": "AEMET",
+   "nivel": "amarillo",
+   "zona": "Prelitoral de Barcelona",
+   "descripcion": "Tormentas: Aviso de tormentas de nivel amarillo de 19:00 19-10-2026 CEST (UTC+2) a 08:59 20-10-2026 CEST (UTC+2).",
+   "t_utc": "2026-10-19T17:00:00Z",
+   "region": "cat"
+  },
+  {
+   "origen": "AEMET",
+   "nivel": "amarillo",
+   "zona": "Litoral de Barcelona",
+   "descripcion": "Tormentas: Aviso de tormentas de nivel amarillo de 19:00 19-10-2026 CEST (UTC+2) a 08:59 20-10-2026 CEST (UTC+2).",
+   "t_utc": "2026-10-19T17:00:00Z",
+   "region": "cat"
+  },
+  {
+   "origen": "AEMET",
+   "nivel": "amarillo",
+   "zona": "Litoral sur de Girona",
+   "descripcion": "Tormentas: Aviso de tormentas de nivel amarillo de 19:00 19-10-2026 CEST (UTC+2) a 08:59 20-10-2026 CEST (UTC+2).",
+   "t_utc": "2026-10-19T17:00:00Z",
+   "region": "cat"
+  },
+  {
+   "origen": "AEMET",
+   "nivel": "amarillo",
+   "zona": "Prelitoral de Barcelona",
+   "descripcion": "Lluvias: Aviso de precipitación acumulada en una hora de nivel amarillo de 00:00 20-10-2026 CEST (UTC+2) a 08:59 20-10-2026 CEST (UTC+2).",
+   "t_utc": "2026-10-19T22:00:00Z",
+   "region": "cat"
+  },
+  {
+   "origen": "AEMET",
+   "nivel": "amarillo",
+   "zona": "Litoral de Barcelona",
+   "descripcion": "Lluvias: Aviso de precipitación acumulada en una hora de nivel amarillo de 00:00 20-10-2026 CEST (UTC+2) a 08:59 20-10-2026 CEST (UTC+2).",
+   "t_utc": "2026-10-19T22:00:00Z",
+   "region": "cat"
+  },
+  {
+   "origen": "AEMET",
+   "nivel": "amarillo",
+   "zona": "Prelitoral de Girona",
+   "descripcion": "Lluvias: Aviso de precipitación acumulada en una hora de nivel amarillo de 00:00 20-10-2026 CEST (UTC+2) a 08:59 20-10-2026 CEST (UTC+2).",
+   "t_utc": "2026-10-19T22:00:00Z",
+   "region": "cat"
+  },
+  {
+   "origen": "AEMET",
+   "nivel": "amarillo",
+   "zona": "Litoral sur de Girona",
+   "descripcion": "Lluvias: Aviso de precipitación acumulada en una hora de nivel amarillo de 00:00 20-10-2026 CEST (UTC+2) a 08:59 20-10-2026 CEST (UTC+2).",
+   "t_utc": "2026-10-19T22:00:00Z",
+   "region": "cat"
+  },
+  {
+   "origen": "AEMET",
+   "nivel": "amarillo",
+   "zona": "Ampurdán",
+   "descripcion": "Lluvias: Aviso de precipitación acumulada en una hora de nivel amarillo de 19:00 19-10-2026 CEST (UTC+2) a 11:59 20-10-2026 CEST (UTC+2).",
+   "t_utc": "2026-10-19T17:00:00Z",
+   "region": "cat"
+  },
+  {
+   "origen": "AEMET",
+   "nivel": "amarillo",
+   "zona": "Prelitoral de Girona",
+   "descripcion": "Lluvias: Aviso de precipitación acumulada en 12 horas de nivel amarillo de 19:00 19-10-2026 CEST (UTC+2) a 08:59 20-10-2026 CEST (UTC+2).",
+   "t_utc": "2026-10-19T17:00:00Z",
+   "region": "cat"
+  },
+  {
+   "origen": "AEMET",
+   "nivel": "amarillo",
+   "zona": "Ampurdán",
+   "descripcion": "Lluvias: Aviso de precipitación acumulada en 12 horas de nivel amarillo de 19:00 19-10-2026 CEST (UTC+2) a 11:59 20-10-2026 CEST (UTC+2).",
+   "t_utc": "2026-10-19T17:00:00Z",
+   "region": "cat"
+  },
+  {
+   "origen": "AEMET",
+   "nivel": "amarillo",
+   "zona": "Prelitoral de Girona",
+   "descripcion": "Tormentas: Aviso de tormentas de nivel amarillo de 19:00 19-10-2026 CEST (UTC+2) a 08:59 20-10-2026 CEST (UTC+2).",
+   "t_utc": "2026-10-19T17:00:00Z",
+   "region": "cat"
+  },
+  {
+   "origen": "AEMET",
+   "nivel": "amarillo",
+   "zona": "Ampurdán",
+   "descripcion": "Tormentas: Aviso de tormentas de nivel amarillo de 19:00 19-10-2026 CEST (UTC+2) a 11:59 20-10-2026 CEST (UTC+2).",
+   "t_utc": "2026-10-19T17:00:00Z",
+   "region": "cat"
+  },
+  {
+   "origen": "AEMET",
+   "nivel": "naranja",
+   "zona": "Litoral sur de Alicante",
+   "descripcion": "Lluvias: Aviso de precipitación acumulada en una hora de nivel naranja de 21:00 19-10-2026 CEST (UTC+2) a 02:59 20-10-2026 CEST (UTC+2).",
+   "t_utc": "2026-10-19T19:00:00Z",
+   "region": "val"
+  },
+  {
+   "origen": "AEMET",
+   "nivel": "amarillo",
+   "zona": "Litoral norte de Alicante",
+   "descripcion": "Lluvias: Aviso de precipitación acumulada en una hora de nivel amarillo de 19:00 19-10-2026 CEST (UTC+2) a 02:59 20-10-2026 CEST (UTC+2).",
+   "t_utc": "2026-10-19T17:00:00Z",
+   "region": "val"
+  },
+  {
+   "origen": "AEMET",
+   "nivel": "amarillo",
+   "zona": "Litoral norte de Alicante",
+   "descripcion": "Lluvias: Aviso de precipitación acumulada en 12 horas de nivel amarillo de 19:00 19-10-2026 CEST (UTC+2) a 02:59 20-10-2026 CEST (UTC+2).",
+   "t_utc": "2026-10-19T17:00:00Z",
+   "region": "val"
+  },
+  {
+   "origen": "AEMET",
+   "nivel": "amarillo",
+   "zona": "Litoral sur de Alicante",
+   "descripcion": "Lluvias: Aviso de precipitación acumulada en 12 horas de nivel amarillo de 19:00 19-10-2026 CEST (UTC+2) a 02:59 20-10-2026 CEST (UTC+2).",
+   "t_utc": "2026-10-19T17:00:00Z",
+   "region": "val"
+  },
+  {
+   "origen": "AEMET",
+   "nivel": "amarillo",
+   "zona": "Litoral norte de Alicante",
+   "descripcion": "Tormentas: Aviso de tormentas de nivel amarillo de 19:00 19-10-2026 CEST (UTC+2) a 02:59 20-10-2026 CEST (UTC+2).",
+   "t_utc": "2026-10-19T17:00:00Z",
+   "region": "val"
+  },
+  {
+   "origen": "AEMET",
+   "nivel": "amarillo",
+   "zona": "Litoral sur de Alicante",
+   "descripcion": "Tormentas: Aviso de tormentas de nivel amarillo de 19:00 19-10-2026 CEST (UTC+2) a 02:59 20-10-2026 CEST (UTC+2).",
+   "t_utc": "2026-10-19T17:00:00Z",
+   "region": "val"
+  },
+  {
+   "origen": "INUNCAT",
+   "nivel": "naranja",
+   "zona": "Catalunya",
+   "descripcion": "Avís-Intensitat de pluja Intensitat >40 mm / 30 minuts -",
+   "t_utc": "2026-10-15T17:06:00Z",
+   "region": "cat"
+  }
+ ],
+ "fuentes_ok": {
+  "aca": true,
+  "chj": true,
+  "avisos": true,
+  "prevision": true
+ }
+}
