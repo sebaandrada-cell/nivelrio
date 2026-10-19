@@ -137,3 +137,16 @@ def test_parse_ventana_ordena_aunque_llegue_al_reves():
         {"value": "2", "timestamp": "19/10/2026T19:05:00"},
     ]}]}
     assert [v for _, v in aca.parse_ventana(doc)] == [2.0, 1.0]
+
+
+def test_bajar_reintenta_con_lectura_incompleta():
+    import http.client
+    llamadas = []
+
+    def abrir(req, timeout=None):
+        llamadas.append(1)
+        if len(llamadas) == 1:
+            raise http.client.IncompleteRead(b"{")
+        return _Resp(b'{"sensors": []}')
+
+    assert aca.bajar("https://x.test/a", abrir=abrir, intentos=2, dormir=lambda s: None) == {"sensors": []}

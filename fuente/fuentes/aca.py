@@ -4,6 +4,7 @@ Los timestamps de Sentilo (dd/mm/yyyyThh:mi:ss) vienen en UTC (verificado contra
 `time` en milisegundos). Los valores son cadenas; un sensor sin lectura reciente trae la lista
 de observaciones vacía o el valor "NAN".
 """
+import http.client
 import json
 import time
 import urllib.error
@@ -107,7 +108,7 @@ def bajar(url: str, abrir=urllib.request.urlopen, intentos: int = 3, dormir=time
             req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT, "Accept": "application/json"})
             with abrir(req, timeout=30) as r:
                 return json.loads(r.read().decode("utf-8"))
-        except (urllib.error.URLError, TimeoutError, OSError, ValueError) as e:
+        except (urllib.error.URLError, http.client.HTTPException, TimeoutError, OSError, ValueError) as e:
             ultimo = e
             if i < intentos - 1:
                 dormir(2 ** i)
