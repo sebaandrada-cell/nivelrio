@@ -1,0 +1,87 @@
+name: actualizar
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: actualizar
+  cancel-in-progress: false
+
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # El estado de histéresis (contadores de lecturas seguidas) tiene que sobrevivir a las ejecuciones en las
+      # que no se publica. Se guarda en la caché y no en commits, para no llenar el historial del repo.
+      - name: restaurar estado
+        uses: actions/cache/restore@v4
+        with:
+          path: data
+          key: data-sin-coincidencia
+          restore-keys: data-
+
+      - id: actualizar
+        name: descargar fuentes y evaluar alertas
+        timeout-minutes: 5
+        run: python fuente/actualizar.py
+
+      - name: guardar estado
+        uses: actions/cache/save@v4
+        with:
+          path: data
+          key: data-${{ github.run_id }}-${{ github.run_attempt }}
+
+      - id: publicar
+        name: publicar datos
+        if: steps.actualizar.outputs.publicar == 'true'
+        timeout-minutes: 3
+        env:
+          RAMA: ${{ github.ref_name }}
+        run: |
+          set -eu
+          git config user.name "rius-bot"
+          git config user.email "rius-bot@users.noreply.github.com"
+          git add data
+          if git diff --cached --quiet; then
+            echo "sin cambios en data/"
+            exit 0
+          fi
+          git commit -q -m "datos: $(date -u +%Y-%m-%dT%H:%MZ)"
+          for intento in 1 2 3; do
+            if git push origin "HEAD:${RAMA}"; then
+              exit 0
+            fi
+            echo "push rechazado (intento ${intento}); se rehace el commit sobre la rama remota"
+            git fetch origin "${RAMA}"
+            rm -rf "${RUNNER_TEMP}/data_nuevo"
+            cp -r data "${RUNNER_TEMP}/data_nuevo"
+            git reset -q --hard "origin/${RAMA}"
+            rm -rf data
+            cp -r "${RUNNER_TEMP}/data_nuevo" data
+            git add data
+            git commit -q -m "datos: $(date -u +%Y-%m-%dT%H:%MZ)" || true
+            sleep 3
+          done
+          echo "no se pudo publicar tras 3 intentos" >&2
+          exit 1
+
+      - id: notificar
+        name: avisar por issue
+        if: steps.actualizar.outcome == 'success'
+        timeout-minutes: 3
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python fuente/notificar.py
