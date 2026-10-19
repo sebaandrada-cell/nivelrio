@@ -1,0 +1,160 @@
+{
+  "es": {
+    "title": "Rius de Catalunya",
+    "desc": "Caudal de los ríos de Catalunya con más riesgo de inundación, con contexto de Valencia (Túria, Xúquer, Poyo). Datos oficiales, actualizados cada 15 minutos.",
+    "sub": "Caudal de los ríos de Catalunya con más riesgo de inundación, más contexto de Valencia. Se actualiza cada 15 minutos.",
+    "lang_label": "Idioma",
+    "tile_desc": [
+      "bajo el umbral",
+      "caudal alto",
+      "crecida importante",
+      "riesgo de desbordamiento",
+      "lectura vieja o ausente"
+    ],
+    "avisos_title": "Avisos oficiales vigentes",
+    "avisos_none": "Sin avisos oficiales de lluvia o inundación vigentes.",
+    "avisos_more": "y {n} avisos más",
+    "avisos_desde": "desde",
+    "prev_title": "Previsión de lluvia, próximos 3 días",
+    "prev_none": "La previsión de lluvia no está disponible ahora.",
+    "prev_note": "Lluvia acumulada por día (mm) y probabilidad máxima, el valor más alto entre las estaciones de cada zona. Fuente: Open-Meteo.com (CC BY 4.0). No existe una previsión oficial de caudales para estos ríos: el caudal esperado de cada tarjeta sale de un modelo global (GloFAS, malla de unos 5 km, un dato por día). Sirve de orientación y no capta las crecidas rápidas de rambla. La previsión nunca cambia el nivel de alerta.",
+    "zonas": {
+      "tarragona": "Tarragona y litoral sur",
+      "barcelona": "Barcelona y Maresme",
+      "girona": "Girona y Empordà",
+      "interior": "Interior (Lleida, Segre, Cardener)",
+      "valencia": "València (Túria, Xúquer, Poyo)"
+    },
+    "est_title": "Ríos, de mayor a menor peligro",
+    "filt_all": "Todos",
+    "filt_act": "Solo con alerta",
+    "filt_none": "Ningún río con alerta ahora mismo.",
+    "rise": "subiendo",
+    "fall": "bajando",
+    "flat": "estable",
+    "no_value": "Sin lectura",
+    "sd_note": "Sin datos recientes. Se mantiene el último nivel conocido.",
+    "forecast_h": "Previsión 72 h",
+    "rain48": "Lluvia 48 h",
+    "fcq": "Caudal esperado",
+    "fcwarn": "orientativo",
+    "fcmay": "Podría llegar a",
+    "fcnone": "Sin previsión de caudal fiable para este punto.",
+    "thr_legend": "V Vigilancia · A Aviso · P Peligro",
+    "thr_none": "Umbrales todavía en estudio: de momento solo se muestra el caudal.",
+    "source": "Fuente",
+    "stations_of": "Estaciones de este río",
+    "chart_title": "Historial",
+    "chart_ranges": [
+      "48 h",
+      "15 días",
+      "3 meses"
+    ],
+    "chart_empty": "Reuniendo historial. El gráfico se completa con el paso de las horas.",
+    "chart_aria": "Caudal de la estación a lo largo del tiempo, con las líneas de umbral",
+    "trend_prefix": "Tendencia",
+    "banner_stale": "Los datos llevan {edad} sin actualizarse. Lo que ves puede no ser el estado actual.",
+    "banner_fuentes": "No se pudo leer: {lista}. Esas estaciones aparecen como sin datos.",
+    "fuentes_nombres": {
+      "aca": "ACA (Catalunya)",
+      "chj": "CHJ (Valencia)",
+      "avisos": "avisos oficiales",
+      "prevision": "previsión"
+    },
+    "loading": "Cargando datos…",
+    "error_load": "No se pudieron cargar los datos. Se reintentará en unos minutos.",
+    "foot": [
+      "<b>Informativo.</b> Datos provisionales sin validar. No sustituye a Protecció Civil. Siga siempre sus instrucciones. En una emergencia llame al 112.",
+      "Fuentes: Agència Catalana de l'Aigua (ACA), Confederación Hidrográfica del Júcar (SAIH), AEMET, Protecció Civil de Catalunya (INUNCAT) y Open-Meteo.com (CC BY 4.0). Los niveles Vigilancia, Aviso y Peligro son una escala propia de esta página, no una escala oficial. Los umbrales de Catalunya son estimaciones calculadas a partir de la serie histórica; los de Valencia son los oficiales de la CHJ.",
+      "Hecho por Pablo Dodda. Adaptación para Catalunya: Sebastian Andrada. Licencia MIT."
+    ],
+    "aviso_color": {
+      "amarillo": "amarillo",
+      "naranja": "naranja",
+      "rojo": "rojo"
+    },
+    "last_level": "Último nivel conocido",
+    "ago_updated": "Actualizado",
+    "noscript": "Esta página necesita JavaScript para mostrar los datos.",
+    "details_show": "Ver estaciones e historial"
+  },
+  "ca": {
+    "title": "Rius de Catalunya",
+    "desc": "Cabal dels rius de Catalunya amb més risc d'inundació, amb context de València (Túria, Xúquer, Poyo). Dades oficials, actualitzades cada 15 minuts.",
+    "sub": "Cabal dels rius de Catalunya amb més risc d'inundació, més context de València. S'actualitza cada 15 minuts.",
+    "lang_label": "Idioma",
+    "tile_desc": [
+      "sota el llindar",
+      "cabal alt",
+      "crescuda important",
+      "risc de desbordament",
+      "lectura vella o absent"
+    ],
+    "avisos_title": "Avisos oficials vigents",
+    "avisos_none": "Cap avís oficial de pluja o inundació vigent.",
+    "avisos_more": "i {n} avisos més",
+    "avisos_desde": "des de",
+    "prev_title": "Previsió de pluja, propers 3 dies",
+    "prev_none": "La previsió de pluja no està disponible ara.",
+    "prev_note": "Pluja acumulada per dia (mm) i probabilitat màxima, el valor més alt entre les estacions de cada zona. Font: Open-Meteo.com (CC BY 4.0). No hi ha cap previsió oficial de cabals per a aquests rius: el cabal esperat de cada targeta surt d'un model global (GloFAS, malla d'uns 5 km, una dada per dia). Serveix d'orientació i no capta les crescudes ràpides de riera. La previsió mai no canvia el nivell d'alerta.",
+    "zonas": {
+      "tarragona": "Tarragona i litoral sud",
+      "barcelona": "Barcelona i Maresme",
+      "girona": "Girona i Empordà",
+      "interior": "Interior (Lleida, Segre, Cardener)",
+      "valencia": "València (Túria, Xúquer, Poyo)"
+    },
+    "est_title": "Rius, de més a menys perill",
+    "filt_all": "Tots",
+    "filt_act": "Només amb alerta",
+    "filt_none": "Cap riu amb alerta ara mateix.",
+    "rise": "pujant",
+    "fall": "baixant",
+    "flat": "estable",
+    "no_value": "Sense lectura",
+    "sd_note": "Sense dades recents. Es manté l'últim nivell conegut.",
+    "forecast_h": "Previsió 72 h",
+    "rain48": "Pluja 48 h",
+    "fcq": "Cabal esperat",
+    "fcwarn": "orientatiu",
+    "fcmay": "Podria arribar a",
+    "fcnone": "Sense previsió de cabal fiable per a aquest punt.",
+    "thr_legend": "V Vigilància · A Avís · P Perill",
+    "thr_none": "Llindars encara en estudi: de moment només es mostra el cabal.",
+    "source": "Font",
+    "stations_of": "Estacions d'aquest riu",
+    "chart_title": "Historial",
+    "chart_ranges": [
+      "48 h",
+      "15 dies",
+      "3 mesos"
+    ],
+    "chart_empty": "Recollint historial. El gràfic es completa amb el pas de les hores.",
+    "chart_aria": "Cabal de l'estació al llarg del temps, amb les línies de llindar",
+    "trend_prefix": "Tendència",
+    "banner_stale": "Les dades fa {edad} que no s'actualitzen. El que veus pot no ser l'estat actual.",
+    "banner_fuentes": "No s'ha pogut llegir: {lista}. Aquestes estacions apareixen sense dades.",
+    "fuentes_nombres": {
+      "aca": "ACA (Catalunya)",
+      "chj": "CHJ (València)",
+      "avisos": "avisos oficials",
+      "prevision": "previsió"
+    },
+    "loading": "Carregant dades…",
+    "error_load": "No s'han pogut carregar les dades. Es tornarà a provar d'aquí a uns minuts.",
+    "foot": [
+      "<b>Informatiu.</b> Dades provisionals sense validar. No substitueix Protecció Civil. Seguiu sempre les seves instruccions. En una emergència truqueu al 112.",
+      "Fonts: Agència Catalana de l'Aigua (ACA), Confederación Hidrográfica del Júcar (SAIH), AEMET, Protecció Civil de Catalunya (INUNCAT) i Open-Meteo.com (CC BY 4.0). Els nivells Vigilància, Avís i Perill són una escala pròpia d'aquesta pàgina, no una escala oficial. Els llindars de Catalunya són estimacions calculades a partir de la sèrie històrica; els de València són els oficials de la CHJ.",
+      "Fet per Pablo Dodda. Adaptació per a Catalunya: Sebastian Andrada. Llicència MIT."
+    ],
+    "aviso_color": {
+      "amarillo": "groc",
+      "naranja": "taronja",
+      "rojo": "vermell"
+    },
+    "last_level": "Darrer nivell conegut",
+    "ago_updated": "Actualitzat",
+    "noscript": "Aquesta pàgina necessita JavaScript per mostrar les dades.",
+    "details_show": "Veure estacions i historial"
+  }
+}
