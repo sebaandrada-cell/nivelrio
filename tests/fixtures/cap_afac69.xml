@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='utf-8'?>
+<rss version="2.0">
+  <channel>
+    <title>AEMET - Avisos de fenómenos meteorológicos adversos - Cataluña</title>
+    <link>https://www.aemet.es/es/eltiempo/prediccion/avisos?k=cat</link>
+    <description>Avisos de fenómenos meteorológicos adversos según el Plan Meteoalerta de la Agencia Estatal de Meteorología (AEMET) para Cataluña.</description>
+    <language>es</language>
+    <copyright>https://www.aemet.es/es/nota_legal</copyright>
+    <pubDate>2026-10-19T21:50:01+00:00</pubDate>
+    <lastBuildDate>2026-10-19T21:50:01+00:00</lastBuildDate>
+    <image>
+      <url>https://www.aemet.es/imagenes/gif/logo_AEMET_web.gif</url>
+    </image>
+    <item>
+      <title>Estado completo de avisos para Cataluña</title>
+      <description>Fichero tar.gz que contiene todos los avisos para Cataluña de 23:50 19-10-2026 CEST (UTC+2) a 23:59 22-10-2026 CEST (UTC+2).</description>
+      <link>https://www.aemet.es/documentos_d/eltiempo/prediccion/avisos/cap/Z_CAP_C_LEMM_20261019215001_AFAC69.tar.gz</link>
+      <guid>Z_CAP_C_LEMM_20261019215001_AFAC69.tar.gz</guid>
+      <pubDate>2026-10-19T21:50:01+00:00</pubDate>
+    </item>
+    <item>
+      <title>Aviso. Nivel naranja. Lluvias. Litoral sur de Tarragona</title>
+      <description>Aviso de precipitación acumulada en una hora de nivel naranja de 19:00 19-10-2026 CEST (UTC+2) a 23:59 19-10-2026 CEST (UTC+2).</description>
+      <link>https://www.aemet.es/documentos_d/eltiempo/prediccion/avisos/cap/Z_CAP_C_LEMM_20261019171300_AFAZ694304PRP11922.xml</link>
+      <guid>Z_CAP_C_LEMM_20261019171300_AFAZ694304PRP11922.xml</guid>
+      <pubDate>2026-10-19T17:13:00+00:00</pubDate>
+    </item>
+    <item>
+      <title>Aviso. Nivel amarillo. Tormentas. Litoral de Barcelona</title>
+      <description>Aviso de tormentas de nivel amarillo de 19:00 19-10-2026 CEST (UTC+2) a 08:59 20-10-2026 CEST (UTC+2).</description>
+      <link>https://www.aemet.es/documentos_d/eltiempo/prediccion/avisos/cap/Z_CAP_C_LEMM_20261019171300_AFAZ690804TOTO2007.xml</link>
+      <guid>Z_CAP_C_LEMM_20261019171300_AFAZ690804TOTO2007.xml</guid>
+      <pubDate>2026-10-19T17:13:00+00:00</pubDate>
+    </item>
+    <item>
+      <title>Aviso. Nivel amarillo. Costeros. Ampurdán</title>
+      <description>Aviso de costeros de nivel amarillo de 16:00 20-10-2026 CEST (UTC+2) a 23:59 20-10-2026 CEST (UTC+2).</description>
+      <link>https://www.aemet.es/documentos_d/eltiempo/prediccion/avisos/cap/Z_CAP_C_LEMM_20261019162629_AFAZ691703COCO2022.xml</link>
+      <guid>Z_CAP_C_LEMM_20261019162629_AFAZ691703COCO2022.xml</guid>
+      <pubDate>2026-10-19T16:26:29+00:00</pubDate>
+    </item>
+    <item>
+      <title>Aviso. Nivel amarillo. Lluvias. Ampurdán</title>
+      <description>Aviso de precipitación acumulada en 12 horas de nivel amarillo de 19:00 19-10-2026 CEST (UTC+2) a 11:59 20-10-2026 CEST (UTC+2).</description>
+      <link>https://www.aemet.es/documentos_d/eltiempo/prediccion/avisos/cap/Z_CAP_C_LEMM_20261019091707_AFAZ691703PRP22010.xml</link>
+      <guid>Z_CAP_C_LEMM_20261019091707_AFAZ691703PRP22010.xml</guid>
+      <pubDate>2026-10-19T09:17:07+00:00</pubDate>
+    </item>
+    <item>
+      <title>Aviso. Nivel amarillo. Lluvias. Prelitoral de Barcelona</title>
+      <description>Aviso de precipitación acumulada en una hora de nivel amarillo de 00:00 20-10-2026 CEST (UTC+2) a 08:59 20-10-2026 CEST (UTC+2).</description>
+      <link>https://www.aemet.es/documentos_d/eltiempo/prediccion/avisos/cap/Z_CAP_C_LEMM_20261019171300_AFAZ690803PRP12007.xml</link>
+      <guid>Z_CAP_C_LEMM_20261019171300_AFAZ690803PRP12007.xml</guid>
+      <pubDate>2026-10-19T17:13:00+00:00</pubDate>
+    </item>
+    <item>
+      <title>Aviso. Nivel rojo. Lluvias. Zona de prueba sin periodo</title>
+      <description>Aviso de precipitación sin periodo legible.</description>
+      <link>https://www.aemet.es/documentos_d/eltiempo/prediccion/avisos/cap/Z_CAP_C_LEMM_20261019171300_AFAZ694304PRP11922.xml</link>
+      <guid>Z_CAP_C_LEMM_20261019171300_AFAZ694304PRP11922.xml</guid>
+      <pubDate>2026-10-19T17:13:00+00:00</pubDate>
+    </item>
+  </channel>
+</rss>

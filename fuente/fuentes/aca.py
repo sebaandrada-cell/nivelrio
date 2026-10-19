@@ -4,18 +4,16 @@ Los timestamps de Sentilo (dd/mm/yyyyThh:mi:ss) vienen en UTC (verificado contra
 `time` en milisegundos). Los valores son cadenas; un sensor sin lectura reciente trae la lista
 de observaciones vacía o el valor "NAN".
 """
-import http.client
 import json
 import time
-import urllib.error
 import urllib.request
 from datetime import datetime, timezone
 
-from modelo import FuenteError, Lectura
+from fuentes import red
+from modelo import Lectura
 
 URL_ULTIMOS = "https://aplicacions.aca.gencat.cat/sdim2/apirest/data/AFORAMENT-EST"
 URL_CATALOGO = "https://aplicacions.aca.gencat.cat/sdim2/apirest/catalog?componentType=aforament"
-USER_AGENT = "rius-catalunya/0.1 (+https://github.com/sebaandrada-cell/nivelrio)"
 TIPO_CAUDAL = "0014"
 TIPO_NIVEL = "0019"
 FMT = "%d/%m/%YT%H:%M:%S"
@@ -101,15 +99,7 @@ def url_ventana(sensor: str, desde: datetime, hasta: datetime) -> str:
 
 
 def bajar(url: str, abrir=urllib.request.urlopen, intentos: int = 3, dormir=time.sleep) -> dict:
-    """GET con reintentos y espera creciente. Lanza FuenteError al agotar los intentos."""
-    ultimo = None
-    for i in range(intentos):
-        try:
-            req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT, "Accept": "application/json"})
-            with abrir(req, timeout=30) as r:
-                return json.loads(r.read().decode("utf-8"))
-        except (urllib.error.URLError, http.client.HTTPException, TimeoutError, OSError, ValueError) as e:
-            ultimo = e
-            if i < intentos - 1:
-                dormir(2 ** i)
-    raise FuenteError(f"ACA: {url} falló tras {intentos} intentos: {ultimo}")
+    """GET de JSON con reintentos y espera creciente. Lanza FuenteError al agotar los intentos."""
+    texto = red.get_texto(url, fuente="ACA", abrir=abrir, intentos=intentos, dormir=dormir,
+                          validar=json.loads, accept="application/json")
+    return json.loads(texto)

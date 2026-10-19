@@ -1,0 +1,16 @@
+[
+ {
+  "plaicona": {
+   "url": "https://documents.dadesobertes.gencat.cat/cecat/docs/ico_INUNCAT.png"
+  },
+  "plaacronim": "INUNCAT",
+  "planom": "INUNCAT",
+  "plafase": "ALERTA",
+  "plaactivat": "SI",
+  "fasedatahora": "15/10/2026 19:06",
+  "comunicatpdf": {
+   "url": "https://documents.dadesobertes.gencat.cat/cecat/docs/I-128205_ACTUALITZACIO--ACTIVAT_INUNCAT_202610192026.pdf"
+  },
+  "descripcio": "Avís-Intensitat de pluja Intensitat >40 mm / 30 minuts - "
+ }
+]

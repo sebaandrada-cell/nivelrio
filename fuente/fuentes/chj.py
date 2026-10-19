@@ -4,17 +4,15 @@ La página https://saih.chj.es/mapa-aforos lleva los aforos como un array JavaSc
 (`let aforos = [...]`) dentro del HTML. No es una API oficial: si la página cambia, el parseo
 lanza FuenteError y las estaciones CHJ quedan en "sin datos".
 """
-import http.client
 import json
 import time
-import urllib.error
 import urllib.request
 from datetime import datetime, timezone
 
+from fuentes import red
 from modelo import FuenteError, Lectura, Umbrales
 
 URL_AFOROS = "https://saih.chj.es/mapa-aforos"
-USER_AGENT = "rius-catalunya/0.1 (+https://github.com/sebaandrada-cell/nivelrio)"
 
 
 def extraer_array(html: str, nombre: str) -> list[dict]:
@@ -76,19 +74,11 @@ def lecturas_para(estaciones, aforos: dict[str, dict]) -> list[Lectura]:
     return salida
 
 
+def _tiene_array(html: str) -> None:
+    if "let aforos = [" not in html:
+        raise ValueError("la página no trae el array de aforos")
+
+
 def bajar_aforos(abrir=urllib.request.urlopen, intentos: int = 5, dormir=time.sleep) -> str:
     """GET de la página con reintentos: el servidor corta cerca de 1 de cada 3 conexiones."""
-    ultimo = None
-    for i in range(intentos):
-        try:
-            req = urllib.request.Request(URL_AFOROS, headers={"User-Agent": USER_AGENT})
-            with abrir(req, timeout=30) as r:
-                html = r.read().decode("utf-8")
-            if "let aforos = [" not in html:
-                raise ValueError("la página no trae el array de aforos")
-            return html
-        except (urllib.error.URLError, http.client.HTTPException, TimeoutError, OSError, ValueError) as e:
-            ultimo = e
-            if i < intentos - 1:
-                dormir(min(2 ** i, 8))
-    raise FuenteError(f"CHJ: {URL_AFOROS} falló tras {intentos} intentos: {ultimo}")
+    return red.get_texto(URL_AFOROS, fuente="CHJ", abrir=abrir, intentos=intentos, dormir=dormir, validar=_tiene_array)
