@@ -1,0 +1,528 @@
+{
+ "sensors": [
+  {
+   "sensor": "080478-006-ANA001",
+   "observations": [
+    {
+     "value": "16.129",
+     "timestamp": "19/10/2026T22:15:00",
+     "time": 1792448100000
+    }
+   ]
+  },
+  {
+   "sensor": "CALC001241",
+   "observations": [
+    {
+     "value": "5.106",
+     "timestamp": "19/10/2026T22:15:00",
+     "time": 1792448100000
+    }
+   ]
+  },
+  {
+   "sensor": "080538-005-ANA001",
+   "observations": [
+    {
+     "value": "52.182",
+     "timestamp": "19/10/2026T22:15:00",
+     "time": 1792448100000
+    }
+   ]
+  },
+  {
+   "sensor": "CALC001244",
+   "observations": [
+    {
+     "value": "20.669",
+     "timestamp": "19/10/2026T22:15:00",
+     "time": 1792448100000
+    }
+   ]
+  },
+  {
+   "sensor": "080543-002-ANA001",
+   "observations": [
+    {
+     "value": "60.559",
+     "timestamp": "19/10/2026T22:20:00",
+     "time": 1792448400000
+    }
+   ]
+  },
+  {
+   "sensor": "CALC001446",
+   "observations": [
+    {
+     "value": "27.155",
+     "timestamp": "19/10/2026T22:20:00",
+     "time": 1792448400000
+    }
+   ]
+  },
+  {
+   "sensor": "080826-002-ANA001",
+   "observations": [
+    {
+     "value": "48.138",
+     "timestamp": "19/10/2026T22:20:00",
+     "time": 1792448400000
+    }
+   ]
+  },
+  {
+   "sensor": "CALC001209",
+   "observations": [
+    {
+     "value": "6.551",
+     "timestamp": "19/10/2026T22:20:00",
+     "time": 1792448400000
+    }
+   ]
+  },
+  {
+   "sensor": "080996-007-ANA010",
+   "observations": [
+    {
+     "value": "182.408",
+     "timestamp": "19/10/2026T22:15:00",
+     "time": 1792448100000
+    }
+   ]
+  },
+  {
+   "sensor": "CALC001228",
+   "observations": [
+    {
+     "value": "62.791",
+     "timestamp": "19/10/2026T22:15:00",
+     "time": 1792448100000
+    }
+   ]
+  },
+  {
+   "sensor": "081141-002-ANA001",
+   "observations": [
+    {
+     "value": "77.732",
+     "timestamp": "19/10/2026T22:20:00",
+     "time": 1792448400000
+    }
+   ]
+  },
+  {
+   "sensor": "082021-001-ANA002",
+   "observations": [
+    {
+     "value": "26.62",
+     "timestamp": "19/10/2026T22:15:00",
+     "time": 1792448100000
+    }
+   ]
+  },
+  {
+   "sensor": "CALC001210",
+   "observations": [
+    {
+     "value": "1.506",
+     "timestamp": "19/10/2026T22:15:00",
+     "time": 1792448100000
+    }
+   ]
+  },
+  {
+   "sensor": "082172-002-ANA010",
+   "observations": [
+    {
+     "value": "65.178",
+     "timestamp": "19/10/2026T22:15:00",
+     "time": 1792448100000
+    }
+   ]
+  },
+  {
+   "sensor": "CALC001261",
+   "observations": [
+    {
+     "value": "41.174",
+     "timestamp": "19/10/2026T22:15:00",
+     "time": 1792448100000
+    }
+   ]
+  },
+  {
+   "sensor": "082401-002-ANA001",
+   "observations": [
+    {
+     "value": "30.662",
+     "timestamp": "19/10/2026T22:15:00",
+     "time": 1792448100000
+    }
+   ]
+  },
+  {
+   "sensor": "CALC001249",
+   "observations": [
+    {
+     "value": "2.469",
+     "timestamp": "19/10/2026T22:15:00",
+     "time": 1792448100000
+    }
+   ]
+  },
+  {
+   "sensor": "082457-001-ANA001",
+   "observations": [
+    {
+     "value": "38.28",
+     "timestamp": "19/10/2026T22:20:00",
+     "time": 1792448400000
+    }
+   ]
+  },
+  {
+   "sensor": "CALC001219",
+   "observations": [
+    {
+     "value": "12.54",
+     "timestamp": "19/10/2026T22:20:00",
+     "time": 1792448400000
+    }
+   ]
+  },
+  {
+   "sensor": "082634-001-ANA013",
+   "observations": [
+    {
+     "value": "52.181",
+     "timestamp": "19/10/2026T22:20:00",
+     "time": 1792448400000
+    }
+   ]
+  },
+  {
+   "sensor": "CALC001363",
+   "observations": [
+    {
+     "value": "36.77",
+     "timestamp": "19/10/2026T22:20:00",
+     "time": 1792448400000
+    }
+   ]
+  },
+  {
+   "sensor": "082747-007-ANA001",
+   "observations": [
+    {
+     "value": "23.143",
+     "timestamp": "19/10/2026T22:20:00",
+     "time": 1792448400000
+    }
+   ]
+  },
+  {
+   "sensor": "CALC001274",
+   "observations": [
+    {
+     "value": "3.618",
+     "timestamp": "19/10/2026T22:20:00",
+     "time": 1792448400000
+    }
+   ]
+  },
+  {
+   "sensor": "CALC001100",
+   "observations": [
+    {
+     "value": "1.129",
+     "timestamp": "19/10/2026T22:20:00",
+     "time": 1792448400000
+    }
+   ]
+  },
+  {
+   "sensor": "CALC001110",
+   "observations": [
+    {
+     "value": "16.285",
+     "timestamp": "19/10/2026T22:20:00",
+     "time": 1792448400000
+    }
+   ]
+  },
+  {
+   "sensor": "170558-002-ANA019",
+   "observations": [
+    {
+     "value": "10.6",
+     "timestamp": "19/10/2026T22:20:00",
+     "time": 1792448400000
+    }
+   ]
+  },
+  {
+   "sensor": "CALC001201",
+   "observations": [
+    {
+     "value": "9.094",
+     "timestamp": "19/10/2026T22:20:00",
+     "time": 1792448400000
+    }
+   ]
+  },
+  {
+   "sensor": "170656-005-ANA001",
+   "observations": [
+    {
+     "value": "51.92",
+     "timestamp": "19/10/2026T22:10:00",
+     "time": 1792447800000
+    }
+   ]
+  },
+  {
+   "sensor": "CALC001103",
+   "observations": [
+    {
+     "value": "4.37",
+     "timestamp": "19/10/2026T22:10:00",
+     "time": 1792447800000
+    }
+   ]
+  },
+  {
+   "sensor": "170792-002-ANA001",
+   "observations": [
+    {
+     "value": "79.091",
+     "timestamp": "19/10/2026T22:15:00",
+     "time": 1792448100000
+    }
+   ]
+  },
+  {
+   "sensor": "CALC001218",
+   "observations": [
+    {
+     "value": "4.914",
+     "timestamp": "19/10/2026T22:15:00",
+     "time": 1792448100000
+    }
+   ]
+  },
+  {
+   "sensor": "171143-002-ANA001",
+   "observations": [
+    {
+     "value": "24.909",
+     "timestamp": "19/10/2026T22:15:00",
+     "time": 1792448100000
+    }
+   ]
+  },
+  {
+   "sensor": "CALC001101",
+   "observations": [
+    {
+     "value": "1.164",
+     "timestamp": "19/10/2026T22:15:00",
+     "time": 1792448100000
+    }
+   ]
+  },
+  {
+   "sensor": "171352-003-ANA001",
+   "observations": [
+    {
+     "value": "103.286",
+     "timestamp": "19/10/2026T22:20:00",
+     "time": 1792448400000
+    }
+   ]
+  },
+  {
+   "sensor": "CALC001553",
+   "observations": [
+    {
+     "value": "0.257",
+     "timestamp": "19/10/2026T22:20:00",
+     "time": 1792448400000
+    }
+   ]
+  },
+  {
+   "sensor": "171714-001-ANA01",
+   "observations": [
+    {
+     "value": "133.007",
+     "timestamp": "19/10/2026T22:20:00",
+     "time": 1792448400000
+    }
+   ]
+  },
+  {
+   "sensor": "CALC001623",
+   "observations": [
+    {
+     "value": "0.686",
+     "timestamp": "19/10/2026T22:20:00",
+     "time": 1792448400000
+    }
+   ]
+  },
+  {
+   "sensor": "431652-001-ANA001",
+   "observations": [
+    {
+     "value": "42.26",
+     "timestamp": "19/10/2026T22:15:00",
+     "time": 1792448100000
+    }
+   ]
+  },
+  {
+   "sensor": "CALC001367",
+   "observations": [
+    {
+     "value": "2.006",
+     "timestamp": "19/10/2026T22:15:00",
+     "time": 1792448100000
+    }
+   ]
+  },
+  {
+   "sensor": "080581-003-ANA01",
+   "observations": [
+    {
+     "value": "46.358",
+     "timestamp": "19/10/2026T22:20:00",
+     "time": 1792448400000
+    }
+   ]
+  },
+  {
+   "sensor": "CALC001670",
+   "observations": [
+    {
+     "value": "3.451",
+     "timestamp": "19/10/2026T22:20:00",
+     "time": 1792448400000
+    }
+   ]
+  },
+  {
+   "sensor": "080996-007-ANA006",
+   "observations": [
+    {
+     "value": "2885.46",
+     "timestamp": "19/10/2026T22:15:00",
+     "time": 1792448100000
+    }
+   ]
+  },
+  {
+   "sensor": "CALC001757",
+   "observations": [
+    {
+     "value": "26.638",
+     "timestamp": "19/10/2026T22:00:00",
+     "time": 1792447200000
+    }
+   ]
+  },
+  {
+   "sensor": "081831-003-ANA01",
+   "observations": [
+    {
+     "value": "82.954",
+     "timestamp": "19/10/2026T22:00:00",
+     "time": 1792447200000
+    }
+   ]
+  },
+  {
+   "sensor": "CALC001185",
+   "observations": [
+    {
+     "value": "94.119",
+     "timestamp": "19/10/2026T22:20:00",
+     "time": 1792448400000
+    }
+   ]
+  },
+  {
+   "sensor": "CALC001186",
+   "observations": [
+    {
+     "value": "9.131",
+     "timestamp": "19/10/2026T22:20:00",
+     "time": 1792448400000
+    }
+   ]
+  },
+  {
+   "sensor": "CALC001836",
+   "observations": [
+    {
+     "value": "8.177",
+     "timestamp": "19/10/2026T22:20:00",
+     "time": 1792448400000
+    }
+   ]
+  },
+  {
+   "sensor": "CALC000008",
+   "observations": [
+    {
+     "value": "9.139",
+     "timestamp": "19/10/2026T22:00:00",
+     "time": 1792447200000
+    }
+   ]
+  },
+  {
+   "sensor": "431482-004-ANA01",
+   "observations": [
+    {
+     "value": "144.507",
+     "timestamp": "19/10/2026T22:00:00",
+     "time": 1792447200000
+    }
+   ]
+  },
+  {
+   "sensor": "430862-001-ANA001",
+   "observations": [
+    {
+     "value": "35.388",
+     "timestamp": "19/10/2026T22:20:00",
+     "time": 1792448400000
+    }
+   ]
+  },
+  {
+   "sensor": "CALC001368",
+   "observations": [
+    {
+     "value": "2.618",
+     "timestamp": "19/10/2026T22:20:00",
+     "time": 1792448400000
+    }
+   ]
+  },
+  {
+   "sensor": "TEST-VACIO-01",
+   "observations": []
+  },
+  {
+   "sensor": "TEST-NAN-01",
+   "observations": [
+    {
+     "value": "NAN",
+     "timestamp": "19/10/2026T22:15:00",
+     "time": 1792448100000
+    }
+   ]
+  }
+ ]
+}

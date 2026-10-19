@@ -1,0 +1,1487 @@
+{
+ "providers": [
+  {
+   "provider": "AFORAMENT-EST",
+   "sensors": [
+    {
+     "sensor": "080478-006-ANA001",
+     "description": "Nivell riu",
+     "type": "0019",
+     "unit": "cm",
+     "location": "41.920666218 1.696075185",
+     "component": "080478-006",
+     "componentDesc": "Cardona (Cardener)",
+     "additionalInfo": {
+      "Temps mostreig (min)": "5",
+      "Rang mínim": "0",
+      "Rang màxim": "10"
+     },
+     "componentAdditionalInfo": {
+      "Comarca": "BAGES",
+      "Província": "BARCELONA",
+      "Riu": "RIU CARDENER",
+      "Districte fluvial": "ACA",
+      "Superfície conca drenada": "631,00 km²",
+      "Subconca": "EL CARDENER",
+      "Terme municipal": "CARDONA",
+      "Conca": "EL LLOBREGAT",
+      "Coordenada X (UTM ETRS89)": "391877",
+      "Coordenada Y (UTM ETRS89)": "4641790",
+      "Codi ordre": "CB-10",
+      "Estat": "En servei",
+      "Topònim": "Túnel del Cardener"
+     }
+    },
+    {
+     "sensor": "080478-006-ANA003",
+     "description": "Cabal canal",
+     "type": "0035",
+     "unit": "l/s",
+     "location": "41.920666218 1.696075185",
+     "component": "080478-006",
+     "componentDesc": "Cardona (Cardener)",
+     "additionalInfo": {
+      "Temps mostreig (min)": "5",
+      "Rang mínim": "0",
+      "Rang màxim": "0"
+     },
+     "componentAdditionalInfo": {
+      "Comarca": "BAGES",
+      "Província": "BARCELONA",
+      "Riu": "RIU CARDENER",
+      "Districte fluvial": "ACA",
+      "Superfície conca drenada": "631,00 km²",
+      "Subconca": "EL CARDENER",
+      "Terme municipal": "CARDONA",
+      "Conca": "EL LLOBREGAT",
+      "Coordenada X (UTM ETRS89)": "391877",
+      "Coordenada Y (UTM ETRS89)": "4641790",
+      "Codi ordre": "CB-10",
+      "Estat": "En servei",
+      "Topònim": "Túnel del Cardener"
+     }
+    },
+    {
+     "sensor": "CALC001241",
+     "description": "Cabal riu",
+     "type": "0014",
+     "unit": "m³/s",
+     "location": "41.920666218 1.696075185",
+     "component": "080478-006",
+     "componentDesc": "Cardona (Cardener)",
+     "additionalInfo": {
+      "Temps mostreig (min)": "5",
+      "Rang mínim": "0",
+      "Rang màxim": "470"
+     },
+     "componentAdditionalInfo": {
+      "Comarca": "BAGES",
+      "Província": "BARCELONA",
+      "Riu": "RIU CARDENER",
+      "Districte fluvial": "ACA",
+      "Superfície conca drenada": "631,00 km²",
+      "Subconca": "EL CARDENER",
+      "Terme municipal": "CARDONA",
+      "Conca": "EL LLOBREGAT",
+      "Coordenada X (UTM ETRS89)": "391877",
+      "Coordenada Y (UTM ETRS89)": "4641790",
+      "Codi ordre": "CB-10",
+      "Estat": "En servei",
+      "Topònim": "Túnel del Cardener"
+     }
+    },
+    {
+     "sensor": "080538-005-ANA001",
+     "description": "Nivell riu",
+     "type": "0019",
+     "unit": "cm",
+     "location": "41.646561643 1.858396556",
+     "component": "080538-005",
+     "componentDesc": "Castellbell i el Vilar (Llobregat)",
+     "additionalInfo": {
+      "Temps mostreig (min)": "5",
+      "Rang mínim": "0",
+      "Rang màxim": "10"
+     },
+     "componentAdditionalInfo": {
+      "Codi ordre": "LB-25",
+      "Comarca": "BAGES",
+      "Província": "BARCELONA",
+      "Riu": "RIU LLOBREGAT",
+      "Districte fluvial": "ACA",
+      "Superfície conca drenada": "3326,85 km²",
+      "Coordenada Y (UTM ETRS89)": "4611165",
+      "Coordenada X (UTM ETRS89)": "404933",
+      "Subconca": "BAIX LLOBREGAT",
+      "Terme municipal": "CASTELLBELL I EL VILAR",
+      "Conca": "EL LLOBREGAT",
+      "Estat": "En servei",
+      "Topònim": ""
+     }
+    },
+    {
+     "sensor": "CALC001244",
+     "description": "Cabal riu",
+     "type": "0014",
+     "unit": "m³/s",
+     "location": "41.646561643 1.858396556",
+     "component": "080538-005",
+     "componentDesc": "Castellbell i el Vilar (Llobregat)",
+     "additionalInfo": {
+      "Temps mostreig (min)": "5",
+      "Rang mínim": "0",
+      "Rang màxim": "970"
+     },
+     "componentAdditionalInfo": {
+      "Codi ordre": "LB-25",
+      "Comarca": "BAGES",
+      "Província": "BARCELONA",
+      "Riu": "RIU LLOBREGAT",
+      "Districte fluvial": "ACA",
+      "Superfície conca drenada": "3326,85 km²",
+      "Coordenada Y (UTM ETRS89)": "4611165",
+      "Coordenada X (UTM ETRS89)": "404933",
+      "Subconca": "BAIX LLOBREGAT",
+      "Terme municipal": "CASTELLBELL I EL VILAR",
+      "Conca": "EL LLOBREGAT",
+      "Estat": "En servei",
+      "Topònim": ""
+     }
+    },
+    {
+     "sensor": "080543-002-ANA001",
+     "description": "Nivell riu",
+     "type": "0019",
+     "unit": "cm",
+     "location": "41.484600949 1.933089949",
+     "component": "080543-002",
+     "componentDesc": "Castellbisbal (Llobregat)",
+     "additionalInfo": {
+      "Temps mostreig (min)": "5",
+      "Rang mínim": "0",
+      "Rang màxim": "0"
+     },
+     "componentAdditionalInfo": {
+      "Codi ordre": "LB-30",
+      "Superfície conca drenada": "3628,00 km²",
+      "Districte fluvial": "ACA",
+      "Coordenada X (UTM ETRS89)": "410931",
+      "Conca": "EL LLOBREGAT",
+      "Terme municipal": "CASTELLBISBAL",
+      "Coordenada Y (UTM ETRS89)": "4593104",
+      "Província": "BARCELONA",
+      "Comarca": "VALLÈS OCCIDENTAL",
+      "Estat": "En servei",
+      "Subconca": "BAIX LLOBREGAT",
+      "Riu": "RIU LLOBREGAT",
+      "Topònim": "Assut de Salzers"
+     }
+    },
+    {
+     "sensor": "CALC001446",
+     "description": "Cabal riu",
+     "type": "0014",
+     "unit": "m³/s",
+     "location": "41.484600949 1.933089949",
+     "component": "080543-002",
+     "componentDesc": "Castellbisbal (Llobregat)",
+     "additionalInfo": {
+      "Temps mostreig (min)": "5",
+      "Rang mínim": "0",
+      "Rang màxim": "290"
+     },
+     "componentAdditionalInfo": {
+      "Codi ordre": "LB-30",
+      "Superfície conca drenada": "3628,00 km²",
+      "Districte fluvial": "ACA",
+      "Coordenada X (UTM ETRS89)": "410931",
+      "Conca": "EL LLOBREGAT",
+      "Terme municipal": "CASTELLBISBAL",
+      "Coordenada Y (UTM ETRS89)": "4593104",
+      "Província": "BARCELONA",
+      "Comarca": "VALLÈS OCCIDENTAL",
+      "Estat": "En servei",
+      "Subconca": "BAIX LLOBREGAT",
+      "Riu": "RIU LLOBREGAT",
+      "Topònim": "Assut de Salzers"
+     }
+    },
+    {
+     "sensor": "080581-003-ANA01",
+     "description": "Nivell riu",
+     "type": "0019",
+     "unit": "cm",
+     "location": "41.265610897 1.633829253",
+     "component": "080581-003",
+     "componentDesc": "Castellet i la Gornal (Foix)",
+     "additionalInfo": null,
+     "componentAdditionalInfo": {
+      "Comarca": "ALT PENEDÈS",
+      "Província": "BARCELONA",
+      "Riu": "RIU FOIX",
+      "Districte fluvial": "ACA",
+      "Superfície conca drenada": "278,90 km²",
+      "Subconca": "EL FOIX",
+      "Terme municipal": "CASTELLET I LA GORNAL",
+      "Conca": "EL FOIX",
+      "Coordenada X (UTM ETRS89)": "385564",
+      "Coordenada Y (UTM ETRS89)": "4569143",
+      "Codi ordre": "FO-05",
+      "Estat": "En servei",
+      "Topònim": ""
+     }
+    },
+    {
+     "sensor": "CALC001670",
+     "description": "Cabal riu",
+     "type": "0014",
+     "unit": "m³/s",
+     "location": "41.265610897 1.633829253",
+     "component": "080581-003",
+     "componentDesc": "Castellet i la Gornal (Foix)",
+     "additionalInfo": null,
+     "componentAdditionalInfo": {
+      "Comarca": "ALT PENEDÈS",
+      "Província": "BARCELONA",
+      "Riu": "RIU FOIX",
+      "Districte fluvial": "ACA",
+      "Superfície conca drenada": "278,90 km²",
+      "Subconca": "EL FOIX",
+      "Terme municipal": "CASTELLET I LA GORNAL",
+      "Conca": "EL FOIX",
+      "Coordenada X (UTM ETRS89)": "385564",
+      "Coordenada Y (UTM ETRS89)": "4569143",
+      "Codi ordre": "FO-05",
+      "Estat": "En servei",
+      "Topònim": ""
+     }
+    },
+    {
+     "sensor": "080826-002-ANA001",
+     "description": "Nivell riu",
+     "type": "0019",
+     "unit": "cm",
+     "location": "41.738958347 2.693885954",
+     "component": "080826-002",
+     "componentDesc": "Fogars de la Selva (Tordera)",
+     "additionalInfo": {
+      "Temps mostreig (min)": "5",
+      "Rang mínim": "0",
+      "Rang màxim": "10"
+     },
+     "componentAdditionalInfo": {
+      "Comarca": "SELVA",
+      "Província": "BARCELONA",
+      "Riu": "RIU TORDERA",
+      "Districte fluvial": "ACA",
+      "Superfície conca drenada": "776,56 km²",
+      "Subconca": "LA TORDERA",
+      "Terme municipal": "FOGARS DE LA SELVA",
+      "Conca": "LA TORDERA",
+      "Coordenada X (UTM ETRS89)": "474545",
+      "Coordenada Y (UTM ETRS89)": "4620839",
+      "Codi ordre": "TO-20",
+      "Estat": "En servei",
+      "Topònim": "Can Simó"
+     }
+    },
+    {
+     "sensor": "CALC001209",
+     "description": "Cabal riu",
+     "type": "0014",
+     "unit": "m³/s",
+     "location": "41.738958347 2.693885954",
+     "component": "080826-002",
+     "componentDesc": "Fogars de la Selva (Tordera)",
+     "additionalInfo": {
+      "Temps mostreig (min)": "5",
+      "Rang mínim": "0",
+      "Rang màxim": "280"
+     },
+     "componentAdditionalInfo": {
+      "Comarca": "SELVA",
+      "Província": "BARCELONA",
+      "Riu": "RIU TORDERA",
+      "Districte fluvial": "ACA",
+      "Superfície conca drenada": "776,56 km²",
+      "Subconca": "LA TORDERA",
+      "Terme municipal": "FOGARS DE LA SELVA",
+      "Conca": "LA TORDERA",
+      "Coordenada X (UTM ETRS89)": "474545",
+      "Coordenada Y (UTM ETRS89)": "4620839",
+      "Codi ordre": "TO-20",
+      "Estat": "En servei",
+      "Topònim": "Can Simó"
+     }
+    },
+    {
+     "sensor": "080996-007-ANA006",
+     "description": "Cabal canal",
+     "type": "0035",
+     "unit": "l/s",
+     "location": "42.214385565 1.869705979",
+     "component": "080996-007",
+     "componentDesc": "Guardiola de Berguedà (Llobregat)",
+     "additionalInfo": null,
+     "componentAdditionalInfo": {
+      "Comarca": "BERGUEDÀ",
+      "Província": "BARCELONA",
+      "Riu": "RIU LLOBREGAT",
+      "Districte fluvial": "ACA",
+      "Superfície conca drenada": "332,58 km²",
+      "Subconca": "ALT LLOBREGAT",
+      "Terme municipal": "GUARDIOLA DE BERGUEDÀ",
+      "Conca": "EL LLOBREGAT",
+      "Coordenada X (UTM ETRS89)": "406706",
+      "Coordenada Y (UTM ETRS89)": "4674198",
+      "Codi ordre": "LA-10",
+      "Estat": "En servei",
+      "Topònim": "Assut derivació Canal Industrial de Berga"
+     }
+    },
+    {
+     "sensor": "080996-007-ANA010",
+     "description": "Nivell riu",
+     "type": "0019",
+     "unit": "cm",
+     "location": "42.214385565 1.869705979",
+     "component": "080996-007",
+     "componentDesc": "Guardiola de Berguedà (Llobregat)",
+     "additionalInfo": {
+      "Temps mostreig (min)": "5",
+      "Rang mínim": "0",
+      "Rang màxim": "0"
+     },
+     "componentAdditionalInfo": {
+      "Comarca": "BERGUEDÀ",
+      "Província": "BARCELONA",
+      "Riu": "RIU LLOBREGAT",
+      "Districte fluvial": "ACA",
+      "Superfície conca drenada": "332,58 km²",
+      "Subconca": "ALT LLOBREGAT",
+      "Terme municipal": "GUARDIOLA DE BERGUEDÀ",
+      "Conca": "EL LLOBREGAT",
+      "Coordenada X (UTM ETRS89)": "406706",
+      "Coordenada Y (UTM ETRS89)": "4674198",
+      "Codi ordre": "LA-10",
+      "Estat": "En servei",
+      "Topònim": "Assut derivació Canal Industrial de Berga"
+     }
+    },
+    {
+     "sensor": "CALC001228",
+     "description": "Cabal riu",
+     "type": "0014",
+     "unit": "m³/s",
+     "location": "42.214385565 1.869705979",
+     "component": "080996-007",
+     "componentDesc": "Guardiola de Berguedà (Llobregat)",
+     "additionalInfo": {
+      "Temps mostreig (min)": "5",
+      "Rang mínim": "0",
+      "Rang màxim": "280"
+     },
+     "componentAdditionalInfo": {
+      "Comarca": "BERGUEDÀ",
+      "Província": "BARCELONA",
+      "Riu": "RIU LLOBREGAT",
+      "Districte fluvial": "ACA",
+      "Superfície conca drenada": "332,58 km²",
+      "Subconca": "ALT LLOBREGAT",
+      "Terme municipal": "GUARDIOLA DE BERGUEDÀ",
+      "Conca": "EL LLOBREGAT",
+      "Coordenada X (UTM ETRS89)": "406706",
+      "Coordenada Y (UTM ETRS89)": "4674198",
+      "Codi ordre": "LA-10",
+      "Estat": "En servei",
+      "Topònim": "Assut derivació Canal Industrial de Berga"
+     }
+    },
+    {
+     "sensor": "081141-002-ANA001",
+     "description": "Nivell riu",
+     "type": "0019",
+     "unit": "cm",
+     "location": "41.47770205 1.929286623",
+     "component": "081141-002",
+     "componentDesc": "Martorell (Anoia)",
+     "additionalInfo": {
+      "Temps mostreig (min)": "5",
+      "Rang mínim": "0",
+      "Rang màxim": "0"
+     },
+     "componentAdditionalInfo": {
+      "Comarca": "BAIX LLOBREGAT",
+      "Província": "BARCELONA",
+      "Riu": "RIU ANOIA",
+      "Districte fluvial": "ACA",
+      "Superfície conca drenada": "904 km²",
+      "Subconca": "L'ANOIA",
+      "Terme municipal": "MARTORELL",
+      "Conca": "EL LLOBREGAT",
+      "Coordenada X (UTM ETRS89)": "410604",
+      "Coordenada Y (UTM ETRS89)": "4592342",
+      "Codi ordre": "LB-50",
+      "Estat": "En servei",
+      "Topònim": ""
+     }
+    },
+    {
+     "sensor": "CALC001836",
+     "description": "Cabal riu",
+     "type": "0014",
+     "unit": "m³/s",
+     "location": "41.47770205 1.929286623",
+     "component": "081141-002",
+     "componentDesc": "Martorell (Anoia)",
+     "additionalInfo": null,
+     "componentAdditionalInfo": {
+      "Comarca": "BAIX LLOBREGAT",
+      "Província": "BARCELONA",
+      "Riu": "RIU ANOIA",
+      "Districte fluvial": "ACA",
+      "Superfície conca drenada": "904 km²",
+      "Subconca": "L'ANOIA",
+      "Terme municipal": "MARTORELL",
+      "Conca": "EL LLOBREGAT",
+      "Coordenada X (UTM ETRS89)": "410604",
+      "Coordenada Y (UTM ETRS89)": "4592342",
+      "Codi ordre": "LB-50",
+      "Estat": "En servei",
+      "Topònim": ""
+     }
+    },
+    {
+     "sensor": "081831-003-ANA01",
+     "description": "Nivell riu",
+     "type": "0019",
+     "unit": "cm",
+     "location": "41.980134 2.30814202",
+     "component": "081831-003",
+     "componentDesc": "Roda de Ter (Ter)",
+     "additionalInfo": null,
+     "componentAdditionalInfo": {
+      "Superfície conca drenada": "1400 km²",
+      "Districte fluvial": "ACA",
+      "Terme municipal": "RODA DE TER",
+      "Conca": "EL TER",
+      "Província": "BARCELONA",
+      "Comarca": "OSONA",
+      "Codi ordre": "TA-31",
+      "Coordenada X (UTM ETRS89)": "442684",
+      "Coordenada Y (UTM ETRS89)": "4647801",
+      "Estat": "En servei",
+      "Subconca": "ALT TER",
+      "Riu": "RIU TER",
+      "Topònim": ""
+     }
+    },
+    {
+     "sensor": "CALC001757",
+     "description": "Cabal riu",
+     "type": "0014",
+     "unit": "m³/s",
+     "location": "41.980134 2.30814202",
+     "component": "081831-003",
+     "componentDesc": "Roda de Ter (Ter)",
+     "additionalInfo": null,
+     "componentAdditionalInfo": {
+      "Superfície conca drenada": "1400 km²",
+      "Districte fluvial": "ACA",
+      "Terme municipal": "RODA DE TER",
+      "Conca": "EL TER",
+      "Província": "BARCELONA",
+      "Comarca": "OSONA",
+      "Codi ordre": "TA-31",
+      "Coordenada X (UTM ETRS89)": "442684",
+      "Coordenada Y (UTM ETRS89)": "4647801",
+      "Estat": "En servei",
+      "Subconca": "ALT TER",
+      "Riu": "RIU TER",
+      "Topònim": ""
+     }
+    },
+    {
+     "sensor": "082021-001-ANA002",
+     "description": "Nivell riu",
+     "type": "0019",
+     "unit": "cm",
+     "location": "41.680341221 2.488976096",
+     "component": "082021-001",
+     "componentDesc": "Sant Celoni (Tordera)",
+     "additionalInfo": {
+      "Temps mostreig (min)": "5",
+      "Rang mínim": "0",
+      "Rang màxim": "0"
+     },
+     "componentAdditionalInfo": {
+      "Comarca": "VALLÈS ORIENTAL",
+      "Província": "BARCELONA",
+      "Riu": "RIU TORDERA",
+      "Districte fluvial": "ACA",
+      "Superfície conca drenada": "124,62 km²",
+      "Subconca": "LA TORDERA",
+      "Terme municipal": "SANT CELONI",
+      "Conca": "LA TORDERA",
+      "Coordenada X (UTM ETRS89)": "457467",
+      "Coordenada Y (UTM ETRS89)": "4614412",
+      "Codi ordre": "TO-10",
+      "Estat": "En servei",
+      "Topònim": ""
+     }
+    },
+    {
+     "sensor": "CALC001210",
+     "description": "Cabal riu",
+     "type": "0014",
+     "unit": "m³/s",
+     "location": "41.680341221 2.488976096",
+     "component": "082021-001",
+     "componentDesc": "Sant Celoni (Tordera)",
+     "additionalInfo": {
+      "Temps mostreig (min)": "5",
+      "Rang mínim": "0",
+      "Rang màxim": "170"
+     },
+     "componentAdditionalInfo": {
+      "Comarca": "VALLÈS ORIENTAL",
+      "Província": "BARCELONA",
+      "Riu": "RIU TORDERA",
+      "Districte fluvial": "ACA",
+      "Superfície conca drenada": "124,62 km²",
+      "Subconca": "LA TORDERA",
+      "Terme municipal": "SANT CELONI",
+      "Conca": "LA TORDERA",
+      "Coordenada X (UTM ETRS89)": "457467",
+      "Coordenada Y (UTM ETRS89)": "4614412",
+      "Codi ordre": "TO-10",
+      "Estat": "En servei",
+      "Topònim": ""
+     }
+    },
+    {
+     "sensor": "082172-002-ANA010",
+     "description": "Nivell riu",
+     "type": "0019",
+     "unit": "cm",
+     "location": "41.351810642 2.046600124",
+     "component": "082172-002",
+     "componentDesc": "Sant Joan Despí (Llobregat)",
+     "additionalInfo": {
+      "Temps mostreig (min)": "5",
+      "Rang mínim": "0",
+      "Rang màxim": "0"
+     },
+     "componentAdditionalInfo": {
+      "Comarca": "BAIX LLOBREGAT",
+      "Província": "BARCELONA",
+      "Riu": "RIU LLOBREGAT",
+      "Districte fluvial": "ACA",
+      "Superfície conca drenada": "4907,79 km²",
+      "Subconca": "BAIX LLOBREGAT",
+      "Terme municipal": "SANT JOAN DESPÍ",
+      "Conca": "EL LLOBREGAT",
+      "Coordenada X (UTM ETRS89)": "420245",
+      "Coordenada Y (UTM ETRS89)": "4578251",
+      "Codi ordre": "LB-60",
+      "Estat": "En servei",
+      "Topònim": "ETAP Sant Joan Despí"
+     }
+    },
+    {
+     "sensor": "CALC001261",
+     "description": "Cabal riu",
+     "type": "0014",
+     "unit": "m³/s",
+     "location": "41.351810642 2.046600124",
+     "component": "082172-002",
+     "componentDesc": "Sant Joan Despí (Llobregat)",
+     "additionalInfo": null,
+     "componentAdditionalInfo": {
+      "Comarca": "BAIX LLOBREGAT",
+      "Província": "BARCELONA",
+      "Riu": "RIU LLOBREGAT",
+      "Districte fluvial": "ACA",
+      "Superfície conca drenada": "4907,79 km²",
+      "Subconca": "BAIX LLOBREGAT",
+      "Terme municipal": "SANT JOAN DESPÍ",
+      "Conca": "EL LLOBREGAT",
+      "Coordenada X (UTM ETRS89)": "420245",
+      "Coordenada Y (UTM ETRS89)": "4578251",
+      "Codi ordre": "LB-60",
+      "Estat": "En servei",
+      "Topònim": "ETAP Sant Joan Despí"
+     }
+    },
+    {
+     "sensor": "082401-002-ANA001",
+     "description": "Nivell riu",
+     "type": "0019",
+     "unit": "cm",
+     "location": "41.443497484 1.788187977",
+     "component": "082401-002",
+     "componentDesc": "Sant Sadurní d'Anoia (Anoia)",
+     "additionalInfo": {
+      "Temps mostreig (min)": "5",
+      "Rang mínim": "0",
+      "Rang màxim": "0"
+     },
+     "componentAdditionalInfo": {
+      "Comarca": "ALT PENEDÈS",
+      "Província": "BARCELONA",
+      "Riu": "RIU ANOIA",
+      "Districte fluvial": "ACA",
+      "Superfície conca drenada": "720,03 km²",
+      "Subconca": "L'ANOIA",
+      "Terme municipal": "SANT SADURNÍ D'ANOIA",
+      "Conca": "EL LLOBREGAT",
+      "Coordenada X (UTM ETRS89)": "398770",
+      "Coordenada Y (UTM ETRS89)": "4588700",
+      "Codi ordre": "LB-45",
+      "Estat": "En servei",
+      "Topònim": ""
+     }
+    },
+    {
+     "sensor": "CALC001249",
+     "description": "Cabal riu",
+     "type": "0014",
+     "unit": "m³/s",
+     "location": "41.443497484 1.788187977",
+     "component": "082401-002",
+     "componentDesc": "Sant Sadurní d'Anoia (Anoia)",
+     "additionalInfo": {
+      "Temps mostreig (min)": "5",
+      "Rang mínim": "0",
+      "Rang màxim": "140"
+     },
+     "componentAdditionalInfo": {
+      "Comarca": "ALT PENEDÈS",
+      "Província": "BARCELONA",
+      "Riu": "RIU ANOIA",
+      "Districte fluvial": "ACA",
+      "Superfície conca drenada": "720,03 km²",
+      "Subconca": "L'ANOIA",
+      "Terme municipal": "SANT SADURNÍ D'ANOIA",
+      "Conca": "EL LLOBREGAT",
+      "Coordenada X (UTM ETRS89)": "398770",
+      "Coordenada Y (UTM ETRS89)": "4588700",
+      "Codi ordre": "LB-45",
+      "Estat": "En servei",
+      "Topònim": ""
+     }
+    },
+    {
+     "sensor": "082457-001-ANA001",
+     "description": "Nivell riu",
+     "type": "0019",
+     "unit": "cm",
+     "location": "41.450597601 2.200589117",
+     "component": "082457-001",
+     "componentDesc": "Santa Coloma de Gramenet (Besòs)",
+     "additionalInfo": {
+      "Temps mostreig (min)": "5",
+      "Rang mínim": "0",
+      "Rang màxim": "0"
+     },
+     "componentAdditionalInfo": {
+      "Comarca": "BARCELONÈS",
+      "Província": "BARCELONA",
+      "Riu": "RIU BESÓS",
+      "Districte fluvial": "ACA",
+      "Superfície conca drenada": "1018,25 km²",
+      "Subconca": "EL BESÒS",
+      "Terme municipal": "SANTA COLOMA DE GRAMENET",
+      "Conca": "EL BESÒS",
+      "Coordenada X (UTM ETRS89)": "433228",
+      "Coordenada Y (UTM ETRS89)": "4589088",
+      "Codi ordre": "BE-20",
+      "Estat": "En servei",
+      "Topònim": ""
+     }
+    },
+    {
+     "sensor": "CALC001219",
+     "description": "Cabal riu",
+     "type": "0014",
+     "unit": "m³/s",
+     "location": "41.450597601 2.200589117",
+     "component": "082457-001",
+     "componentDesc": "Santa Coloma de Gramenet (Besòs)",
+     "additionalInfo": {
+      "Temps mostreig (min)": "5",
+      "Rang mínim": "0",
+      "Rang màxim": "550"
+     },
+     "componentAdditionalInfo": {
+      "Comarca": "BARCELONÈS",
+      "Província": "BARCELONA",
+      "Riu": "RIU BESÓS",
+      "Districte fluvial": "ACA",
+      "Superfície conca drenada": "1018,25 km²",
+      "Subconca": "EL BESÒS",
+      "Terme municipal": "SANTA COLOMA DE GRAMENET",
+      "Conca": "EL BESÒS",
+      "Coordenada X (UTM ETRS89)": "433228",
+      "Coordenada Y (UTM ETRS89)": "4589088",
+      "Codi ordre": "BE-20",
+      "Estat": "En servei",
+      "Topònim": ""
+     }
+    },
+    {
+     "sensor": "082634-001-ANA013",
+     "description": "Nivell riu",
+     "type": "0019",
+     "unit": "cm",
+     "location": "41.386564791 2.023355995",
+     "component": "082634-001",
+     "componentDesc": "Sant Vicenç dels Horts (Llobregat)",
+     "additionalInfo": {
+      "Temps mostreig (min)": "5",
+      "Rang mínim": "0",
+      "Rang màxim": "0"
+     },
+     "componentAdditionalInfo": {
+      "Codi ordre": "LB-55",
+      "Comarca": "BAIX LLOBREGAT",
+      "Província": "BARCELONA",
+      "Estat": "En servei",
+      "Riu": "RIU LLOBREGAT",
+      "Districte fluvial": "ACA",
+      "Superfície conca drenada": "4842,00 km²",
+      "Coordenada Y (UTM ETRS89)": "4582131",
+      "Coordenada X (UTM ETRS89)": "418344",
+      "Subconca": "BAIX LLOBREGAT",
+      "Terme municipal": "SANT VICENÇ DELS HORTS",
+      "Conca": "EL LLOBREGAT",
+      "Topònim": "Sifó EMSSA"
+     }
+    },
+    {
+     "sensor": "CALC001363",
+     "description": "Cabal riu",
+     "type": "0014",
+     "unit": "m³/s",
+     "location": "41.386564791 2.023355995",
+     "component": "082634-001",
+     "componentDesc": "Sant Vicenç dels Horts (Llobregat)",
+     "additionalInfo": {
+      "Temps mostreig (min)": "5",
+      "Rang mínim": "0",
+      "Rang màxim": "1950"
+     },
+     "componentAdditionalInfo": {
+      "Codi ordre": "LB-55",
+      "Comarca": "BAIX LLOBREGAT",
+      "Província": "BARCELONA",
+      "Estat": "En servei",
+      "Riu": "RIU LLOBREGAT",
+      "Districte fluvial": "ACA",
+      "Superfície conca drenada": "4842,00 km²",
+      "Coordenada Y (UTM ETRS89)": "4582131",
+      "Coordenada X (UTM ETRS89)": "418344",
+      "Subconca": "BAIX LLOBREGAT",
+      "Terme municipal": "SANT VICENÇ DELS HORTS",
+      "Conca": "EL LLOBREGAT",
+      "Topònim": "Sifó EMSSA"
+     }
+    },
+    {
+     "sensor": "082747-007-ANA001",
+     "description": "Nivell riu",
+     "type": "0019",
+     "unit": "cm",
+     "location": "41.81351335 1.762733581",
+     "component": "082747-007",
+     "componentDesc": "Súria (Cardener)",
+     "additionalInfo": {
+      "Temps mostreig (min)": "5",
+      "Rang mínim": "0",
+      "Rang màxim": "0"
+     },
+     "componentAdditionalInfo": {
+      "Comarca": "BAGES",
+      "Província": "BARCELONA",
+      "Riu": "RIU CARDENER",
+      "Districte fluvial": "ACA",
+      "Superfície conca drenada": "964,13 km²",
+      "Subconca": "EL CARDENER",
+      "Terme municipal": "SÚRIA",
+      "Conca": "EL LLOBREGAT",
+      "Coordenada X (UTM ETRS89)": "397233",
+      "Coordenada Y (UTM ETRS89)": "4629811",
+      "Codi ordre": "CB-15",
+      "Estat": "En servei",
+      "Topònim": ""
+     }
+    },
+    {
+     "sensor": "CALC001274",
+     "description": "Cabal riu",
+     "type": "0014",
+     "unit": "m³/s",
+     "location": "41.81351335 1.762733581",
+     "component": "082747-007",
+     "componentDesc": "Súria (Cardener)",
+     "additionalInfo": {
+      "Temps mostreig (min)": "5",
+      "Rang mínim": "0",
+      "Rang màxim": "360"
+     },
+     "componentAdditionalInfo": {
+      "Comarca": "BAGES",
+      "Província": "BARCELONA",
+      "Riu": "RIU CARDENER",
+      "Districte fluvial": "ACA",
+      "Superfície conca drenada": "964,13 km²",
+      "Subconca": "EL CARDENER",
+      "Terme municipal": "SÚRIA",
+      "Conca": "EL LLOBREGAT",
+      "Coordenada X (UTM ETRS89)": "397233",
+      "Coordenada Y (UTM ETRS89)": "4629811",
+      "Codi ordre": "CB-15",
+      "Estat": "En servei",
+      "Topònim": ""
+     }
+    },
+    {
+     "sensor": "CALC001100",
+     "description": "Cabal riu",
+     "type": "0014",
+     "unit": "m³/s",
+     "location": "42.254381062 3.071999259",
+     "component": "170470-003",
+     "componentDesc": "Castelló d'Empúries (Muga)",
+     "additionalInfo": {
+      "Temps mostreig (min)": "5",
+      "Rang mínim": "0",
+      "Rang màxim": "930"
+     },
+     "componentAdditionalInfo": {
+      "Comarca": "ALT EMPORDÀ",
+      "Província": "GIRONA",
+      "Riu": "RIU MUGA",
+      "Districte fluvial": "ACA",
+      "Superfície conca drenada": "755,57 km²",
+      "Subconca": "LA MUGA",
+      "Terme municipal": "CASTELLÓ D'EMPÚRIES",
+      "Conca": "LA MUGA",
+      "Coordenada X (UTM ETRS89)": "505939",
+      "Coordenada Y (UTM ETRS89)": "4678023",
+      "Codi ordre": "MB-25",
+      "Estat": "En servei",
+      "Topònim": ""
+     }
+    },
+    {
+     "sensor": "CALC001110",
+     "description": "Nivell riu",
+     "type": "0019",
+     "unit": "cm",
+     "location": "42.254381062 3.071999259",
+     "component": "170470-003",
+     "componentDesc": "Castelló d'Empúries (Muga)",
+     "additionalInfo": {
+      "Temps mostreig (min)": "5",
+      "Rang mínim": "0",
+      "Rang màxim": "0"
+     },
+     "componentAdditionalInfo": {
+      "Comarca": "ALT EMPORDÀ",
+      "Província": "GIRONA",
+      "Riu": "RIU MUGA",
+      "Districte fluvial": "ACA",
+      "Superfície conca drenada": "755,57 km²",
+      "Subconca": "LA MUGA",
+      "Terme municipal": "CASTELLÓ D'EMPÚRIES",
+      "Conca": "LA MUGA",
+      "Coordenada X (UTM ETRS89)": "505939",
+      "Coordenada Y (UTM ETRS89)": "4678023",
+      "Codi ordre": "MB-25",
+      "Estat": "En servei",
+      "Topònim": ""
+     }
+    },
+    {
+     "sensor": "170558-002-ANA019",
+     "description": "Nivell riu",
+     "type": "0019",
+     "unit": "cm",
+     "location": "42.076860022 2.991162733",
+     "component": "170558-002",
+     "componentDesc": "Colomers (Ter)",
+     "additionalInfo": {
+      "Temps mostreig (min)": "5",
+      "Rang mínim": "0",
+      "Rang màxim": "10"
+     },
+     "componentAdditionalInfo": {
+      "Codi ordre": "TB-45",
+      "Superfície conca drenada": "2901,95 km²",
+      "Districte fluvial": "ACA",
+      "Coordenada X (UTM ETRS89)": "499269",
+      "Conca": "EL TER",
+      "Terme municipal": "COLOMERS",
+      "Coordenada Y (UTM ETRS89)": "4658310",
+      "Província": "GIRONA",
+      "Comarca": "BAIX EMPORDÀ",
+      "Estat": "En servei",
+      "Subconca": "BAIX TER",
+      "Riu": "RIU TER",
+      "Topònim": "Presa de Colomers"
+     }
+    },
+    {
+     "sensor": "CALC001201",
+     "description": "Cabal riu",
+     "type": "0014",
+     "unit": "m³/s",
+     "location": "42.076860022 2.991162733",
+     "component": "170558-002",
+     "componentDesc": "Colomers (Ter)",
+     "additionalInfo": {
+      "Temps mostreig (min)": "5",
+      "Rang mínim": "0",
+      "Rang màxim": "2170"
+     },
+     "componentAdditionalInfo": {
+      "Codi ordre": "TB-45",
+      "Superfície conca drenada": "2901,95 km²",
+      "Districte fluvial": "ACA",
+      "Coordenada X (UTM ETRS89)": "499269",
+      "Conca": "EL TER",
+      "Terme municipal": "COLOMERS",
+      "Coordenada Y (UTM ETRS89)": "4658310",
+      "Província": "GIRONA",
+      "Comarca": "BAIX EMPORDÀ",
+      "Estat": "En servei",
+      "Subconca": "BAIX TER",
+      "Riu": "RIU TER",
+      "Topònim": "Presa de Colomers"
+     }
+    },
+    {
+     "sensor": "170656-005-ANA001",
+     "description": "Nivell riu",
+     "type": "0019",
+     "unit": "cm",
+     "location": "42.177583121 2.798648637",
+     "component": "170656-005",
+     "componentDesc": "Esponellà (Fluvià)",
+     "additionalInfo": {
+      "Temps mostreig (min)": "5",
+      "Rang mínim": "0",
+      "Rang màxim": "10"
+     },
+     "componentAdditionalInfo": {
+      "Comarca": "PLA DE L'ESTANY",
+      "Província": "GIRONA",
+      "Riu": "RIU FLUVIÀ",
+      "Districte fluvial": "ACA",
+      "Superfície conca drenada": "803,86 km²",
+      "Subconca": "EL FLUVIÀ",
+      "Terme municipal": "ESPONELLÀ",
+      "Conca": "EL FLUVIÀ",
+      "Coordenada X (UTM ETRS89)": "483371",
+      "Coordenada Y (UTM ETRS89)": "4669513",
+      "Codi ordre": "FL-20",
+      "Estat": "En servei",
+      "Topònim": ""
+     }
+    },
+    {
+     "sensor": "CALC001103",
+     "description": "Cabal riu",
+     "type": "0014",
+     "unit": "m³/s",
+     "location": "42.177583121 2.798648637",
+     "component": "170656-005",
+     "componentDesc": "Esponellà (Fluvià)",
+     "additionalInfo": {
+      "Temps mostreig (min)": "5",
+      "Rang mínim": "0",
+      "Rang màxim": "1700"
+     },
+     "componentAdditionalInfo": {
+      "Comarca": "PLA DE L'ESTANY",
+      "Província": "GIRONA",
+      "Riu": "RIU FLUVIÀ",
+      "Districte fluvial": "ACA",
+      "Superfície conca drenada": "803,86 km²",
+      "Subconca": "EL FLUVIÀ",
+      "Terme municipal": "ESPONELLÀ",
+      "Conca": "EL FLUVIÀ",
+      "Coordenada X (UTM ETRS89)": "483371",
+      "Coordenada Y (UTM ETRS89)": "4669513",
+      "Codi ordre": "FL-20",
+      "Estat": "En servei",
+      "Topònim": ""
+     }
+    },
+    {
+     "sensor": "170792-002-ANA001",
+     "description": "Nivell riu",
+     "type": "0019",
+     "unit": "cm",
+     "location": "41.990209392 2.819160445",
+     "component": "170792-002",
+     "componentDesc": "Girona (Ter)",
+     "additionalInfo": {
+      "Temps mostreig (min)": "5",
+      "Rang mínim": "0",
+      "Rang màxim": "10"
+     },
+     "componentAdditionalInfo": {
+      "Comarca": "GIRONÈS",
+      "Província": "GIRONA",
+      "Riu": "RIU TER",
+      "Districte fluvial": "ACA",
+      "Superfície conca drenada": "2257,00 km²",
+      "Subconca": "BAIX TER",
+      "Terme municipal": "GIRONA",
+      "Conca": "EL TER",
+      "Coordenada X (UTM ETRS89)": "485021",
+      "Coordenada Y (UTM ETRS89)": "4648705",
+      "Codi ordre": "TB-20",
+      "Estat": "En servei",
+      "Topònim": "Estació d’aforament Francesc Ferrer i Gironès"
+     }
+    },
+    {
+     "sensor": "CALC001218",
+     "description": "Cabal riu",
+     "type": "0014",
+     "unit": "m³/s",
+     "location": "41.990209392 2.819160445",
+     "component": "170792-002",
+     "componentDesc": "Girona (Ter)",
+     "additionalInfo": {
+      "Temps mostreig (min)": "5",
+      "Rang mínim": "0",
+      "Rang màxim": "980"
+     },
+     "componentAdditionalInfo": {
+      "Comarca": "GIRONÈS",
+      "Província": "GIRONA",
+      "Riu": "RIU TER",
+      "Districte fluvial": "ACA",
+      "Superfície conca drenada": "2257,00 km²",
+      "Subconca": "BAIX TER",
+      "Terme municipal": "GIRONA",
+      "Conca": "EL TER",
+      "Coordenada X (UTM ETRS89)": "485021",
+      "Coordenada Y (UTM ETRS89)": "4648705",
+      "Codi ordre": "TB-20",
+      "Estat": "En servei",
+      "Topònim": "Estació d’aforament Francesc Ferrer i Gironès"
+     }
+    },
+    {
+     "sensor": "171143-002-ANA001",
+     "description": "Nivell riu",
+     "type": "0019",
+     "unit": "cm",
+     "location": "42.188664947 2.510031397",
+     "component": "171143-002",
+     "componentDesc": "Olot (Fluvià)",
+     "additionalInfo": {
+      "Temps mostreig (min)": "5",
+      "Rang mínim": "0",
+      "Rang màxim": "0"
+     },
+     "componentAdditionalInfo": {
+      "Comarca": "GARROTXA",
+      "Província": "GIRONA",
+      "Riu": "RIU FLUVIÀ",
+      "Districte fluvial": "ACA",
+      "Superfície conca drenada": "139,48 km²",
+      "Subconca": "EL FLUVIÀ",
+      "Terme municipal": "OLOT",
+      "Conca": "EL FLUVIÀ",
+      "Coordenada X (UTM ETRS89)": "459542",
+      "Coordenada Y (UTM ETRS89)": "4670840",
+      "Codi ordre": "FL-05",
+      "Estat": "En servei",
+      "Topònim": ""
+     }
+    },
+    {
+     "sensor": "CALC001101",
+     "description": "Cabal riu",
+     "type": "0014",
+     "unit": "m³/s",
+     "location": "42.188664947 2.510031397",
+     "component": "171143-002",
+     "componentDesc": "Olot (Fluvià)",
+     "additionalInfo": {
+      "Temps mostreig (min)": "5",
+      "Rang mínim": "0",
+      "Rang màxim": "160"
+     },
+     "componentAdditionalInfo": {
+      "Comarca": "GARROTXA",
+      "Província": "GIRONA",
+      "Riu": "RIU FLUVIÀ",
+      "Districte fluvial": "ACA",
+      "Superfície conca drenada": "139,48 km²",
+      "Subconca": "EL FLUVIÀ",
+      "Terme municipal": "OLOT",
+      "Conca": "EL FLUVIÀ",
+      "Coordenada X (UTM ETRS89)": "459542",
+      "Coordenada Y (UTM ETRS89)": "4670840",
+      "Codi ordre": "FL-05",
+      "Estat": "En servei",
+      "Topònim": ""
+     }
+    },
+    {
+     "sensor": "171352-003-ANA001",
+     "description": "Nivell riu",
+     "type": "0019",
+     "unit": "cm",
+     "location": "42.31551754 2.917968379",
+     "component": "171352-003",
+     "componentDesc": "Pont de Molins (Muga)",
+     "additionalInfo": {
+      "Temps mostreig (min)": "5",
+      "Rang mínim": "0",
+      "Rang màxim": "10"
+     },
+     "componentAdditionalInfo": {
+      "Comarca": "ALT EMPORDÀ",
+      "Província": "GIRONA",
+      "Riu": "RIU MUGA",
+      "Districte fluvial": "ACA",
+      "Superfície conca drenada": "206,55 km²",
+      "Subconca": "LA MUGA",
+      "Terme municipal": "PONT DE MOLINS",
+      "Conca": "LA MUGA",
+      "Coordenada X (UTM ETRS89)": "493240",
+      "Coordenada Y (UTM ETRS89)": "4684812",
+      "Codi ordre": "MB-10",
+      "Estat": "En servei",
+      "Topònim": ""
+     }
+    },
+    {
+     "sensor": "CALC001553",
+     "description": "Cabal riu",
+     "type": "0014",
+     "unit": "m³/s",
+     "location": "42.31551754 2.917968379",
+     "component": "171352-003",
+     "componentDesc": "Pont de Molins (Muga)",
+     "additionalInfo": {
+      "Temps mostreig (min)": "5",
+      "Rang mínim": "0",
+      "Rang màxim": "380"
+     },
+     "componentAdditionalInfo": {
+      "Comarca": "ALT EMPORDÀ",
+      "Província": "GIRONA",
+      "Riu": "RIU MUGA",
+      "Districte fluvial": "ACA",
+      "Superfície conca drenada": "206,55 km²",
+      "Subconca": "LA MUGA",
+      "Terme municipal": "PONT DE MOLINS",
+      "Conca": "LA MUGA",
+      "Coordenada X (UTM ETRS89)": "493240",
+      "Coordenada Y (UTM ETRS89)": "4684812",
+      "Codi ordre": "MB-10",
+      "Estat": "En servei",
+      "Topònim": ""
+     }
+    },
+    {
+     "sensor": "171714-001-ANA01",
+     "description": "Nivell riu",
+     "type": "0019",
+     "unit": "cm",
+     "location": "42.316501288 2.78190903",
+     "component": "171714-001",
+     "componentDesc": "Sant Llorenç de la Muga (Muga)",
+     "additionalInfo": {
+      "Temps mostreig (min)": "15",
+      "Rang mínim": "0",
+      "Rang màxim": "10"
+     },
+     "componentAdditionalInfo": {
+      "Codi ordre": "MA-05",
+      "Superfície conca drenada": "76 km²",
+      "Districte fluvial": "ACA",
+      "Coordenada X (UTM ETRS89)": "482028",
+      "Conca": "LA MUGA",
+      "Terme municipal": "SANT LLORENÇ DE LA MUGA",
+      "Coordenada Y (UTM ETRS89)": "4684941",
+      "Província": "GIRONA",
+      "Comarca": "ALT EMPORDÀ",
+      "Topònim": "",
+      "Estat": "En servei",
+      "Subconca": "LA MUGA",
+      "Riu": "RIU MUGA"
+     }
+    },
+    {
+     "sensor": "CALC001623",
+     "description": "Cabal riu",
+     "type": "0014",
+     "unit": "m³/s",
+     "location": "42.316501288 2.78190903",
+     "component": "171714-001",
+     "componentDesc": "Sant Llorenç de la Muga (Muga)",
+     "additionalInfo": {
+      "Temps mostreig (min)": "15",
+      "Rang mínim": "0",
+      "Rang màxim": "650"
+     },
+     "componentAdditionalInfo": {
+      "Codi ordre": "MA-05",
+      "Superfície conca drenada": "76 km²",
+      "Districte fluvial": "ACA",
+      "Coordenada X (UTM ETRS89)": "482028",
+      "Conca": "LA MUGA",
+      "Terme municipal": "SANT LLORENÇ DE LA MUGA",
+      "Coordenada Y (UTM ETRS89)": "4684941",
+      "Província": "GIRONA",
+      "Comarca": "ALT EMPORDÀ",
+      "Topònim": "",
+      "Estat": "En servei",
+      "Subconca": "LA MUGA",
+      "Riu": "RIU MUGA"
+     }
+    },
+    {
+     "sensor": "CALC001185",
+     "description": "Nivell riu",
+     "type": "0019",
+     "unit": "cm",
+     "location": "42.035163473 3.125380537",
+     "component": "171997-002",
+     "componentDesc": "Torroella de Montgrí (Ter)",
+     "additionalInfo": null,
+     "componentAdditionalInfo": {
+      "Comarca": "BAIX EMPORDÀ",
+      "Província": "GIRONA",
+      "Riu": "RIU TER",
+      "Districte fluvial": "ACA",
+      "Superfície conca drenada": "2948,48 km²",
+      "Subconca": "BAIX TER",
+      "Terme municipal": "TORROELLA DE MONTGRÍ",
+      "Conca": "EL TER",
+      "Coordenada X (UTM ETRS89)": "510378",
+      "Coordenada Y (UTM ETRS89)": "4653688",
+      "Codi ordre": "TB-50",
+      "Estat": "Funcionalitat limitada",
+      "Topònim": "Pont de Torroella"
+     }
+    },
+    {
+     "sensor": "CALC001186",
+     "description": "Cabal riu",
+     "type": "0014",
+     "unit": "m³/s",
+     "location": "42.035163473 3.125380537",
+     "component": "171997-002",
+     "componentDesc": "Torroella de Montgrí (Ter)",
+     "additionalInfo": null,
+     "componentAdditionalInfo": {
+      "Comarca": "BAIX EMPORDÀ",
+      "Província": "GIRONA",
+      "Riu": "RIU TER",
+      "Districte fluvial": "ACA",
+      "Superfície conca drenada": "2948,48 km²",
+      "Subconca": "BAIX TER",
+      "Terme municipal": "TORROELLA DE MONTGRÍ",
+      "Conca": "EL TER",
+      "Coordenada X (UTM ETRS89)": "510378",
+      "Coordenada Y (UTM ETRS89)": "4653688",
+      "Codi ordre": "TB-50",
+      "Estat": "Funcionalitat limitada",
+      "Topònim": "Pont de Torroella"
+     }
+    },
+    {
+     "sensor": "431652-001-ANA001",
+     "description": "Nivell riu",
+     "type": "0019",
+     "unit": "cm",
+     "location": "41.233966843 1.33729486",
+     "component": "431652-001",
+     "componentDesc": "Vilabella (Gaià)",
+     "additionalInfo": {
+      "Temps mostreig (min)": "5",
+      "Rang mínim": "0",
+      "Rang màxim": "10"
+     },
+     "componentAdditionalInfo": {
+      "Comarca": "ALT CAMP",
+      "Província": "TARRAGONA",
+      "Riu": "RIU GAIÀ",
+      "Districte fluvial": "ACA",
+      "Superfície conca drenada": "329,73 km²",
+      "Subconca": "EL GAIÀ",
+      "Terme municipal": "VILABELLA",
+      "Conca": "EL GAIÀ",
+      "Coordenada X (UTM ETRS89)": "360657",
+      "Coordenada Y (UTM ETRS89)": "4566063",
+      "Codi ordre": "GA-05",
+      "Estat": "En servei",
+      "Topònim": ""
+     }
+    },
+    {
+     "sensor": "CALC001367",
+     "description": "Cabal riu",
+     "type": "0014",
+     "unit": "m³/s",
+     "location": "41.233966843 1.33729486",
+     "component": "431652-001",
+     "componentDesc": "Vilabella (Gaià)",
+     "additionalInfo": {
+      "Temps mostreig (min)": "5",
+      "Rang mínim": "0",
+      "Rang màxim": "40"
+     },
+     "componentAdditionalInfo": {
+      "Comarca": "ALT CAMP",
+      "Província": "TARRAGONA",
+      "Riu": "RIU GAIÀ",
+      "Districte fluvial": "ACA",
+      "Superfície conca drenada": "329,73 km²",
+      "Subconca": "EL GAIÀ",
+      "Terme municipal": "VILABELLA",
+      "Conca": "EL GAIÀ",
+      "Coordenada X (UTM ETRS89)": "360657",
+      "Coordenada Y (UTM ETRS89)": "4566063",
+      "Codi ordre": "GA-05",
+      "Estat": "En servei",
+      "Topònim": ""
+     }
+    },
+    {
+     "sensor": "CALC000008",
+     "description": "Cabal riu",
+     "type": "0014",
+     "unit": "m³/s",
+     "location": "41.148784999 1.236276118",
+     "component": "431482-004",
+     "componentDesc": "Tarragona (Francolí)",
+     "additionalInfo": null,
+     "componentAdditionalInfo": {
+      "Codi ordre": "FR-10",
+      "Superfície conca drenada": "821,98 km²",
+      "Districte fluvial": "ACA",
+      "Coordenada X (UTM ETRS89)": "351999",
+      "Conca": "EL FRANCOLÍ",
+      "Terme municipal": "TARRAGONA",
+      "Coordenada Y (UTM ETRS89)": "4556773",
+      "Província": "TARRAGONA",
+      "Comarca": "TARRAGONÈS",
+      "Estat": "En servei",
+      "Subconca": "EL FRANCOLÍ",
+      "Riu": "RIU FRANCOLÍ",
+      "Topònim": "Resclosa de Sant Salvador"
+     }
+    },
+    {
+     "sensor": "431482-004-ANA01",
+     "description": "Nivell riu",
+     "type": "0019",
+     "unit": "cm",
+     "location": "41.148784999 1.236276118",
+     "component": "431482-004",
+     "componentDesc": "Tarragona (Francolí)",
+     "additionalInfo": null,
+     "componentAdditionalInfo": {
+      "Codi ordre": "FR-10",
+      "Superfície conca drenada": "821,98 km²",
+      "Districte fluvial": "ACA",
+      "Coordenada X (UTM ETRS89)": "351999",
+      "Conca": "EL FRANCOLÍ",
+      "Terme municipal": "TARRAGONA",
+      "Coordenada Y (UTM ETRS89)": "4556773",
+      "Província": "TARRAGONA",
+      "Comarca": "TARRAGONÈS",
+      "Estat": "En servei",
+      "Subconca": "EL FRANCOLÍ",
+      "Riu": "RIU FRANCOLÍ",
+      "Topònim": "Resclosa de Sant Salvador"
+     }
+    },
+    {
+     "sensor": "430862-001-ANA001",
+     "description": "Nivell riu",
+     "type": "0019",
+     "unit": "cm",
+     "location": "41.364783119 1.179845465",
+     "component": "430862-001",
+     "componentDesc": "Montblanc (Francolí)",
+     "additionalInfo": null,
+     "componentAdditionalInfo": {
+      "Codi ordre": "FR-05",
+      "Superfície conca drenada": "332,45 km²",
+      "Districte fluvial": "ACA",
+      "Coordenada X (UTM ETRS89)": "347766",
+      "Conca": "EL FRANCOLÍ",
+      "Terme municipal": "MONTBLANC",
+      "Coordenada Y (UTM ETRS89)": "4580851",
+      "Província": "TARRAGONA",
+      "Comarca": "CONCA DE BARBERÀ",
+      "Estat": "En servei",
+      "Subconca": "EL FRANCOLÍ",
+      "Riu": "RIU FRANCOLÍ",
+      "Topònim": ""
+     }
+    },
+    {
+     "sensor": "CALC001368",
+     "description": "Cabal riu",
+     "type": "0014",
+     "unit": "m³/s",
+     "location": "41.364783119 1.179845465",
+     "component": "430862-001",
+     "componentDesc": "Montblanc (Francolí)",
+     "additionalInfo": null,
+     "componentAdditionalInfo": {
+      "Codi ordre": "FR-05",
+      "Superfície conca drenada": "332,45 km²",
+      "Districte fluvial": "ACA",
+      "Coordenada X (UTM ETRS89)": "347766",
+      "Conca": "EL FRANCOLÍ",
+      "Terme municipal": "MONTBLANC",
+      "Coordenada Y (UTM ETRS89)": "4580851",
+      "Província": "TARRAGONA",
+      "Comarca": "CONCA DE BARBERÀ",
+      "Estat": "En servei",
+      "Subconca": "EL FRANCOLÍ",
+      "Riu": "RIU FRANCOLÍ",
+      "Topònim": ""
+     }
+    },
+    {
+     "sensor": "TEST-VACIO-01",
+     "description": "Cabal riu",
+     "type": "0014",
+     "unit": "m³/s",
+     "location": "41.0 2.0",
+     "component": "TEST-VACIO",
+     "componentDesc": "Sintética (sin observación)",
+     "additionalInfo": null,
+     "componentAdditionalInfo": null
+    },
+    {
+     "sensor": "TEST-NAN-01",
+     "description": "Cabal riu",
+     "type": "0014",
+     "unit": "m³/s",
+     "location": "41.0 2.0",
+     "component": "TEST-NAN",
+     "componentDesc": "Sintética (valor NAN)",
+     "additionalInfo": null,
+     "componentAdditionalInfo": null
+    }
+   ]
+  }
+ ]
+}
