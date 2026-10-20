@@ -220,3 +220,14 @@ def test_la_pagina_formatea_valores_con_una_sola_funcion(html):
     assert '" mm"' not in plantilla and " mm<" not in plantilla
     assert "formatoValor(" in plantilla
     assert 'lang === "ca" ? "ca-ES"' not in plantilla  # los idiomas salen de localeDe
+
+
+def test_los_ejes_de_los_graficos_usan_el_formato_del_idioma():
+    plantilla = (RAIZ / "fuente" / "page.html").read_text(encoding="utf-8")
+    assert ".text((d) => d)" not in plantilla  # una marca de eje sin formato sale con punto en es/ca
+    assert ".text((d) => num(d))" in plantilla
+
+
+def test_umbrales_sin_unidad_se_tratan_como_caudal():
+    plantilla = (RAIZ / "fuente" / "page.html").read_text(encoding="utf-8")
+    assert 'val(u.alto, unidad || "m3s")' in plantilla

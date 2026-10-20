@@ -478,7 +478,7 @@ details.det > summary { cursor: pointer; font-size: var(--fs-cap); color: var(--
 
   function umbralesTexto(u, unidad) {
     if (!u || u.tipo === "en_estudio" || u.bajo == null) return t().thr_none;
-    return `${L.letraUmbral(0, lang)} ${num(u.bajo)} · ${L.letraUmbral(1, lang)} ${num(u.medio)} · ${L.letraUmbral(2, lang)} ${val(u.alto, unidad)}`;
+    return `${L.letraUmbral(0, lang)} ${num(u.bajo)} · ${L.letraUmbral(1, lang)} ${num(u.medio)} · ${L.letraUmbral(2, lang)} ${val(u.alto, unidad || "m3s")}`;
   }
 
   function bloquePrevision(e) {
@@ -532,7 +532,7 @@ details.det > summary { cursor: pointer; font-size: var(--fs-cap); color: var(--
     const y = d3.scaleLinear().domain([rg.min, rg.max]).nice().range([H - m.b, m.t]);
     const svg = d3.select(el).append("svg").attr("class", "ch2").attr("viewBox", `0 0 ${W} ${H}`).attr("role", "img").attr("aria-label", t().chart_aria);
     svg.append("g").selectAll("line").data(y.ticks(4)).join("line").attr("class", "gr").attr("x1", m.l).attr("x2", W - m.r).attr("y1", (d) => y(d)).attr("y2", (d) => y(d));
-    svg.append("g").selectAll("text").data(y.ticks(4)).join("text").attr("x", m.l - 5).attr("y", (d) => y(d) + 3).attr("text-anchor", "end").text((d) => d);
+    svg.append("g").selectAll("text").data(y.ticks(4)).join("text").attr("x", m.l - 5).attr("y", (d) => y(d) + 3).attr("text-anchor", "end").text((d) => num(d));
     svg.append("g").selectAll("text").data(x.ticks(4)).join("text").attr("x", (d) => x(d)).attr("y", H - 6).attr("text-anchor", "middle")
       .text((d) => d.toLocaleDateString(loc(), { day: "numeric", month: "short", hour: RANGOS_H[rango] <= 48 ? "2-digit" : undefined, timeZone: ZONA_HORARIA[pais] }));
     const c = COL[e.sd ? 4 : e.nivel];
