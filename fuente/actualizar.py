@@ -344,6 +344,10 @@ def main() -> int:
     por_pais = ejecutar_todo(ahora, paises, fuentes_por_pais, DIR_DATA)
     for pais, cambios in por_pais.items():
         escribir_json(os.path.join(DIR_DATA, pais, "cambios.json"), cambios)
+    # Un país que no corrió no puede dejar su cambios.json anterior: notificar lo reenviaría en cada ejecución.
+    for pais in _paises_con_registro():
+        if pais not in por_pais and os.path.isdir(os.path.join(DIR_DATA, pais)):
+            escribir_json(os.path.join(DIR_DATA, pais, "cambios.json"), [])
     todos = [c for cs in por_pais.values() for c in cs]
     publicar = debe_publicar(todos, ahora, ultima_publicacion(DIR_DATA))
     if publicar:

@@ -462,3 +462,20 @@ def test_indice_conserva_entrada_del_pais_que_falla(tmp_path):
 def test_fuentes_reales_solo_es():
     assert actualizar._fuentes_reales("ar") == {}
     assert set(actualizar._fuentes_reales("es")) == {"aca", "aca_ventana", "chj", "avisos", "prevision"}
+
+
+def test_main_vacia_cambios_del_pais_que_falla(tmp_path, monkeypatch):
+    """Un país que sigue fallando no puede dejar su cambios.json viejo: notificar lo reenviaría cada 15 min."""
+    import estaciones
+    (tmp_path / "ar").mkdir()
+    (tmp_path / "es").mkdir()
+    actualizar.escribir_json(str(tmp_path / "ar" / "cambios.json"), [{"estacion_id": "i1", "nivel_antes": 0, "nivel_despues": 3, "sd": False, "elevado_por_aviso": False}])
+    monkeypatch.setattr(actualizar, "DIR_DATA", str(tmp_path))
+    monkeypatch.setattr(actualizar, "_paises_con_registro", lambda *a: ["ar", "es"])
+    monkeypatch.setattr(estaciones, "cargar", lambda ruta, pais: [est_ina()] if pais == "ar" else [est_aca()])
+    monkeypatch.setattr(actualizar, "_fuentes_reales", lambda pais: (
+        {"ina": lambda e: (_ for _ in ()).throw(RuntimeError("x"))} if pais == "ar" else fuentes(aca=[lec("a1", 3.0)])))
+    monkeypatch.delenv("GITHUB_OUTPUT", raising=False)
+    assert actualizar.main() == 0
+    assert leer(tmp_path / "ar", "cambios.json") == []
+    assert leer(tmp_path / "es", "cambios.json") == []

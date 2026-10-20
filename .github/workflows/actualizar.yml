@@ -30,8 +30,8 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: data
-          key: data-sin-coincidencia
-          restore-keys: data-
+          key: data-v2-sin-coincidencia
+          restore-keys: data-v2-
 
       - id: actualizar
         name: descargar fuentes y evaluar alertas
@@ -42,7 +42,7 @@ jobs:
         uses: actions/cache/save@v4
         with:
           path: data
-          key: data-${{ github.run_id }}-${{ github.run_attempt }}
+          key: data-v2-${{ github.run_id }}-${{ github.run_attempt }}
 
       - id: publicar
         name: publicar datos

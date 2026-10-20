@@ -60,3 +60,12 @@ def test_git_add_data_cubre_las_carpetas_por_pais(wf):
     """`git add data` incluye data/<pais>/ y data/paises.json; no hace falta listar países en el workflow."""
     texto = RUTA.read_text(encoding="utf-8")
     assert "git add data\n" in texto
+
+
+def test_cache_con_prefijo_v2_para_no_resucitar_el_formato_plano(wf):
+    """El caché antiguo (data-*) tiene data/*.json planos; extraído junto a data/es/ se commitearía."""
+    restaurar = next(p for p in pasos(wf) if p.get("uses", "").startswith("actions/cache/restore@"))
+    guardar = next(p for p in pasos(wf) if p.get("uses", "").startswith("actions/cache/save@"))
+    assert restaurar["with"]["restore-keys"].strip().startswith("data-v2-")
+    assert restaurar["with"]["key"].startswith("data-v2-")
+    assert guardar["with"]["key"].startswith("data-v2-")
