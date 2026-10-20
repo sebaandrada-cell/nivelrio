@@ -131,9 +131,10 @@ details.det > summary { cursor: pointer; font-size: var(--fs-cap); color: var(--
       <h1 id="t-title">Nivel de ríos</h1>
       <p class="sub" id="t-sub"></p>
     </div>
-    <div class="seg" id="lang" role="group" aria-label="Idioma / Idioma">
-      <button data-l="es" aria-pressed="true">Castellano</button>
-      <button data-l="ca" aria-pressed="false">Català</button>
+    <div class="seg" id="lang" role="group" aria-label="Idioma / Language">
+      <button data-l="es" lang="es" aria-pressed="true">Castellano</button>
+      <button data-l="ca" lang="ca" aria-pressed="false">Català</button>
+      <button data-l="en" lang="en" aria-pressed="false">English</button>
     </div>
   </header>
 
@@ -144,7 +145,7 @@ details.det > summary { cursor: pointer; font-size: var(--fs-cap); color: var(--
   </div>
 
   <div class="banners" id="banners" role="status" aria-live="polite"></div>
-  <noscript><div class="banner err">Esta página necesita JavaScript para mostrar los datos. / Aquesta pàgina necessita JavaScript per mostrar les dades.</div></noscript>
+  <noscript><div class="banner err">Esta página necesita JavaScript para mostrar los datos. / Aquesta pàgina necessita JavaScript per mostrar les dades. / This page needs JavaScript to show the data.</div></noscript>
 
   <div id="panel" role="tabpanel" aria-labelledby="tab-es" style="display:grid;gap:22px">
   <section class="tiles" id="tiles" aria-label="Resumen"></section>
@@ -185,11 +186,13 @@ details.det > summary { cursor: pointer; font-size: var(--fs-cap); color: var(--
 
   let lang = "es", filtro = "all", rango = 1, pais = "es", desconocido = false, ficha = 0;
   const D = { indice: null, latest: null, prev: null, hist: {}, histT: 0, error: false, sinDatos: false };
-  // Cada estación lleva su unidad tal como la publica la fuente (m³/s, m, ft); no se convierte.
+  // Cada estación lleva su unidad tal como la publica la fuente (caudal, metros o pies); no se convierte.
   const uni = (e) => L.unidadTexto(e.unidad || "m3s");
+  const val = (v, unidad) => L.formatoValor(v, unidad, lang);  // único punto de formato de una medida
 
   const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-  const num = (v) => v == null ? "—" : new Intl.NumberFormat(lang === "ca" ? "ca-ES" : "es-ES", { maximumFractionDigits: v >= 100 ? 0 : v >= 10 ? 1 : 2 }).format(v);
+  const num = (v) => L.formatoNumero(v, lang);
+  const loc = () => L.localeDe(lang);
   const t = () => T[lang];
   const tp = () => T[lang].paises[pais];
   const tag = (nivel, sd, extra) => {
@@ -197,7 +200,7 @@ details.det > summary { cursor: pointer; font-size: var(--fs-cap); color: var(--
     return `<span class="tag" style="--c:${COL[sd ? 4 : nivel]}"><span aria-hidden="true">${r.simbolo}</span> ${esc(r.texto)}${extra || ""}</span>`;
   };
   const hora = (iso) => {
-    try { return new Date(iso).toLocaleString(lang === "ca" ? "ca-ES" : "es-ES", { timeZone: ZONA_HORARIA[pais], timeZoneName: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }); }
+    try { return new Date(iso).toLocaleString(loc(), { timeZone: ZONA_HORARIA[pais], timeZoneName: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }); }
     catch (e) { return ""; }
   };
 
@@ -259,7 +262,7 @@ details.det > summary { cursor: pointer; font-size: var(--fs-cap); color: var(--
     if (tipoOk) ["bajo", "medio", "alto"].forEach((k, i) => {
       if (u[k] > ymax || u[k] < ymin) return;
       const y = Y(u[k]).toFixed(1);
-      g += `<line class="tl" stroke="${COL[i + 1]}" x1="${Lm}" x2="${W - R}" y1="${y}" y2="${y}"/><text class="lb" x="${W - R + 3}" y="${(+y + 3).toFixed(1)}">${"VAP"[i]}</text>`;
+      g += `<line class="tl" stroke="${COL[i + 1]}" x1="${Lm}" x2="${W - R}" y1="${y}" y2="${y}"/><text class="lb" x="${W - R + 3}" y="${(+y + 3).toFixed(1)}">${L.letraUmbral(i, lang)}</text>`;
     });
     const c = COL[sd ? 4 : nivel];
     const last = puntos[puntos.length - 1];
@@ -268,7 +271,7 @@ details.det > summary { cursor: pointer; font-size: var(--fs-cap); color: var(--
 
   function umbralesTexto(u, unidad) {
     if (!u || u.tipo === "en_estudio" || u.bajo == null) return t().thr_none;
-    return `V ${num(u.bajo)} · A ${num(u.medio)} · P ${num(u.alto)} ${L.unidadTexto(unidad)}`;
+    return `${L.letraUmbral(0, lang)} ${num(u.bajo)} · ${L.letraUmbral(1, lang)} ${num(u.medio)} · ${L.letraUmbral(2, lang)} ${val(u.alto, unidad)}`;
   }
 
   function bloquePrevision(e) {
@@ -276,8 +279,8 @@ details.det > summary { cursor: pointer; font-size: var(--fs-cap); color: var(--
     if (!p) return "";
     const chip = (p.puede_llegar && !e.sd)
       ? `<span class="tag fchip" style="--c:${COL[p.puede_llegar]}"><span aria-hidden="true">${L.nivelRotulo(p.puede_llegar, false, lang).simbolo}</span> ${esc(t().fcmay)} ${esc(L.nivelRotulo(p.puede_llegar, false, lang).texto)}</span>` : "";
-    const q = e.unidad && e.unidad !== "m3s" ? "" : p.caudal ? `<span>${esc(t().fcq)}: <b>${num(p.caudal[0])}–${num(p.caudal[1])} m³/s</b> <span class="sdnote">(${esc(t().fcwarn)})</span></span>` : `<span class="sdnote">${esc(t().fcnone)}</span>`;
-    const lluvia = p.lluvia_48h_mm == null ? "" : `<span>${esc(t().rain48)}: <b>${num(p.lluvia_48h_mm)} mm</b></span>`;
+    const q = e.unidad && e.unidad !== "m3s" ? "" : p.caudal ? `<span>${esc(t().fcq)}: <b>${num(p.caudal[0])}–${val(p.caudal[1], "m3s")}</b> <span class="sdnote">(${esc(t().fcwarn)})</span></span>` : `<span class="sdnote">${esc(t().fcnone)}</span>`;
+    const lluvia = p.lluvia_48h_mm == null ? "" : `<span>${esc(t().rain48)}: <b>${val(p.lluvia_48h_mm, "mm")}</b></span>`;
     return `<div class="fc"><div class="fh">${esc(t().forecast_h)}</div><div class="fl">${lluvia}${q}</div>${chip}</div>`;
   }
 
@@ -324,14 +327,14 @@ details.det > summary { cursor: pointer; font-size: var(--fs-cap); color: var(--
     svg.append("g").selectAll("line").data(y.ticks(4)).join("line").attr("class", "gr").attr("x1", m.l).attr("x2", W - m.r).attr("y1", (d) => y(d)).attr("y2", (d) => y(d));
     svg.append("g").selectAll("text").data(y.ticks(4)).join("text").attr("x", m.l - 5).attr("y", (d) => y(d) + 3).attr("text-anchor", "end").text((d) => d);
     svg.append("g").selectAll("text").data(x.ticks(4)).join("text").attr("x", (d) => x(d)).attr("y", H - 6).attr("text-anchor", "middle")
-      .text((d) => d.toLocaleDateString(lang === "ca" ? "ca-ES" : "es-ES", { day: "numeric", month: "short", hour: RANGOS_H[rango] <= 48 ? "2-digit" : undefined, timeZone: ZONA_HORARIA[pais] }));
+      .text((d) => d.toLocaleDateString(loc(), { day: "numeric", month: "short", hour: RANGOS_H[rango] <= 48 ? "2-digit" : undefined, timeZone: ZONA_HORARIA[pais] }));
     const c = COL[e.sd ? 4 : e.nivel];
     svg.append("path").datum(data).attr("fill", c).attr("opacity", 0.13).attr("d", d3.area().x((d) => x(d.x)).y0(H - m.b).y1((d) => y(d.y)));
     svg.append("path").datum(data).attr("fill", "none").attr("stroke", c).attr("stroke-width", 2).attr("stroke-linejoin", "round").attr("d", d3.line().x((d) => x(d.x)).y((d) => y(d.y)));
     if (conU) ["bajo", "medio", "alto"].forEach((k, i) => {
       if (u[k] > y.domain()[1] || u[k] < y.domain()[0]) return;
       svg.append("line").attr("class", "tl").attr("stroke", COL[i + 1]).attr("x1", m.l).attr("x2", W - m.r).attr("y1", y(u[k])).attr("y2", y(u[k]));
-      svg.append("text").attr("x", W - m.r + 3).attr("y", y(u[k]) + 3).text("VAP"[i]);
+      svg.append("text").attr("x", W - m.r + 3).attr("y", y(u[k]) + 3).text(L.letraUmbral(i, lang));
     });
   }
 
@@ -342,7 +345,7 @@ details.det > summary { cursor: pointer; font-size: var(--fs-cap); color: var(--
     const botones = t().chart_ranges.map((r, i) => `<button data-r="${i}" aria-pressed="${i === rango}">${esc(r)}</button>`).join("");
     body.innerHTML = `<div class="seg rng" role="group">${botones}</div>` + g.estaciones.map((e) =>
       `<div class="srow"><div class="h"><b>${esc(e.nombre)}</b>${tag(e.nivel, e.sd)}</div>
-        <div class="meta"><span>${e.valor == null ? "—" : num(e.valor) + " " + esc(uni(e))}</span><span>${esc(L.edadTexto(L.edadMin(e.t_utc, Date.now()), lang))}</span></div>
+        <div class="meta"><span>${esc(val(e.valor, e.unidad || "m3s"))}</span><span>${esc(L.edadTexto(L.edadMin(e.t_utc, Date.now()), lang))}</span></div>
         <div class="meta"><span>${esc(umbralesTexto(e.umbrales, e.unidad))}</span><span>${esc(L.tipoUmbralTexto(e.umbrales.tipo, lang))}</span></div>
         <div class="chbox" data-id="${esc(e.id)}"></div></div>`).join("");
     body.querySelectorAll(".chbox").forEach((el) => grafico(el, g.estaciones.find((e) => e.id === el.dataset.id)));
@@ -380,10 +383,10 @@ details.det > summary { cursor: pointer; font-size: var(--fs-cap); color: var(--
     const z = D.prev && D.prev.zonas;
     const claves = z ? Object.keys(t().zonas).filter((k) => z[k] && z[k].length) : [];
     if (!claves.length) { el.innerHTML = `<h2>${esc(t().prev_title)}</h2><div class="sdnote">${esc(t().prev_none)}</div>`; return; }
-    const dias = z[claves[0]].map((d) => new Date(d.fecha + "T12:00:00Z").toLocaleDateString(lang === "ca" ? "ca-ES" : "es-ES", { weekday: "short", day: "numeric", timeZone: "UTC" }));
+    const dias = z[claves[0]].map((d) => new Date(d.fecha + "T12:00:00Z").toLocaleDateString(loc(), { weekday: "short", day: "numeric", timeZone: "UTC" }));
     const nivLluvia = (mm) => mm >= 60 ? 3 : mm >= 30 ? 2 : mm >= 10 ? 1 : 0;
     el.innerHTML = `<h2>${esc(t().prev_title)}</h2><div class="pwrap"><table class="ptab"><thead><tr><th></th>${dias.map((d) => `<th>${esc(d)}</th>`).join("")}</tr></thead><tbody>` +
-      claves.map((k) => `<tr><td class="z">${esc(t().zonas[k])}</td>${z[k].map((d) => `<td class="c" style="--c:${nivLluvia(d.mm) ? COL[nivLluvia(d.mm)] : "var(--line)"}"><b>${num(d.mm)} mm</b><small>${d.prob} %</small></td>`).join("")}</tr>`).join("") +
+      claves.map((k) => `<tr><td class="z">${esc(t().zonas[k])}</td>${z[k].map((d) => `<td class="c" style="--c:${nivLluvia(d.mm) ? COL[nivLluvia(d.mm)] : "var(--line)"}"><b>${val(d.mm, "mm")}</b><small>${d.prob} %</small></td>`).join("")}</tr>`).join("") +
       `</tbody></table></div><p class="pnote">${esc(tp().prev_note)}</p>`;
   }
 
@@ -394,7 +397,7 @@ details.det > summary { cursor: pointer; font-size: var(--fs-cap); color: var(--
     if (D.latest) {
       if (L.datosViejos(D.latest.generado_utc, Date.now())) {
         const min = D.latest.generado_utc ? (Date.now() - Date.parse(D.latest.generado_utc)) / 60000 : null;
-        const edad = min == null ? "—" : L.edadTexto(min, lang).replace(/^(hace|fa) /, "");
+        const edad = min == null ? "—" : L.duracionTexto(min);
         b.push(`<div class="banner">${esc(t().banner_stale.replace("{edad}", edad))}</div>`);
       }
       const caidas = Object.keys(D.latest.fuentes_ok || {}).filter((k) => D.latest.fuentes_ok[k] === false).map((k) => t().fuentes_nombres[k] || k);
@@ -494,7 +497,7 @@ details.det > summary { cursor: pointer; font-size: var(--fs-cap); color: var(--
 
   let guardado = null;
   try { guardado = localStorage.getItem("lang"); } catch (err) { /* idem */ }
-  lang = L.idiomaInicial(location.search, guardado);
+  lang = L.idiomaInicial(location.search, guardado, navigator.language);
   const crudo = location.hash.replace("#", "").toLowerCase();
   pais = L.paisDesdeHash(location.hash, L.paisPorIdioma(navigator.language));
   desconocido = !!crudo && !L.PAISES.includes(crudo);

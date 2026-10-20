@@ -7,44 +7,64 @@
   const ROTULOS = {
     es: ["Normal", "Vigilancia", "Aviso", "Peligro"],
     ca: ["Normal", "Vigilància", "Avís", "Perill"],
+    en: ["Normal", "Watch", "Alert", "Danger"],
   };
-  const SIN_DATOS = { es: "Sin datos", ca: "Sense dades" };
+  const SIN_DATOS = { es: "Sin datos", ca: "Sense dades", en: "No data" };
+  // Inicial de cada umbral (el 1.º, 2.º y 3.º) en los rótulos de las gráficas y de las tarjetas.
+  const LETRAS_UMBRAL = { es: "VAP", ca: "VAP", en: "WAD" };
+  const IDIOMAS = ["es", "ca", "en"];
+  const LOCALES = { es: "es-ES", ca: "ca-ES", en: "en-US" };
   // Símbolos distintos por nivel: el nivel nunca se comunica solo con color.
   const SIMBOLOS = ["●", "◆", "▲", "■"];
   const SIMBOLO_SD = "○";
   const UMBRAL_TEXTO = {
     es: { oficial: "oficial", estimado: "estimado, no oficial", en_estudio: "umbral en estudio" },
     ca: { oficial: "oficial", estimado: "estimat, no oficial", en_estudio: "llindar en estudi" },
+    en: { oficial: "official", estimado: "estimated, unofficial", en_estudio: "threshold under review" },
   };
   const LIMITE_DATOS_VIEJOS_MIN = 90;
 
-  function edadTexto(minutos, lang) {
+  const idioma = (lang) => (IDIOMAS.includes(lang) ? lang : "es");
+  const localeDe = (lang) => LOCALES[idioma(lang)];
+
+  // Duración sin prefijo ni sufijo: «3 h 10 min».
+  function duracionTexto(minutos) {
     if (minutos === null || minutos === undefined || Number.isNaN(minutos)) return "—";
-    const pre = lang === "ca" ? "fa" : "hace";
     const m = Math.max(0, Math.round(minutos));
-    if (m >= 1440) return `${pre} ${Math.floor(m / 1440)} d`;
+    if (m >= 1440) return `${Math.floor(m / 1440)} d`;
     if (m >= 60) {
       const h = Math.floor(m / 60), r = m % 60;
-      return r ? `${pre} ${h} h ${r} min` : `${pre} ${h} h`;
+      return r ? `${h} h ${r} min` : `${h} h`;
     }
-    return `${pre} ${m} min`;
+    return `${m} min`;
+  }
+
+  function edadTexto(minutos, lang) {
+    const d = duracionTexto(minutos);
+    if (d === "—") return d;
+    if (lang === "en") return `${d} ago`;
+    return `${lang === "ca" ? "fa" : "hace"} ${d}`;
   }
 
   function nivelRotulo(nivel, sd, lang) {
-    const l = lang === "ca" ? "ca" : "es";
+    const l = idioma(lang);
     if (sd) return { texto: SIN_DATOS[l], simbolo: SIMBOLO_SD };
     return { texto: ROTULOS[l][nivel], simbolo: SIMBOLOS[nivel] };
   }
 
   function tipoUmbralTexto(tipo, lang) {
-    return (UMBRAL_TEXTO[lang === "ca" ? "ca" : "es"] || {})[tipo] || "";
+    return (UMBRAL_TEXTO[idioma(lang)] || {})[tipo] || "";
   }
 
-  function idiomaInicial(search, guardado) {
-    const m = /[?&]lang=(es|ca)(?:&|$)/.exec(search || "");
+  // La URL manda; después lo guardado; después el idioma del navegador (solo en* → en); por defecto castellano.
+  function idiomaInicial(search, guardado, navegador) {
+    const m = /[?&]lang=(es|ca|en)(?:&|$)/.exec(search || "");
     if (m) return m[1];
-    return guardado === "ca" || guardado === "es" ? guardado : "es";
+    if (IDIOMAS.includes(guardado)) return guardado;
+    return /^en(?:[-_]|$)/i.test(String(navegador || "")) ? "en" : "es";
   }
+
+  function letraUmbral(i, lang) { return LETRAS_UMBRAL[idioma(lang)][i] || ""; }
 
   function ratio(e) {
     const b = e.umbrales && e.umbrales.bajo;
@@ -151,8 +171,22 @@
   }
 
   // La unidad se muestra como la publica la fuente: metros en Argentina, pies en EE. UU., sin convertir.
-  const UNIDADES = { m3s: "m³/s", m: "m", ft: "ft" };
+  const UNIDADES = { m3s: "m³/s", m: "m", ft: "ft", mm: "mm" };
   function unidadTexto(unidad) { return UNIDADES[unidad] || ""; }
+
+  // Número con los separadores del idioma y los decimales que caben según su tamaño.
+  function formatoNumero(valor, lang) {
+    if (valor === null || valor === undefined || Number.isNaN(valor)) return "—";
+    const v = Math.abs(valor);
+    return new Intl.NumberFormat(localeDe(lang), { maximumFractionDigits: v >= 100 ? 0 : v >= 10 ? 1 : 2 }).format(valor);
+  }
+
+  // Único punto de formato de una medida: «6,1 m», «28 ft», «41,2 m³/s». Nunca convierte de unidad.
+  function formatoValor(valor, unidad, lang) {
+    const n = formatoNumero(valor, lang);
+    const u = unidadTexto(unidad);
+    return n === "—" || !u ? n : `${n} ${u}`;
+  }
 
   // Rango vertical de los gráficos. El caudal parte de cero; una altura de río se ajusta a sus datos,
   // porque con un 0 de base una variación de decímetros se vería como una línea recta.
@@ -168,6 +202,6 @@
     return { min: lo - hueco, max: tope + hueco };
   }
 
-  return { PAISES, paisDesdeHash, hashPara, rutaDatos, paisPorIdioma, resumenPais, unidadTexto, rangoY, edadMin, serieConActual, edadTexto, nivelRotulo, tipoUmbralTexto, idiomaInicial, ordenarPorPeligro, resumenPorNivel,
+  return { PAISES, paisDesdeHash, hashPara, rutaDatos, paisPorIdioma, resumenPais, unidadTexto, formatoNumero, formatoValor, duracionTexto, letraUmbral, localeDe, rangoY, edadMin, serieConActual, edadTexto, nivelRotulo, tipoUmbralTexto, idiomaInicial, ordenarPorPeligro, resumenPorNivel,
     agruparPorRio, tendencia, filtrarRango, nivelAviso, datosViejos };
 });

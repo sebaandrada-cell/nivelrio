@@ -248,5 +248,130 @@
         ]
       }
     }
+  },
+  "en": {
+    "lang_label": "Language",
+    "tile_desc": [
+      "below threshold",
+      "high flow",
+      "major rise",
+      "flood risk",
+      "reading old or missing"
+    ],
+    "avisos_title": "Official warnings in effect",
+    "avisos_none": "No official rain or flood warnings in effect.",
+    "avisos_more": "and {n} more warnings",
+    "avisos_desde": "since",
+    "prev_title": "Rain forecast, next 3 days",
+    "prev_none": "The rain forecast isn't available right now.",
+    "zonas": {
+      "tarragona": "Tarragona and the south coast",
+      "barcelona": "Barcelona and Maresme",
+      "girona": "Girona and Empordà",
+      "interior": "Inland (Lleida, Cardener)",
+      "valencia": "Valencia (Turia, Júcar, Poyo)",
+      "chaco-corrientes": "Chaco and Corrientes",
+      "litoral-parana": "Litoral: Santa Fe, Paraná and Rosario",
+      "uruguay": "Uruguay River (Concordia)",
+      "mississippi": "Mississippi (St. Louis)",
+      "missouri-ohio": "Missouri and Ohio (Kansas City, Cincinnati)",
+      "red-river": "Red River of the North (Fargo)"
+    },
+    "est_title": "Rivers, from highest to lowest risk",
+    "filt_all": "All",
+    "filt_act": "Alerts only",
+    "filt_none": "No river is on alert right now.",
+    "rise": "rising",
+    "fall": "falling",
+    "flat": "steady",
+    "no_value": "No reading",
+    "sd_note": "No recent data. The last known level is kept.",
+    "forecast_h": "72 h forecast",
+    "rain48": "Rain, 48 h",
+    "fcq": "Expected flow",
+    "fcwarn": "rough guide",
+    "fcmay": "Could reach",
+    "fcnone": "No reliable flow forecast for this point.",
+    "thr_legend": "W Watch · A Alert · D Danger",
+    "thr_none": "Thresholds are still under review, so only the reading is shown for now.",
+    "source": "Source",
+    "stations_of": "Stations on this river",
+    "chart_title": "History",
+    "chart_ranges": [
+      "48 h",
+      "15 days",
+      "3 months"
+    ],
+    "chart_empty": "Collecting history. The chart fills in as the hours pass.",
+    "chart_aria": "Station flow over time, with the threshold lines",
+    "trend_prefix": "Trend",
+    "banner_stale": "The data hasn't updated in {edad}. What you see may not be the current state.",
+    "banner_fuentes": "Couldn't read: {lista}. Those stations show as no data.",
+    "fuentes_nombres": {
+      "aca": "ACA (Catalonia)",
+      "chj": "CHJ (Valencia)",
+      "avisos": "official warnings",
+      "prevision": "forecast",
+      "ina": "INA (Argentina)",
+      "agp": "AGP (Barranqueras port)",
+      "usgs": "USGS (US)"
+    },
+    "loading": "Loading data…",
+    "error_load": "Couldn't load the data. Trying again in a few minutes.",
+    "foot": [
+      "Built by Pablo Dodda. Adapted for Catalonia and more countries by Sebastian Andrada. MIT license."
+    ],
+    "aviso_color": {
+      "amarillo": "yellow",
+      "naranja": "orange",
+      "rojo": "red"
+    },
+    "last_level": "Last known level",
+    "ago_updated": "Updated",
+    "noscript": "This page needs JavaScript to show the data.",
+    "details_show": "Show stations and history",
+    "title": "River levels",
+    "desc": "Level and flow of flood-prone rivers in Argentina, Spain and the United States. Data from public agencies, with this page's own alert scale, refreshed every hour or sooner if a level changes.",
+    "tab_label": "Country",
+    "pais_sin_datos": "There's no data for this country yet. It will appear once the first reading is in.",
+    "pais_desconocido": "That country isn't in the address. Showing {pais}.",
+    "paises": {
+      "ar": {
+        "nombre": "Argentina",
+        "titulo": "Rivers of Argentina's Litoral",
+        "desc": "Heights of the Paraná and Uruguay rivers in Argentina's Litoral region. Readings from INA and the Administración General de Puertos, refreshed on this page every hour.",
+        "sub": "Heights of the Paraná and Uruguay rivers in Argentina's Litoral region, in meters. INA publishes one value per day; the port of Barranqueras publishes one per hour.",
+        "prev_note": "Rain accumulated per day (mm) and peak probability, taking the highest value among the stations in each zone. Source: Open-Meteo.com (CC BY 4.0). This page doesn't show a river height forecast. The forecast never changes the alert level.",
+        "foot": [
+          "<b>For information only.</b> Provisional, unvalidated data. It does not replace Defensa Civil or the warnings from your province. Follow their instructions at all times. In an emergency call 911.",
+          "<b>Limits.</b> INA updates one value per day, so a fast rise can take a while to show. Only some stations on the Paraná and Uruguay are shown. Rivers without a threshold show height only.",
+          "Sources: Instituto Nacional del Agua (INA), Administración General de Puertos (AGP) and Open-Meteo.com (CC BY 4.0). Alert and Evacuation are the levels INA publishes; Watch is this page's own rule (90% of the alert level) and is not official. At Barranqueras, the warning levels of the Administración Provincial del Agua del Chaco are used."
+        ]
+      },
+      "es": {
+        "nombre": "Spain",
+        "titulo": "Rivers of Catalonia",
+        "desc": "Flow of the Catalan rivers with the highest flood risk, with Valencia (Turia, Júcar, Poyo) for context. Readings from ACA and CHJ, refreshed every hour, or sooner if a level changes.",
+        "sub": "Flow of the Catalan rivers at highest flood risk, plus Valencia for context. Updated every hour, or sooner if a level changes.",
+        "prev_note": "Rain accumulated per day (mm) and peak probability, taking the highest value among the stations in each zone. Source: Open-Meteo.com (CC BY 4.0). There is no official flow forecast for these rivers: the expected flow on each card comes from a global model (GloFAS, roughly 5 km grid, one value per day). Treat it as a rough guide; it misses flash floods in ramblas. The forecast never changes the alert level.",
+        "foot": [
+          "<b>For information only.</b> Provisional, unvalidated data. It does not replace Protecció Civil. Follow their instructions at all times. In an emergency call 112.",
+          "<b>Limits.</b> Flash-flood basins like the Rambla del Poyo can rise in under an hour, faster than this page updates. Segre, Ebre and Noguera have no station here yet because a reliable data source is missing. Rivers without a threshold show flow only.",
+          "Sources: Agència Catalana de l'Aigua (ACA), Confederación Hidrográfica del Júcar (SAIH), AEMET, Protecció Civil de Catalunya (INUNCAT) and Open-Meteo.com (CC BY 4.0). The Watch, Alert and Danger levels are this page's own scale, not an official one. Catalonia's thresholds are estimates calculated from the historical record; Valencia's are the official CHJ ones."
+        ]
+      },
+      "us": {
+        "nombre": "US",
+        "titulo": "Rivers of the central United States",
+        "desc": "Heights of the Mississippi, Missouri, Ohio and Red River of the North. USGS readings, refreshed on this page every hour.",
+        "sub": "Heights of the Mississippi, Missouri, Ohio and Red River of the North, in feet, as USGS publishes them.",
+        "prev_note": "Rain accumulated per day (mm) and peak probability, taking the highest value among the stations in each zone. Source: Open-Meteo.com (CC BY 4.0). This page doesn't show the National Weather Service (NWS) river forecast yet. The forecast never changes the alert level.",
+        "foot": [
+          "<b>For information only.</b> Provisional, unvalidated data. It does not replace the National Weather Service (NWS) or your local emergency management office. Follow their instructions at all times. In an emergency call 911.",
+          "<b>Limits.</b> Only some stations are shown. A rise on a small tributary may not show up here. Levels are shown in feet, as the source publishes them, with no conversion.",
+          "Sources: U.S. Geological Survey (USGS), National Weather Service (NWS) and Open-Meteo.com (CC BY 4.0). The Watch, Alert and Danger levels are this page's own scale, not an official one. When the NWS publishes flood categories for a gauge (action, minor, moderate), they are used as thresholds; otherwise the station shows the stage only."
+        ]
+      }
+    }
   }
 }

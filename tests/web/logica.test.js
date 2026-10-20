@@ -195,3 +195,61 @@ test("rangoY: caudal parte de cero, altura se ajusta a los datos", () => {
   const plano = L.rangoY("ft", [12, 12], null);
   assert.ok(plano.max > plano.min);
 });
+
+test("formatoValor: coma decimal en es/ca, punto en en, unidad tal como la publica la fuente", () => {
+  assert.equal(L.formatoValor(6.1, "m", "es"), "6,1 m");
+  assert.equal(L.formatoValor(28, "ft", "en"), "28 ft");
+  assert.equal(L.formatoValor(41.2, "m3s", "ca"), "41,2 m³/s");
+  assert.equal(L.formatoValor(6.1, "m", "en"), "6.1 m");
+  assert.equal(L.formatoValor(1234.5, "m3s", "en"), "1,235 m³/s");
+  assert.equal(L.formatoValor(12.5, "mm", "es"), "12,5 mm");
+});
+
+test("formatoValor sin dato devuelve guion y sin unidad solo el número", () => {
+  assert.equal(L.formatoValor(null, "m", "es"), "—");
+  assert.equal(L.formatoValor(undefined, "ft", "en"), "—");
+  assert.equal(L.formatoValor(3.456, undefined, "en"), "3.46");
+});
+
+test("edadTexto en inglés usa «ago» al final", () => {
+  assert.equal(L.edadTexto(12, "en"), "12 min ago");
+  assert.equal(L.edadTexto(190, "en"), "3 h 10 min ago");
+  assert.equal(L.edadTexto(60, "en"), "1 h ago");
+  assert.equal(L.edadTexto(2 * 1440, "en"), "2 d ago");
+  assert.equal(L.edadTexto(null, "en"), "—");
+});
+
+test("duracionTexto no lleva prefijo ni sufijo", () => {
+  assert.equal(L.duracionTexto(125, "es"), "2 h 5 min");
+  assert.equal(L.duracionTexto(125, "en"), "2 h 5 min");
+  assert.equal(L.duracionTexto(null, "ca"), "—");
+});
+
+test("nivelRotulo, umbral y letras de umbral en inglés", () => {
+  assert.deepEqual(L.nivelRotulo(2, false, "en"), { texto: "Alert", simbolo: "▲" });
+  assert.equal(L.nivelRotulo(1, false, "en").texto, "Watch");
+  assert.equal(L.nivelRotulo(3, true, "en").texto, "No data");
+  assert.equal(L.tipoUmbralTexto("oficial", "en"), "official");
+  assert.equal(L.tipoUmbralTexto("en_estudio", "en"), "threshold under review");
+  assert.equal([0, 1, 2].map((i) => L.letraUmbral(i, "en")).join(""), "WAD");
+  assert.equal([0, 1, 2].map((i) => L.letraUmbral(i, "es")).join(""), "VAP");
+  assert.equal([0, 1, 2].map((i) => L.letraUmbral(i, "ca")).join(""), "VAP");
+});
+
+test("idiomaInicial acepta en y deduce del navegador solo cuando no hay URL ni lo guardado", () => {
+  assert.equal(L.idiomaInicial("?lang=en", "es"), "en");
+  assert.equal(L.idiomaInicial("", "en"), "en");
+  assert.equal(L.idiomaInicial("", null, "en-US"), "en");
+  assert.equal(L.idiomaInicial("", null, "en"), "en");
+  assert.equal(L.idiomaInicial("", null, "es-AR"), "es");
+  assert.equal(L.idiomaInicial("", null, "fr-FR"), "es");
+  assert.equal(L.idiomaInicial("", "ca", "en-US"), "ca");
+  assert.equal(L.idiomaInicial("?lang=ca", null, "en-US"), "ca");
+});
+
+test("localeDe devuelve la etiqueta BCP 47 de cada idioma", () => {
+  assert.equal(L.localeDe("es"), "es-ES");
+  assert.equal(L.localeDe("ca"), "ca-ES");
+  assert.equal(L.localeDe("en"), "en-US");
+  assert.equal(L.localeDe("xx"), "es-ES");
+});

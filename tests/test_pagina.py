@@ -44,17 +44,22 @@ def pie(lang, pais="es"):
     return " ".join(TEXTOS[lang]["foot"] + TEXTOS[lang]["paises"][pais]["foot"])
 
 
-def test_pie_en_es_y_ca():
-    for lang in ("es", "ca"):
+def test_pie_en_todos_los_idiomas():
+    for lang in IDIOMAS:
         assert "Protecció Civil" in pie(lang)
 
 
-def test_es_y_ca_tienen_las_mismas_claves():
-    assert forma(TEXTOS["es"]) == forma(TEXTOS["ca"])
+IDIOMAS = ("es", "ca", "en")
+
+
+def test_es_ca_y_en_tienen_las_mismas_claves():
+    assert forma(TEXTOS["es"]) == forma(TEXTOS["ca"]) == forma(TEXTOS["en"])
+    for k in ("tile_desc", "foot", "fuentes_nombres", "zonas", "paises"):
+        assert k in TEXTOS["en"], k
 
 
 def test_creditos_incluyen_a_ambos_autores():
-    for lang in ("es", "ca"):
+    for lang in IDIOMAS:
         general = " ".join(TEXTOS[lang]["foot"])
         assert "Pablo Dodda" in general and "Sebastian Andrada" in general
 
@@ -98,10 +103,10 @@ def test_pruebas_de_logica_js_pasan():
 
 
 def test_textos_no_prometen_mas_de_lo_que_hay():
-    for lang in ("es", "ca"):
+    for lang in IDIOMAS:
         t = TEXTOS[lang]
         for desc in [t["desc"]] + [p["desc"] for p in t["paises"].values()]:
-            assert "oficiales" not in desc and "oficials" not in desc
+            assert "oficiales" not in desc and "oficials" not in desc and "official" not in desc
             assert "15" not in desc  # se publica cada hora salvo cambios
         assert "Segre" not in t["zonas"]["interior"]
         assert "Segre" in pie(lang) and "Poyo" in pie(lang)  # límites de cobertura y de cuencas rápidas
@@ -125,8 +130,8 @@ def test_pagina_lee_los_datos_por_pais(html):
         assert vieja not in html
 
 
-def test_textos_nuevos_en_es_y_ca():
-    for lang in ("es", "ca"):
+def test_textos_nuevos_en_todos_los_idiomas():
+    for lang in IDIOMAS:
         t = TEXTOS[lang]
         for k in ("pais_sin_datos", "pais_desconocido", "tab_label"):
             assert t[k], (lang, k)
@@ -140,11 +145,78 @@ def test_cada_zona_de_cada_pais_tiene_texto():
     for p in PAISES:
         registro = json.loads((RAIZ / "fuente" / "paises" / p / "estaciones.json").read_text(encoding="utf-8"))
         for e in registro:
-            for lang in ("es", "ca"):
+            for lang in IDIOMAS:
                 assert TEXTOS[lang]["zonas"].get(e["zona"]), (lang, p, e["zona"])
 
 
 def test_cada_fuente_de_datos_tiene_nombre_para_el_aviso_de_caida():
-    for lang in ("es", "ca"):
+    for lang in IDIOMAS:
         for k in ("aca", "chj", "ina", "agp", "usgs", "avisos", "prevision"):
             assert TEXTOS[lang]["fuentes_nombres"][k], (lang, k)
+
+
+def _hojas(x, ruta=""):
+    if isinstance(x, dict):
+        for k, v in x.items():
+            yield from _hojas(v, f"{ruta}.{k}")
+    elif isinstance(x, list):
+        for i, v in enumerate(x):
+            yield from _hojas(v, f"{ruta}[{i}]")
+    else:
+        yield ruta, x
+
+
+# Claves que pueden coincidir con el castellano porque son nombres propios, siglas o cifras.
+def test_el_ingles_esta_traducido_de_verdad():
+    es = dict(_hojas(TEXTOS["es"]))
+    en = dict(_hojas(TEXTOS["en"]))
+    assert set(es) == set(en)
+    iguales = [k for k in es if es[k] == en[k]]
+    distintas = len(es) - len(iguales)
+    assert distintas / len(es) >= 0.9, iguales
+    # lo que queda igual tiene que ser un nombre propio, una sigla o una cifra
+    for k in iguales:
+        assert not re.search(r"[a-záéíóúñ]{4,} [a-záéíóúñ]{3,}", es[k].replace("Red River of the North", "")), (k, es[k])
+
+
+def test_el_ingles_no_arrastra_palabras_del_castellano():
+    propios = ("Instituto Nacional del Agua", "Administración General de Puertos", "Administración Provincial del Agua del Chaco",
+               "Confederación Hidrográfica del Júcar", "Agència Catalana de l'Aigua", "Protecció Civil de Catalunya", "Protecció Civil",
+               "Defensa Civil", "Rambla del Poyo")
+    palabras = re.compile(r"\b(el|los|las|del|para|con|una|por|que|sin|más|ríos?|caudal|nivel(?:es)?|aviso|peligro|hace|datos)\b", re.I)
+    for ruta, v in _hojas(TEXTOS["en"]):
+        texto = re.sub(r"<[^>]+>", "", str(v))
+        for nombre in propios:
+            texto = texto.replace(nombre, "")
+        # «Nivel» no aparece en inglés; «Aviso» tampoco, salvo dentro de un nombre propio
+        m = palabras.search(texto)
+        assert not m, (ruta, m.group(0), texto)
+
+
+def test_el_ingles_evita_las_muletillas_de_texto_generado():
+    prohibidas = ("seamless", "leverage", "robust", "delve", "tapestry", "landscape", "cutting-edge",
+                  "empower", "elevate", "unlock", "ensure", "comprehensive", "—")
+    for ruta, v in _hojas(TEXTOS["en"]):
+        baja = str(v).lower()
+        for w in prohibidas:
+            assert w not in baja, (ruta, w)
+
+
+def test_el_ingles_usa_ortografia_de_ee_uu():
+    for ruta, v in _hojas(TEXTOS["en"]):
+        for w in ("colour", "metre", "kilometre", "centre", "organis"):
+            assert w not in str(v).lower(), (ruta, w)
+
+
+def test_selector_de_idioma_tiene_tres_opciones(html):
+    bloque = re.search(r'<div class="seg" id="lang".*?</div>', html, re.S).group(0)
+    assert set(re.findall(r'data-l="(\w+)"', bloque)) == {"es", "ca", "en"}
+
+
+def test_la_pagina_formatea_valores_con_una_sola_funcion(html):
+    # un único punto de formato por unidad: ni toFixed de valores de río ni «m³/s» a mano en la plantilla
+    plantilla = (RAIZ / "fuente" / "page.html").read_text(encoding="utf-8")
+    assert "m³/s" not in plantilla
+    assert '" mm"' not in plantilla and " mm<" not in plantilla
+    assert "formatoValor(" in plantilla
+    assert 'lang === "ca" ? "ca-ES"' not in plantilla  # los idiomas salen de localeDe
