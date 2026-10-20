@@ -19,7 +19,7 @@ class Umbrales:
 class Lectura:
     estacion_id: str
     valor: float
-    unidad: str  # "m3s" | "cm"
+    unidad: str  # "m3s" | "m" | "ft"
     t_utc: datetime
     fuente: str
 
@@ -30,7 +30,7 @@ class Estacion:
     rio: str
     nombre: str
     cuenca: str
-    fuente: str  # "aca" | "chj"
+    fuente: str  # "aca" | "chj" | "ina" | "agp" | "usgs"
     muestreo_min: int
     umbrales: Umbrales
     componente: str | None  # código Sentilo
@@ -38,6 +38,12 @@ class Estacion:
     lat: float
     lon: float
     zona: str
+    pais: str = "es"  # "ar" | "es" | "us"
+    magnitud: str = "caudal"  # "caudal" | "altura"
+    unidad: str = "m3s"  # "m3s" | "m" | "ft"
+    ref: str | None = None  # id en la fuente: INA estacion_id, USGS site
+    lid: str | None = None  # NWS
+    vel_subida_rapida: float | None = None  # por lectura, en la unidad de la estación; None = valor por defecto de la magnitud
 
 
 @dataclass(frozen=True)

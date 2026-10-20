@@ -17,6 +17,7 @@ HORAS_PARA_BAJAR = 3
 LECTURAS_PARA_SUBIR = 2
 LIMITE_SD_CHJ_MIN = 25
 MUESTREOS_PARA_SD_ACA = 3
+MUESTREO_DIARIO_MIN = 1440  # desde aquí hay una lectura al día: una sola lectura confirma la subida
 
 
 @dataclass(frozen=True)
@@ -61,9 +62,12 @@ def estado_desde_dict(d: dict) -> Estado:
     )
 
 
-def _limite_sd(est: Estacion) -> timedelta:
+def limite_sd(est: Estacion) -> timedelta:
+    """Antigüedad máxima de la última lectura antes de pasar a «sin datos»."""
     if est.fuente == "chj":
         return timedelta(minutes=LIMITE_SD_CHJ_MIN)
+    if est.muestreo_min >= MUESTREO_DIARIO_MIN:
+        return timedelta(minutes=2 * est.muestreo_min)  # una lectura al día: 3 muestreos serían 3 días
     return timedelta(minutes=MUESTREOS_PARA_SD_ACA * est.muestreo_min)
 
 
@@ -72,9 +76,9 @@ def evaluar(prev: Estado, lectura: Lectura | None, est: Estacion, ahora: datetim
         e = replace(prev, **cambios)
         return replace(e, nivel=3 if aviso_rojo else e.nivel_propio, elevado_por_aviso=aviso_rojo)
 
-    # Sin datos: falta la lectura, está en otra unidad (los umbrales son de caudal), viene del futuro o es vieja.
-    if (lectura is None or lectura.unidad != "m3s" or lectura.t_utc > ahora
-            or ahora - lectura.t_utc > _limite_sd(est)):
+    # Sin datos: falta la lectura, está en otra unidad (los umbrales son de la unidad de la estación), viene del futuro o es vieja.
+    if (lectura is None or lectura.unidad != est.unidad or lectura.t_utc > ahora
+            or ahora - lectura.t_utc > limite_sd(est)):
         return cerrar(sd=True)
 
     u = est.umbrales
@@ -85,6 +89,10 @@ def evaluar(prev: Estado, lectura: Lectura | None, est: Estacion, ahora: datetim
     if prev.ultimo_t_utc == t:  # misma lectura que la última: no cuenta como una nueva
         return cerrar(sd=False)
 
+    vel = est.vel_subida_rapida
+    if vel is None and est.magnitud == "caudal":
+        vel = VEL_SUBIDA_RAPIDA * u.bajo
+    para_subir = 1 if est.muestreo_min >= MUESTREO_DIARIO_MIN else LECTURAS_PARA_SUBIR
     entrada = (None, u.bajo, u.medio, u.alto)
     prev_v = prev.ultimo_valor
 
@@ -102,10 +110,10 @@ def evaluar(prev: Estado, lectura: Lectura | None, est: Estacion, ahora: datetim
     if c > nivel:
         cnt_sobre += 1
         cnt_bajo, bajo_desde = 0, None
-        rapido = prev_v is not None and (v - prev_v) >= VEL_SUBIDA_RAPIDA * u.bajo
-        if prev_v is None or rapido:  # sin historial no hay con qué confirmar; subida rápida no espera
+        rapido = vel is not None and prev_v is not None and (v - prev_v) >= vel
+        if prev_v is None or rapido or para_subir <= 1:  # sin historial no hay con qué confirmar; subida rápida no espera
             nivel, cnt_sobre = c, 0
-        elif cnt_sobre >= LECTURAS_PARA_SUBIR:
+        elif cnt_sobre >= para_subir:
             objetivo = min(c, candidato(prev_v, True))  # el nivel que superaron las dos lecturas seguidas
             if objetivo > nivel:
                 nivel, cnt_sobre = objetivo, 0

@@ -15,11 +15,11 @@ sys.path.insert(0, os.path.join(AQUI, ".."))
 from estaciones import cargar  # noqa: E402
 from fuentes import aca, chj  # noqa: E402
 
-ESTACIONES = os.path.join(AQUI, "..", "estaciones.json")
+ESTACIONES = os.path.join(AQUI, "..", "paises", "es", "estaciones.json")
 
 
 def main() -> int:
-    ests = cargar(ESTACIONES)  # valida zona, coordenadas, ids repetidos y umbrales
+    ests = cargar(ESTACIONES, "es")  # valida zona, coordenadas, ids repetidos y umbrales
     ahora = datetime.now(timezone.utc)
     catalogo = aca.bajar(aca.URL_CATALOGO)
     ultimos = aca.parse_ultimos(aca.bajar(aca.URL_ULTIMOS))

@@ -48,7 +48,7 @@ Un workflow de GitHub Actions corre cada 15 minutos (`.github/workflows/actualiz
 fuente/alertas.py          máquina de niveles (función pura)
 fuente/fuentes/            clientes de ACA, CHJ, AEMET/INUNCAT y Open-Meteo
 fuente/actualizar.py       orquestador
-fuente/estaciones.json     catálogo de estaciones y umbrales
+fuente/paises/es/estaciones.json  catálogo de estaciones y umbrales
 fuente/herramientas/       verificar estaciones y calibrar umbrales (a mano)
 fuente/page.html           plantilla; textos en fuente/textos.json (es y ca)
 ```

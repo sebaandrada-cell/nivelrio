@@ -22,7 +22,7 @@ VENTANA_MIN = 90          # minutos de historia de Sentilo que se miran para no 
 CERCA_DEL_UMBRAL = 0.8    # fracción del umbral bajo desde la que se pide la ventana
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
-RUTA_ESTACIONES = os.path.join(AQUI, "estaciones.json")
+RUTA_ESTACIONES = os.path.join(AQUI, "paises", "es", "estaciones.json")
 DIR_DATA = os.path.join(AQUI, "..", "data")
 
 
@@ -289,7 +289,7 @@ def _fuentes_reales() -> dict:
 def main() -> int:
     from estaciones import cargar
     ahora = datetime.now(timezone.utc).replace(microsecond=0)
-    cambios = ejecutar(ahora, cargar(RUTA_ESTACIONES), _fuentes_reales(), DIR_DATA)
+    cambios = ejecutar(ahora, cargar(RUTA_ESTACIONES, "es"), _fuentes_reales(), DIR_DATA)
     escribir_json(os.path.join(DIR_DATA, "cambios.json"), cambios)
     publicar = debe_publicar(cambios, ahora, ultima_publicacion(DIR_DATA))
     if publicar:

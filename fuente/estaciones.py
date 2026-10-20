@@ -1,10 +1,17 @@
-"""Carga y validación del catálogo de estaciones (fuente/estaciones.json)."""
+"""Carga y validación del catálogo de estaciones (fuente/paises/<pais>/estaciones.json)."""
 import json
 
 from modelo import Estacion, Umbrales
 
-FUENTES = ("aca", "chj")
-ZONAS = ("tarragona", "barcelona", "girona", "interior", "valencia")
+FUENTES = ("aca", "chj", "ina", "agp", "usgs")
+PAISES = ("ar", "es", "us")
+ZONAS = {
+    "es": ("tarragona", "barcelona", "girona", "interior", "valencia"),
+    "ar": ("chaco-corrientes", "litoral-parana", "uruguay"),
+    "us": ("mississippi", "missouri-ohio", "red-river"),
+}
+MAGNITUDES = ("caudal", "altura")
+UNIDADES = ("m3s", "m", "ft")
 TIPOS_UMBRAL = ("oficial", "estimado", "en_estudio")
 
 
@@ -18,7 +25,9 @@ def _umbrales(id_, d):
     return u
 
 
-def cargar(ruta: str) -> list[Estacion]:
+def cargar(ruta: str, pais: str) -> list[Estacion]:
+    if pais not in PAISES:
+        raise ValueError(f"país desconocido: {pais!r}")
     with open(ruta, encoding="utf-8") as f:
         crudo = json.load(f)
     vistos, salida = set(), []
@@ -33,12 +42,25 @@ def cargar(ruta: str) -> list[Estacion]:
             raise ValueError(f"{id_}: falta componente")
         if d["fuente"] == "chj" and not d.get("id_cha"):
             raise ValueError(f"{id_}: falta id_cha")
-        if d.get("zona") not in ZONAS:
-            raise ValueError(f"{id_}: zona inválida: {d.get('zona')!r}")
+        if d["fuente"] in ("ina", "agp", "usgs") and not d.get("ref"):
+            raise ValueError(f"{id_}: falta ref")
+        if d["fuente"] == "usgs" and not d.get("lid"):
+            raise ValueError(f"{id_}: falta lid")
+        if d.get("pais", pais) != pais:
+            raise ValueError(f"{id_}: país {d.get('pais')!r} no es {pais!r}")
+        if d.get("zona") not in ZONAS[pais]:
+            raise ValueError(f"{id_}: zona inválida para {pais}: {d.get('zona')!r}")
+        if d.get("magnitud") not in MAGNITUDES:
+            raise ValueError(f"{id_}: magnitud inválida: {d.get('magnitud')!r}")
+        if d.get("unidad") not in UNIDADES:
+            raise ValueError(f"{id_}: unidad inválida: {d.get('unidad')!r}")
+        vel = d.get("vel_subida_rapida")
         salida.append(Estacion(
             id=id_, rio=d["rio"], nombre=d["nombre"], cuenca=d["cuenca"], fuente=d["fuente"],
             muestreo_min=int(d["muestreo_min"]), umbrales=_umbrales(id_, d["umbrales"]),
             componente=d.get("componente"), id_cha=d.get("id_cha"),
             lat=float(d["lat"]), lon=float(d["lon"]), zona=d["zona"],
+            pais=pais, magnitud=d["magnitud"], unidad=d["unidad"], ref=d.get("ref"), lid=d.get("lid"),
+            vel_subida_rapida=None if vel is None else float(vel),
         ))
     return salida

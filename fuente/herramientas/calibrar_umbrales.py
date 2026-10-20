@@ -26,7 +26,7 @@ from modelo import FuenteError  # noqa: E402
 from umbrales import emparejar_por_utm, estimar  # noqa: E402
 
 SOCRATA = "https://analisi.transparenciacatalunya.cat/resource/hprm-xuw7.json"
-ESTACIONES = os.path.join(AQUI, "..", "estaciones.json")
+ESTACIONES = os.path.join(AQUI, "..", "paises", "es", "estaciones.json")
 FACTOR_EQUIVALENCIA = 4.0  # el caudal actual y la media diaria pueden diferir, pero no en otro orden de magnitud
 
 

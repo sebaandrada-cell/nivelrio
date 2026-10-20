@@ -16,7 +16,10 @@
       "medio": 324.503,
       "alto": 513.433,
       "tipo": "estimado"
-    }
+    },
+    "pais": "es",
+    "magnitud": "caudal",
+    "unidad": "m3s"
   },
   {
     "id": "llobregat-sant-vicenc-dels-horts",
@@ -35,7 +38,10 @@
       "medio": null,
       "alto": null,
       "tipo": "en_estudio"
-    }
+    },
+    "pais": "es",
+    "magnitud": "caudal",
+    "unidad": "m3s"
   },
   {
     "id": "llobregat-castellbisbal",
@@ -54,7 +60,10 @@
       "medio": null,
       "alto": null,
       "tipo": "en_estudio"
-    }
+    },
+    "pais": "es",
+    "magnitud": "caudal",
+    "unidad": "m3s"
   },
   {
     "id": "llobregat-castellbell",
@@ -73,7 +82,10 @@
       "medio": 180.226,
       "alto": 300.997,
       "tipo": "estimado"
-    }
+    },
+    "pais": "es",
+    "magnitud": "caudal",
+    "unidad": "m3s"
   },
   {
     "id": "llobregat-guardiola",
@@ -92,7 +104,10 @@
       "medio": 68.953,
       "alto": 123.744,
       "tipo": "estimado"
-    }
+    },
+    "pais": "es",
+    "magnitud": "caudal",
+    "unidad": "m3s"
   },
   {
     "id": "cardener-cardona",
@@ -111,7 +126,10 @@
       "medio": 26.642,
       "alto": 39.971,
       "tipo": "estimado"
-    }
+    },
+    "pais": "es",
+    "magnitud": "caudal",
+    "unidad": "m3s"
   },
   {
     "id": "cardener-suria",
@@ -130,7 +148,10 @@
       "medio": 45.894,
       "alto": 92.134,
       "tipo": "estimado"
-    }
+    },
+    "pais": "es",
+    "magnitud": "caudal",
+    "unidad": "m3s"
   },
   {
     "id": "anoia-sant-sadurni",
@@ -149,7 +170,10 @@
       "medio": 29.418,
       "alto": 38.075,
       "tipo": "estimado"
-    }
+    },
+    "pais": "es",
+    "magnitud": "caudal",
+    "unidad": "m3s"
   },
   {
     "id": "anoia-martorell",
@@ -168,7 +192,10 @@
       "medio": null,
       "alto": null,
       "tipo": "en_estudio"
-    }
+    },
+    "pais": "es",
+    "magnitud": "caudal",
+    "unidad": "m3s"
   },
   {
     "id": "besos-santa-coloma",
@@ -187,7 +214,10 @@
       "medio": 72.464,
       "alto": 86.286,
       "tipo": "estimado"
-    }
+    },
+    "pais": "es",
+    "magnitud": "caudal",
+    "unidad": "m3s"
   },
   {
     "id": "ter-girona",
@@ -206,7 +236,10 @@
       "medio": 229.931,
       "alto": 399.472,
       "tipo": "estimado"
-    }
+    },
+    "pais": "es",
+    "magnitud": "caudal",
+    "unidad": "m3s"
   },
   {
     "id": "ter-colomers",
@@ -225,7 +258,10 @@
       "medio": 330.689,
       "alto": 708.852,
       "tipo": "estimado"
-    }
+    },
+    "pais": "es",
+    "magnitud": "caudal",
+    "unidad": "m3s"
   },
   {
     "id": "ter-roda-de-ter",
@@ -244,7 +280,10 @@
       "medio": null,
       "alto": null,
       "tipo": "en_estudio"
-    }
+    },
+    "pais": "es",
+    "magnitud": "caudal",
+    "unidad": "m3s"
   },
   {
     "id": "ter-torroella",
@@ -263,7 +302,10 @@
       "medio": 227.084,
       "alto": 372.344,
       "tipo": "estimado"
-    }
+    },
+    "pais": "es",
+    "magnitud": "caudal",
+    "unidad": "m3s"
   },
   {
     "id": "fluvia-esponella",
@@ -282,7 +324,10 @@
       "medio": 196.298,
       "alto": 406.866,
       "tipo": "estimado"
-    }
+    },
+    "pais": "es",
+    "magnitud": "caudal",
+    "unidad": "m3s"
   },
   {
     "id": "fluvia-olot",
@@ -301,7 +346,10 @@
       "medio": 40.127,
       "alto": 55.926,
       "tipo": "estimado"
-    }
+    },
+    "pais": "es",
+    "magnitud": "caudal",
+    "unidad": "m3s"
   },
   {
     "id": "muga-pont-de-molins",
@@ -320,7 +368,10 @@
       "medio": 51.297,
       "alto": 81.908,
       "tipo": "estimado"
-    }
+    },
+    "pais": "es",
+    "magnitud": "caudal",
+    "unidad": "m3s"
   },
   {
     "id": "muga-castello-d-empuries",
@@ -339,7 +390,10 @@
       "medio": 334.967,
       "alto": 376.116,
       "tipo": "estimado"
-    }
+    },
+    "pais": "es",
+    "magnitud": "caudal",
+    "unidad": "m3s"
   },
   {
     "id": "muga-sant-llorenc",
@@ -358,7 +412,10 @@
       "medio": null,
       "alto": null,
       "tipo": "en_estudio"
-    }
+    },
+    "pais": "es",
+    "magnitud": "caudal",
+    "unidad": "m3s"
   },
   {
     "id": "tordera-fogars-de-la-selva",
@@ -377,7 +434,10 @@
       "medio": 95.204,
       "alto": 114.364,
       "tipo": "estimado"
-    }
+    },
+    "pais": "es",
+    "magnitud": "caudal",
+    "unidad": "m3s"
   },
   {
     "id": "tordera-sant-celoni",
@@ -396,7 +456,10 @@
       "medio": 12.537,
       "alto": 25.918,
       "tipo": "estimado"
-    }
+    },
+    "pais": "es",
+    "magnitud": "caudal",
+    "unidad": "m3s"
   },
   {
     "id": "francoli-montblanc",
@@ -415,7 +478,10 @@
       "medio": null,
       "alto": null,
       "tipo": "en_estudio"
-    }
+    },
+    "pais": "es",
+    "magnitud": "caudal",
+    "unidad": "m3s"
   },
   {
     "id": "francoli-tarragona",
@@ -434,7 +500,10 @@
       "medio": null,
       "alto": null,
       "tipo": "en_estudio"
-    }
+    },
+    "pais": "es",
+    "magnitud": "caudal",
+    "unidad": "m3s"
   },
   {
     "id": "gaia-vilabella",
@@ -453,7 +522,10 @@
       "medio": null,
       "alto": null,
       "tipo": "en_estudio"
-    }
+    },
+    "pais": "es",
+    "magnitud": "caudal",
+    "unidad": "m3s"
   },
   {
     "id": "foix-castellet-i-la-gornal",
@@ -472,7 +544,10 @@
       "medio": null,
       "alto": null,
       "tipo": "en_estudio"
-    }
+    },
+    "pais": "es",
+    "magnitud": "caudal",
+    "unidad": "m3s"
   },
   {
     "id": "turia-manises",
@@ -491,7 +566,10 @@
       "medio": null,
       "alto": null,
       "tipo": "en_estudio"
-    }
+    },
+    "pais": "es",
+    "magnitud": "caudal",
+    "unidad": "m3s"
   },
   {
     "id": "turia-quart-de-poblet",
@@ -510,7 +588,10 @@
       "medio": null,
       "alto": null,
       "tipo": "en_estudio"
-    }
+    },
+    "pais": "es",
+    "magnitud": "caudal",
+    "unidad": "m3s"
   },
   {
     "id": "turia-vilamarxant",
@@ -529,7 +610,10 @@
       "medio": null,
       "alto": null,
       "tipo": "en_estudio"
-    }
+    },
+    "pais": "es",
+    "magnitud": "caudal",
+    "unidad": "m3s"
   },
   {
     "id": "turia-bugarra",
@@ -548,7 +632,10 @@
       "medio": null,
       "alto": null,
       "tipo": "en_estudio"
-    }
+    },
+    "pais": "es",
+    "magnitud": "caudal",
+    "unidad": "m3s"
   },
   {
     "id": "xuquer-algemesi",
@@ -567,7 +654,10 @@
       "medio": null,
       "alto": null,
       "tipo": "en_estudio"
-    }
+    },
+    "pais": "es",
+    "magnitud": "caudal",
+    "unidad": "m3s"
   },
   {
     "id": "xuquer-salida-de-tous",
@@ -586,7 +676,10 @@
       "medio": null,
       "alto": null,
       "tipo": "en_estudio"
-    }
+    },
+    "pais": "es",
+    "magnitud": "caudal",
+    "unidad": "m3s"
   },
   {
     "id": "poyo-n-iii",
@@ -605,6 +698,9 @@
       "medio": null,
       "alto": null,
       "tipo": "en_estudio"
-    }
+    },
+    "pais": "es",
+    "magnitud": "caudal",
+    "unidad": "m3s"
   }
 ]

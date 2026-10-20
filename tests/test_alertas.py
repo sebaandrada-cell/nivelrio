@@ -4,7 +4,7 @@ from datetime import timedelta
 
 import pytest
 
-from alertas import ESTADO_INICIAL, VEL_SUBIDA_RAPIDA, Estado, estado_a_dict, estado_desde_dict, evaluar
+from alertas import ESTADO_INICIAL, VEL_SUBIDA_RAPIDA, Estado, estado_a_dict, estado_desde_dict, evaluar, limite_sd
 from conftest import make_estacion, utc
 from modelo import Lectura, Umbrales
 
@@ -158,3 +158,48 @@ def test_estado_ida_y_vuelta_a_dict():
     assert d["ultimo_t_utc"] == "2026-10-19T12:00:00Z"
     assert estado_desde_dict(d) == e
     assert estado_desde_dict(estado_a_dict(ESTADO_INICIAL)) == ESTADO_INICIAL
+
+
+ALTURA = dict(magnitud="altura", unidad="m", umbrales=Umbrales(5.5, 6.0, 6.5, "oficial"))
+
+
+def test_estacion_en_metros_usa_su_unidad():
+    est = make_estacion(**ALTURA)
+    # sin historial N2 no se concede (N2 exige subida), igual que en caudal: se parte de N1 subiendo
+    assert niveles(correr([6.1, 6.2], est=est, unidad="m", prev=desde_nivel(1, ultimo=5.9))) == [1, 2]
+    assert correr([6.1], est=est, unidad="m3s")[0].sd
+
+
+def test_altura_no_usa_subida_rapida():
+    est = make_estacion(**ALTURA)
+    assert niveles(correr([5.0, 6.6, 6.7], est=est, unidad="m")) == [0, 0, 3]
+    caudal = make_estacion(umbrales=Umbrales(5.5, 6.0, 6.5, "oficial"))
+    assert niveles(correr([5.0, 6.6], est=caudal)) == [0, 3]
+
+
+def test_vel_subida_rapida_propia_de_la_estacion():
+    est = make_estacion(**ALTURA, vel_subida_rapida=1.0)
+    assert niveles(correr([5.0, 6.6], est=est, unidad="m")) == [0, 3]
+
+
+def test_estacion_diaria_sube_con_una_lectura():
+    est = make_estacion(muestreo_min=1440, umbrales=Umbrales(5.5, 6.0, 6.5, "oficial"))
+    assert niveles(correr([5.0, 6.2], est=est, paso_min=1440)) == [0, 2]
+
+
+def test_estacion_diaria_no_cae_en_sd_a_las_30_horas():
+    est = make_estacion(muestreo_min=1440)
+    assert limite_sd(est) == timedelta(minutes=2880)
+    lec = Lectura(est.id, 5, "m3s", T0, est.fuente)
+    assert not evaluar(ESTADO_INICIAL, lec, est, T0 + timedelta(hours=30)).sd
+
+
+def test_estacion_diaria_si_cae_en_sd_a_las_50_horas():
+    est = make_estacion(muestreo_min=1440)
+    lec = Lectura(est.id, 5, "m3s", T0, est.fuente)
+    assert evaluar(ESTADO_INICIAL, lec, est, T0 + timedelta(hours=50)).sd
+
+
+def test_limite_sd_chj_y_resto():
+    assert limite_sd(make_estacion(fuente="chj", muestreo_min=15)) == timedelta(minutes=25)
+    assert limite_sd(make_estacion(muestreo_min=60)) == timedelta(minutes=180)
