@@ -1,0 +1,140 @@
+[
+  {
+    "id": "parana-barranqueras",
+    "rio": "Paraná",
+    "nombre": "Barranqueras",
+    "cuenca": "Paraná",
+    "fuente": "agp",
+    "muestreo_min": 1440,
+    "componente": null,
+    "id_cha": null,
+    "lat": -27.483333,
+    "lon": -58.933333,
+    "zona": "chaco-corrientes",
+    "umbrales": {
+      "bajo": 5.5,
+      "medio": 6.0,
+      "alto": 6.5,
+      "tipo": "oficial"
+    },
+    "pais": "ar",
+    "magnitud": "altura",
+    "unidad": "m",
+    "ref": "20"
+  },
+  {
+    "id": "parana-corrientes",
+    "rio": "Paraná",
+    "nombre": "Corrientes",
+    "cuenca": "Paraná",
+    "fuente": "ina",
+    "muestreo_min": 1440,
+    "componente": null,
+    "id_cha": null,
+    "lat": -27.463643,
+    "lon": -58.83887,
+    "zona": "chaco-corrientes",
+    "umbrales": {
+      "bajo": null,
+      "medio": null,
+      "alto": null,
+      "tipo": "en_estudio"
+    },
+    "pais": "ar",
+    "magnitud": "altura",
+    "unidad": "m",
+    "ref": "19"
+  },
+  {
+    "id": "parana-santa-fe",
+    "rio": "Paraná",
+    "nombre": "Santa Fe",
+    "cuenca": "Paraná",
+    "fuente": "ina",
+    "muestreo_min": 1440,
+    "componente": null,
+    "id_cha": null,
+    "lat": -31.651477,
+    "lon": -60.700232,
+    "zona": "litoral-parana",
+    "umbrales": {
+      "bajo": null,
+      "medio": null,
+      "alto": null,
+      "tipo": "en_estudio"
+    },
+    "pais": "ar",
+    "magnitud": "altura",
+    "unidad": "m",
+    "ref": "30"
+  },
+  {
+    "id": "parana-parana",
+    "rio": "Paraná",
+    "nombre": "Paraná",
+    "cuenca": "Paraná",
+    "fuente": "ina",
+    "muestreo_min": 1440,
+    "componente": null,
+    "id_cha": null,
+    "lat": -31.718238,
+    "lon": -60.52257,
+    "zona": "litoral-parana",
+    "umbrales": {
+      "bajo": null,
+      "medio": null,
+      "alto": null,
+      "tipo": "en_estudio"
+    },
+    "pais": "ar",
+    "magnitud": "altura",
+    "unidad": "m",
+    "ref": "29"
+  },
+  {
+    "id": "parana-rosario",
+    "rio": "Paraná",
+    "nombre": "Rosario",
+    "cuenca": "Paraná",
+    "fuente": "ina",
+    "muestreo_min": 1440,
+    "componente": null,
+    "id_cha": null,
+    "lat": -32.94327,
+    "lon": -60.630821,
+    "zona": "litoral-parana",
+    "umbrales": {
+      "bajo": null,
+      "medio": null,
+      "alto": null,
+      "tipo": "en_estudio"
+    },
+    "pais": "ar",
+    "magnitud": "altura",
+    "unidad": "m",
+    "ref": "34"
+  },
+  {
+    "id": "uruguay-concordia",
+    "rio": "Uruguay",
+    "nombre": "Concordia",
+    "cuenca": "Uruguay",
+    "fuente": "ina",
+    "muestreo_min": 1440,
+    "componente": null,
+    "id_cha": null,
+    "lat": -31.4,
+    "lon": -58.016667,
+    "zona": "uruguay",
+    "umbrales": {
+      "bajo": null,
+      "medio": null,
+      "alto": null,
+      "tipo": "en_estudio"
+    },
+    "pais": "ar",
+    "magnitud": "altura",
+    "unidad": "m",
+    "ref": "79"
+  }
+]

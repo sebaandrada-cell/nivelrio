@@ -230,6 +230,20 @@ def ejecutar(ahora: datetime, estaciones: list, fuentes: dict, dir_data: str) ->
                 p["puede_llegar"] = _puede_llegar(e, p.get("caudal"), f["valor"], f["nivel"])
         escribir_json(ruta_prev, doc)
 
+    # --- pronóstico de río (NWS): informativo, no entra en niveles, cambios ni fuentes_ok ---
+    if "pronostico_rio" in fuentes:
+        try:
+            docs = fuentes["pronostico_rio"](estaciones)
+        except Exception:  # noqa: BLE001 - nada de esto puede frenar las alertas
+            docs = {}
+        ids = {e.id for e in estaciones}  # el id es el nombre de la carpeta: solo ids del registro
+        for id_, d in docs.items():
+            if id_ in ids and d and d.get("puntos"):
+                try:
+                    escribir_json(os.path.join(dir_data, "rios", id_, "pronostico.json"), d)
+                except OSError:
+                    pass
+
     # --- persistencia ---
     escribir_json(os.path.join(dir_data, "state.json"), {i: estado_a_dict(s) for i, s in nuevos.items()})
     escribir_json(os.path.join(dir_data, "avisos.json"), [_aviso_a_dict(a) for a in avisos])
@@ -282,9 +296,81 @@ def ejecutar_todo(ahora: datetime, paises: dict, fuentes_por_pais: dict, raiz_da
     return resultado
 
 
+def _fuentes_ar() -> dict:
+    """INA para el Paraná/Uruguay y AGP para Barranqueras (con el INA de respaldo). El INA se baja una sola vez
+    por ejecución y se comparte entre las dos fuentes; el caché vive en esta llamada, no entre ejecuciones."""
+    from fuentes import agp, ina, prevision
+    cache = {}
+
+    def ina_parseado():
+        if "ina" not in cache:
+            try:
+                cache["ina"] = ina.parse(ina.bajar())
+            except FuenteError as exc:
+                cache["ina"] = exc  # el fallo también se comparte: no se reintenta dentro de la ejecución
+        if isinstance(cache["ina"], FuenteError):
+            raise cache["ina"]
+        return cache["ina"]
+
+    def f_ina(ests):
+        parseadas = ina_parseado()
+        return ina.lecturas_para(ests, parseadas), {e.id: parseadas[str(e.ref)]["umbrales"]
+                                                    for e in ests if str(e.ref) in parseadas}
+
+    def f_agp(ests):
+        try:
+            ultima = agp.parse(agp.bajar())
+        except FuenteError:  # hoy el TLS del puerto no verifica: es lo esperado y se cubre con el INA
+            ultima = None
+        try:
+            parseadas = ina_parseado()
+        except FuenteError:
+            parseadas = {}
+        ahora = datetime.now(timezone.utc)
+        salida = []
+        for e in ests:
+            l_agp = next(iter(agp.lecturas_para([e], ultima)), None)
+            l_ina = next(iter(ina.lecturas_para([replace(e, fuente="ina")], parseadas)), None)
+            elegida = agp.elegir(l_agp, l_ina, ahora)
+            if elegida is not None:
+                salida.append(elegida)  # conserva Lectura.fuente: "agp" o "ina"
+        if not salida:
+            raise FuenteError("agp: sin lectura de AGP ni de INA")
+        return salida, {}  # los umbrales de Barranqueras son los APA fijos del registro
+
+    return {"ina": f_ina, "agp": f_agp, "prevision": prevision.bajar}
+
+
+def _fuentes_us() -> dict:
+    from fuentes import prevision, usgs_nws
+
+    def f_usgs(ests):
+        return usgs_nws.bajar_todo(ests)
+
+    def f_pronostico(ests):
+        docs, generado = {}, _iso(datetime.now(timezone.utc))
+        for e in ests:
+            if not e.lid:
+                continue
+            try:
+                puntos = usgs_nws.bajar_pronostico(e.lid)
+            except Exception:  # noqa: BLE001 - informativo: una estación caída no afecta a las demás
+                continue
+            if puntos:
+                docs[e.id] = {"fuente": "NWS", "manual": False, "generado_utc": generado,
+                              "puntos": [[_iso(t), v] for t, v in puntos]}
+        return docs
+
+    return {"usgs": f_usgs, "prevision": prevision.bajar, "pronostico_rio": f_pronostico}
+
+
 def _fuentes_reales(pais: str = "es") -> dict:
+    if pais == "ar":
+        return _fuentes_ar()
+    if pais == "us":
+        return _fuentes_us()
     if pais != "es":
-        return {}  # las fuentes de AR y US las cablean sus tareas
+        return {}
     from fuentes import aca, avisos, chj, prevision
     cache = {}
 

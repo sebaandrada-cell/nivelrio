@@ -459,8 +459,9 @@ def test_indice_conserva_entrada_del_pais_que_falla(tmp_path):
     assert idx["ar"] == {"estaciones": 7} and idx["es"]["estaciones"] == 1
 
 
-def test_fuentes_reales_solo_es():
-    assert actualizar._fuentes_reales("ar") == {}
+def test_fuentes_reales_por_pais():
+    assert set(actualizar._fuentes_reales("ar")) == {"ina", "agp", "prevision"}
+    assert set(actualizar._fuentes_reales("us")) == {"usgs", "prevision", "pronostico_rio"}
     assert set(actualizar._fuentes_reales("es")) == {"aca", "aca_ventana", "chj", "avisos", "prevision"}
 
 
