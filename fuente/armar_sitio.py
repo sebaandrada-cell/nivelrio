@@ -38,8 +38,8 @@ def armar() -> str:
 
 # ---------- módulos por río ----------
 # Los archivos manuales viven en fuente/paises/<pais>/rios/<id>/ (en el repo) y el armado los valida y copia a
-# data/<pais>/rios/<id>/. Así no dependen de la caché de Actions que restaura data/, y el robot (que escribe
-# pronostico.json) no los toca ni ellos a él.
+# modulos/<pais>/<id>/ en la raíz del sitio, fuera de data/. Así no dependen de la caché de Actions que restaura data/ ni
+# los toca el robot (que solo escribe data/<pais>/rios/<id>/pronostico.json).
 ARCHIVOS_MODULOS = ("historicos", "pronostico_manual")
 IDIOMAS = ("es", "ca", "en")
 UNIDADES = ("m3s", "m", "ft")
@@ -178,38 +178,48 @@ def indice_modulos(src: str) -> dict:
             for cc, rios in _leer_modulos(str(src)).items()}
 
 
-def copiar_modulos(src: str, data: str) -> dict:
-    """Valida y copia los archivos de módulos a data/<pais>/rios/<id>/ y escribe data/<pais>/rios/modulos.json.
+def copiar_modulos(src: str, destino: str) -> dict:
+    """Valida y copia los archivos de módulos a <destino>/<pais>/<id>/ y escribe <destino>/modulos.json ({pais: {id: [archivos]}}).
 
-    No toca pronostico.json (es del robot). Retira las copias cuyo origen ya no existe."""
-    src, data = str(src), str(data)
+    El destino es `modulos/` en la raíz del sitio, fuera de data/: la caché de Actions restaura data/ y
+    pisaría estas copias con otras viejas. Los pronósticos del robot (data/<pais>/rios/<id>/pronostico.json)
+    no pasan por aquí. Retira las copias cuyo origen ya no existe."""
+    src, destino = str(src), str(destino)
     modulos = _leer_modulos(src)
-    indice = {}
+    indice = {cc: {i: [a for a in ARCHIVOS_MODULOS if a in docs] for i, docs in rios.items()} for cc, rios in modulos.items()}
     for cc, rios in modulos.items():
-        base = os.path.join(data, cc, "rios")
         for id_, docs in rios.items():
-            os.makedirs(os.path.join(base, id_), exist_ok=True)
+            os.makedirs(os.path.join(destino, cc, id_), exist_ok=True)
             for clave, doc in docs.items():
-                with open(os.path.join(base, id_, clave + ".json"), "w", encoding="utf-8") as f:
+                with open(os.path.join(destino, cc, id_, clave + ".json"), "w", encoding="utf-8") as f:
                     json.dump(doc, f, ensure_ascii=False, indent=2)
                     f.write("\n")
-        # copias huérfanas de archivos manuales (nunca pronostico.json)
-        if os.path.isdir(base):
+    if os.path.isdir(destino):  # huérfanos: archivos y carpetas que ya no tienen origen
+        for cc in os.listdir(destino):
+            base = os.path.join(destino, cc)
+            if not os.path.isdir(base):
+                continue
             for id_ in os.listdir(base):
+                carpeta = os.path.join(base, id_)
+                if not os.path.isdir(carpeta):
+                    continue
                 for clave in ARCHIVOS_MODULOS:
-                    ruta = os.path.join(base, id_, clave + ".json")
-                    if os.path.isfile(ruta) and clave not in rios.get(id_, {}):
+                    ruta = os.path.join(carpeta, clave + ".json")
+                    if os.path.isfile(ruta) and clave not in modulos.get(cc, {}).get(id_, {}):
                         os.remove(ruta)
-        os.makedirs(base, exist_ok=True)
-        indice[cc] = {i: [a for a in ARCHIVOS_MODULOS if a in docs] for i, docs in rios.items()}
-        with open(os.path.join(base, "modulos.json"), "w", encoding="utf-8") as f:
-            json.dump(indice[cc], f, ensure_ascii=False, indent=2)
-            f.write("\n")
+                if not os.listdir(carpeta):
+                    os.rmdir(carpeta)
+            if not os.listdir(base):
+                os.rmdir(base)
+    os.makedirs(destino, exist_ok=True)
+    with open(os.path.join(destino, "modulos.json"), "w", encoding="utf-8") as f:
+        json.dump(indice, f, ensure_ascii=False, indent=2)
+        f.write("\n")
     return indice
 
 
 def main() -> None:
-    copiar_modulos(os.path.join(F, "paises"), os.path.join(RAIZ, "data"))
+    copiar_modulos(os.path.join(F, "paises"), os.path.join(RAIZ, "modulos"))
     with open(os.path.join(RAIZ, "index.html"), "w", encoding="utf-8") as f:
         f.write(armar())
     print("index.html listo")

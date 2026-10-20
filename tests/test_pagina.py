@@ -258,8 +258,8 @@ def test_el_simulador_esta_etiquetado_y_anuncia_su_resultado(html):
 
 
 def test_el_modulo_historico_depende_del_indice_de_archivos(html):
-    # el contenedor solo se pinta si data/<pais>/rios/modulos.json lista historicos para esa estación
-    assert 'rios/modulos.json' in html
+    # el contenedor solo se pinta si modulos/modulos.json lista historicos para esa estación
+    assert 'modulos/modulos.json' in html
     assert 'includes("historicos")' in html and 'data-mod="historicas"' in html
     assert "parana-barranqueras" not in html  # ninguna estación va escrita a mano en la plantilla
 
@@ -273,3 +273,15 @@ def test_los_modulos_usan_d3_local_y_nada_externo(html):
 def test_el_pronostico_no_se_mezcla_con_los_niveles(html):
     # el pronóstico solo se dibuja: la plantilla no lo pasa a nivelRotulo ni toca e.nivel
     assert "e.nivel =" not in html and "nivel:" not in html.split("function elegirPronostico", 1)[1].split("function grafico", 1)[0]
+
+
+def test_la_pagina_nunca_pide_archivos_manuales_bajo_data():
+    # data/ la restaura la caché de Actions: los archivos manuales se sirven desde modulos/
+    plantilla = (RAIZ / "fuente" / "page.html").read_text(encoding="utf-8")
+    assert '"modulos/modulos.json"' in plantilla and '"modulos/" + p' in plantilla
+    assert "rios/modulos.json" not in plantilla
+    for m in re.finditer(r"rutaDatos\([^)]*\)", plantilla):
+        assert "historicos" not in m.group(0) and "pronostico_manual" not in m.group(0) and "modulos" not in m.group(0), m.group(0)
+    # lo único que se pide bajo data/<pais>/rios/ es el pronóstico del robot
+    pedidos = re.findall(r'robotDe\("([^"]+)"\)', plantilla)
+    assert set(pedidos) == {"pronostico.json"}

@@ -209,7 +209,7 @@ svg.hb .mu { fill: var(--muted); }
   const RANGOS_H = [48, 24 * 15, 24 * 92];
 
   let lang = "es", filtro = "all", rango = 1, pais = "es", desconocido = false, ficha = 0;
-  // mod: qué ríos del país tienen archivos de módulos (data/<pais>/rios/modulos.json); rios: lo ya descargado de cada uno; sim: lo escrito en cada simulador.
+  // mod: qué ríos del país tienen archivos de módulos (modulos/modulos.json); rios: lo ya descargado de cada uno; sim: lo escrito en cada simulador.
   const D = { indice: null, latest: null, prev: null, hist: {}, histT: 0, error: false, sinDatos: false, mod: {}, rios: {}, sim: {} };
   // Cada estación lleva su unidad tal como la publica la fuente (caudal, metros o pies); no se convierte.
   const uni = (e) => L.unidadTexto(e.unidad || "m3s");
@@ -259,11 +259,11 @@ svg.hb .mu { fill: var(--muted); }
     try {
       const latest = await getJson(L.rutaDatos(p, "latest.json"));
       const prev = await getJson(L.rutaDatos(p, "prevision.json")).catch(() => null);
-      const mod = await getJson(L.rutaDatos(p, "rios/modulos.json")).catch(() => ({}));
+      const mod = await getJson("modulos/modulos.json").catch(() => ({}));
       let hist = D.hist, histT = D.histT;
       if (Date.now() - histT > HIST_MS) { hist = await cargarHistorial(p); histT = Date.now(); }
       if (mia !== ficha) return;
-      D.latest = latest; D.prev = prev; D.mod = mod && typeof mod === "object" ? mod : {}; D.hist = hist; D.histT = histT; D.error = false; D.sinDatos = false;
+      D.latest = latest; D.prev = prev; D.mod = mod && mod[p] && typeof mod[p] === "object" ? mod[p] : {}; D.hist = hist; D.histT = histT; D.error = false; D.sinDatos = false;
     } catch (e) {
       if (mia !== ficha) return;
       if (e.status === 404) { vaciarPais(); D.sinDatos = true; } else D.error = true;
@@ -350,11 +350,13 @@ svg.hb .mu { fill: var(--muted); }
     const p = pais, previo = D.rios[e.id];
     if (previo && Date.now() - previo.t < REFRESCO_MS) return previo;
     const tiene = D.mod[e.id] || [];
-    const pedir = (nombre) => getJson(L.rutaDatos(p, "rios/" + encodeURIComponent(e.id) + "/" + nombre)).catch(() => null);
+    // Los archivos manuales viven en modulos/ (fuera de data/, que la caché de Actions restaura); solo el pronóstico del robot está en data/.
+    const manualDe = (nombre) => getJson("modulos/" + p + "/" + encodeURIComponent(e.id) + "/" + nombre).catch(() => null);
+    const robotDe = (nombre) => getJson(L.rutaDatos(p, "rios/" + encodeURIComponent(e.id) + "/" + nombre)).catch(() => null);
     const [historicos, manual, nws] = await Promise.all([
-      tiene.includes("historicos") ? pedir("historicos.json") : null,
-      tiene.includes("pronostico_manual") ? pedir("pronostico_manual.json") : null,
-      e.fuente === "usgs" ? pedir("pronostico.json") : null]);
+      tiene.includes("historicos") ? manualDe("historicos.json") : null,
+      tiene.includes("pronostico_manual") ? manualDe("pronostico_manual.json") : null,
+      e.fuente === "usgs" ? robotDe("pronostico.json") : null]);
     const r = { t: Date.now(), historicos, nws, manual };
     if (p === pais) D.rios[e.id] = r;
     return r;
@@ -427,10 +429,19 @@ svg.hb .mu { fill: var(--muted); }
     let html = `<p id="msum-${esc(idSeguro(e.id))}">${esc(fmt(t().mod_chart_summary, { desde: f(a), hasta: f(b), min: val(Math.min(...vs), u), max: val(Math.max(...vs), u), ultimo: val(vs[vs.length - 1], u) }))}`;
     const pr = elegirPronostico(e);
     if (!pr) return html + "</p>";
-    const d = pr.doc, ult = d.puntos.slice().sort((p, q) => Date.parse(p[0]) - Date.parse(q[0])).pop();
+    const d = pr.doc;
+    // el gráfico solo dibuja los puntos posteriores a la última lectura; el resumen cuenta lo mismo
+    const lecturaFin = Date.parse(puntos[puntos.length - 1][0]);
+    const ult = d.puntos.filter((q) => Date.parse(q[0]) > lecturaFin).sort((p, q) => Date.parse(p[0]) - Date.parse(q[0])).pop();
     const fecha = d.manual ? new Date(d.fecha + "T00:00:00Z").toLocaleDateString(loc(), { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }) : hora(d.generado_utc);
-    const punto = ult.length >= 3 ? fmt(t().mod_prono_rango, { min: val(ult[1], u), max: val(ult[2], u), dia: dia(ult[0]) }) : fmt(t().mod_prono_punto, { valor: val(ult[1], u), dia: dia(ult[0]) });
     const etiqueta = d.manual ? t().mod_prono_manual : t().mod_prono_nws;
+    if (!ult) {
+      html += ` ${esc(fmt(t().mod_prono_pasado, { label: etiqueta, fecha }))}</p>`;
+      if (pr.vencido) html += `<p><span class="vencido">${esc(t().mod_prono_vencido)}</span></p>`;
+      if (d.manual) html += `<p>${esc(fmt(t().mod_prono_manual_nota, { fuente: d.fuente || "—" }))}</p>`;
+      return html + `<p>${esc(t().mod_prono_aviso)}</p>`;
+    }
+    const punto = ult.length >= 3 ? fmt(t().mod_prono_rango, { min: val(ult[1], u), max: val(ult[2], u), dia: dia(ult[0]) }) : fmt(t().mod_prono_punto, { valor: val(ult[1], u), dia: dia(ult[0]) });
     html += ` ${esc(fmt(t().mod_prono_resumen, { label: etiqueta, fecha, punto }))}</p>`;
     html += `<p class="leg"><span style="--c:${colorDe(e)}"><i></i>${esc(t().mod_leyenda_obs)}</span><span style="--c:var(--accent)"><i class="pr"></i>${esc(etiqueta)}</span></p>`;
     if (pr.vencido) html += `<p><span class="vencido">${esc(t().mod_prono_vencido)}</span></p>`;

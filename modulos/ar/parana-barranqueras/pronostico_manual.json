@@ -1,0 +1,14 @@
+{
+  "estacion": "parana-barranqueras",
+  "unidad": "m",
+  "manual": true,
+  "fecha": "2026-10-13",
+  "fuente": "INA, pronóstico del 13 de octubre para el 20 de octubre, según situacion.json del proyecto de Pablo Dodda (apuratejose, licencia MIT)",
+  "puntos": [
+    [
+      "2026-10-20T12:00:00Z",
+      6.75,
+      7.55
+    ]
+  ]
+}

@@ -157,7 +157,8 @@
     "mod_hist_encima": "hoy está {d} por encima",
     "mod_hist_igual": "hoy está a la misma altura",
     "mod_hist_sin_valor": "No hay una lectura reciente, así que no se puede comparar.",
-    "mod_hist_fuente": "Referencias: {fuente}."
+    "mod_hist_fuente": "Referencias: {fuente}.",
+    "mod_prono_pasado": "{label} ({fecha}): todos sus puntos son anteriores a la última lectura, así que no se dibuja nada."
   },
   "ca": {
     "lang_label": "Idioma",
@@ -317,7 +318,8 @@
     "mod_hist_encima": "avui és {d} per sobre",
     "mod_hist_igual": "avui és a la mateixa alçada",
     "mod_hist_sin_valor": "No hi ha cap lectura recent, així que no es pot comparar.",
-    "mod_hist_fuente": "Referències: {fuente}."
+    "mod_hist_fuente": "Referències: {fuente}.",
+    "mod_prono_pasado": "{label} ({fecha}): tots els punts són anteriors a l'última lectura, així que no es dibuixa res."
   },
   "en": {
     "lang_label": "Language",
@@ -477,6 +479,7 @@
     "mod_hist_encima": "today it is {d} above",
     "mod_hist_igual": "today it is at the same height",
     "mod_hist_sin_valor": "There is no recent reading, so a comparison is not possible.",
-    "mod_hist_fuente": "References: {fuente}."
+    "mod_hist_fuente": "References: {fuente}.",
+    "mod_prono_pasado": "{label} ({fecha}): every point is earlier than the latest reading, so nothing is drawn."
   }
 }

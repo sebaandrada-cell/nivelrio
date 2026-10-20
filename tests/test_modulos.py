@@ -91,37 +91,53 @@ def arbol(tmp_path):
     return src
 
 
-def test_el_armado_copia_los_modulos_a_data_y_escribe_el_indice(tmp_path):
-    src, data = arbol(tmp_path), tmp_path / "data"
-    indice = armar_sitio.copiar_modulos(src, data)
-    destino = data / "ar" / "rios" / "parana-barranqueras"
+def test_el_armado_copia_los_modulos_fuera_de_data_y_escribe_el_indice(tmp_path):
+    src, destino = arbol(tmp_path), tmp_path / "modulos"
+    indice = armar_sitio.copiar_modulos(src, destino)
+    carpeta = destino / "ar" / "parana-barranqueras"
     for f in ("historicos.json", "pronostico_manual.json"):
-        assert json.loads((destino / f).read_text(encoding="utf-8")) == cargar(f)
-    assert indice == {"ar": {"parana-barranqueras": ["historicos", "pronostico_manual"]}, "es": {}, "us": {}}
-    for cc, esperado in indice.items():
-        assert json.loads((data / cc / "rios" / "modulos.json").read_text(encoding="utf-8")) == esperado
+        assert json.loads((carpeta / f).read_text(encoding="utf-8")) == cargar(f)
+    esperado = {"ar": {"parana-barranqueras": ["historicos", "pronostico_manual"]}, "es": {}, "us": {}}
+    assert indice == esperado
+    assert json.loads((destino / "modulos.json").read_text(encoding="utf-8")) == esperado
 
 
-def test_el_armado_no_toca_el_pronostico_del_robot(tmp_path):
-    src, data = arbol(tmp_path), tmp_path / "data"
-    robot = data / "ar" / "rios" / "parana-barranqueras"
+def test_el_armado_escribe_en_modulos_y_no_en_data():
+    # el destino por defecto de main() cuelga de la raíz del sitio y no de data/ (la caché de Actions restaura data/)
+    fuente = (RAIZ / "fuente" / "armar_sitio.py").read_text(encoding="utf-8")
+    assert 'os.path.join(RAIZ, "modulos")' in fuente
+    assert 'os.path.join(RAIZ, "data")' not in fuente
+    assert not list((RAIZ / "data").rglob("historicos.json")) and not list((RAIZ / "data").rglob("pronostico_manual.json"))
+    assert not list((RAIZ / "data").rglob("modulos.json"))
+    assert (RAIZ / "modulos" / "modulos.json").is_file()
+    assert (RAIZ / "modulos" / "ar" / "parana-barranqueras" / "historicos.json").is_file()
+
+
+def test_el_armado_no_toca_data_ni_el_pronostico_del_robot(tmp_path):
+    src, destino = arbol(tmp_path), tmp_path / "modulos"
+    robot = tmp_path / "data" / "ar" / "rios" / "parana-barranqueras"
     robot.mkdir(parents=True)
     (robot / "pronostico.json").write_text('{"fuente":"NWS"}', encoding="utf-8")
-    armar_sitio.copiar_modulos(src, data)
+    armar_sitio.copiar_modulos(src, destino)
+    assert sorted(p.name for p in robot.iterdir()) == ["pronostico.json"]
     assert (robot / "pronostico.json").read_text(encoding="utf-8") == '{"fuente":"NWS"}'
 
 
 def test_el_armado_retira_copias_cuyo_origen_ya_no_existe(tmp_path):
-    src, data = arbol(tmp_path), tmp_path / "data"
-    armar_sitio.copiar_modulos(src, data)
+    src, destino = arbol(tmp_path), tmp_path / "modulos"
+    armar_sitio.copiar_modulos(src, destino)
     (src / "ar" / "rios" / "parana-barranqueras" / "pronostico_manual.json").unlink()
-    indice = armar_sitio.copiar_modulos(src, data)
+    indice = armar_sitio.copiar_modulos(src, destino)
     assert indice["ar"] == {"parana-barranqueras": ["historicos"]}
-    assert not (data / "ar" / "rios" / "parana-barranqueras" / "pronostico_manual.json").exists()
+    assert not (destino / "ar" / "parana-barranqueras" / "pronostico_manual.json").exists()
+    shutil.rmtree(src / "ar" / "rios")
+    armar_sitio.copiar_modulos(src, destino)
+    assert not (destino / "ar").exists()  # sin archivos de origen no queda ni la carpeta
+    assert json.loads((destino / "modulos.json").read_text(encoding="utf-8")) == {"ar": {}, "es": {}, "us": {}}
 
 
 def test_el_armado_rechaza_ids_y_archivos_desconocidos(tmp_path):
-    src, data = arbol(tmp_path), tmp_path / "data"
+    src, data = arbol(tmp_path), tmp_path / "modulos"
     shutil.copytree(BARRANQUERAS, src / "ar" / "rios" / "no-existe")
     with pytest.raises(ValueError, match="no-existe"):
         armar_sitio.copiar_modulos(src, data)
@@ -132,7 +148,7 @@ def test_el_armado_rechaza_ids_y_archivos_desconocidos(tmp_path):
 
 
 def test_el_armado_rechaza_un_archivo_con_esquema_malo(tmp_path):
-    src, data = arbol(tmp_path), tmp_path / "data"
+    src, data = arbol(tmp_path), tmp_path / "modulos"
     f = src / "ar" / "rios" / "parana-barranqueras" / "historicos.json"
     d = json.loads(f.read_text(encoding="utf-8"))
     d["eventos"][0]["valor"] = "mucho"
@@ -153,7 +169,7 @@ def test_pruebas_de_modulos_js_pasan():
 
 
 def test_el_archivo_debe_ser_de_su_estacion_y_su_unidad(tmp_path):
-    src, data = arbol(tmp_path), tmp_path / "data"
+    src, data = arbol(tmp_path), tmp_path / "modulos"
     f = src / "ar" / "rios" / "parana-barranqueras" / "historicos.json"
     d = json.loads(f.read_text(encoding="utf-8"))
     d["unidad"] = "ft"
@@ -165,3 +181,14 @@ def test_el_archivo_debe_ser_de_su_estacion_y_su_unidad(tmp_path):
     f.write_text(json.dumps(d), encoding="utf-8")
     with pytest.raises(ValueError, match="estacion"):
         armar_sitio.copiar_modulos(src, data)
+
+
+def test_pronostico_manual_de_barranqueras_dice_de_donde_sale_y_cuando_se_emitio():
+    # Según situacion.json de Pablo: pronóstico del INA emitido el 13 de octubre para el 20. El punto del 27 de octubre
+    # no tiene origen declarado y no se incluye.
+    d = cargar("pronostico_manual.json")
+    assert d["fecha"] == "2026-10-13"
+    assert "INA" in d["fuente"] and "13 de octubre" in d["fuente"] and d["fuente"].strip()
+    assert "APA" not in d["fuente"].split("según")[0]
+    assert [p[0][:10] for p in d["puntos"]] == ["2026-10-20"]
+    assert d["puntos"][0][1:] == [6.75, 7.55]
