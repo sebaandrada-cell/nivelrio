@@ -1,0 +1,44 @@
+{
+  "estacion": "parana-barranqueras",
+  "unidad": "m",
+  "fuente": "Pablo Dodda, proyecto apuratejose (licencia MIT), compartido con su permiso",
+  "aviso": {
+    "es": "Las referencias vienen del proyecto de Pablo Dodda, que las compara con la altura que publica la AGP en Barranqueras. No pudimos comprobar por nuestra cuenta que el cero de la escala histórica sea el mismo que el de la estación automática de la AGP.",
+    "ca": "Les referències venen del projecte de Pablo Dodda, que les compara amb l'alçada que publica l'AGP a Barranqueras. No hem pogut comprovar pel nostre compte que el zero de l'escala històrica sigui el mateix que el de l'estació automàtica de l'AGP.",
+    "en": "These reference levels come from Pablo Dodda's project, which compares them with the height the AGP publishes at Barranqueras. We could not check on our own that the zero of the historical gauge matches the zero of the AGP automatic station."
+  },
+  "eventos": [
+    {
+      "evento": "1983",
+      "tipo": "crecida",
+      "valor": 8.6,
+      "nota": {
+        "es": "La mayor crecida registrada. El agua estuvo alta unos 13 meses.",
+        "ca": "La major crescuda registrada. L'aigua es va mantenir alta uns 13 mesos.",
+        "en": "The largest flood on record. The water stayed high for about 13 months."
+      }
+    },
+    {
+      "evento": "1992",
+      "tipo": "crecida",
+      "valor": 8.25,
+      "nota": ""
+    },
+    {
+      "evento": "2013",
+      "tipo": "crecida",
+      "valor": 7.09,
+      "nota": ""
+    },
+    {
+      "evento": "Tope de las defensas",
+      "tipo": "defensa",
+      "valor": 9.5,
+      "nota": {
+        "es": "Altura máxima que pueden aguantar las defensas actuales del Gran Resistencia.",
+        "ca": "Alçada màxima que poden aguantar les defenses actuals del Gran Resistencia.",
+        "en": "The highest level the current flood defenses of Greater Resistencia can hold."
+      }
+    }
+  ]
+}

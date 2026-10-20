@@ -1,0 +1,11 @@
+{
+  "estacion": "parana-barranqueras",
+  "unidad": "m",
+  "manual": true,
+  "fecha": "2026-10-20",
+  "fuente": "Pronóstico oficial vigente (APA o INA) según el proyecto de Pablo Dodda (apuratejose, licencia MIT)",
+  "puntos": [
+    ["2026-10-20T12:00:00Z", 6.75, 7.55],
+    ["2026-10-27T12:00:00Z", 5.8, 6.6]
+  ]
+}

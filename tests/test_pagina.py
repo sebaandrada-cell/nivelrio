@@ -231,3 +231,45 @@ def test_los_ejes_de_los_graficos_usan_el_formato_del_idioma():
 def test_umbrales_sin_unidad_se_tratan_como_caudal():
     plantilla = (RAIZ / "fuente" / "page.html").read_text(encoding="utf-8")
     assert 'val(u.alto, unidad || "m3s")' in plantilla
+
+
+def test_textos_de_modulos_en_todos_los_idiomas_con_los_mismos_marcadores():
+    claves = [k for k in TEXTOS["es"] if k.startswith("mod_")]
+    assert len(claves) >= 30
+    for lang in IDIOMAS:
+        assert [k for k in TEXTOS[lang] if k.startswith("mod_")] == claves
+        for k in claves:
+            assert TEXTOS[lang][k].strip(), (lang, k)
+            assert set(re.findall(r"\{(\w+)\}", TEXTOS[lang][k])) == set(re.findall(r"\{(\w+)\}", TEXTOS["es"][k])), (lang, k)
+
+
+def test_la_pagina_usa_todas_las_claves_de_modulos():
+    plantilla = (RAIZ / "fuente" / "page.html").read_text(encoding="utf-8")
+    logica = (RAIZ / "fuente" / "web" / "modulos.js").read_text(encoding="utf-8")
+    for k in (k for k in TEXTOS["es"] if k.startswith("mod_")):
+        assert k in plantilla or k in logica or re.fullmatch(r"mod_sim_n[0-3]", k), k  # mod_sim_nX lo arma simular()
+
+
+def test_el_simulador_esta_etiquetado_y_anuncia_su_resultado(html):
+    assert re.search(r'<label for="sim-', html)
+    assert 'aria-live="polite"' in html and 'class="simout"' in html
+    assert 'class="simin"' in html and 'inputmode="decimal"' in html
+    assert "aria-describedby" in html  # el gráfico remite a su resumen en texto
+
+
+def test_el_modulo_historico_depende_del_indice_de_archivos(html):
+    # el contenedor solo se pinta si data/<pais>/rios/modulos.json lista historicos para esa estación
+    assert 'rios/modulos.json' in html
+    assert 'includes("historicos")' in html and 'data-mod="historicas"' in html
+    assert "parana-barranqueras" not in html  # ninguna estación va escrita a mano en la plantilla
+
+
+def test_los_modulos_usan_d3_local_y_nada_externo(html):
+    assert '<script src="d3.min.js"></script>' in html
+    assert not re.search(r'<script[^>]+src="https?:', html)
+    assert "cdn." not in html and "unpkg" not in html
+
+
+def test_el_pronostico_no_se_mezcla_con_los_niveles(html):
+    # el pronóstico solo se dibuja: la plantilla no lo pasa a nivelRotulo ni toca e.nivel
+    assert "e.nivel =" not in html and "nivel:" not in html.split("function elegirPronostico", 1)[1].split("function grafico", 1)[0]

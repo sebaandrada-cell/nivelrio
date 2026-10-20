@@ -121,6 +121,26 @@ details.det > summary { cursor: pointer; font-size: var(--fs-cap); color: var(--
 .rng { justify-self: start; }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .empty { color: var(--muted); font-size: var(--fs-cap); padding: 8px 0; }
+.mods { display: grid; gap: 12px; margin-top: 4px; }
+.mh { font-size: var(--fs-body); font-weight: 600; margin: 0; }
+.mnote { display: grid; gap: 4px; font-size: var(--fs-cap); color: var(--muted); line-height: 1.5; }
+.mnote p { margin: 0; max-width: 56rem; }
+.mnote .vencido { color: var(--fg); font-weight: 600; }
+.leg { display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: center; }
+.leg i { display: inline-block; width: 18px; height: 0; border-top: 2px solid var(--c); vertical-align: middle; margin-right: 5px; }
+.leg i.pr { border-top-style: dashed; }
+.sim, .mhist { border-top: 1px solid var(--line); padding-top: 10px; display: grid; gap: 6px; }
+.sim label { font-size: var(--fs-cap); color: var(--muted); }
+.sim input { font: inherit; font-size: 16px; min-height: 40px; width: 100%; max-width: 12rem; padding: 6px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--fg); font-variant-numeric: tabular-nums; }
+.sim input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.simout { min-height: 1.4em; display: grid; gap: 4px; }
+.simout p, .simout ul { margin: 0; }
+.simout ul { padding-left: 1.1rem; font-size: var(--fs-cap); color: var(--muted); font-variant-numeric: tabular-nums; }
+.hl { margin: 0; padding-left: 1.1rem; display: grid; gap: 4px; font-variant-numeric: tabular-nums; }
+.hl .nota { color: var(--muted); font-size: var(--fs-cap); }
+svg.hb { width: 100%; height: auto; display: block; }
+svg.hb text { font-size: 11px; fill: var(--fg); }
+svg.hb .mu { fill: var(--muted); }
 @media (prefers-reduced-motion: no-preference) { .card { transition: border-color .3s; } }
 </style>
 </head>
@@ -167,7 +187,7 @@ details.det > summary { cursor: pointer; font-size: var(--fs-cap); color: var(--
   <footer class="foot" id="foot"></footer>
 </div>
 
-<script type="application/json" id="textos">{"es":{"lang_label":"Idioma","tile_desc":["bajo el umbral","caudal alto","crecida importante","riesgo de desbordamiento","lectura vieja o ausente"],"avisos_title":"Avisos oficiales vigentes","avisos_none":"Sin avisos oficiales de lluvia o inundación vigentes.","avisos_more":"y {n} avisos más","avisos_desde":"desde","prev_title":"Previsión de lluvia, próximos 3 días","prev_none":"La previsión de lluvia no está disponible ahora.","zonas":{"tarragona":"Tarragona y litoral sur","barcelona":"Barcelona y Maresme","girona":"Girona y Empordà","interior":"Interior (Lleida, Cardener)","valencia":"València (Túria, Xúquer, Poyo)","chaco-corrientes":"Chaco y Corrientes","litoral-parana":"Litoral: Santa Fe, Paraná y Rosario","uruguay":"Río Uruguay (Concordia)","mississippi":"Mississippi (St. Louis)","missouri-ohio":"Missouri y Ohio (Kansas City, Cincinnati)","red-river":"Red River of the North (Fargo)"},"est_title":"Ríos, de mayor a menor peligro","filt_all":"Todos","filt_act":"Solo con alerta","filt_none":"Ningún río con alerta ahora mismo.","rise":"subiendo","fall":"bajando","flat":"estable","no_value":"Sin lectura","sd_note":"Sin datos recientes. Se mantiene el último nivel conocido.","forecast_h":"Previsión 72 h","rain48":"Lluvia 48 h","fcq":"Caudal esperado","fcwarn":"orientativo","fcmay":"Podría llegar a","fcnone":"Sin previsión de caudal fiable para este punto.","thr_legend":"V Vigilancia · A Aviso · P Peligro","thr_none":"Umbrales todavía en estudio: de momento solo se muestra la lectura.","source":"Fuente","stations_of":"Estaciones de este río","chart_title":"Historial","chart_ranges":["48 h","15 días","3 meses"],"chart_empty":"Reuniendo historial. El gráfico se completa con el paso de las horas.","chart_aria":"Caudal de la estación a lo largo del tiempo, con las líneas de umbral","trend_prefix":"Tendencia","banner_stale":"Los datos llevan {edad} sin actualizarse. Lo que ves puede no ser el estado actual.","banner_fuentes":"No se pudo leer: {lista}. Esas estaciones aparecen como sin datos.","fuentes_nombres":{"aca":"ACA (Catalunya)","chj":"CHJ (Valencia)","avisos":"avisos oficiales","prevision":"previsión","ina":"INA (Argentina)","agp":"AGP (puerto de Barranqueras)","usgs":"USGS (EE. UU.)"},"loading":"Cargando datos…","error_load":"No se pudieron cargar los datos. Se reintentará en unos minutos.","foot":["Hecho por Pablo Dodda. Adaptación a Catalunya y a más países: Sebastian Andrada. Licencia MIT."],"aviso_color":{"amarillo":"amarillo","naranja":"naranja","rojo":"rojo"},"last_level":"Último nivel conocido","ago_updated":"Actualizado","noscript":"Esta página necesita JavaScript para mostrar los datos.","details_show":"Ver estaciones e historial","title":"Nivel de ríos","desc":"Nivel y caudal de ríos con riesgo de crecida en Argentina, España y Estados Unidos. Datos de organismos públicos, con una escala de alerta propia, actualizados cada hora o antes si cambia un nivel.","tab_label":"País","pais_sin_datos":"Todavía no hay datos de este país. Aparecerán cuando se complete la primera lectura.","pais_desconocido":"No existe ese país en la dirección. Se muestra {pais}.","paises":{"ar":{"nombre":"Argentina","titulo":"Ríos del litoral argentino","desc":"Altura del Paraná y del Uruguay en el litoral argentino. Lecturas del INA y de la Administración General de Puertos, actualizadas en esta página cada hora.","sub":"Altura del Paraná y del Uruguay en el litoral argentino, en metros. El INA publica un valor por día; el puerto de Barranqueras, uno por hora.","prev_note":"Lluvia acumulada por día (mm) y probabilidad máxima, el valor más alto entre las estaciones de cada zona. Fuente: Open-Meteo.com (CC BY 4.0). Esta página no muestra una previsión de altura del río. La previsión nunca cambia el nivel de alerta.","foot":["<b>Informativo.<\/b> Datos provisionales sin validar. No sustituye a Defensa Civil ni a los avisos de su provincia. Siga siempre sus instrucciones. En una emergencia llame al 911.","<b>Límites.<\/b> El INA actualiza un valor por día, de modo que una crecida rápida puede tardar en verse. Solo se muestran algunas estaciones del Paraná y del Uruguay. Los ríos sin umbral muestran solo la altura.","Fuentes: Instituto Nacional del Agua (INA), Administración General de Puertos (AGP) y Open-Meteo.com (CC BY 4.0). Alerta y evacuación son los niveles que publica el INA; Vigilancia es una regla propia de esta página (90 % del nivel de alerta) y no es oficial. En Barranqueras se usan los niveles de aviso de la Administración Provincial del Agua del Chaco."]},"es":{"nombre":"España","titulo":"Rius de Catalunya","desc":"Caudal de los ríos de Catalunya con más riesgo de inundación, con contexto de Valencia (Túria, Xúquer, Poyo). Lecturas de la ACA y la CHJ, actualizadas cada hora o antes si cambia un nivel.","sub":"Caudal de los ríos de Catalunya con más riesgo de inundación, más contexto de Valencia. Se actualiza cada hora, o antes si cambia un nivel.","prev_note":"Lluvia acumulada por día (mm) y probabilidad máxima, el valor más alto entre las estaciones de cada zona. Fuente: Open-Meteo.com (CC BY 4.0). No existe una previsión oficial de caudales para estos ríos: el caudal esperado de cada tarjeta sale de un modelo global (GloFAS, malla de unos 5 km, un dato por día). Sirve de orientación y no capta las crecidas rápidas de rambla. La previsión nunca cambia el nivel de alerta.","foot":["<b>Informativo.<\/b> Datos provisionales sin validar. No sustituye a Protecció Civil. Siga siempre sus instrucciones. En una emergencia llame al 112.","<b>Límites.<\/b> Cuencas rápidas como la rambla del Poyo pueden crecer en menos de una hora, más rápido que esta página. Segre, Ebre y Noguera todavía no tienen estación en la página porque falta una fuente de datos fiable. Los ríos sin umbral muestran solo el caudal.","Fuentes: Agència Catalana de l'Aigua (ACA), Confederación Hidrográfica del Júcar (SAIH), AEMET, Protecció Civil de Catalunya (INUNCAT) y Open-Meteo.com (CC BY 4.0). Los niveles Vigilancia, Aviso y Peligro son una escala propia de esta página, no una escala oficial. Los umbrales de Catalunya son estimaciones calculadas a partir de la serie histórica; los de Valencia son los oficiales de la CHJ."]},"us":{"nombre":"EE. UU.","titulo":"Ríos del centro de Estados Unidos","desc":"Altura de los ríos Mississippi, Missouri, Ohio y Red River of the North. Lecturas del USGS, actualizadas en esta página cada hora.","sub":"Altura de los ríos Mississippi, Missouri, Ohio y Red River of the North, en pies, tal como la publica el USGS.","prev_note":"Lluvia acumulada por día (mm) y probabilidad máxima, el valor más alto entre las estaciones de cada zona. Fuente: Open-Meteo.com (CC BY 4.0). Esta página todavía no muestra el pronóstico de río del Servicio Meteorológico Nacional (NWS). La previsión nunca cambia el nivel de alerta.","foot":["<b>Informativo.<\/b> Datos provisionales sin validar. No sustituye al Servicio Meteorológico Nacional (NWS) ni a las autoridades locales de emergencias. Siga siempre sus instrucciones. En una emergencia llame al 911.","<b>Límites.<\/b> Solo se muestran algunas estaciones. Una creciente en un afluente pequeño puede no verse aquí. Los niveles se ven en pies, como los publica la fuente, sin convertir.","Fuentes: U.S. Geological Survey (USGS), National Weather Service (NWS) y Open-Meteo.com (CC BY 4.0). Los niveles Vigilancia, Aviso y Peligro son una escala propia de esta página, no una escala oficial. Cuando el NWS publica categorías de inundación para la estación (acción, menor, moderada), se usan como umbrales; si no, la estación muestra solo la altura."]}}},"ca":{"lang_label":"Idioma","tile_desc":["sota el llindar","cabal alt","crescuda important","risc de desbordament","lectura vella o absent"],"avisos_title":"Avisos oficials vigents","avisos_none":"Cap avís oficial de pluja o inundació vigent.","avisos_more":"i {n} avisos més","avisos_desde":"des de","prev_title":"Previsió de pluja, propers 3 dies","prev_none":"La previsió de pluja no està disponible ara.","zonas":{"tarragona":"Tarragona i litoral sud","barcelona":"Barcelona i Maresme","girona":"Girona i Empordà","interior":"Interior (Lleida, Cardener)","valencia":"València (Túria, Xúquer, Poyo)","chaco-corrientes":"Chaco i Corrientes","litoral-parana":"Litoral: Santa Fe, Paraná i Rosario","uruguay":"Riu Uruguai (Concordia)","mississippi":"Mississippi (St. Louis)","missouri-ohio":"Missouri i Ohio (Kansas City, Cincinnati)","red-river":"Red River of the North (Fargo)"},"est_title":"Rius, de més a menys perill","filt_all":"Tots","filt_act":"Només amb alerta","filt_none":"Cap riu amb alerta ara mateix.","rise":"pujant","fall":"baixant","flat":"estable","no_value":"Sense lectura","sd_note":"Sense dades recents. Es manté l'últim nivell conegut.","forecast_h":"Previsió 72 h","rain48":"Pluja 48 h","fcq":"Cabal esperat","fcwarn":"orientatiu","fcmay":"Podria arribar a","fcnone":"Sense previsió de cabal fiable per a aquest punt.","thr_legend":"V Vigilància · A Avís · P Perill","thr_none":"Llindars encara en estudi: de moment només es mostra la lectura.","source":"Font","stations_of":"Estacions d'aquest riu","chart_title":"Historial","chart_ranges":["48 h","15 dies","3 mesos"],"chart_empty":"Recollint historial. El gràfic es completa amb el pas de les hores.","chart_aria":"Cabal de l'estació al llarg del temps, amb les línies de llindar","trend_prefix":"Tendència","banner_stale":"Les dades fa {edad} que no s'actualitzen. El que veus pot no ser l'estat actual.","banner_fuentes":"No s'ha pogut llegir: {lista}. Aquestes estacions apareixen sense dades.","fuentes_nombres":{"aca":"ACA (Catalunya)","chj":"CHJ (València)","avisos":"avisos oficials","prevision":"previsió","ina":"INA (Argentina)","agp":"AGP (port de Barranqueras)","usgs":"USGS (EUA)"},"loading":"Carregant dades…","error_load":"No s'han pogut carregar les dades. Es tornarà a provar d'aquí a uns minuts.","foot":["Fet per Pablo Dodda. Adaptació a Catalunya i a més països: Sebastian Andrada. Llicència MIT."],"aviso_color":{"amarillo":"groc","naranja":"taronja","rojo":"vermell"},"last_level":"Darrer nivell conegut","ago_updated":"Actualitzat","noscript":"Aquesta pàgina necessita JavaScript per mostrar les dades.","details_show":"Veure estacions i historial","title":"Nivell dels rius","desc":"Nivell i cabal de rius amb risc de crescuda a l'Argentina, Espanya i els Estats Units. Dades d'organismes públics, amb una escala d'alerta pròpia, actualitzades cada hora o abans si canvia un nivell.","tab_label":"País","pais_sin_datos":"Encara no hi ha dades d'aquest país. Apareixeran quan es completi la primera lectura.","pais_desconocido":"Aquest país no existeix a l'adreça. Es mostra {pais}.","paises":{"ar":{"nombre":"Argentina","titulo":"Rius del litoral argentí","desc":"Alçada del Paraná i de l'Uruguai al litoral argentí. Lectures de l'INA i de l'Administración General de Puertos, actualitzades en aquesta pàgina cada hora.","sub":"Alçada del Paraná i de l'Uruguai al litoral argentí, en metres. L'INA publica un valor per dia; el port de Barranqueras, un per hora.","prev_note":"Pluja acumulada per dia (mm) i probabilitat màxima, el valor més alt entre les estacions de cada zona. Font: Open-Meteo.com (CC BY 4.0). Aquesta pàgina no mostra cap previsió d'alçada del riu. La previsió mai no canvia el nivell d'alerta.","foot":["<b>Informatiu.<\/b> Dades provisionals sense validar. No substitueix Defensa Civil ni els avisos de la vostra província. Seguiu sempre les seves instruccions. En una emergència truqueu al 911.","<b>Límits.<\/b> L'INA actualitza un valor per dia, de manera que una crescuda ràpida pot trigar a veure's. Només es mostren algunes estacions del Paraná i de l'Uruguai. Els rius sense llindar només mostren l'alçada.","Fonts: Instituto Nacional del Agua (INA), Administración General de Puertos (AGP) i Open-Meteo.com (CC BY 4.0). Alerta i evacuació són els nivells que publica l'INA; Vigilància és una regla pròpia d'aquesta pàgina (90 % del nivell d'alerta) i no és oficial. A Barranqueras s'usen els nivells d'avís de l'Administración Provincial del Agua del Chaco."]},"es":{"nombre":"Espanya","titulo":"Rius de Catalunya","desc":"Cabal dels rius de Catalunya amb més risc d'inundació, amb context de València (Túria, Xúquer, Poyo). Lectures de l'ACA i la CHJ, actualitzades cada hora o abans si canvia un nivell.","sub":"Cabal dels rius de Catalunya amb més risc d'inundació, més context de València. S'actualitza cada hora, o abans si canvia un nivell.","prev_note":"Pluja acumulada per dia (mm) i probabilitat màxima, el valor més alt entre les estacions de cada zona. Font: Open-Meteo.com (CC BY 4.0). No hi ha cap previsió oficial de cabals per a aquests rius: el cabal esperat de cada targeta surt d'un model global (GloFAS, malla d'uns 5 km, una dada per dia). Serveix d'orientació i no capta les crescudes ràpides de riera. La previsió mai no canvia el nivell d'alerta.","foot":["<b>Informatiu.<\/b> Dades provisionals sense validar. No substitueix Protecció Civil. Seguiu sempre les seves instruccions. En una emergència truqueu al 112.","<b>Límits.<\/b> Les conques ràpides com la rambla del Poyo poden créixer en menys d'una hora, més de pressa que aquesta pàgina. Segre, Ebre i Noguera encara no tenen estació a la pàgina perquè falta una font de dades fiable. Els rius sense llindar només mostren el cabal.","Fonts: Agència Catalana de l'Aigua (ACA), Confederación Hidrográfica del Júcar (SAIH), AEMET, Protecció Civil de Catalunya (INUNCAT) i Open-Meteo.com (CC BY 4.0). Els nivells Vigilància, Avís i Perill són una escala pròpia d'aquesta pàgina, no una escala oficial. Els llindars de Catalunya són estimacions calculades a partir de la sèrie històrica; els de València són els oficials de la CHJ."]},"us":{"nombre":"EUA","titulo":"Rius del centre dels Estats Units","desc":"Alçada dels rius Mississippi, Missouri, Ohio i Red River of the North. Lectures de l'USGS, actualitzades en aquesta pàgina cada hora.","sub":"Alçada dels rius Mississippi, Missouri, Ohio i Red River of the North, en peus, tal com la publica l'USGS.","prev_note":"Pluja acumulada per dia (mm) i probabilitat màxima, el valor més alt entre les estacions de cada zona. Font: Open-Meteo.com (CC BY 4.0). Aquesta pàgina encara no mostra el pronòstic de riu del Servei Meteorològic Nacional (NWS). La previsió mai no canvia el nivell d'alerta.","foot":["<b>Informatiu.<\/b> Dades provisionals sense validar. No substitueix el Servei Meteorològic Nacional (NWS) ni les autoritats locals d'emergències. Seguiu sempre les seves instruccions. En una emergència truqueu al 911.","<b>Límits.<\/b> Només es mostren algunes estacions. Una crescuda en un afluent petit pot no veure's aquí. Els nivells es veuen en peus, com els publica la font, sense convertir.","Fonts: U.S. Geological Survey (USGS), National Weather Service (NWS) i Open-Meteo.com (CC BY 4.0). Els nivells Vigilància, Avís i Perill són una escala pròpia d'aquesta pàgina, no una escala oficial. Quan el NWS publica categories d'inundació per a l'estació (acció, menor, moderada), s'usen com a llindars; si no, l'estació mostra només l'alçada."]}}},"en":{"lang_label":"Language","tile_desc":["below threshold","high flow","major rise","flood risk","reading old or missing"],"avisos_title":"Official warnings in effect","avisos_none":"No official rain or flood warnings in effect.","avisos_more":"and {n} more warnings","avisos_desde":"since","prev_title":"Rain forecast, next 3 days","prev_none":"The rain forecast isn't available right now.","zonas":{"tarragona":"Tarragona and the south coast","barcelona":"Barcelona and Maresme","girona":"Girona and Empordà","interior":"Inland (Lleida, Cardener)","valencia":"Valencia (Turia, Júcar, Poyo)","chaco-corrientes":"Chaco and Corrientes","litoral-parana":"Litoral: Santa Fe, Paraná and Rosario","uruguay":"Uruguay River (Concordia)","mississippi":"Mississippi (St. Louis)","missouri-ohio":"Missouri and Ohio (Kansas City, Cincinnati)","red-river":"Red River of the North (Fargo)"},"est_title":"Rivers, from highest to lowest risk","filt_all":"All","filt_act":"Alerts only","filt_none":"No river is on alert right now.","rise":"rising","fall":"falling","flat":"steady","no_value":"No reading","sd_note":"No recent data. The last known level is kept.","forecast_h":"72 h forecast","rain48":"Rain, 48 h","fcq":"Expected flow","fcwarn":"rough guide","fcmay":"Could reach","fcnone":"No reliable flow forecast for this point.","thr_legend":"W Watch · A Alert · D Danger","thr_none":"Thresholds are still under review, so only the reading is shown for now.","source":"Source","stations_of":"Stations on this river","chart_title":"History","chart_ranges":["48 h","15 days","3 months"],"chart_empty":"Collecting history. The chart fills in as the hours pass.","chart_aria":"Station flow over time, with the threshold lines","trend_prefix":"Trend","banner_stale":"The data hasn't updated in {edad}. What you see may not be the current state.","banner_fuentes":"Couldn't read: {lista}. Those stations show as no data.","fuentes_nombres":{"aca":"ACA (Catalonia)","chj":"CHJ (Valencia)","avisos":"official warnings","prevision":"forecast","ina":"INA (Argentina)","agp":"AGP (Barranqueras port)","usgs":"USGS (US)"},"loading":"Loading data…","error_load":"Couldn't load the data. Trying again in a few minutes.","foot":["Built by Pablo Dodda. Adapted for Catalonia and more countries by Sebastian Andrada. MIT license."],"aviso_color":{"amarillo":"yellow","naranja":"orange","rojo":"red"},"last_level":"Last known level","ago_updated":"Updated","noscript":"This page needs JavaScript to show the data.","details_show":"Show stations and history","title":"River levels","desc":"Level and flow of flood-prone rivers in Argentina, Spain and the United States. Data from public agencies, with this page's own alert scale, refreshed every hour or sooner if a level changes.","tab_label":"Country","pais_sin_datos":"There's no data for this country yet. It will appear once the first reading is in.","pais_desconocido":"That country isn't in the address. Showing {pais}.","paises":{"ar":{"nombre":"Argentina","titulo":"Rivers of Argentina's Litoral","desc":"Heights of the Paraná and Uruguay rivers in Argentina's Litoral region. Readings from INA and the Administración General de Puertos, refreshed on this page every hour.","sub":"Heights of the Paraná and Uruguay rivers in Argentina's Litoral region, in meters. INA publishes one value per day; the port of Barranqueras publishes one per hour.","prev_note":"Rain accumulated per day (mm) and peak probability, taking the highest value among the stations in each zone. Source: Open-Meteo.com (CC BY 4.0). This page doesn't show a river height forecast. The forecast never changes the alert level.","foot":["<b>For information only.<\/b> Provisional, unvalidated data. It does not replace Defensa Civil or the warnings from your province. Follow their instructions at all times. In an emergency call 911.","<b>Limits.<\/b> INA updates one value per day, so a fast rise can take a while to show. Only some stations on the Paraná and Uruguay are shown. Rivers without a threshold show height only.","Sources: Instituto Nacional del Agua (INA), Administración General de Puertos (AGP) and Open-Meteo.com (CC BY 4.0). Alert and Evacuation are the levels INA publishes; Watch is this page's own rule (90% of the alert level) and is not official. At Barranqueras, the warning levels of the Administración Provincial del Agua del Chaco are used."]},"es":{"nombre":"Spain","titulo":"Rivers of Catalonia","desc":"Flow of the Catalan rivers with the highest flood risk, with Valencia (Turia, Júcar, Poyo) for context. Readings from ACA and CHJ, refreshed every hour, or sooner if a level changes.","sub":"Flow of the Catalan rivers at highest flood risk, plus Valencia for context. Updated every hour, or sooner if a level changes.","prev_note":"Rain accumulated per day (mm) and peak probability, taking the highest value among the stations in each zone. Source: Open-Meteo.com (CC BY 4.0). There is no official flow forecast for these rivers: the expected flow on each card comes from a global model (GloFAS, roughly 5 km grid, one value per day). Treat it as a rough guide; it misses flash floods in ramblas. The forecast never changes the alert level.","foot":["<b>For information only.<\/b> Provisional, unvalidated data. It does not replace Protecció Civil. Follow their instructions at all times. In an emergency call 112.","<b>Limits.<\/b> Flash-flood basins like the Rambla del Poyo can rise in under an hour, faster than this page updates. Segre, Ebre and Noguera have no station here yet because a reliable data source is missing. Rivers without a threshold show flow only.","Sources: Agència Catalana de l'Aigua (ACA), Confederación Hidrográfica del Júcar (SAIH), AEMET, Protecció Civil de Catalunya (INUNCAT) and Open-Meteo.com (CC BY 4.0). The Watch, Alert and Danger levels are this page's own scale, not an official one. Catalonia's thresholds are estimates calculated from the historical record; Valencia's are the official CHJ ones."]},"us":{"nombre":"US","titulo":"Rivers of the central United States","desc":"Heights of the Mississippi, Missouri, Ohio and Red River of the North. USGS readings, refreshed on this page every hour.","sub":"Heights of the Mississippi, Missouri, Ohio and Red River of the North, in feet, as USGS publishes them.","prev_note":"Rain accumulated per day (mm) and peak probability, taking the highest value among the stations in each zone. Source: Open-Meteo.com (CC BY 4.0). This page doesn't show the National Weather Service (NWS) river forecast yet. The forecast never changes the alert level.","foot":["<b>For information only.<\/b> Provisional, unvalidated data. It does not replace the National Weather Service (NWS) or your local emergency management office. Follow their instructions at all times. In an emergency call 911.","<b>Limits.<\/b> Only some stations are shown. A rise on a small tributary may not show up here. Levels are shown in feet, as the source publishes them, with no conversion.","Sources: U.S. Geological Survey (USGS), National Weather Service (NWS) and Open-Meteo.com (CC BY 4.0). The Watch, Alert and Danger levels are this page's own scale, not an official one. When the NWS publishes flood categories for a gauge (action, minor, moderate), they are used as thresholds; otherwise the station shows the stage only."]}}}}</script>
+<script type="application/json" id="textos">{"es":{"lang_label":"Idioma","tile_desc":["bajo el umbral","caudal alto","crecida importante","riesgo de desbordamiento","lectura vieja o ausente"],"avisos_title":"Avisos oficiales vigentes","avisos_none":"Sin avisos oficiales de lluvia o inundación vigentes.","avisos_more":"y {n} avisos más","avisos_desde":"desde","prev_title":"Previsión de lluvia, próximos 3 días","prev_none":"La previsión de lluvia no está disponible ahora.","zonas":{"tarragona":"Tarragona y litoral sur","barcelona":"Barcelona y Maresme","girona":"Girona y Empordà","interior":"Interior (Lleida, Cardener)","valencia":"València (Túria, Xúquer, Poyo)","chaco-corrientes":"Chaco y Corrientes","litoral-parana":"Litoral: Santa Fe, Paraná y Rosario","uruguay":"Río Uruguay (Concordia)","mississippi":"Mississippi (St. Louis)","missouri-ohio":"Missouri y Ohio (Kansas City, Cincinnati)","red-river":"Red River of the North (Fargo)"},"est_title":"Ríos, de mayor a menor peligro","filt_all":"Todos","filt_act":"Solo con alerta","filt_none":"Ningún río con alerta ahora mismo.","rise":"subiendo","fall":"bajando","flat":"estable","no_value":"Sin lectura","sd_note":"Sin datos recientes. Se mantiene el último nivel conocido.","forecast_h":"Previsión 72 h","rain48":"Lluvia 48 h","fcq":"Caudal esperado","fcwarn":"orientativo","fcmay":"Podría llegar a","fcnone":"Sin previsión de caudal fiable para este punto.","thr_legend":"V Vigilancia · A Aviso · P Peligro","thr_none":"Umbrales todavía en estudio: de momento solo se muestra la lectura.","source":"Fuente","stations_of":"Estaciones de este río","chart_title":"Historial","chart_ranges":["48 h","15 días","3 meses"],"chart_empty":"Reuniendo historial. El gráfico se completa con el paso de las horas.","chart_aria":"Caudal de la estación a lo largo del tiempo, con las líneas de umbral","trend_prefix":"Tendencia","banner_stale":"Los datos llevan {edad} sin actualizarse. Lo que ves puede no ser el estado actual.","banner_fuentes":"No se pudo leer: {lista}. Esas estaciones aparecen como sin datos.","fuentes_nombres":{"aca":"ACA (Catalunya)","chj":"CHJ (Valencia)","avisos":"avisos oficiales","prevision":"previsión","ina":"INA (Argentina)","agp":"AGP (puerto de Barranqueras)","usgs":"USGS (EE. UU.)"},"loading":"Cargando datos…","error_load":"No se pudieron cargar los datos. Se reintentará en unos minutos.","foot":["Hecho por Pablo Dodda. Adaptación a Catalunya y a más países: Sebastian Andrada. Licencia MIT."],"aviso_color":{"amarillo":"amarillo","naranja":"naranja","rojo":"rojo"},"last_level":"Último nivel conocido","ago_updated":"Actualizado","noscript":"Esta página necesita JavaScript para mostrar los datos.","details_show":"Ver estaciones e historial","title":"Nivel de ríos","desc":"Nivel y caudal de ríos con riesgo de crecida en Argentina, España y Estados Unidos. Datos de organismos públicos, con una escala de alerta propia, actualizados cada hora o antes si cambia un nivel.","tab_label":"País","pais_sin_datos":"Todavía no hay datos de este país. Aparecerán cuando se complete la primera lectura.","pais_desconocido":"No existe ese país en la dirección. Se muestra {pais}.","paises":{"ar":{"nombre":"Argentina","titulo":"Ríos del litoral argentino","desc":"Altura del Paraná y del Uruguay en el litoral argentino. Lecturas del INA y de la Administración General de Puertos, actualizadas en esta página cada hora.","sub":"Altura del Paraná y del Uruguay en el litoral argentino, en metros. El INA publica un valor por día; el puerto de Barranqueras, uno por hora.","prev_note":"Lluvia acumulada por día (mm) y probabilidad máxima, el valor más alto entre las estaciones de cada zona. Fuente: Open-Meteo.com (CC BY 4.0). Esta página no muestra una previsión de altura del río. La previsión nunca cambia el nivel de alerta.","foot":["<b>Informativo.<\/b> Datos provisionales sin validar. No sustituye a Defensa Civil ni a los avisos de su provincia. Siga siempre sus instrucciones. En una emergencia llame al 911.","<b>Límites.<\/b> El INA actualiza un valor por día, de modo que una crecida rápida puede tardar en verse. Solo se muestran algunas estaciones del Paraná y del Uruguay. Los ríos sin umbral muestran solo la altura.","Fuentes: Instituto Nacional del Agua (INA), Administración General de Puertos (AGP) y Open-Meteo.com (CC BY 4.0). Alerta y evacuación son los niveles que publica el INA; Vigilancia es una regla propia de esta página (90 % del nivel de alerta) y no es oficial. En Barranqueras se usan los niveles de aviso de la Administración Provincial del Agua del Chaco."]},"es":{"nombre":"España","titulo":"Rius de Catalunya","desc":"Caudal de los ríos de Catalunya con más riesgo de inundación, con contexto de Valencia (Túria, Xúquer, Poyo). Lecturas de la ACA y la CHJ, actualizadas cada hora o antes si cambia un nivel.","sub":"Caudal de los ríos de Catalunya con más riesgo de inundación, más contexto de Valencia. Se actualiza cada hora, o antes si cambia un nivel.","prev_note":"Lluvia acumulada por día (mm) y probabilidad máxima, el valor más alto entre las estaciones de cada zona. Fuente: Open-Meteo.com (CC BY 4.0). No existe una previsión oficial de caudales para estos ríos: el caudal esperado de cada tarjeta sale de un modelo global (GloFAS, malla de unos 5 km, un dato por día). Sirve de orientación y no capta las crecidas rápidas de rambla. La previsión nunca cambia el nivel de alerta.","foot":["<b>Informativo.<\/b> Datos provisionales sin validar. No sustituye a Protecció Civil. Siga siempre sus instrucciones. En una emergencia llame al 112.","<b>Límites.<\/b> Cuencas rápidas como la rambla del Poyo pueden crecer en menos de una hora, más rápido que esta página. Segre, Ebre y Noguera todavía no tienen estación en la página porque falta una fuente de datos fiable. Los ríos sin umbral muestran solo el caudal.","Fuentes: Agència Catalana de l'Aigua (ACA), Confederación Hidrográfica del Júcar (SAIH), AEMET, Protecció Civil de Catalunya (INUNCAT) y Open-Meteo.com (CC BY 4.0). Los niveles Vigilancia, Aviso y Peligro son una escala propia de esta página, no una escala oficial. Los umbrales de Catalunya son estimaciones calculadas a partir de la serie histórica; los de Valencia son los oficiales de la CHJ."]},"us":{"nombre":"EE. UU.","titulo":"Ríos del centro de Estados Unidos","desc":"Altura de los ríos Mississippi, Missouri, Ohio y Red River of the North. Lecturas del USGS, actualizadas en esta página cada hora.","sub":"Altura de los ríos Mississippi, Missouri, Ohio y Red River of the North, en pies, tal como la publica el USGS.","prev_note":"Lluvia acumulada por día (mm) y probabilidad máxima, el valor más alto entre las estaciones de cada zona. Fuente: Open-Meteo.com (CC BY 4.0). Esta página todavía no muestra el pronóstico de río del Servicio Meteorológico Nacional (NWS). La previsión nunca cambia el nivel de alerta.","foot":["<b>Informativo.<\/b> Datos provisionales sin validar. No sustituye al Servicio Meteorológico Nacional (NWS) ni a las autoridades locales de emergencias. Siga siempre sus instrucciones. En una emergencia llame al 911.","<b>Límites.<\/b> Solo se muestran algunas estaciones. Una creciente en un afluente pequeño puede no verse aquí. Los niveles se ven en pies, como los publica la fuente, sin convertir.","Fuentes: U.S. Geological Survey (USGS), National Weather Service (NWS) y Open-Meteo.com (CC BY 4.0). Los niveles Vigilancia, Aviso y Peligro son una escala propia de esta página, no una escala oficial. Cuando el NWS publica categorías de inundación para la estación (acción, menor, moderada), se usan como umbrales; si no, la estación muestra solo la altura."]}},"mod_chart_h":"Evolución y pronóstico","mod_chart_summary":"Entre {desde} y {hasta} la lectura osciló entre {min} y {max}. Última lectura: {ultimo}.","mod_chart_aria":"Gráfico de la lectura de la estación con su pronóstico, si lo hay. El resumen en texto está justo debajo.","mod_leyenda_obs":"Lectura","mod_prono_nws":"Pronóstico oficial del NWS","mod_prono_manual":"Pronóstico manual","mod_prono_resumen":"{label} ({fecha}). Último punto: {punto}.","mod_prono_punto":"{valor} el {dia}","mod_prono_rango":"entre {min} y {max} el {dia}","mod_prono_vencido":"Vencido: tiene más de 36 h.","mod_prono_aviso":"El pronóstico solo se dibuja en el gráfico. No cambia el nivel ni activa avisos.","mod_prono_manual_nota":"Copiado a mano de esta fuente: {fuente}. Puede estar desactualizado.","mod_sim_h":"Simulador de nivel","mod_sim_label":"Valor hipotético ({u})","mod_sim_hint":"Escribe una lectura y verás qué nivel marcaría con los umbrales de esta estación. No es una previsión.","mod_sim_invalid":"Escribe un número, por ejemplo 6,2.","mod_sim_sin_valor":"Escribe un valor para simular.","mod_sim_sin_umbrales":"Esta estación todavía no tiene umbrales (están en estudio), así que con {valor} no se puede decir qué nivel sería.","mod_sim_n0":"Con {valor} seguiría por debajo de todos los umbrales: nivel {lv}.","mod_sim_n1":"Con {valor} se alcanzaría el primer umbral: nivel {lv}.","mod_sim_n2":"Con {valor} se alcanzaría el segundo umbral: nivel {lv}.","mod_sim_n3":"Con {valor} se superaría el umbral más alto: nivel {lv}.","mod_sim_falta":"{lv}: faltan {d}","mod_sim_superado":"{lv}: superado por {d}","mod_sim_justo":"{lv}: justo en el umbral","mod_sim_actual":"Última lectura: {valor}.","mod_hist_h":"Crecidas históricas","mod_hist_intro":"Cómo está el nivel de hoy frente a las mayores alturas conocidas en esta estación.","mod_hist_hoy":"Hoy","mod_hist_defensa":"Tope de las defensas","mod_hist_debajo":"hoy está {d} por debajo","mod_hist_encima":"hoy está {d} por encima","mod_hist_igual":"hoy está a la misma altura","mod_hist_sin_valor":"No hay una lectura reciente, así que no se puede comparar.","mod_hist_fuente":"Referencias: {fuente}."},"ca":{"lang_label":"Idioma","tile_desc":["sota el llindar","cabal alt","crescuda important","risc de desbordament","lectura vella o absent"],"avisos_title":"Avisos oficials vigents","avisos_none":"Cap avís oficial de pluja o inundació vigent.","avisos_more":"i {n} avisos més","avisos_desde":"des de","prev_title":"Previsió de pluja, propers 3 dies","prev_none":"La previsió de pluja no està disponible ara.","zonas":{"tarragona":"Tarragona i litoral sud","barcelona":"Barcelona i Maresme","girona":"Girona i Empordà","interior":"Interior (Lleida, Cardener)","valencia":"València (Túria, Xúquer, Poyo)","chaco-corrientes":"Chaco i Corrientes","litoral-parana":"Litoral: Santa Fe, Paraná i Rosario","uruguay":"Riu Uruguai (Concordia)","mississippi":"Mississippi (St. Louis)","missouri-ohio":"Missouri i Ohio (Kansas City, Cincinnati)","red-river":"Red River of the North (Fargo)"},"est_title":"Rius, de més a menys perill","filt_all":"Tots","filt_act":"Només amb alerta","filt_none":"Cap riu amb alerta ara mateix.","rise":"pujant","fall":"baixant","flat":"estable","no_value":"Sense lectura","sd_note":"Sense dades recents. Es manté l'últim nivell conegut.","forecast_h":"Previsió 72 h","rain48":"Pluja 48 h","fcq":"Cabal esperat","fcwarn":"orientatiu","fcmay":"Podria arribar a","fcnone":"Sense previsió de cabal fiable per a aquest punt.","thr_legend":"V Vigilància · A Avís · P Perill","thr_none":"Llindars encara en estudi: de moment només es mostra la lectura.","source":"Font","stations_of":"Estacions d'aquest riu","chart_title":"Historial","chart_ranges":["48 h","15 dies","3 mesos"],"chart_empty":"Recollint historial. El gràfic es completa amb el pas de les hores.","chart_aria":"Cabal de l'estació al llarg del temps, amb les línies de llindar","trend_prefix":"Tendència","banner_stale":"Les dades fa {edad} que no s'actualitzen. El que veus pot no ser l'estat actual.","banner_fuentes":"No s'ha pogut llegir: {lista}. Aquestes estacions apareixen sense dades.","fuentes_nombres":{"aca":"ACA (Catalunya)","chj":"CHJ (València)","avisos":"avisos oficials","prevision":"previsió","ina":"INA (Argentina)","agp":"AGP (port de Barranqueras)","usgs":"USGS (EUA)"},"loading":"Carregant dades…","error_load":"No s'han pogut carregar les dades. Es tornarà a provar d'aquí a uns minuts.","foot":["Fet per Pablo Dodda. Adaptació a Catalunya i a més països: Sebastian Andrada. Llicència MIT."],"aviso_color":{"amarillo":"groc","naranja":"taronja","rojo":"vermell"},"last_level":"Darrer nivell conegut","ago_updated":"Actualitzat","noscript":"Aquesta pàgina necessita JavaScript per mostrar les dades.","details_show":"Veure estacions i historial","title":"Nivell dels rius","desc":"Nivell i cabal de rius amb risc de crescuda a l'Argentina, Espanya i els Estats Units. Dades d'organismes públics, amb una escala d'alerta pròpia, actualitzades cada hora o abans si canvia un nivell.","tab_label":"País","pais_sin_datos":"Encara no hi ha dades d'aquest país. Apareixeran quan es completi la primera lectura.","pais_desconocido":"Aquest país no existeix a l'adreça. Es mostra {pais}.","paises":{"ar":{"nombre":"Argentina","titulo":"Rius del litoral argentí","desc":"Alçada del Paraná i de l'Uruguai al litoral argentí. Lectures de l'INA i de l'Administración General de Puertos, actualitzades en aquesta pàgina cada hora.","sub":"Alçada del Paraná i de l'Uruguai al litoral argentí, en metres. L'INA publica un valor per dia; el port de Barranqueras, un per hora.","prev_note":"Pluja acumulada per dia (mm) i probabilitat màxima, el valor més alt entre les estacions de cada zona. Font: Open-Meteo.com (CC BY 4.0). Aquesta pàgina no mostra cap previsió d'alçada del riu. La previsió mai no canvia el nivell d'alerta.","foot":["<b>Informatiu.<\/b> Dades provisionals sense validar. No substitueix Defensa Civil ni els avisos de la vostra província. Seguiu sempre les seves instruccions. En una emergència truqueu al 911.","<b>Límits.<\/b> L'INA actualitza un valor per dia, de manera que una crescuda ràpida pot trigar a veure's. Només es mostren algunes estacions del Paraná i de l'Uruguai. Els rius sense llindar només mostren l'alçada.","Fonts: Instituto Nacional del Agua (INA), Administración General de Puertos (AGP) i Open-Meteo.com (CC BY 4.0). Alerta i evacuació són els nivells que publica l'INA; Vigilància és una regla pròpia d'aquesta pàgina (90 % del nivell d'alerta) i no és oficial. A Barranqueras s'usen els nivells d'avís de l'Administración Provincial del Agua del Chaco."]},"es":{"nombre":"Espanya","titulo":"Rius de Catalunya","desc":"Cabal dels rius de Catalunya amb més risc d'inundació, amb context de València (Túria, Xúquer, Poyo). Lectures de l'ACA i la CHJ, actualitzades cada hora o abans si canvia un nivell.","sub":"Cabal dels rius de Catalunya amb més risc d'inundació, més context de València. S'actualitza cada hora, o abans si canvia un nivell.","prev_note":"Pluja acumulada per dia (mm) i probabilitat màxima, el valor més alt entre les estacions de cada zona. Font: Open-Meteo.com (CC BY 4.0). No hi ha cap previsió oficial de cabals per a aquests rius: el cabal esperat de cada targeta surt d'un model global (GloFAS, malla d'uns 5 km, una dada per dia). Serveix d'orientació i no capta les crescudes ràpides de riera. La previsió mai no canvia el nivell d'alerta.","foot":["<b>Informatiu.<\/b> Dades provisionals sense validar. No substitueix Protecció Civil. Seguiu sempre les seves instruccions. En una emergència truqueu al 112.","<b>Límits.<\/b> Les conques ràpides com la rambla del Poyo poden créixer en menys d'una hora, més de pressa que aquesta pàgina. Segre, Ebre i Noguera encara no tenen estació a la pàgina perquè falta una font de dades fiable. Els rius sense llindar només mostren el cabal.","Fonts: Agència Catalana de l'Aigua (ACA), Confederación Hidrográfica del Júcar (SAIH), AEMET, Protecció Civil de Catalunya (INUNCAT) i Open-Meteo.com (CC BY 4.0). Els nivells Vigilància, Avís i Perill són una escala pròpia d'aquesta pàgina, no una escala oficial. Els llindars de Catalunya són estimacions calculades a partir de la sèrie històrica; els de València són els oficials de la CHJ."]},"us":{"nombre":"EUA","titulo":"Rius del centre dels Estats Units","desc":"Alçada dels rius Mississippi, Missouri, Ohio i Red River of the North. Lectures de l'USGS, actualitzades en aquesta pàgina cada hora.","sub":"Alçada dels rius Mississippi, Missouri, Ohio i Red River of the North, en peus, tal com la publica l'USGS.","prev_note":"Pluja acumulada per dia (mm) i probabilitat màxima, el valor més alt entre les estacions de cada zona. Font: Open-Meteo.com (CC BY 4.0). Aquesta pàgina encara no mostra el pronòstic de riu del Servei Meteorològic Nacional (NWS). La previsió mai no canvia el nivell d'alerta.","foot":["<b>Informatiu.<\/b> Dades provisionals sense validar. No substitueix el Servei Meteorològic Nacional (NWS) ni les autoritats locals d'emergències. Seguiu sempre les seves instruccions. En una emergència truqueu al 911.","<b>Límits.<\/b> Només es mostren algunes estacions. Una crescuda en un afluent petit pot no veure's aquí. Els nivells es veuen en peus, com els publica la font, sense convertir.","Fonts: U.S. Geological Survey (USGS), National Weather Service (NWS) i Open-Meteo.com (CC BY 4.0). Els nivells Vigilància, Avís i Perill són una escala pròpia d'aquesta pàgina, no una escala oficial. Quan el NWS publica categories d'inundació per a l'estació (acció, menor, moderada), s'usen com a llindars; si no, l'estació mostra només l'alçada."]}},"mod_chart_h":"Evolució i pronòstic","mod_chart_summary":"Entre {desde} i {hasta} la lectura ha oscil·lat entre {min} i {max}. Última lectura: {ultimo}.","mod_chart_aria":"Gràfic de la lectura de l'estació amb el seu pronòstic, si n'hi ha. El resum en text és just a sota.","mod_leyenda_obs":"Lectura","mod_prono_nws":"Pronòstic oficial de l'NWS","mod_prono_manual":"Pronòstic manual","mod_prono_resumen":"{label} ({fecha}). Últim punt: {punto}.","mod_prono_punto":"{valor} el {dia}","mod_prono_rango":"entre {min} i {max} el {dia}","mod_prono_vencido":"Caducat: té més de 36 h.","mod_prono_aviso":"El pronòstic només es dibuixa al gràfic. No canvia el nivell ni activa avisos.","mod_prono_manual_nota":"Copiat a mà d'aquesta font: {fuente}. Pot estar desactualitzat.","mod_sim_h":"Simulador de nivell","mod_sim_label":"Valor hipotètic ({u})","mod_sim_hint":"Escriu una lectura i veuràs quin nivell marcaria amb els llindars d'aquesta estació. No és una previsió.","mod_sim_invalid":"Escriu un número, per exemple 6,2.","mod_sim_sin_valor":"Escriu un valor per simular.","mod_sim_sin_umbrales":"Aquesta estació encara no té llindars (són en estudi), així que amb {valor} no es pot dir quin nivell seria.","mod_sim_n0":"Amb {valor} seguiria per sota de tots els llindars: nivell {lv}.","mod_sim_n1":"Amb {valor} s'arribaria al primer llindar: nivell {lv}.","mod_sim_n2":"Amb {valor} s'arribaria al segon llindar: nivell {lv}.","mod_sim_n3":"Amb {valor} se superaria el llindar més alt: nivell {lv}.","mod_sim_falta":"{lv}: falten {d}","mod_sim_superado":"{lv}: superat per {d}","mod_sim_justo":"{lv}: just al llindar","mod_sim_actual":"Última lectura: {valor}.","mod_hist_h":"Crescudes històriques","mod_hist_intro":"Com és el nivell d'avui davant les alçades més grans conegudes en aquesta estació.","mod_hist_hoy":"Avui","mod_hist_defensa":"Límit de les defenses","mod_hist_debajo":"avui és {d} per sota","mod_hist_encima":"avui és {d} per sobre","mod_hist_igual":"avui és a la mateixa alçada","mod_hist_sin_valor":"No hi ha cap lectura recent, així que no es pot comparar.","mod_hist_fuente":"Referències: {fuente}."},"en":{"lang_label":"Language","tile_desc":["below threshold","high flow","major rise","flood risk","reading old or missing"],"avisos_title":"Official warnings in effect","avisos_none":"No official rain or flood warnings in effect.","avisos_more":"and {n} more warnings","avisos_desde":"since","prev_title":"Rain forecast, next 3 days","prev_none":"The rain forecast isn't available right now.","zonas":{"tarragona":"Tarragona and the south coast","barcelona":"Barcelona and Maresme","girona":"Girona and Empordà","interior":"Inland (Lleida, Cardener)","valencia":"Valencia (Turia, Júcar, Poyo)","chaco-corrientes":"Chaco and Corrientes","litoral-parana":"Litoral: Santa Fe, Paraná and Rosario","uruguay":"Uruguay River (Concordia)","mississippi":"Mississippi (St. Louis)","missouri-ohio":"Missouri and Ohio (Kansas City, Cincinnati)","red-river":"Red River of the North (Fargo)"},"est_title":"Rivers, from highest to lowest risk","filt_all":"All","filt_act":"Alerts only","filt_none":"No river is on alert right now.","rise":"rising","fall":"falling","flat":"steady","no_value":"No reading","sd_note":"No recent data. The last known level is kept.","forecast_h":"72 h forecast","rain48":"Rain, 48 h","fcq":"Expected flow","fcwarn":"rough guide","fcmay":"Could reach","fcnone":"No reliable flow forecast for this point.","thr_legend":"W Watch · A Alert · D Danger","thr_none":"Thresholds are still under review, so only the reading is shown for now.","source":"Source","stations_of":"Stations on this river","chart_title":"History","chart_ranges":["48 h","15 days","3 months"],"chart_empty":"Collecting history. The chart fills in as the hours pass.","chart_aria":"Station flow over time, with the threshold lines","trend_prefix":"Trend","banner_stale":"The data hasn't updated in {edad}. What you see may not be the current state.","banner_fuentes":"Couldn't read: {lista}. Those stations show as no data.","fuentes_nombres":{"aca":"ACA (Catalonia)","chj":"CHJ (Valencia)","avisos":"official warnings","prevision":"forecast","ina":"INA (Argentina)","agp":"AGP (Barranqueras port)","usgs":"USGS (US)"},"loading":"Loading data…","error_load":"Couldn't load the data. Trying again in a few minutes.","foot":["Built by Pablo Dodda. Adapted for Catalonia and more countries by Sebastian Andrada. MIT license."],"aviso_color":{"amarillo":"yellow","naranja":"orange","rojo":"red"},"last_level":"Last known level","ago_updated":"Updated","noscript":"This page needs JavaScript to show the data.","details_show":"Show stations and history","title":"River levels","desc":"Level and flow of flood-prone rivers in Argentina, Spain and the United States. Data from public agencies, with this page's own alert scale, refreshed every hour or sooner if a level changes.","tab_label":"Country","pais_sin_datos":"There's no data for this country yet. It will appear once the first reading is in.","pais_desconocido":"That country isn't in the address. Showing {pais}.","paises":{"ar":{"nombre":"Argentina","titulo":"Rivers of Argentina's Litoral","desc":"Heights of the Paraná and Uruguay rivers in Argentina's Litoral region. Readings from INA and the Administración General de Puertos, refreshed on this page every hour.","sub":"Heights of the Paraná and Uruguay rivers in Argentina's Litoral region, in meters. INA publishes one value per day; the port of Barranqueras publishes one per hour.","prev_note":"Rain accumulated per day (mm) and peak probability, taking the highest value among the stations in each zone. Source: Open-Meteo.com (CC BY 4.0). This page doesn't show a river height forecast. The forecast never changes the alert level.","foot":["<b>For information only.<\/b> Provisional, unvalidated data. It does not replace Defensa Civil or the warnings from your province. Follow their instructions at all times. In an emergency call 911.","<b>Limits.<\/b> INA updates one value per day, so a fast rise can take a while to show. Only some stations on the Paraná and Uruguay are shown. Rivers without a threshold show height only.","Sources: Instituto Nacional del Agua (INA), Administración General de Puertos (AGP) and Open-Meteo.com (CC BY 4.0). Alert and Evacuation are the levels INA publishes; Watch is this page's own rule (90% of the alert level) and is not official. At Barranqueras, the warning levels of the Administración Provincial del Agua del Chaco are used."]},"es":{"nombre":"Spain","titulo":"Rivers of Catalonia","desc":"Flow of the Catalan rivers with the highest flood risk, with Valencia (Turia, Júcar, Poyo) for context. Readings from ACA and CHJ, refreshed every hour, or sooner if a level changes.","sub":"Flow of the Catalan rivers at highest flood risk, plus Valencia for context. Updated every hour, or sooner if a level changes.","prev_note":"Rain accumulated per day (mm) and peak probability, taking the highest value among the stations in each zone. Source: Open-Meteo.com (CC BY 4.0). There is no official flow forecast for these rivers: the expected flow on each card comes from a global model (GloFAS, roughly 5 km grid, one value per day). Treat it as a rough guide; it misses flash floods in ramblas. The forecast never changes the alert level.","foot":["<b>For information only.<\/b> Provisional, unvalidated data. It does not replace Protecció Civil. Follow their instructions at all times. In an emergency call 112.","<b>Limits.<\/b> Flash-flood basins like the Rambla del Poyo can rise in under an hour, faster than this page updates. Segre, Ebre and Noguera have no station here yet because a reliable data source is missing. Rivers without a threshold show flow only.","Sources: Agència Catalana de l'Aigua (ACA), Confederación Hidrográfica del Júcar (SAIH), AEMET, Protecció Civil de Catalunya (INUNCAT) and Open-Meteo.com (CC BY 4.0). The Watch, Alert and Danger levels are this page's own scale, not an official one. Catalonia's thresholds are estimates calculated from the historical record; Valencia's are the official CHJ ones."]},"us":{"nombre":"US","titulo":"Rivers of the central United States","desc":"Heights of the Mississippi, Missouri, Ohio and Red River of the North. USGS readings, refreshed on this page every hour.","sub":"Heights of the Mississippi, Missouri, Ohio and Red River of the North, in feet, as USGS publishes them.","prev_note":"Rain accumulated per day (mm) and peak probability, taking the highest value among the stations in each zone. Source: Open-Meteo.com (CC BY 4.0). This page doesn't show the National Weather Service (NWS) river forecast yet. The forecast never changes the alert level.","foot":["<b>For information only.<\/b> Provisional, unvalidated data. It does not replace the National Weather Service (NWS) or your local emergency management office. Follow their instructions at all times. In an emergency call 911.","<b>Limits.<\/b> Only some stations are shown. A rise on a small tributary may not show up here. Levels are shown in feet, as the source publishes them, with no conversion.","Sources: U.S. Geological Survey (USGS), National Weather Service (NWS) and Open-Meteo.com (CC BY 4.0). The Watch, Alert and Danger levels are this page's own scale, not an official one. When the NWS publishes flood categories for a gauge (action, minor, moderate), they are used as thresholds; otherwise the station shows the stage only."]}},"mod_chart_h":"Trend and forecast","mod_chart_summary":"From {desde} to {hasta} the reading ranged between {min} and {max}. Latest reading: {ultimo}.","mod_chart_aria":"Chart of the station reading with its forecast, if there is one. A text summary follows right below.","mod_leyenda_obs":"Reading","mod_prono_nws":"Official NWS forecast","mod_prono_manual":"Manual forecast","mod_prono_resumen":"{label} ({fecha}). Last point: {punto}.","mod_prono_punto":"{valor} on {dia}","mod_prono_rango":"between {min} and {max} on {dia}","mod_prono_vencido":"Out of date: more than 36 h old.","mod_prono_aviso":"The forecast is only drawn on the chart. It does not change the level or trigger alerts.","mod_prono_manual_nota":"Copied by hand from this source: {fuente}. It may be out of date.","mod_sim_h":"Level simulator","mod_sim_label":"Hypothetical value ({u})","mod_sim_hint":"Type a reading to see which level it would show under this station's thresholds. It is not a forecast.","mod_sim_invalid":"Enter a number, for example 6.2.","mod_sim_sin_valor":"Enter a value to simulate.","mod_sim_sin_umbrales":"This station has no thresholds yet (they are under review), so we cannot say which level {valor} would be.","mod_sim_n0":"At {valor} it would stay below every threshold: level {lv}.","mod_sim_n1":"At {valor} it would reach the first threshold: level {lv}.","mod_sim_n2":"At {valor} it would reach the second threshold: level {lv}.","mod_sim_n3":"At {valor} it would pass the highest threshold: level {lv}.","mod_sim_falta":"{lv}: {d} to go","mod_sim_superado":"{lv}: passed by {d}","mod_sim_justo":"{lv}: right at the threshold","mod_sim_actual":"Latest reading: {valor}.","mod_hist_h":"Historic floods","mod_hist_intro":"How today's level compares with the highest levels known at this station.","mod_hist_hoy":"Today","mod_hist_defensa":"Top of the flood defenses","mod_hist_debajo":"today it is {d} below","mod_hist_encima":"today it is {d} above","mod_hist_igual":"today it is at the same height","mod_hist_sin_valor":"There is no recent reading, so a comparison is not possible.","mod_hist_fuente":"References: {fuente}."}}</script>
 <script src="d3.min.js"></script>
 <script>
 /* Lógica pura de la página (sin DOM). Se prueba con `node --test tests/web/` y se incrusta en index.html. */
@@ -380,9 +400,95 @@ details.det > summary { cursor: pointer; font-size: var(--fs-cap); color: var(--
 
 </script>
 <script>
+// Lógica pura de los módulos de ficha: crecidas históricas, serie con pronóstico y simulador.
+// Sin DOM y sin conversión de unidades: los valores se comparan tal como los publica cada fuente.
+// Idea tomada del proyecto de Pablo Dodda (licencia MIT); código propio.
+(function (root, factory) {
+  const M = factory();
+  if (typeof module === "object" && module.exports) module.exports = M;
+  else root.Modulos = M;
+})(typeof self !== "undefined" ? self : this, function () {
+  const HORAS_VENCIDO = 36;
+
+  const esNumero = (x) => typeof x === "number" && Number.isFinite(x);
+
+  // Compara el valor actual con cada referencia histórica, de mayor a menor.
+  // diferencia = actual - referencia (negativa: hoy está por debajo). Sin valor actual queda en null.
+  function compararConHistoricas(valorActual, historicas) {
+    const hay = esNumero(valorActual);
+    return (Array.isArray(historicas) ? historicas : [])
+      .filter((h) => h && esNumero(h.valor))
+      .map((h) => ({
+        evento: h.evento, tipo: h.tipo, valor: h.valor, nota: h.nota,
+        diferencia: hay ? valorActual - h.valor : null,
+      }))
+      .sort((a, b) => b.valor - a.valor);
+  }
+
+  const SIN_DISTANCIAS = () => ({ N1: null, N2: null, N3: null });
+
+  // Nivel que correspondería a un valor hipotético según los umbrales de la estación.
+  // distancias.Nk = umbral - valor: positiva, lo que falta para llegar; negativa, lo que ya se superó.
+  // Es una lectura puntual de los umbrales: no aplica la histéresis ni las lecturas sostenidas del motor de alertas.
+  function simular(valor, umbrales) {
+    if (!esNumero(valor)) return { nivel: null, textoClave: "mod_sim_sin_valor", distancias: SIN_DISTANCIAS() };
+    const u = umbrales;
+    const ok = u && u.tipo !== "en_estudio" && esNumero(u.bajo) && esNumero(u.medio) && esNumero(u.alto);
+    if (!ok) return { nivel: null, textoClave: "mod_sim_sin_umbrales", distancias: SIN_DISTANCIAS() };
+    const nivel = valor >= u.alto ? 3 : valor >= u.medio ? 2 : valor >= u.bajo ? 1 : 0;
+    return {
+      nivel, textoClave: "mod_sim_n" + nivel,
+      distancias: { N1: u.bajo - valor, N2: u.medio - valor, N3: u.alto - valor },
+    };
+  }
+
+  // Lo que escribe la persona: acepta «6,2» y «6.2». Cualquier otra cosa es null.
+  function leerEntrada(texto) {
+    if (typeof texto !== "string") return null;
+    const s = texto.trim().replace(",", ".");
+    if (!/^-?\d+(\.\d+)?$/.test(s)) return null;
+    const n = Number(s);
+    return Number.isFinite(n) ? n : null;
+  }
+
+  // Historial observado + pronóstico en una sola serie [{t (ms), v, tipo}].
+  // Un punto pronosticado puede ser un valor [iso, v] o un rango [iso, mín, máx] (v queda en null).
+  // Los puntos del pronóstico que no son posteriores a la última lectura se descartan.
+  function serieConPronostico(historial, pronostico) {
+    const obs = (Array.isArray(historial) ? historial : [])
+      .map((p) => ({ t: Date.parse(p && p[0]), v: p && p[1], tipo: "obs" }))
+      .filter((p) => Number.isFinite(p.t) && esNumero(p.v))
+      .sort((a, b) => a.t - b.t);
+    if (obs.length) obs[obs.length - 1].ultimo = true;
+    const desde = obs.length ? obs[obs.length - 1].t : -Infinity;
+    const pr = [];
+    for (const p of pronostico && Array.isArray(pronostico.puntos) ? pronostico.puntos : []) {
+      const t = Date.parse(p && p[0]);
+      if (!Number.isFinite(t) || t <= desde) continue;
+      if (p.length >= 3 && esNumero(p[1]) && esNumero(p[2])) pr.push({ t, v: null, min: Math.min(p[1], p[2]), max: Math.max(p[1], p[2]), tipo: "prono" });
+      else if (esNumero(p[1])) pr.push({ t, v: p[1], tipo: "prono" });
+    }
+    pr.sort((a, b) => a.t - b.t);
+    return obs.concat(pr);
+  }
+
+  // Un pronóstico de más de 36 h se marca vencido. La fecha es `generado_utc` (NWS) o `fecha` (manual, día sin hora,
+  // contado desde las 00:00 UTC). Sin fecha legible no se puede afirmar que sea vigente.
+  function pronosticoVencido(doc, ahoraMs) {
+    if (!doc) return true;
+    const t = Date.parse(doc.generado_utc || (doc.fecha ? doc.fecha + "T00:00:00Z" : ""));
+    return !Number.isFinite(t) || ahoraMs - t > HORAS_VENCIDO * 3600000;
+  }
+
+  return { HORAS_VENCIDO, compararConHistoricas, simular, leerEntrada, serieConPronostico, pronosticoVencido };
+});
+
+</script>
+<script>
 (function () {
   "use strict";
   const L = window.Logica;
+  const M = window.Modulos;
   const T = JSON.parse(document.getElementById("textos").textContent);
   const COL = ["var(--n0)", "var(--n1)", "var(--n2)", "var(--n3)", "var(--sd)"];
   const ZONA_HORARIA = { ar: "America/Argentina/Buenos_Aires", es: "Europe/Madrid", us: undefined }; // EE. UU.: la del navegador
@@ -392,7 +498,8 @@ details.det > summary { cursor: pointer; font-size: var(--fs-cap); color: var(--
   const RANGOS_H = [48, 24 * 15, 24 * 92];
 
   let lang = "es", filtro = "all", rango = 1, pais = "es", desconocido = false, ficha = 0;
-  const D = { indice: null, latest: null, prev: null, hist: {}, histT: 0, error: false, sinDatos: false };
+  // mod: qué ríos del país tienen archivos de módulos (data/<pais>/rios/modulos.json); rios: lo ya descargado de cada uno; sim: lo escrito en cada simulador.
+  const D = { indice: null, latest: null, prev: null, hist: {}, histT: 0, error: false, sinDatos: false, mod: {}, rios: {}, sim: {} };
   // Cada estación lleva su unidad tal como la publica la fuente (caudal, metros o pies); no se convierte.
   const uni = (e) => L.unidadTexto(e.unidad || "m3s");
   const val = (v, unidad) => L.formatoValor(v, unidad, lang);  // único punto de formato de una medida
@@ -430,7 +537,7 @@ details.det > summary { cursor: pointer; font-size: var(--fs-cap); color: var(--
     return h;
   }
   function vaciarPais() {
-    D.latest = null; D.prev = null; D.hist = {}; D.histT = 0; D.error = false; D.sinDatos = false;
+    D.latest = null; D.prev = null; D.hist = {}; D.histT = 0; D.error = false; D.sinDatos = false; D.mod = {}; D.rios = {};
   }
   // Primero el índice (qué países tienen datos), después solo los archivos del país activo.
   async function cargar() {
@@ -441,10 +548,11 @@ details.det > summary { cursor: pointer; font-size: var(--fs-cap); color: var(--
     try {
       const latest = await getJson(L.rutaDatos(p, "latest.json"));
       const prev = await getJson(L.rutaDatos(p, "prevision.json")).catch(() => null);
+      const mod = await getJson(L.rutaDatos(p, "rios/modulos.json")).catch(() => ({}));
       let hist = D.hist, histT = D.histT;
       if (Date.now() - histT > HIST_MS) { hist = await cargarHistorial(p); histT = Date.now(); }
       if (mia !== ficha) return;
-      D.latest = latest; D.prev = prev; D.hist = hist; D.histT = histT; D.error = false; D.sinDatos = false;
+      D.latest = latest; D.prev = prev; D.mod = mod && typeof mod === "object" ? mod : {}; D.hist = hist; D.histT = histT; D.error = false; D.sinDatos = false;
     } catch (e) {
       if (mia !== ficha) return;
       if (e.status === 404) { vaciarPais(); D.sinDatos = true; } else D.error = true;
@@ -519,6 +627,39 @@ details.det > summary { cursor: pointer; font-size: var(--fs-cap); color: var(--
     </article>`;
   }
 
+  // ---------- módulos de ficha: archivos por río ----------
+  const fmt = (txt, vars) => String(txt).replace(/\{(\w+)\}/g, (m, k) => (k in vars ? vars[k] : m));
+  const dia = (iso) => new Date(iso).toLocaleDateString(loc(), { day: "numeric", month: "short", timeZone: ZONA_HORARIA[pais] });
+  const porIdioma = (x) => (x && typeof x === "object" ? x[lang] || x.es || "" : x || "");
+  const idSeguro = (id) => String(id).replace(/[^A-Za-z0-9_-]/g, "_");
+
+  // Descarga (y recuerda unos minutos) lo que hay de cada río: crecidas históricas, pronóstico del robot (NWS) y pronóstico manual.
+  // Los archivos que el índice no menciona no se piden, para no llenar la consola de 404.
+  async function cargarRio(e) {
+    const p = pais, previo = D.rios[e.id];
+    if (previo && Date.now() - previo.t < REFRESCO_MS) return previo;
+    const tiene = D.mod[e.id] || [];
+    const pedir = (nombre) => getJson(L.rutaDatos(p, "rios/" + encodeURIComponent(e.id) + "/" + nombre)).catch(() => null);
+    const [historicos, manual, nws] = await Promise.all([
+      tiene.includes("historicos") ? pedir("historicos.json") : null,
+      tiene.includes("pronostico_manual") ? pedir("pronostico_manual.json") : null,
+      e.fuente === "usgs" ? pedir("pronostico.json") : null]);
+    const r = { t: Date.now(), historicos, nws, manual };
+    if (p === pais) D.rios[e.id] = r;
+    return r;
+  }
+
+  // El pronóstico que se dibuja: el vigente (NWS antes que el manual); si todos están vencidos, el más reciente, marcado como vencido.
+  function elegirPronostico(e) {
+    const r = D.rios[e.id];
+    if (!r) return null;
+    const ok = (d) => d && Array.isArray(d.puntos) && d.puntos.length && (!d.unidad || d.unidad === e.unidad);
+    const cands = [r.nws && Object.assign({ manual: false }, r.nws), r.manual && Object.assign({}, r.manual, { manual: true })].filter(ok);
+    const vigente = cands.find((d) => !M.pronosticoVencido(d, Date.now()));
+    const doc = vigente || cands[0];
+    return doc ? { doc, vencido: !vigente } : null;
+  }
+
   // ---------- gráfico de detalle (d3) ----------
   function grafico(el, e) {
     const puntos = L.filtrarRango(D.hist[e.id] || [], Date.now(), RANGOS_H[rango]);
@@ -526,23 +667,142 @@ details.det > summary { cursor: pointer; font-size: var(--fs-cap); color: var(--
     if (!window.d3 || puntos.length < 2) { el.innerHTML = `<p class="empty">${esc(t().chart_empty)}</p>`; return; }
     const W = Math.max(280, el.clientWidth || 320), H = 180, m = { l: 38, r: 22, t: 10, b: 22 };
     const u = e.umbrales, conU = u && u.tipo !== "en_estudio" && u.bajo != null;
-    const data = puntos.map((p) => ({ x: new Date(p[0]), y: p[1] }));
-    const rg = L.rangoY(e.unidad || "m3s", data.map((d) => d.y), conU ? u.bajo : null);
-    const x = d3.scaleTime().domain(d3.extent(data, (d) => d.x)).range([m.l, W - m.r]);
+    const pr = elegirPronostico(e);
+    const serie = M.serieConPronostico(puntos, pr && pr.doc);
+    const obs = serie.filter((d) => d.tipo === "obs"), fut = serie.filter((d) => d.tipo === "prono");
+    const ultimo = obs[obs.length - 1];
+    const todos = serie.flatMap((d) => (d.v == null ? [d.min, d.max] : [d.v]));
+    const rg = L.rangoY(e.unidad || "m3s", todos, conU ? u.bajo : null);
+    const x = d3.scaleTime().domain(d3.extent(serie, (d) => d.t)).range([m.l, W - m.r]);
     const y = d3.scaleLinear().domain([rg.min, rg.max]).nice().range([H - m.b, m.t]);
-    const svg = d3.select(el).append("svg").attr("class", "ch2").attr("viewBox", `0 0 ${W} ${H}`).attr("role", "img").attr("aria-label", t().chart_aria);
+    const svg = d3.select(el).append("svg").attr("class", "ch2").attr("viewBox", `0 0 ${W} ${H}`).attr("role", "img")
+      .attr("aria-label", t().mod_chart_aria).attr("aria-describedby", "msum-" + idSeguro(e.id));
     svg.append("g").selectAll("line").data(y.ticks(4)).join("line").attr("class", "gr").attr("x1", m.l).attr("x2", W - m.r).attr("y1", (d) => y(d)).attr("y2", (d) => y(d));
     svg.append("g").selectAll("text").data(y.ticks(4)).join("text").attr("x", m.l - 5).attr("y", (d) => y(d) + 3).attr("text-anchor", "end").text((d) => num(d));
     svg.append("g").selectAll("text").data(x.ticks(4)).join("text").attr("x", (d) => x(d)).attr("y", H - 6).attr("text-anchor", "middle")
       .text((d) => d.toLocaleDateString(loc(), { day: "numeric", month: "short", hour: RANGOS_H[rango] <= 48 ? "2-digit" : undefined, timeZone: ZONA_HORARIA[pais] }));
     const c = COL[e.sd ? 4 : e.nivel];
-    svg.append("path").datum(data).attr("fill", c).attr("opacity", 0.13).attr("d", d3.area().x((d) => x(d.x)).y0(H - m.b).y1((d) => y(d.y)));
-    svg.append("path").datum(data).attr("fill", "none").attr("stroke", c).attr("stroke-width", 2).attr("stroke-linejoin", "round").attr("d", d3.line().x((d) => x(d.x)).y((d) => y(d.y)));
+    svg.append("path").datum(obs).attr("fill", c).attr("opacity", 0.13).attr("d", d3.area().x((d) => x(d.t)).y0(H - m.b).y1((d) => y(d.v)));
+    svg.append("path").datum(obs).attr("fill", "none").attr("stroke", c).attr("stroke-width", 2).attr("stroke-linejoin", "round").attr("d", d3.line().x((d) => x(d.t)).y((d) => y(d.v)));
     if (conU) ["bajo", "medio", "alto"].forEach((k, i) => {
       if (u[k] > y.domain()[1] || u[k] < y.domain()[0]) return;
       svg.append("line").attr("class", "tl").attr("stroke", COL[i + 1]).attr("x1", m.l).attr("x2", W - m.r).attr("y1", y(u[k])).attr("y2", y(u[k]));
       svg.append("text").attr("x", W - m.r + 3).attr("y", y(u[k]) + 3).text(L.letraUmbral(i, lang));
     });
+    if (fut.length && ultimo) {
+      const g = svg.append("g").attr("opacity", pr.vencido ? 0.5 : 1);
+      const rangos = fut.filter((d) => d.v == null), valores = fut.filter((d) => d.v != null);
+      if (rangos.length) {
+        const banda = [{ t: ultimo.t, min: ultimo.v, max: ultimo.v }].concat(rangos);
+        g.append("path").datum(banda).attr("fill", "var(--accent)").attr("opacity", 0.18).attr("d", d3.area().x((d) => x(d.t)).y0((d) => y(d.min)).y1((d) => y(d.max)));
+        [["min"], ["max"]].forEach(([k]) => g.append("path").datum(banda).attr("fill", "none").attr("stroke", "var(--accent)").attr("stroke-width", 1.5).attr("stroke-dasharray", "4 3")
+          .attr("d", d3.line().x((d) => x(d.t)).y((d) => y(d[k]))));
+      }
+      if (valores.length) {
+        g.append("path").datum([ultimo].concat(valores)).attr("fill", "none").attr("stroke", "var(--accent)").attr("stroke-width", 2).attr("stroke-dasharray", "5 3")
+          .attr("d", d3.line().x((d) => x(d.t)).y((d) => y(d.v)));
+      }
+    }
+    if (ultimo) svg.append("circle").attr("cx", x(ultimo.t)).attr("cy", y(ultimo.v)).attr("r", 3.5).attr("fill", c);
+  }
+
+  // Texto que acompaña al gráfico: es también su alternativa textual (el SVG remite a este párrafo).
+  function notaGrafico(e) {
+    const puntos = L.filtrarRango(D.hist[e.id] || [], Date.now(), RANGOS_H[rango]);
+    if (puntos.length < 2) return "";
+    const u = e.unidad || "m3s", vs = puntos.map((p) => p[1]);
+    const a = new Date(puntos[0][0]), b = new Date(puntos[puntos.length - 1][0]);
+    const f = (d) => d.toLocaleDateString(loc(), { day: "numeric", month: "short", timeZone: ZONA_HORARIA[pais] });
+    let html = `<p id="msum-${esc(idSeguro(e.id))}">${esc(fmt(t().mod_chart_summary, { desde: f(a), hasta: f(b), min: val(Math.min(...vs), u), max: val(Math.max(...vs), u), ultimo: val(vs[vs.length - 1], u) }))}`;
+    const pr = elegirPronostico(e);
+    if (!pr) return html + "</p>";
+    const d = pr.doc, ult = d.puntos.slice().sort((p, q) => Date.parse(p[0]) - Date.parse(q[0])).pop();
+    const fecha = d.manual ? new Date(d.fecha + "T00:00:00Z").toLocaleDateString(loc(), { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }) : hora(d.generado_utc);
+    const punto = ult.length >= 3 ? fmt(t().mod_prono_rango, { min: val(ult[1], u), max: val(ult[2], u), dia: dia(ult[0]) }) : fmt(t().mod_prono_punto, { valor: val(ult[1], u), dia: dia(ult[0]) });
+    const etiqueta = d.manual ? t().mod_prono_manual : t().mod_prono_nws;
+    html += ` ${esc(fmt(t().mod_prono_resumen, { label: etiqueta, fecha, punto }))}</p>`;
+    html += `<p class="leg"><span style="--c:${colorDe(e)}"><i></i>${esc(t().mod_leyenda_obs)}</span><span style="--c:var(--accent)"><i class="pr"></i>${esc(etiqueta)}</span></p>`;
+    if (pr.vencido) html += `<p><span class="vencido">${esc(t().mod_prono_vencido)}</span></p>`;
+    if (d.manual) html += `<p>${esc(fmt(t().mod_prono_manual_nota, { fuente: d.fuente || "—" }))}</p>`;
+    return html + `<p>${esc(t().mod_prono_aviso)}</p>`;
+  }
+  const colorDe = (e) => COL[e.sd ? 4 : e.nivel];
+
+  // ---------- simulador ----------
+  function simulador(e) {
+    const id = idSeguro(e.id), u = e.unidad || "m3s";
+    return `<div class="sim"><h4 class="mh">${esc(t().mod_sim_h)}</h4>
+      <label for="sim-${esc(id)}">${esc(fmt(t().mod_sim_label, { u: L.unidadTexto(u) }))}</label>
+      <input class="simin" id="sim-${esc(id)}" data-id="${esc(e.id)}" type="text" inputmode="decimal" autocomplete="off" aria-describedby="simh-${esc(id)}" value="${esc(D.sim[e.id] || "")}">
+      <p class="sdnote" id="simh-${esc(id)}">${esc(t().mod_sim_hint)}</p>
+      <div class="simout" id="simo-${esc(id)}" aria-live="polite">${resultadoSim(e)}</div></div>`;
+  }
+  function resultadoSim(e) {
+    const crudo = D.sim[e.id] || "", u = e.unidad || "m3s";
+    if (!crudo.trim()) return "";
+    const v = M.leerEntrada(crudo);
+    if (v == null) return `<p>${esc(t().mod_sim_invalid)}</p>`;
+    const s = M.simular(v, e.umbrales), nombre = (n) => { const r = L.nivelRotulo(n, false, lang); return `${r.simbolo} ${r.texto}`; };
+    const texto = fmt(t()[s.textoClave], { valor: val(v, u), lv: s.nivel == null ? "" : nombre(s.nivel) });
+    if (s.nivel == null) return `<p>${esc(texto)}</p>`;
+    const filas = ["N1", "N2", "N3"].map((k, i) => {
+      const dist = s.distancias[k], lv = nombre(i + 1);
+      if (Math.abs(dist) < 1e-9) return `<li>${esc(fmt(t().mod_sim_justo, { lv }))}</li>`;
+      return `<li>${esc(fmt(dist > 0 ? t().mod_sim_falta : t().mod_sim_superado, { lv, d: val(Math.abs(dist), u) }))}</li>`;
+    }).join("");
+    const actual = e.valor != null && !e.sd ? `<p class="sdnote">${esc(fmt(t().mod_sim_actual, { valor: val(e.valor, u) }))}</p>` : "";
+    return `<p>${esc(texto)}</p><ul>${filas}</ul>${actual}`;
+  }
+
+  // ---------- crecidas históricas ----------
+  function historicas(e, doc) {
+    const u = e.unidad || "m3s", ref = e.valor != null && !e.sd ? e.valor : null;
+    const comp = M.compararConHistoricas(ref, doc.eventos);
+    const etiqueta = (h) => (h.tipo === "defensa" ? t().mod_hist_defensa : h.evento);
+    const frase = (h) => (h.diferencia == null ? "" : Math.abs(h.diferencia) < 1e-9 ? t().mod_hist_igual
+      : fmt(h.diferencia < 0 ? t().mod_hist_debajo : t().mod_hist_encima, { d: val(Math.abs(h.diferencia), u) }));
+    const lista = comp.map((h) => `<li><b>${esc(etiqueta(h))}</b>: ${esc(val(h.valor, u))}${frase(h) ? " · " + esc(frase(h)) : ""}${porIdioma(h.nota) ? `<div class="nota">${esc(porIdioma(h.nota))}</div>` : ""}</li>`).join("");
+    return `<h4 class="mh">${esc(t().mod_hist_h)}</h4><p class="sdnote">${esc(t().mod_hist_intro)}</p>${ref == null ? `<p>${esc(t().mod_hist_sin_valor)}</p>` : ""}`
+      + `<div class="hbar" data-id="${esc(e.id)}"></div><ul class="hl">${lista}</ul>`
+      + (porIdioma(doc.aviso) ? `<p class="sdnote">${esc(porIdioma(doc.aviso))}</p>` : "")
+      + `<p class="sdnote">${esc(fmt(t().mod_hist_fuente, { fuente: doc.fuente || "—" }))}</p>`;
+  }
+  function barrasHistoricas(el, e, doc) {
+    if (!window.d3) return;
+    const u = e.unidad || "m3s", ref = e.valor != null && !e.sd ? e.valor : null;
+    const filas = M.compararConHistoricas(ref, doc.eventos).map((h) => ({ txt: h.tipo === "defensa" ? t().mod_hist_defensa : h.evento, v: h.valor, k: h.tipo }));
+    if (ref != null) filas.push({ txt: t().mod_hist_hoy, v: ref, k: "hoy" });
+    filas.sort((a, b) => b.v - a.v);
+    el.innerHTML = "";
+    const W = Math.max(260, el.clientWidth || 320), rh = 22, m = { l: 118, r: 70, t: 4, b: 4 }, H = m.t + m.b + rh * filas.length;
+    const x = d3.scaleLinear().domain([0, Math.max(...filas.map((f) => f.v)) * 1.02]).range([m.l, W - m.r]);
+    const svg = d3.select(el).append("svg").attr("class", "hb").attr("viewBox", `0 0 ${W} ${H}`).attr("aria-hidden", "true");
+    filas.forEach((f, i) => {
+      const yy = m.t + i * rh, hoy = f.k === "hoy";
+      svg.append("text").attr("x", m.l - 6).attr("y", yy + 15).attr("text-anchor", "end").attr("font-weight", hoy ? 700 : 400).text(f.txt);
+      svg.append("rect").attr("x", m.l).attr("y", yy + 3).attr("height", rh - 8).attr("width", Math.max(1, x(f.v) - m.l)).attr("rx", 3)
+        .attr("fill", hoy ? "var(--accent)" : f.k === "defensa" ? "none" : "var(--muted)").attr("opacity", hoy ? 1 : f.k === "defensa" ? 1 : 0.55)
+        .attr("stroke", f.k === "defensa" ? "var(--muted)" : "none").attr("stroke-width", 1.5).attr("stroke-dasharray", f.k === "defensa" ? "4 3" : null);
+      svg.append("text").attr("class", "mu").attr("x", x(f.v) + 5).attr("y", yy + 15).text(val(f.v, u));
+    });
+  }
+
+  // Rellena lo que depende de los archivos del río, cuando ya se descargaron.
+  function pintarRio(fila, e) {
+    const r = D.rios[e.id] || {};
+    const ch = fila.querySelector(".chbox"); if (ch) grafico(ch, e);
+    const nota = fila.querySelector(".mnote"); if (nota) nota.innerHTML = notaGrafico(e);
+    const h = fila.querySelector('[data-mod="historicas"]');
+    if (h && r.historicos && Array.isArray(r.historicos.eventos)) {
+      h.innerHTML = historicas(e, r.historicos);
+      barrasHistoricas(h.querySelector(".hbar"), e, r.historicos);
+    } else if (h) h.hidden = true;
+  }
+
+  function modulos(e) {
+    if ((D.hist[e.id] || []).length < 2) return "";
+    const conHist = (D.mod[e.id] || []).includes("historicos");
+    return `<div class="mods"><div class="mnote">${notaGrafico(e)}</div>${simulador(e)}${conHist ? '<div class="mhist" data-mod="historicas"></div>' : ""}</div>`;
   }
 
   function rellenarDetalle(det) {
@@ -554,8 +814,12 @@ details.det > summary { cursor: pointer; font-size: var(--fs-cap); color: var(--
       `<div class="srow"><div class="h"><b>${esc(e.nombre)}</b>${tag(e.nivel, e.sd)}</div>
         <div class="meta"><span>${esc(val(e.valor, e.unidad || "m3s"))}</span><span>${esc(L.edadTexto(L.edadMin(e.t_utc, Date.now()), lang))}</span></div>
         <div class="meta"><span>${esc(umbralesTexto(e.umbrales, e.unidad))}</span><span>${esc(L.tipoUmbralTexto(e.umbrales.tipo, lang))}</span></div>
-        <div class="chbox" data-id="${esc(e.id)}"></div></div>`).join("");
-    body.querySelectorAll(".chbox").forEach((el) => grafico(el, g.estaciones.find((e) => e.id === el.dataset.id)));
+        ${(D.hist[e.id] || []).length >= 2 ? `<h4 class="mh">${esc(t().mod_chart_h)}</h4>` : ""}<div class="chbox" data-id="${esc(e.id)}"></div>${modulos(e)}</div>`).join("");
+    const filas = [...body.querySelectorAll(".srow")];
+    g.estaciones.forEach((e, i) => {
+      grafico(filas[i].querySelector(".chbox"), e);
+      cargarRio(e).then(() => { if (filas[i].isConnected) pintarRio(filas[i], e); });
+    });
   }
 
   // ---------- secciones ----------
@@ -617,10 +881,16 @@ details.det > summary { cursor: pointer; font-size: var(--fs-cap); color: var(--
     const grid = document.getElementById("grid");
     if (!D.latest) { grid.innerHTML = `<p class="empty">${esc(D.sinDatos ? t().pais_sin_datos : D.error ? t().error_load : t().loading)}</p>`; return; }
     const abiertos = new Set([...grid.querySelectorAll("details.det[open]")].map((d) => d.dataset.rio));
+    // si se está escribiendo en un simulador, el repintado periódico no debe quitarle el foco
+    const foco = document.activeElement && document.activeElement.classList.contains("simin") ? { id: document.activeElement.dataset.id, ini: document.activeElement.selectionStart } : null;
     let grupos = L.agruparPorRio(D.latest.estaciones);
     if (filtro === "act") grupos = grupos.filter((g) => g.principal.nivel >= 1);
     grid.innerHTML = grupos.length ? grupos.map(tarjeta).join("") : `<p class="empty">${esc(t().filt_none)}</p>`;
     grid.querySelectorAll("details.det").forEach((d) => { if (abiertos.has(d.dataset.rio)) { d.open = true; rellenarDetalle(d); } });
+    if (foco) {
+      const inp = [...grid.querySelectorAll(".simin")].find((x) => x.dataset.id === foco.id);
+      if (inp) { inp.focus(); try { inp.setSelectionRange(foco.ini, foco.ini); } catch (err) { /* sin selección: no pasa nada */ } }
+    }
   }
 
   // Cada pestaña lleva el nombre del país y, si hay estaciones en alerta, el símbolo del nivel más alto con su cuenta.
@@ -696,6 +966,12 @@ details.det > summary { cursor: pointer; font-size: var(--fs-cap); color: var(--
     if (p !== pais) irAPais(p); else render();
   });
   document.getElementById("grid").addEventListener("toggle", (e) => { if (e.target.matches && e.target.matches("details.det") && e.target.open) rellenarDetalle(e.target); }, true);
+  document.getElementById("grid").addEventListener("input", (ev) => {
+    const inp = ev.target.closest && ev.target.closest(".simin"); if (!inp) return;
+    const est = D.latest && D.latest.estaciones.find((x) => x.id === inp.dataset.id); if (!est) return;
+    D.sim[est.id] = inp.value;
+    inp.closest(".sim").querySelector(".simout").innerHTML = resultadoSim(est);
+  });
   document.getElementById("grid").addEventListener("click", (e) => {
     const b = e.target.closest(".rng button"); if (!b) return;
     rango = +b.dataset.r;
