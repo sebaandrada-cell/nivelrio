@@ -1,0 +1,31 @@
+{
+ "lid": "EADM7",
+ "usgsId": "07010000",
+ "name": "Mississippi River at St. Louis",
+ "state": {
+  "abbreviation": "MO",
+  "name": "Missouri"
+ },
+ "flood": {
+  "stageUnits": "ft",
+  "flowUnits": "cfs",
+  "categories": {
+   "major": {
+    "stage": 40,
+    "flow": -9999
+   },
+   "moderate": {
+    "stage": 35,
+    "flow": -9999
+   },
+   "minor": {
+    "stage": 30,
+    "flow": -9999
+   },
+   "action": {
+    "stage": 28,
+    "flow": -9999
+   }
+  }
+ }
+}

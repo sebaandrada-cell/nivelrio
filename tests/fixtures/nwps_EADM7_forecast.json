@@ -1,0 +1,48 @@
+{
+ "pedts": "HGIFF",
+ "issuedTime": "2026-10-20T15:46:00Z",
+ "wfo": "LSX",
+ "timeZone": "CST6CDT",
+ "primaryName": "Stage",
+ "primaryUnits": "ft",
+ "secondaryName": "Flow",
+ "secondaryUnits": "kcfs",
+ "data": [
+  {
+   "validTime": "2026-10-20T18:00:00Z",
+   "generatedTime": "2026-10-20T15:54:23Z",
+   "primary": 8.1,
+   "secondary": 177
+  },
+  {
+   "validTime": "2026-10-21T00:00:00Z",
+   "generatedTime": "2026-10-20T15:54:23Z",
+   "primary": 8,
+   "secondary": 176
+  },
+  {
+   "validTime": "2026-10-21T06:00:00Z",
+   "generatedTime": "2026-10-20T15:54:23Z",
+   "primary": 7.9,
+   "secondary": 174
+  },
+  {
+   "validTime": "2026-10-21T12:00:00Z",
+   "generatedTime": "2026-10-20T15:54:23Z",
+   "primary": 7.9,
+   "secondary": 174
+  },
+  {
+   "validTime": "2026-10-21T18:00:00Z",
+   "generatedTime": "2026-10-20T15:54:23Z",
+   "primary": 7.8,
+   "secondary": 173
+  },
+  {
+   "validTime": "2026-10-22T00:00:00Z",
+   "generatedTime": "2026-10-20T15:54:23Z",
+   "primary": 7.8,
+   "secondary": 173
+  }
+ ]
+}
