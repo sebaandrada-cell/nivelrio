@@ -35,14 +35,18 @@ def test_index_sin_analitica(html):
 
 
 def test_index_sin_restos_del_proyecto_original(html):
-    for marca in ("Resistencia", "Paraná", "apuratejose", "Barranqueras", "Río Negro"):
+    # Paraná y Barranqueras ya son contenido legítimo de la pestaña de Argentina; el resto sigue sin aparecer.
+    for marca in ("Resistencia", "apuratejose", "Río Negro"):
         assert marca not in html
+
+
+def pie(lang, pais="es"):
+    return " ".join(TEXTOS[lang]["foot"] + TEXTOS[lang]["paises"][pais]["foot"])
 
 
 def test_pie_en_es_y_ca():
     for lang in ("es", "ca"):
-        pie = " ".join(TEXTOS[lang]["foot"])
-        assert "Protecció Civil" in pie
+        assert "Protecció Civil" in pie(lang)
 
 
 def test_es_y_ca_tienen_las_mismas_claves():
@@ -51,8 +55,8 @@ def test_es_y_ca_tienen_las_mismas_claves():
 
 def test_creditos_incluyen_a_ambos_autores():
     for lang in ("es", "ca"):
-        pie = " ".join(TEXTOS[lang]["foot"])
-        assert "Pablo Dodda" in pie and "Sebastian Andrada" in pie
+        general = " ".join(TEXTOS[lang]["foot"])
+        assert "Pablo Dodda" in general and "Sebastian Andrada" in general
 
 
 def test_html_incrusta_textos_y_logica(html):
@@ -96,8 +100,51 @@ def test_pruebas_de_logica_js_pasan():
 def test_textos_no_prometen_mas_de_lo_que_hay():
     for lang in ("es", "ca"):
         t = TEXTOS[lang]
-        assert "oficiales" not in t["desc"] and "oficials" not in t["desc"]
-        assert "15" not in t["desc"]  # se publica cada hora salvo cambios
+        for desc in [t["desc"]] + [p["desc"] for p in t["paises"].values()]:
+            assert "oficiales" not in desc and "oficials" not in desc
+            assert "15" not in desc  # se publica cada hora salvo cambios
         assert "Segre" not in t["zonas"]["interior"]
-        pie = " ".join(t["foot"])
-        assert "Segre" in pie and "Poyo" in pie  # límites de cobertura y de cuencas rápidas
+        assert "Segre" in pie(lang) and "Poyo" in pie(lang)  # límites de cobertura y de cuencas rápidas
+
+
+PAISES = ("ar", "es", "us")
+CLAVES_PAIS = ("nombre", "titulo", "desc", "sub", "prev_note", "foot")
+
+
+def test_pagina_tiene_pestanas_accesibles(html):
+    assert 'role="tablist"' in html
+    for p in PAISES:
+        assert re.search(rf'<button[^>]*role="tab"[^>]*data-p="{p}"|<button[^>]*data-p="{p}"[^>]*role="tab"', html), p
+    assert 'role="tabpanel"' in html
+    assert "aria-selected" in html
+
+
+def test_pagina_lee_los_datos_por_pais(html):
+    assert "rutaDatos(" in html and "data/paises.json" in html
+    for vieja in ('"data/latest.json"', '"data/prevision.json"', '"data/history/"'):
+        assert vieja not in html
+
+
+def test_textos_nuevos_en_es_y_ca():
+    for lang in ("es", "ca"):
+        t = TEXTOS[lang]
+        for k in ("pais_sin_datos", "pais_desconocido", "tab_label"):
+            assert t[k], (lang, k)
+        assert set(t["paises"]) == set(PAISES)
+        for p in PAISES:
+            for k in CLAVES_PAIS:
+                assert t["paises"][p][k], (lang, p, k)
+
+
+def test_cada_zona_de_cada_pais_tiene_texto():
+    for p in PAISES:
+        registro = json.loads((RAIZ / "fuente" / "paises" / p / "estaciones.json").read_text(encoding="utf-8"))
+        for e in registro:
+            for lang in ("es", "ca"):
+                assert TEXTOS[lang]["zonas"].get(e["zona"]), (lang, p, e["zona"])
+
+
+def test_cada_fuente_de_datos_tiene_nombre_para_el_aviso_de_caida():
+    for lang in ("es", "ca"):
+        for k in ("aca", "chj", "ina", "agp", "usgs", "avisos", "prevision"):
+            assert TEXTOS[lang]["fuentes_nombres"][k], (lang, k)

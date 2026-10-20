@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Arma index.html con fuente/page.html, fuente/textos.json y fuente/web/logica.js.
 
-La página es estática: lee data/latest.json, data/prevision.json y data/history/ con fetch al cargar.
+La página es estática: lee data/paises.json y, del país activo, data/<pais>/{latest,prevision}.json y history/ con fetch.
 Aquí no se incrustan datos. Uso, desde la raíz del repo: python3 fuente/armar_sitio.py
 """
 import html

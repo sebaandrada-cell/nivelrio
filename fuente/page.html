@@ -6,9 +6,9 @@
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#f7f6f2" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#191917" media="(prefers-color-scheme: dark)">
-<title>Rius de Catalunya</title>
+<title>Nivel de ríos</title>
 <meta name="description" content="{{DESC_ES}}">
-<meta property="og:title" content="Rius de Catalunya">
+<meta property="og:title" content="Nivel de ríos">
 <meta property="og:description" content="{{DESC_ES}}">
 <meta property="og:type" content="website">
 <style>
@@ -36,6 +36,7 @@
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--font-sans); font-size: var(--fs-body);
   padding-block: 20px 36px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
 .wrap { max-width: 1080px; margin-inline: auto; display: grid; gap: var(--gap-lg); }
@@ -46,6 +47,12 @@ h1 { font-family: var(--font-serif); font-weight: 400; font-size: var(--fs-title
 .seg { display: inline-flex; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--panel); }
 .seg button { background: transparent; color: var(--muted); border: 0; padding: 7px 12px; font: inherit; font-size: var(--fs-cap); cursor: pointer; }
 .seg button[aria-pressed="true"] { background: var(--bg); color: var(--fg); font-weight: 600; }
+.tabs { display: flex; gap: var(--gap-xs); border-bottom: 1px solid var(--line); overflow-x: auto; }
+.tabs button { background: transparent; color: var(--muted); border: 0; border-bottom: 2px solid transparent; margin-bottom: -1px; padding: 9px 14px;
+  font: inherit; font-size: var(--fs-head); cursor: pointer; white-space: nowrap; display: inline-flex; gap: 8px; align-items: baseline; }
+.tabs button[aria-selected="true"] { color: var(--fg); border-bottom-color: var(--fg); font-weight: 600; }
+.tabs button:hover { color: var(--fg); }
+.tabs .badge { font-size: var(--fs-cap); font-weight: 600; font-variant-numeric: tabular-nums; color: var(--c); }
 button:focus-visible, summary:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .banner { border: 1px solid var(--n2); color: var(--fg); background: var(--panel); border-left: 4px solid var(--n2); border-radius: var(--radius); padding: 10px 14px; line-height: 1.45; }
 .banner.err { border-color: var(--n3); border-left-color: var(--n3); }
@@ -112,6 +119,7 @@ details.det > summary { cursor: pointer; font-size: var(--fs-cap); color: var(--
 .chbox { min-height: 170px; }
 .ch2 { width: 100%; height: auto; display: block; }
 .rng { justify-self: start; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .empty { color: var(--muted); font-size: var(--fs-cap); padding: 8px 0; }
 @media (prefers-reduced-motion: no-preference) { .card { transition: border-color .3s; } }
 </style>
@@ -120,7 +128,7 @@ details.det > summary { cursor: pointer; font-size: var(--fs-cap); color: var(--
 <div class="wrap">
   <header class="top">
     <div>
-      <h1 id="t-title">Rius de Catalunya</h1>
+      <h1 id="t-title">Nivel de ríos</h1>
       <p class="sub" id="t-sub"></p>
     </div>
     <div class="seg" id="lang" role="group" aria-label="Idioma / Idioma">
@@ -129,9 +137,16 @@ details.det > summary { cursor: pointer; font-size: var(--fs-cap); color: var(--
     </div>
   </header>
 
+  <div class="tabs" id="tabs" role="tablist" aria-label="País">
+    <button type="button" role="tab" id="tab-ar" data-p="ar" aria-selected="false" aria-controls="panel" tabindex="-1">Argentina</button>
+    <button type="button" role="tab" id="tab-es" data-p="es" aria-selected="true" aria-controls="panel" tabindex="0">España</button>
+    <button type="button" role="tab" id="tab-us" data-p="us" aria-selected="false" aria-controls="panel" tabindex="-1">EE. UU.</button>
+  </div>
+
   <div class="banners" id="banners" role="status" aria-live="polite"></div>
   <noscript><div class="banner err">Esta página necesita JavaScript para mostrar los datos. / Aquesta pàgina necessita JavaScript per mostrar les dades.</div></noscript>
 
+  <div id="panel" role="tabpanel" aria-labelledby="tab-es" style="display:grid;gap:22px">
   <section class="tiles" id="tiles" aria-label="Resumen"></section>
   <section class="avisos" id="avisos"></section>
   <section class="prev" id="prev"></section>
@@ -146,6 +161,7 @@ details.det > summary { cursor: pointer; font-size: var(--fs-cap); color: var(--
     </div>
     <div class="grid" id="grid"><p class="empty" id="loading"></p></div>
   </section>
+  </div>
 
   <footer class="foot" id="foot"></footer>
 </div>
@@ -161,70 +177,87 @@ details.det > summary { cursor: pointer; font-size: var(--fs-cap); color: var(--
   const L = window.Logica;
   const T = JSON.parse(document.getElementById("textos").textContent);
   const COL = ["var(--n0)", "var(--n1)", "var(--n2)", "var(--n3)", "var(--sd)"];
-  const ZONAS = ["tarragona", "barcelona", "girona", "interior", "valencia"];
+  const ZONA_HORARIA = { ar: "America/Argentina/Buenos_Aires", es: "Europe/Madrid", us: undefined }; // EE. UU.: la del navegador
+  const FUENTES = { aca: "ACA", chj: "CHJ", ina: "INA", agp: "AGP", usgs: "USGS" };
   const REFRESCO_MS = 5 * 60 * 1000;
   const HIST_MS = 30 * 60 * 1000;
   const RANGOS_H = [48, 24 * 15, 24 * 92];
 
-  let lang = "es", filtro = "all", rango = 1;
-  const D = { latest: null, prev: null, hist: {}, histT: 0, error: false };
+  let lang = "es", filtro = "all", rango = 1, pais = "es", desconocido = false, ficha = 0;
+  const D = { indice: null, latest: null, prev: null, hist: {}, histT: 0, error: false, sinDatos: false };
+  // Cada estación lleva su unidad tal como la publica la fuente (m³/s, m, ft); no se convierte.
+  const uni = (e) => L.unidadTexto(e.unidad || "m3s");
 
   const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const num = (v) => v == null ? "—" : new Intl.NumberFormat(lang === "ca" ? "ca-ES" : "es-ES", { maximumFractionDigits: v >= 100 ? 0 : v >= 10 ? 1 : 2 }).format(v);
   const t = () => T[lang];
+  const tp = () => T[lang].paises[pais];
   const tag = (nivel, sd, extra) => {
     const r = L.nivelRotulo(nivel, sd, lang);
     return `<span class="tag" style="--c:${COL[sd ? 4 : nivel]}"><span aria-hidden="true">${r.simbolo}</span> ${esc(r.texto)}${extra || ""}</span>`;
   };
   const hora = (iso) => {
-    try { return new Date(iso).toLocaleString(lang === "ca" ? "ca-ES" : "es-ES", { timeZone: "Europe/Madrid", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }); }
+    try { return new Date(iso).toLocaleString(lang === "ca" ? "ca-ES" : "es-ES", { timeZone: ZONA_HORARIA[pais], timeZoneName: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }); }
     catch (e) { return ""; }
   };
 
   // ---------- carga de datos ----------
   async function getJson(url) {
     const r = await fetch(url, { cache: "no-store" });
-    if (!r.ok) throw new Error(url + " " + r.status);
+    if (!r.ok) { const err = new Error(url + " " + r.status); err.status = r.status; throw err; }
     return r.json();
   }
-  async function cargarHistorial() {
+  async function cargarHistorial(p) {
     const ahora = new Date();
     const meses = [0, 1, 2].map((k) => {
       const d = new Date(Date.UTC(ahora.getUTCFullYear(), ahora.getUTCMonth() - k, 1));
       return d.getUTCFullYear() + "-" + String(d.getUTCMonth() + 1).padStart(2, "0");
     });
-    const docs = await Promise.all(meses.map((m) => getJson("data/history/" + m + ".json").catch(() => ({}))));
+    const docs = await Promise.all(meses.map((m) => getJson(L.rutaDatos(p, "history/" + m + ".json")).catch(() => ({}))));
     const h = {};
     docs.forEach((doc) => Object.keys(doc).forEach((id) => { h[id] = (h[id] || []).concat(doc[id]); }));
     Object.keys(h).forEach((id) => { h[id].sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0); });
-    D.hist = h; D.histT = Date.now();
+    return h;
   }
+  function vaciarPais() {
+    D.latest = null; D.prev = null; D.hist = {}; D.histT = 0; D.error = false; D.sinDatos = false;
+  }
+  // Primero el índice (qué países tienen datos), después solo los archivos del país activo.
   async function cargar() {
+    const mia = ++ficha, p = pais;
+    try { D.indice = await getJson("data/paises.json"); } catch (e) { /* sin índice: se intenta el país igualmente */ }
+    if (mia !== ficha) return;
+    if (D.indice && !D.indice[p]) { vaciarPais(); D.sinDatos = true; render(); return; }
     try {
-      D.latest = await getJson("data/latest.json");
-      D.prev = await getJson("data/prevision.json").catch(() => null);
-      if (Date.now() - D.histT > HIST_MS) await cargarHistorial();
-      D.error = false;
-    } catch (e) { D.error = true; }
+      const latest = await getJson(L.rutaDatos(p, "latest.json"));
+      const prev = await getJson(L.rutaDatos(p, "prevision.json")).catch(() => null);
+      let hist = D.hist, histT = D.histT;
+      if (Date.now() - histT > HIST_MS) { hist = await cargarHistorial(p); histT = Date.now(); }
+      if (mia !== ficha) return;
+      D.latest = latest; D.prev = prev; D.hist = hist; D.histT = histT; D.error = false; D.sinDatos = false;
+    } catch (e) {
+      if (mia !== ficha) return;
+      if (e.status === 404) { vaciarPais(); D.sinDatos = true; } else D.error = true;
+    }
     render();
   }
 
   // ---------- piezas ----------
-  function sparkline(puntos, u, nivel, sd) {
+  function sparkline(puntos, u, nivel, sd, unidad) {
     const W = 300, H = 92, Lm = 4, R = 30, Tp = 8, B = 16;
     const vals = puntos.map((p) => p[1]);
     const tipoOk = u && u.tipo !== "en_estudio" && u.bajo != null;
-    const ymax = Math.max(Math.max(...vals) * 1.08, tipoOk ? u.bajo * 1.35 : 0, 0.5);
+    const { min: ymin, max: ymax } = L.rangoY(unidad, vals, tipoOk ? u.bajo : null);
     const t0 = Date.parse(puntos[0][0]), t1 = Date.parse(puntos[puntos.length - 1][0]) || t0 + 1;
     const X = (iso) => Lm + (W - Lm - R) * (Date.parse(iso) - t0) / Math.max(1, t1 - t0);
-    const Y = (v) => Tp + (H - Tp - B) * (1 - v / ymax);
+    const Y = (v) => Tp + (H - Tp - B) * (1 - (v - ymin) / (ymax - ymin));
     let d = "";
     puntos.forEach((p, i) => { d += (i ? "L" : "M") + X(p[0]).toFixed(1) + " " + Y(p[1]).toFixed(1) + " "; });
-    const area = d + `L${X(puntos[puntos.length - 1][0]).toFixed(1)} ${Y(0)} L${X(puntos[0][0]).toFixed(1)} ${Y(0)} Z`;
+    const area = d + `L${X(puntos[puntos.length - 1][0]).toFixed(1)} ${H - B} L${X(puntos[0][0]).toFixed(1)} ${H - B} Z`;
     let g = "";
     [0.25, 0.5, 0.75].forEach((f) => { const y = Tp + (H - Tp - B) * f; g += `<line class="gr" x1="${Lm}" x2="${W - R}" y1="${y}" y2="${y}"/>`; });
     if (tipoOk) ["bajo", "medio", "alto"].forEach((k, i) => {
-      if (u[k] > ymax) return;
+      if (u[k] > ymax || u[k] < ymin) return;
       const y = Y(u[k]).toFixed(1);
       g += `<line class="tl" stroke="${COL[i + 1]}" x1="${Lm}" x2="${W - R}" y1="${y}" y2="${y}"/><text class="lb" x="${W - R + 3}" y="${(+y + 3).toFixed(1)}">${"VAP"[i]}</text>`;
     });
@@ -233,9 +266,9 @@ details.det > summary { cursor: pointer; font-size: var(--fs-cap); color: var(--
     return `<svg class="sp" viewBox="0 0 ${W} ${H}" role="img" aria-label="48 h">${g}<path d="${area}" fill="${c}" opacity=".13"/><path d="${d}" fill="none" stroke="${c}" stroke-width="2" stroke-linejoin="round"/><circle cx="${X(last[0]).toFixed(1)}" cy="${Y(last[1]).toFixed(1)}" r="3.5" fill="${c}"/></svg>`;
   }
 
-  function umbralesTexto(u) {
-    if (!u || u.tipo === "en_estudio" || u.bajo == null) return esc(t().thr_none);
-    return `V ${num(u.bajo)} · A ${num(u.medio)} · P ${num(u.alto)} m³/s`;
+  function umbralesTexto(u, unidad) {
+    if (!u || u.tipo === "en_estudio" || u.bajo == null) return t().thr_none;
+    return `V ${num(u.bajo)} · A ${num(u.medio)} · P ${num(u.alto)} ${L.unidadTexto(unidad)}`;
   }
 
   function bloquePrevision(e) {
@@ -243,7 +276,7 @@ details.det > summary { cursor: pointer; font-size: var(--fs-cap); color: var(--
     if (!p) return "";
     const chip = (p.puede_llegar && !e.sd)
       ? `<span class="tag fchip" style="--c:${COL[p.puede_llegar]}"><span aria-hidden="true">${L.nivelRotulo(p.puede_llegar, false, lang).simbolo}</span> ${esc(t().fcmay)} ${esc(L.nivelRotulo(p.puede_llegar, false, lang).texto)}</span>` : "";
-    const q = p.caudal ? `<span>${esc(t().fcq)}: <b>${num(p.caudal[0])}–${num(p.caudal[1])} m³/s</b> <span class="sdnote">(${esc(t().fcwarn)})</span></span>` : `<span class="sdnote">${esc(t().fcnone)}</span>`;
+    const q = e.unidad && e.unidad !== "m3s" ? "" : p.caudal ? `<span>${esc(t().fcq)}: <b>${num(p.caudal[0])}–${num(p.caudal[1])} m³/s</b> <span class="sdnote">(${esc(t().fcwarn)})</span></span>` : `<span class="sdnote">${esc(t().fcnone)}</span>`;
     const lluvia = p.lluvia_48h_mm == null ? "" : `<span>${esc(t().rain48)}: <b>${num(p.lluvia_48h_mm)} mm</b></span>`;
     return `<div class="fc"><div class="fh">${esc(t().forecast_h)}</div><div class="fl">${lluvia}${q}</div>${chip}</div>`;
   }
@@ -259,9 +292,9 @@ details.det > summary { cursor: pointer; font-size: var(--fs-cap); color: var(--
     const trTxt = e.sd || !tend ? "" : tend === "sube" ? `▲ ${t().rise}` : tend === "baja" ? `▼ ${t().fall}` : `● ${t().flat}`;
     const valor = e.valor == null
       ? `<div class="big" style="color:var(--sd)">—</div><div class="tr">${esc(t().no_value)}</div>`
-      : `<div class="big">${num(e.valor)} <small>m³/s</small></div><div class="tr ${tend === "sube" && e.nivel >= 1 ? "up" : ""}">${esc(trTxt)}</div>`;
+      : `<div class="big">${num(e.valor)} <small>${esc(uni(e))}</small></div><div class="tr ${tend === "sube" && e.nivel >= 1 ? "up" : ""}">${esc(trTxt)}</div>`;
     const pts = L.filtrarRango(hist, Date.now(), 48);
-    const spark = pts.length >= 3 ? sparkline(pts, e.umbrales, e.nivel, e.sd) : "";
+    const spark = pts.length >= 3 ? sparkline(pts, e.umbrales, e.nivel, e.sd, e.unidad) : "";
     const lad = [1, 2, 3].map((k) => `<i class="${e.nivel >= k && !e.sd ? "on" : ""}" style="--c:${COL[k]}"></i>`).join("");
     const nota = e.sd ? `<div class="sdnote">${esc(t().sd_note)}</div>` : "";
     const detalle = `<details class="det" data-rio="${esc(g.rio)}"><summary>${esc(t().stations_of)} (${g.estaciones.length}) · ${esc(t().chart_title.toLowerCase())}</summary><div class="dbody"></div></details>`;
@@ -270,8 +303,8 @@ details.det > summary { cursor: pointer; font-size: var(--fs-cap); color: var(--
       <div class="val">${valor}</div>${spark}
       <div class="lad" aria-hidden="true">${lad}</div>${nota}
       ${bloquePrevision(e)}
-      <div class="meta"><span>${esc(umbralesTexto(e.umbrales))}</span><span>${esc(L.tipoUmbralTexto(e.umbrales.tipo, lang))}</span></div>
-      <div class="meta"><span>${esc(L.edadTexto(L.edadMin(e.t_utc, Date.now()), lang))}</span><span>${esc(t().source)}: ${e.fuente === "chj" ? "CHJ" : "ACA"}</span></div>
+      <div class="meta"><span>${esc(umbralesTexto(e.umbrales, e.unidad))}</span><span>${esc(L.tipoUmbralTexto(e.umbrales.tipo, lang))}</span></div>
+      <div class="meta"><span>${esc(L.edadTexto(L.edadMin(e.t_utc, Date.now()), lang))}</span><span>${esc(t().source)}: ${esc(FUENTES[e.fuente] || e.fuente)}</span></div>
       ${detalle}
     </article>`;
   }
@@ -284,20 +317,19 @@ details.det > summary { cursor: pointer; font-size: var(--fs-cap); color: var(--
     const W = Math.max(280, el.clientWidth || 320), H = 180, m = { l: 38, r: 22, t: 10, b: 22 };
     const u = e.umbrales, conU = u && u.tipo !== "en_estudio" && u.bajo != null;
     const data = puntos.map((p) => ({ x: new Date(p[0]), y: p[1] }));
-    const ymaxDatos = d3.max(data, (d) => d.y) * 1.1;
-    const ymax = Math.max(ymaxDatos, conU ? u.bajo * 1.2 : 0, 0.5);
+    const rg = L.rangoY(e.unidad || "m3s", data.map((d) => d.y), conU ? u.bajo : null);
     const x = d3.scaleTime().domain(d3.extent(data, (d) => d.x)).range([m.l, W - m.r]);
-    const y = d3.scaleLinear().domain([0, ymax]).nice().range([H - m.b, m.t]);
+    const y = d3.scaleLinear().domain([rg.min, rg.max]).nice().range([H - m.b, m.t]);
     const svg = d3.select(el).append("svg").attr("class", "ch2").attr("viewBox", `0 0 ${W} ${H}`).attr("role", "img").attr("aria-label", t().chart_aria);
     svg.append("g").selectAll("line").data(y.ticks(4)).join("line").attr("class", "gr").attr("x1", m.l).attr("x2", W - m.r).attr("y1", (d) => y(d)).attr("y2", (d) => y(d));
     svg.append("g").selectAll("text").data(y.ticks(4)).join("text").attr("x", m.l - 5).attr("y", (d) => y(d) + 3).attr("text-anchor", "end").text((d) => d);
     svg.append("g").selectAll("text").data(x.ticks(4)).join("text").attr("x", (d) => x(d)).attr("y", H - 6).attr("text-anchor", "middle")
-      .text((d) => d.toLocaleDateString(lang === "ca" ? "ca-ES" : "es-ES", { day: "numeric", month: "short", hour: RANGOS_H[rango] <= 48 ? "2-digit" : undefined, timeZone: "Europe/Madrid" }));
+      .text((d) => d.toLocaleDateString(lang === "ca" ? "ca-ES" : "es-ES", { day: "numeric", month: "short", hour: RANGOS_H[rango] <= 48 ? "2-digit" : undefined, timeZone: ZONA_HORARIA[pais] }));
     const c = COL[e.sd ? 4 : e.nivel];
-    svg.append("path").datum(data).attr("fill", c).attr("opacity", 0.13).attr("d", d3.area().x((d) => x(d.x)).y0(y(0)).y1((d) => y(d.y)));
+    svg.append("path").datum(data).attr("fill", c).attr("opacity", 0.13).attr("d", d3.area().x((d) => x(d.x)).y0(H - m.b).y1((d) => y(d.y)));
     svg.append("path").datum(data).attr("fill", "none").attr("stroke", c).attr("stroke-width", 2).attr("stroke-linejoin", "round").attr("d", d3.line().x((d) => x(d.x)).y((d) => y(d.y)));
     if (conU) ["bajo", "medio", "alto"].forEach((k, i) => {
-      if (u[k] > y.domain()[1]) return;
+      if (u[k] > y.domain()[1] || u[k] < y.domain()[0]) return;
       svg.append("line").attr("class", "tl").attr("stroke", COL[i + 1]).attr("x1", m.l).attr("x2", W - m.r).attr("y1", y(u[k])).attr("y2", y(u[k]));
       svg.append("text").attr("x", W - m.r + 3).attr("y", y(u[k]) + 3).text("VAP"[i]);
     });
@@ -310,8 +342,8 @@ details.det > summary { cursor: pointer; font-size: var(--fs-cap); color: var(--
     const botones = t().chart_ranges.map((r, i) => `<button data-r="${i}" aria-pressed="${i === rango}">${esc(r)}</button>`).join("");
     body.innerHTML = `<div class="seg rng" role="group">${botones}</div>` + g.estaciones.map((e) =>
       `<div class="srow"><div class="h"><b>${esc(e.nombre)}</b>${tag(e.nivel, e.sd)}</div>
-        <div class="meta"><span>${e.valor == null ? "—" : num(e.valor) + " m³/s"}</span><span>${esc(L.edadTexto(L.edadMin(e.t_utc, Date.now()), lang))}</span></div>
-        <div class="meta"><span>${esc(umbralesTexto(e.umbrales))}</span><span>${esc(L.tipoUmbralTexto(e.umbrales.tipo, lang))}</span></div>
+        <div class="meta"><span>${e.valor == null ? "—" : num(e.valor) + " " + esc(uni(e))}</span><span>${esc(L.edadTexto(L.edadMin(e.t_utc, Date.now()), lang))}</span></div>
+        <div class="meta"><span>${esc(umbralesTexto(e.umbrales, e.unidad))}</span><span>${esc(L.tipoUmbralTexto(e.umbrales.tipo, lang))}</span></div>
         <div class="chbox" data-id="${esc(e.id)}"></div></div>`).join("");
     body.querySelectorAll(".chbox").forEach((el) => grafico(el, g.estaciones.find((e) => e.id === el.dataset.id)));
   }
@@ -327,6 +359,10 @@ details.det > summary { cursor: pointer; font-size: var(--fs-cap); color: var(--
   }
 
   function pintarAvisos() {
+    const el = document.getElementById("avisos");
+    const hay = !!(D.latest.fuentes_ok && "avisos" in D.latest.fuentes_ok);  // solo España tiene fuente de avisos hoy
+    el.hidden = !hay;
+    if (!hay) { el.innerHTML = ""; return; }
     const av = (D.latest.avisos || []).slice().sort((a, b) => L.nivelAviso(b.nivel) - L.nivelAviso(a.nivel));
     const item = (a) => {
       const n = L.nivelAviso(a.nivel), rot = L.nivelRotulo(n, false, lang);
@@ -334,7 +370,7 @@ details.det > summary { cursor: pointer; font-size: var(--fs-cap); color: var(--
         <span>${esc(a.descripcion || a.zona)}</span><span class="src">${esc(a.zona)} · ${esc(t().avisos_desde)} ${esc(hora(a.t_utc))}</span></div>`;
     };
     const visibles = av.slice(0, 5), resto = av.slice(5);
-    document.getElementById("avisos").innerHTML = `<h2>${esc(t().avisos_title)}</h2>` +
+    el.innerHTML = `<h2>${esc(t().avisos_title)}</h2>` +
       (av.length ? visibles.map(item).join("") : `<div class="sdnote">${esc(t().avisos_none)}</div>`) +
       (resto.length ? `<details><summary>${esc(t().avisos_more.replace("{n}", resto.length))}</summary>${resto.map(item).join("")}</details>` : "");
   }
@@ -342,17 +378,18 @@ details.det > summary { cursor: pointer; font-size: var(--fs-cap); color: var(--
   function pintarPrevision() {
     const el = document.getElementById("prev");
     const z = D.prev && D.prev.zonas;
-    const claves = z ? ZONAS.filter((k) => z[k] && z[k].length) : [];
+    const claves = z ? Object.keys(t().zonas).filter((k) => z[k] && z[k].length) : [];
     if (!claves.length) { el.innerHTML = `<h2>${esc(t().prev_title)}</h2><div class="sdnote">${esc(t().prev_none)}</div>`; return; }
     const dias = z[claves[0]].map((d) => new Date(d.fecha + "T12:00:00Z").toLocaleDateString(lang === "ca" ? "ca-ES" : "es-ES", { weekday: "short", day: "numeric", timeZone: "UTC" }));
     const nivLluvia = (mm) => mm >= 60 ? 3 : mm >= 30 ? 2 : mm >= 10 ? 1 : 0;
     el.innerHTML = `<h2>${esc(t().prev_title)}</h2><div class="pwrap"><table class="ptab"><thead><tr><th></th>${dias.map((d) => `<th>${esc(d)}</th>`).join("")}</tr></thead><tbody>` +
       claves.map((k) => `<tr><td class="z">${esc(t().zonas[k])}</td>${z[k].map((d) => `<td class="c" style="--c:${nivLluvia(d.mm) ? COL[nivLluvia(d.mm)] : "var(--line)"}"><b>${num(d.mm)} mm</b><small>${d.prob} %</small></td>`).join("")}</tr>`).join("") +
-      `</tbody></table></div><p class="pnote">${esc(t().prev_note)}</p>`;
+      `</tbody></table></div><p class="pnote">${esc(tp().prev_note)}</p>`;
   }
 
   function pintarBanners() {
     const b = [];
+    if (desconocido) b.push(`<div class="banner">${esc(t().pais_desconocido.replace("{pais}", t().paises[pais].nombre))}</div>`);
     if (D.error) b.push(`<div class="banner err">${esc(t().error_load)}</div>`);
     if (D.latest) {
       if (L.datosViejos(D.latest.generado_utc, Date.now())) {
@@ -368,7 +405,7 @@ details.det > summary { cursor: pointer; font-size: var(--fs-cap); color: var(--
 
   function pintarTarjetas() {
     const grid = document.getElementById("grid");
-    if (!D.latest) { grid.innerHTML = `<p class="empty">${esc(D.error ? t().error_load : t().loading)}</p>`; return; }
+    if (!D.latest) { grid.innerHTML = `<p class="empty">${esc(D.sinDatos ? t().pais_sin_datos : D.error ? t().error_load : t().loading)}</p>`; return; }
     const abiertos = new Set([...grid.querySelectorAll("details.det[open]")].map((d) => d.dataset.rio));
     let grupos = L.agruparPorRio(D.latest.estaciones);
     if (filtro === "act") grupos = grupos.filter((g) => g.principal.nivel >= 1);
@@ -376,20 +413,49 @@ details.det > summary { cursor: pointer; font-size: var(--fs-cap); color: var(--
     grid.querySelectorAll("details.det").forEach((d) => { if (abiertos.has(d.dataset.rio)) { d.open = true; rellenarDetalle(d); } });
   }
 
+  // Cada pestaña lleva el nombre del país y, si hay estaciones en alerta, el símbolo del nivel más alto con su cuenta.
+  function pintarPestanas() {
+    document.getElementById("tabs").setAttribute("aria-label", t().tab_label);
+    document.querySelectorAll("#tabs button").forEach((b) => {
+      const p = b.dataset.p, sel = p === pais;
+      const r = L.resumenPais(D.indice && D.indice[p]);
+      const alto = r.porNivel.reduce((m, c, n) => (c > 0 && n > 0 ? n : m), 0);
+      const enAlerta = r.porNivel[1] + r.porNivel[2] + r.porNivel[3];
+      const rot = L.nivelRotulo(alto, false, lang);
+      b.setAttribute("aria-selected", String(sel));
+      b.tabIndex = sel ? 0 : -1;
+      b.innerHTML = esc(t().paises[p].nombre) + (alto ? ` <span class="badge" style="--c:${COL[alto]}" title="${esc(rot.texto)}"><span aria-hidden="true">${rot.simbolo}</span> ${enAlerta}<span class="sr"> ${esc(rot.texto)}</span></span>` : "");
+    });
+    document.getElementById("panel").setAttribute("aria-labelledby", "tab-" + pais);
+  }
+
+  function irAPais(p, dejarHash) {
+    if (p === pais && !dejarHash) return;
+    pais = p; desconocido = false;
+    vaciarPais();
+    render();
+    cargar();
+  }
+
   function render() {
     const x = t();
     document.documentElement.lang = lang;
-    document.getElementById("t-title").textContent = x.title;
-    document.getElementById("t-sub").textContent = x.sub;
+    document.getElementById("t-title").textContent = tp().titulo;
+    document.getElementById("t-sub").textContent = tp().sub;
+    document.title = tp().titulo + " · " + x.title;
+    pintarPestanas();
     document.getElementById("t-est").textContent = x.est_title;
     const fb = document.querySelectorAll("#filt button");
     fb[0].textContent = x.filt_all; fb[1].textContent = x.filt_act;
     fb.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.f === filtro)));
     document.querySelectorAll("#lang button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.l === lang)));
-    document.getElementById("foot").innerHTML = x.foot.map((p) => `<p>${p}</p>`).join("");
+    document.getElementById("foot").innerHTML = tp().foot.concat(x.foot).map((p) => `<p>${p}</p>`).join("");
     pintarBanners();
-    if (D.latest) { pintarResumen(); pintarAvisos(); pintarPrevision(); }
-    else { document.getElementById("tiles").innerHTML = ""; document.getElementById("avisos").innerHTML = ""; document.getElementById("prev").innerHTML = ""; }
+    if (D.latest) { pintarResumen(); pintarAvisos(); pintarPrevision(); document.getElementById("prev").hidden = false; }
+    else {
+      document.getElementById("tiles").innerHTML = ""; document.getElementById("avisos").innerHTML = ""; document.getElementById("prev").innerHTML = "";
+      document.getElementById("avisos").hidden = true; document.getElementById("prev").hidden = true;
+    }
     pintarTarjetas();
   }
 
@@ -401,6 +467,24 @@ details.det > summary { cursor: pointer; font-size: var(--fs-cap); color: var(--
     render();
   });
   document.getElementById("filt").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) { filtro = b.dataset.f; render(); } });
+  document.getElementById("tabs").addEventListener("click", (e) => {
+    const b = e.target.closest("button[data-p]"); if (!b) return;
+    if (location.hash === L.hashPara(b.dataset.p)) irAPais(b.dataset.p); else location.hash = L.hashPara(b.dataset.p);
+  });
+  document.getElementById("tabs").addEventListener("keydown", (e) => {
+    const orden = L.PAISES, i = orden.indexOf(pais);
+    const j = e.key === "ArrowRight" ? (i + 1) % orden.length : e.key === "ArrowLeft" ? (i + orden.length - 1) % orden.length
+      : e.key === "Home" ? 0 : e.key === "End" ? orden.length - 1 : -1;
+    if (j < 0) return;
+    e.preventDefault();
+    location.hash = L.hashPara(orden[j]);
+    document.getElementById("tab-" + orden[j]).focus();
+  });
+  window.addEventListener("hashchange", () => {
+    const p = L.paisDesdeHash(location.hash, pais);
+    desconocido = !!location.hash.replace("#", "") && !L.PAISES.includes(location.hash.replace("#", "").toLowerCase());
+    if (p !== pais) irAPais(p); else render();
+  });
   document.getElementById("grid").addEventListener("toggle", (e) => { if (e.target.matches && e.target.matches("details.det") && e.target.open) rellenarDetalle(e.target); }, true);
   document.getElementById("grid").addEventListener("click", (e) => {
     const b = e.target.closest(".rng button"); if (!b) return;
@@ -411,6 +495,9 @@ details.det > summary { cursor: pointer; font-size: var(--fs-cap); color: var(--
   let guardado = null;
   try { guardado = localStorage.getItem("lang"); } catch (err) { /* idem */ }
   lang = L.idiomaInicial(location.search, guardado);
+  const crudo = location.hash.replace("#", "").toLowerCase();
+  pais = L.paisDesdeHash(location.hash, L.paisPorIdioma(navigator.language));
+  desconocido = !!crudo && !L.PAISES.includes(crudo);
   render();
   cargar();
   setInterval(cargar, REFRESCO_MS);

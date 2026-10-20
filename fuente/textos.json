@@ -1,8 +1,5 @@
 {
   "es": {
-    "title": "Rius de Catalunya",
-    "desc": "Caudal de los ríos de Catalunya con más riesgo de inundación, con contexto de Valencia (Túria, Xúquer, Poyo). Lecturas de la ACA y la CHJ, actualizadas cada hora o antes si cambia un nivel.",
-    "sub": "Caudal de los ríos de Catalunya con más riesgo de inundación, más contexto de Valencia. Se actualiza cada hora, o antes si cambia un nivel.",
     "lang_label": "Idioma",
     "tile_desc": [
       "bajo el umbral",
@@ -17,13 +14,18 @@
     "avisos_desde": "desde",
     "prev_title": "Previsión de lluvia, próximos 3 días",
     "prev_none": "La previsión de lluvia no está disponible ahora.",
-    "prev_note": "Lluvia acumulada por día (mm) y probabilidad máxima, el valor más alto entre las estaciones de cada zona. Fuente: Open-Meteo.com (CC BY 4.0). No existe una previsión oficial de caudales para estos ríos: el caudal esperado de cada tarjeta sale de un modelo global (GloFAS, malla de unos 5 km, un dato por día). Sirve de orientación y no capta las crecidas rápidas de rambla. La previsión nunca cambia el nivel de alerta.",
     "zonas": {
       "tarragona": "Tarragona y litoral sur",
       "barcelona": "Barcelona y Maresme",
       "girona": "Girona y Empordà",
       "interior": "Interior (Lleida, Cardener)",
-      "valencia": "València (Túria, Xúquer, Poyo)"
+      "valencia": "València (Túria, Xúquer, Poyo)",
+      "chaco-corrientes": "Chaco y Corrientes",
+      "litoral-parana": "Litoral: Santa Fe, Paraná y Rosario",
+      "uruguay": "Río Uruguay (Concordia)",
+      "mississippi": "Mississippi (St. Louis)",
+      "missouri-ohio": "Missouri y Ohio (Kansas City, Cincinnati)",
+      "red-river": "Red River of the North (Fargo)"
     },
     "est_title": "Ríos, de mayor a menor peligro",
     "filt_all": "Todos",
@@ -41,7 +43,7 @@
     "fcmay": "Podría llegar a",
     "fcnone": "Sin previsión de caudal fiable para este punto.",
     "thr_legend": "V Vigilancia · A Aviso · P Peligro",
-    "thr_none": "Umbrales todavía en estudio: de momento solo se muestra el caudal.",
+    "thr_none": "Umbrales todavía en estudio: de momento solo se muestra la lectura.",
     "source": "Fuente",
     "stations_of": "Estaciones de este río",
     "chart_title": "Historial",
@@ -59,15 +61,15 @@
       "aca": "ACA (Catalunya)",
       "chj": "CHJ (Valencia)",
       "avisos": "avisos oficiales",
-      "prevision": "previsión"
+      "prevision": "previsión",
+      "ina": "INA (Argentina)",
+      "agp": "AGP (puerto de Barranqueras)",
+      "usgs": "USGS (EE. UU.)"
     },
     "loading": "Cargando datos…",
     "error_load": "No se pudieron cargar los datos. Se reintentará en unos minutos.",
     "foot": [
-      "<b>Informativo.</b> Datos provisionales sin validar. No sustituye a Protecció Civil. Siga siempre sus instrucciones. En una emergencia llame al 112.",
-      "<b>Límites.</b> Cuencas rápidas como la rambla del Poyo pueden crecer en menos de una hora, más rápido que esta página. Segre, Ebre y Noguera todavía no tienen estación en la página porque falta una fuente de datos fiable. Los ríos sin umbral muestran solo el caudal.",
-      "Fuentes: Agència Catalana de l'Aigua (ACA), Confederación Hidrográfica del Júcar (SAIH), AEMET, Protecció Civil de Catalunya (INUNCAT) y Open-Meteo.com (CC BY 4.0). Los niveles Vigilancia, Aviso y Peligro son una escala propia de esta página, no una escala oficial. Los umbrales de Catalunya son estimaciones calculadas a partir de la serie histórica; los de Valencia son los oficiales de la CHJ.",
-      "Hecho por Pablo Dodda. Adaptación para Catalunya: Sebastian Andrada. Licencia MIT."
+      "Hecho por Pablo Dodda. Adaptación a Catalunya y a más países: Sebastian Andrada. Licencia MIT."
     ],
     "aviso_color": {
       "amarillo": "amarillo",
@@ -77,12 +79,52 @@
     "last_level": "Último nivel conocido",
     "ago_updated": "Actualizado",
     "noscript": "Esta página necesita JavaScript para mostrar los datos.",
-    "details_show": "Ver estaciones e historial"
+    "details_show": "Ver estaciones e historial",
+    "title": "Nivel de ríos",
+    "desc": "Nivel y caudal de ríos con riesgo de crecida en Argentina, España y Estados Unidos. Datos de organismos públicos, con una escala de alerta propia, actualizados cada hora o antes si cambia un nivel.",
+    "tab_label": "País",
+    "pais_sin_datos": "Todavía no hay datos de este país. Aparecerán cuando se complete la primera lectura.",
+    "pais_desconocido": "No existe ese país en la dirección. Se muestra {pais}.",
+    "paises": {
+      "ar": {
+        "nombre": "Argentina",
+        "titulo": "Ríos del litoral argentino",
+        "desc": "Altura del Paraná y del Uruguay en el litoral argentino. Lecturas del INA y de la Administración General de Puertos, actualizadas en esta página cada hora.",
+        "sub": "Altura del Paraná y del Uruguay en el litoral argentino, en metros. El INA publica un valor por día; el puerto de Barranqueras, uno por hora.",
+        "prev_note": "Lluvia acumulada por día (mm) y probabilidad máxima, el valor más alto entre las estaciones de cada zona. Fuente: Open-Meteo.com (CC BY 4.0). Esta página no muestra una previsión de altura del río. La previsión nunca cambia el nivel de alerta.",
+        "foot": [
+          "<b>Informativo.</b> Datos provisionales sin validar. No sustituye a Defensa Civil ni a los avisos de su provincia. Siga siempre sus instrucciones. En una emergencia llame al 911.",
+          "<b>Límites.</b> El INA actualiza un valor por día, de modo que una crecida rápida puede tardar en verse. Solo se muestran algunas estaciones del Paraná y del Uruguay. Los ríos sin umbral muestran solo la altura.",
+          "Fuentes: Instituto Nacional del Agua (INA), Administración General de Puertos (AGP) y Open-Meteo.com (CC BY 4.0). Alerta y evacuación son los niveles que publica el INA; Vigilancia es una regla propia de esta página (90 % del nivel de alerta) y no es oficial. En Barranqueras se usan los niveles de aviso de la Administración Provincial del Agua del Chaco."
+        ]
+      },
+      "es": {
+        "nombre": "España",
+        "titulo": "Rius de Catalunya",
+        "desc": "Caudal de los ríos de Catalunya con más riesgo de inundación, con contexto de Valencia (Túria, Xúquer, Poyo). Lecturas de la ACA y la CHJ, actualizadas cada hora o antes si cambia un nivel.",
+        "sub": "Caudal de los ríos de Catalunya con más riesgo de inundación, más contexto de Valencia. Se actualiza cada hora, o antes si cambia un nivel.",
+        "prev_note": "Lluvia acumulada por día (mm) y probabilidad máxima, el valor más alto entre las estaciones de cada zona. Fuente: Open-Meteo.com (CC BY 4.0). No existe una previsión oficial de caudales para estos ríos: el caudal esperado de cada tarjeta sale de un modelo global (GloFAS, malla de unos 5 km, un dato por día). Sirve de orientación y no capta las crecidas rápidas de rambla. La previsión nunca cambia el nivel de alerta.",
+        "foot": [
+          "<b>Informativo.</b> Datos provisionales sin validar. No sustituye a Protecció Civil. Siga siempre sus instrucciones. En una emergencia llame al 112.",
+          "<b>Límites.</b> Cuencas rápidas como la rambla del Poyo pueden crecer en menos de una hora, más rápido que esta página. Segre, Ebre y Noguera todavía no tienen estación en la página porque falta una fuente de datos fiable. Los ríos sin umbral muestran solo el caudal.",
+          "Fuentes: Agència Catalana de l'Aigua (ACA), Confederación Hidrográfica del Júcar (SAIH), AEMET, Protecció Civil de Catalunya (INUNCAT) y Open-Meteo.com (CC BY 4.0). Los niveles Vigilancia, Aviso y Peligro son una escala propia de esta página, no una escala oficial. Los umbrales de Catalunya son estimaciones calculadas a partir de la serie histórica; los de Valencia son los oficiales de la CHJ."
+        ]
+      },
+      "us": {
+        "nombre": "EE. UU.",
+        "titulo": "Ríos del centro de Estados Unidos",
+        "desc": "Altura de los ríos Mississippi, Missouri, Ohio y Red River of the North. Lecturas del USGS, actualizadas en esta página cada hora.",
+        "sub": "Altura de los ríos Mississippi, Missouri, Ohio y Red River of the North, en pies, tal como la publica el USGS.",
+        "prev_note": "Lluvia acumulada por día (mm) y probabilidad máxima, el valor más alto entre las estaciones de cada zona. Fuente: Open-Meteo.com (CC BY 4.0). Esta página todavía no muestra el pronóstico de río del Servicio Meteorológico Nacional (NWS). La previsión nunca cambia el nivel de alerta.",
+        "foot": [
+          "<b>Informativo.</b> Datos provisionales sin validar. No sustituye al Servicio Meteorológico Nacional (NWS) ni a las autoridades locales de emergencias. Siga siempre sus instrucciones. En una emergencia llame al 911.",
+          "<b>Límites.</b> Solo se muestran algunas estaciones. Una creciente en un afluente pequeño puede no verse aquí. Los niveles se ven en pies, como los publica la fuente, sin convertir.",
+          "Fuentes: U.S. Geological Survey (USGS), National Weather Service (NWS) y Open-Meteo.com (CC BY 4.0). Los niveles Vigilancia, Aviso y Peligro son una escala propia de esta página, no una escala oficial. Cuando el NWS publica categorías de inundación para la estación (acción, menor, moderada), se usan como umbrales; si no, la estación muestra solo la altura."
+        ]
+      }
+    }
   },
   "ca": {
-    "title": "Rius de Catalunya",
-    "desc": "Cabal dels rius de Catalunya amb més risc d'inundació, amb context de València (Túria, Xúquer, Poyo). Lectures de l'ACA i la CHJ, actualitzades cada hora o abans si canvia un nivell.",
-    "sub": "Cabal dels rius de Catalunya amb més risc d'inundació, més context de València. S'actualitza cada hora, o abans si canvia un nivell.",
     "lang_label": "Idioma",
     "tile_desc": [
       "sota el llindar",
@@ -97,13 +139,18 @@
     "avisos_desde": "des de",
     "prev_title": "Previsió de pluja, propers 3 dies",
     "prev_none": "La previsió de pluja no està disponible ara.",
-    "prev_note": "Pluja acumulada per dia (mm) i probabilitat màxima, el valor més alt entre les estacions de cada zona. Font: Open-Meteo.com (CC BY 4.0). No hi ha cap previsió oficial de cabals per a aquests rius: el cabal esperat de cada targeta surt d'un model global (GloFAS, malla d'uns 5 km, una dada per dia). Serveix d'orientació i no capta les crescudes ràpides de riera. La previsió mai no canvia el nivell d'alerta.",
     "zonas": {
       "tarragona": "Tarragona i litoral sud",
       "barcelona": "Barcelona i Maresme",
       "girona": "Girona i Empordà",
       "interior": "Interior (Lleida, Cardener)",
-      "valencia": "València (Túria, Xúquer, Poyo)"
+      "valencia": "València (Túria, Xúquer, Poyo)",
+      "chaco-corrientes": "Chaco i Corrientes",
+      "litoral-parana": "Litoral: Santa Fe, Paraná i Rosario",
+      "uruguay": "Riu Uruguai (Concordia)",
+      "mississippi": "Mississippi (St. Louis)",
+      "missouri-ohio": "Missouri i Ohio (Kansas City, Cincinnati)",
+      "red-river": "Red River of the North (Fargo)"
     },
     "est_title": "Rius, de més a menys perill",
     "filt_all": "Tots",
@@ -121,7 +168,7 @@
     "fcmay": "Podria arribar a",
     "fcnone": "Sense previsió de cabal fiable per a aquest punt.",
     "thr_legend": "V Vigilància · A Avís · P Perill",
-    "thr_none": "Llindars encara en estudi: de moment només es mostra el cabal.",
+    "thr_none": "Llindars encara en estudi: de moment només es mostra la lectura.",
     "source": "Font",
     "stations_of": "Estacions d'aquest riu",
     "chart_title": "Historial",
@@ -139,15 +186,15 @@
       "aca": "ACA (Catalunya)",
       "chj": "CHJ (València)",
       "avisos": "avisos oficials",
-      "prevision": "previsió"
+      "prevision": "previsió",
+      "ina": "INA (Argentina)",
+      "agp": "AGP (port de Barranqueras)",
+      "usgs": "USGS (EUA)"
     },
     "loading": "Carregant dades…",
     "error_load": "No s'han pogut carregar les dades. Es tornarà a provar d'aquí a uns minuts.",
     "foot": [
-      "<b>Informatiu.</b> Dades provisionals sense validar. No substitueix Protecció Civil. Seguiu sempre les seves instruccions. En una emergència truqueu al 112.",
-      "<b>Límits.</b> Les conques ràpides com la rambla del Poyo poden créixer en menys d'una hora, més de pressa que aquesta pàgina. Segre, Ebre i Noguera encara no tenen estació a la pàgina perquè falta una font de dades fiable. Els rius sense llindar només mostren el cabal.",
-      "Fonts: Agència Catalana de l'Aigua (ACA), Confederación Hidrográfica del Júcar (SAIH), AEMET, Protecció Civil de Catalunya (INUNCAT) i Open-Meteo.com (CC BY 4.0). Els nivells Vigilància, Avís i Perill són una escala pròpia d'aquesta pàgina, no una escala oficial. Els llindars de Catalunya són estimacions calculades a partir de la sèrie històrica; els de València són els oficials de la CHJ.",
-      "Fet per Pablo Dodda. Adaptació per a Catalunya: Sebastian Andrada. Llicència MIT."
+      "Fet per Pablo Dodda. Adaptació a Catalunya i a més països: Sebastian Andrada. Llicència MIT."
     ],
     "aviso_color": {
       "amarillo": "groc",
@@ -157,6 +204,49 @@
     "last_level": "Darrer nivell conegut",
     "ago_updated": "Actualitzat",
     "noscript": "Aquesta pàgina necessita JavaScript per mostrar les dades.",
-    "details_show": "Veure estacions i historial"
+    "details_show": "Veure estacions i historial",
+    "title": "Nivell dels rius",
+    "desc": "Nivell i cabal de rius amb risc de crescuda a l'Argentina, Espanya i els Estats Units. Dades d'organismes públics, amb una escala d'alerta pròpia, actualitzades cada hora o abans si canvia un nivell.",
+    "tab_label": "País",
+    "pais_sin_datos": "Encara no hi ha dades d'aquest país. Apareixeran quan es completi la primera lectura.",
+    "pais_desconocido": "Aquest país no existeix a l'adreça. Es mostra {pais}.",
+    "paises": {
+      "ar": {
+        "nombre": "Argentina",
+        "titulo": "Rius del litoral argentí",
+        "desc": "Alçada del Paraná i de l'Uruguai al litoral argentí. Lectures de l'INA i de l'Administración General de Puertos, actualitzades en aquesta pàgina cada hora.",
+        "sub": "Alçada del Paraná i de l'Uruguai al litoral argentí, en metres. L'INA publica un valor per dia; el port de Barranqueras, un per hora.",
+        "prev_note": "Pluja acumulada per dia (mm) i probabilitat màxima, el valor més alt entre les estacions de cada zona. Font: Open-Meteo.com (CC BY 4.0). Aquesta pàgina no mostra cap previsió d'alçada del riu. La previsió mai no canvia el nivell d'alerta.",
+        "foot": [
+          "<b>Informatiu.</b> Dades provisionals sense validar. No substitueix Defensa Civil ni els avisos de la vostra província. Seguiu sempre les seves instruccions. En una emergència truqueu al 911.",
+          "<b>Límits.</b> L'INA actualitza un valor per dia, de manera que una crescuda ràpida pot trigar a veure's. Només es mostren algunes estacions del Paraná i de l'Uruguai. Els rius sense llindar només mostren l'alçada.",
+          "Fonts: Instituto Nacional del Agua (INA), Administración General de Puertos (AGP) i Open-Meteo.com (CC BY 4.0). Alerta i evacuació són els nivells que publica l'INA; Vigilància és una regla pròpia d'aquesta pàgina (90 % del nivell d'alerta) i no és oficial. A Barranqueras s'usen els nivells d'avís de l'Administración Provincial del Agua del Chaco."
+        ]
+      },
+      "es": {
+        "nombre": "Espanya",
+        "titulo": "Rius de Catalunya",
+        "desc": "Cabal dels rius de Catalunya amb més risc d'inundació, amb context de València (Túria, Xúquer, Poyo). Lectures de l'ACA i la CHJ, actualitzades cada hora o abans si canvia un nivell.",
+        "sub": "Cabal dels rius de Catalunya amb més risc d'inundació, més context de València. S'actualitza cada hora, o abans si canvia un nivell.",
+        "prev_note": "Pluja acumulada per dia (mm) i probabilitat màxima, el valor més alt entre les estacions de cada zona. Font: Open-Meteo.com (CC BY 4.0). No hi ha cap previsió oficial de cabals per a aquests rius: el cabal esperat de cada targeta surt d'un model global (GloFAS, malla d'uns 5 km, una dada per dia). Serveix d'orientació i no capta les crescudes ràpides de riera. La previsió mai no canvia el nivell d'alerta.",
+        "foot": [
+          "<b>Informatiu.</b> Dades provisionals sense validar. No substitueix Protecció Civil. Seguiu sempre les seves instruccions. En una emergència truqueu al 112.",
+          "<b>Límits.</b> Les conques ràpides com la rambla del Poyo poden créixer en menys d'una hora, més de pressa que aquesta pàgina. Segre, Ebre i Noguera encara no tenen estació a la pàgina perquè falta una font de dades fiable. Els rius sense llindar només mostren el cabal.",
+          "Fonts: Agència Catalana de l'Aigua (ACA), Confederación Hidrográfica del Júcar (SAIH), AEMET, Protecció Civil de Catalunya (INUNCAT) i Open-Meteo.com (CC BY 4.0). Els nivells Vigilància, Avís i Perill són una escala pròpia d'aquesta pàgina, no una escala oficial. Els llindars de Catalunya són estimacions calculades a partir de la sèrie històrica; els de València són els oficials de la CHJ."
+        ]
+      },
+      "us": {
+        "nombre": "EUA",
+        "titulo": "Rius del centre dels Estats Units",
+        "desc": "Alçada dels rius Mississippi, Missouri, Ohio i Red River of the North. Lectures de l'USGS, actualitzades en aquesta pàgina cada hora.",
+        "sub": "Alçada dels rius Mississippi, Missouri, Ohio i Red River of the North, en peus, tal com la publica l'USGS.",
+        "prev_note": "Pluja acumulada per dia (mm) i probabilitat màxima, el valor més alt entre les estacions de cada zona. Font: Open-Meteo.com (CC BY 4.0). Aquesta pàgina encara no mostra el pronòstic de riu del Servei Meteorològic Nacional (NWS). La previsió mai no canvia el nivell d'alerta.",
+        "foot": [
+          "<b>Informatiu.</b> Dades provisionals sense validar. No substitueix el Servei Meteorològic Nacional (NWS) ni les autoritats locals d'emergències. Seguiu sempre les seves instruccions. En una emergència truqueu al 911.",
+          "<b>Límits.</b> Només es mostren algunes estacions. Una crescuda en un afluent petit pot no veure's aquí. Els nivells es veuen en peus, com els publica la font, sense convertir.",
+          "Fonts: U.S. Geological Survey (USGS), National Weather Service (NWS) i Open-Meteo.com (CC BY 4.0). Els nivells Vigilància, Avís i Perill són una escala pròpia d'aquesta pàgina, no una escala oficial. Quan el NWS publica categories d'inundació per a l'estació (acció, menor, moderada), s'usen com a llindars; si no, l'estació mostra només l'alçada."
+        ]
+      }
+    }
   }
 }

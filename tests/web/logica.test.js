@@ -137,3 +137,61 @@ test("serieConActual añade la lectura actual para que el pico horario no falsee
   assert.equal(L.tendencia(s), "baja");
   assert.deepEqual(L.serieConActual(hist, "2026-10-19T10:50:00Z", null), hist);
 });
+
+test("PAISES son los tres pestañas en orden", () => {
+  assert.deepEqual(L.PAISES, ["ar", "es", "us"]);
+});
+
+test("paisDesdeHash acepta países conocidos y cae al valor por defecto", () => {
+  assert.equal(L.paisDesdeHash("#us", "es"), "us");
+  assert.equal(L.paisDesdeHash("#AR", "es"), "ar");
+  assert.equal(L.paisDesdeHash("#xx", "es"), "es");
+  assert.equal(L.paisDesdeHash("", "ar"), "ar");
+  assert.equal(L.paisDesdeHash(undefined, "us"), "us");
+  assert.equal(L.paisDesdeHash("#__proto__", "es"), "es");
+});
+
+test("hashPara y rutaDatos", () => {
+  assert.equal(L.hashPara("ar"), "#ar");
+  assert.equal(L.rutaDatos("ar", "latest.json"), "data/ar/latest.json");
+  assert.equal(L.rutaDatos("us", "history/2026-10.json"), "data/us/history/2026-10.json");
+});
+
+test("paisPorIdioma elige el país por defecto según el navegador", () => {
+  assert.equal(L.paisPorIdioma("ca"), "es");
+  assert.equal(L.paisPorIdioma("ca-ES"), "es");
+  assert.equal(L.paisPorIdioma("es-ES"), "es");
+  assert.equal(L.paisPorIdioma("es-AR"), "ar");
+  assert.equal(L.paisPorIdioma("es_ar"), "ar");
+  assert.equal(L.paisPorIdioma("en-US"), "us");
+  assert.equal(L.paisPorIdioma("fr-FR"), "es");
+  assert.equal(L.paisPorIdioma(""), "es");
+  assert.equal(L.paisPorIdioma(undefined), "es");
+});
+
+test("resumenPais con índice vacío devuelve ceros", () => {
+  assert.deepEqual(L.resumenPais(undefined), { n: 0, porNivel: [0, 0, 0, 0], sd: 0 });
+  assert.deepEqual(L.resumenPais({}), { n: 0, porNivel: [0, 0, 0, 0], sd: 0 });
+});
+
+test("resumenPais lee una entrada de paises.json", () => {
+  const r = L.resumenPais({ estaciones: 6, por_nivel: [3, 1, 1, 1], sd: 2, generado_utc: "x" });
+  assert.deepEqual(r, { n: 6, porNivel: [3, 1, 1, 1], sd: 2 });
+  assert.deepEqual(L.resumenPais({ estaciones: 2, por_nivel: [1, 1] }).porNivel, [1, 1, 0, 0]);
+});
+
+test("unidadTexto muestra la unidad como la publica la fuente", () => {
+  assert.equal(L.unidadTexto("m3s"), "m³/s");
+  assert.equal(L.unidadTexto("m"), "m");
+  assert.equal(L.unidadTexto("ft"), "ft");
+  assert.equal(L.unidadTexto(undefined), "");
+});
+
+test("rangoY: caudal parte de cero, altura se ajusta a los datos", () => {
+  assert.equal(L.rangoY("m3s", [40, 50], null).min, 0);
+  const r = L.rangoY("m", [4.2, 4.8], 5.5);
+  assert.ok(r.min > 3 && r.min < 4.2);
+  assert.ok(r.max > 5.5);
+  const plano = L.rangoY("ft", [12, 12], null);
+  assert.ok(plano.max > plano.min);
+});

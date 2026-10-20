@@ -121,6 +121,53 @@
     return hist.concat([[tIso, valor]]);
   }
 
-  return { edadMin, serieConActual, edadTexto, nivelRotulo, tipoUmbralTexto, idiomaInicial, ordenarPorPeligro, resumenPorNivel,
+  // ---------- países ----------
+  const PAISES = ["ar", "es", "us"];
+  const POR_NIVEL_VACIO = () => [0, 0, 0, 0];
+
+  function paisDesdeHash(hash, porDefecto) {
+    const p = String(hash || "").replace(/^#/, "").toLowerCase();
+    return PAISES.includes(p) ? p : porDefecto;
+  }
+
+  function hashPara(pais) { return "#" + pais; }
+
+  function rutaDatos(pais, archivo) { return "data/" + pais + "/" + archivo; }
+
+  // País inicial según el idioma del navegador: ca y es-ES → es, es-AR → ar, en-US → us; el resto, es.
+  function paisPorIdioma(idioma) {
+    const l = String(idioma || "").toLowerCase().replace("_", "-");
+    if (l === "es-ar") return "ar";
+    if (l === "en-us") return "us";
+    return "es";
+  }
+
+  // Una entrada de data/paises.json: {estaciones: N, por_nivel: [n0..n3], sd, ...}. Sin entrada, todo a cero.
+  function resumenPais(entrada) {
+    const e = entrada || {};
+    const porNivel = POR_NIVEL_VACIO();
+    (Array.isArray(e.por_nivel) ? e.por_nivel : []).slice(0, 4).forEach((v, i) => { porNivel[i] = Number(v) || 0; });
+    return { n: Number(e.estaciones) || 0, porNivel, sd: Number(e.sd) || 0 };
+  }
+
+  // La unidad se muestra como la publica la fuente: metros en Argentina, pies en EE. UU., sin convertir.
+  const UNIDADES = { m3s: "m³/s", m: "m", ft: "ft" };
+  function unidadTexto(unidad) { return UNIDADES[unidad] || ""; }
+
+  // Rango vertical de los gráficos. El caudal parte de cero; una altura de río se ajusta a sus datos,
+  // porque con un 0 de base una variación de decímetros se vería como una línea recta.
+  function rangoY(unidad, valores, umbralBajo) {
+    const vs = valores.filter((v) => typeof v === "number");
+    const hi = Math.max(...vs, 0.5);
+    if (unidad === "m3s" || !vs.length) {
+      return { min: 0, max: Math.max(hi * 1.08, umbralBajo ? umbralBajo * 1.35 : 0, 0.5) };
+    }
+    const lo = Math.min(...vs, umbralBajo == null ? Infinity : umbralBajo);
+    const tope = Math.max(hi, umbralBajo == null ? -Infinity : umbralBajo * 1.05);
+    const hueco = Math.max((tope - lo) * 0.15, 0.1);
+    return { min: lo - hueco, max: tope + hueco };
+  }
+
+  return { PAISES, paisDesdeHash, hashPara, rutaDatos, paisPorIdioma, resumenPais, unidadTexto, rangoY, edadMin, serieConActual, edadTexto, nivelRotulo, tipoUmbralTexto, idiomaInicial, ordenarPorPeligro, resumenPorNivel,
     agruparPorRio, tendencia, filtrarRango, nivelAviso, datosViejos };
 });
