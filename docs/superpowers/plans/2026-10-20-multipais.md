@@ -31,7 +31,7 @@
 
 ---
 
-### Tarea 1: Modelo y motor agnósticos de la unidad
+### Task 1: Modelo y motor agnósticos de la unidad
 
 **Archivos:**
 - Modificar: `fuente/modelo.py`, `fuente/estaciones.py`, `fuente/alertas.py`, `tests/conftest.py`
@@ -58,7 +58,7 @@
 - [ ] **Paso 4: verde** — ambas suites completas; los 162 + 16 previos siguen pasando.
 - [ ] **Paso 5: commit** — `feat: modelo y motor agnósticos de la unidad; registro de estaciones por país`.
 
-### Tarea 2: Orquestador multipaís y avisos por país
+### Task 2: Orquestador multipaís y avisos por país
 
 **Archivos:**
 - Modificar: `fuente/actualizar.py`, `fuente/notificar.py`, `.github/workflows/actualizar.yml` (solo si cambia algo), `tests/test_actualizar.py`, `tests/test_notificar.py`, `tests/test_workflow.py`
@@ -85,7 +85,7 @@
 - [ ] **Paso 4: verde** — ambas suites.
 - [ ] **Paso 5: commit** — `feat: orquestador multipaís con aislamiento por país`.
 
-### Tarea 3: Adaptador INA (Argentina)
+### Task 3: Adaptador INA (Argentina)
 
 **Archivos:** Crear `fuente/fuentes/ina.py`, `tests/test_ina.py`, `tests/fixtures/ina_estaciones.json` (recorte de la respuesta real del 2026-10-20 con Barranqueras, Corrientes, Paraná, Rosario, Santa Fe y Concordia, más una entrada sintética `TEST-SIN-VALOR` con `valor_actual: null`).
 
@@ -102,7 +102,7 @@
   - `test_bajar_json_roto_lanza_fuenteerror`.
 - [ ] **Paso 2: RED. Paso 3: implementar. Paso 4: verde (suites). Paso 5: commit** — `feat: adaptador INA`.
 
-### Tarea 4: Adaptador AGP (Paraná en Barranqueras) con respaldo INA y niveles APA
+### Task 4: Adaptador AGP (Paraná en Barranqueras) con respaldo INA y niveles APA
 
 **Archivos:** Crear `fuente/fuentes/agp.py`, `tests/test_agp.py`, `tests/fixtures/agp_barranqueras.dat` (recorte real con 6 filas de datos más una `NAN`, una fuera de rango `0 < h < 15` y la cabecera de 4 líneas). Referencia: `/home/claude/apuratejose/fuente/agp_update.py` funciones `bajar` y `agp`.
 
@@ -113,7 +113,7 @@
 - [ ] **Paso 1: tests** — `test_parse_devuelve_la_ultima_valida`, `test_parse_ignora_nan_y_fuera_de_rango`, `test_parse_sin_filas_devuelve_none`, `test_sin_verificacion_tls_solo_para_agpse` (con `abrir` simulado que lanza `URLError("CERTIFICATE_VERIFY_FAILED")` para `agpse.gob.ar` → se reintenta sin verificar; para otro host → se propaga), `test_respaldo_ina_si_agp_pasa_de_3h`.
 - [ ] **Paso 2–5:** RED, implementar, verde, commit — `feat: adaptador AGP con respaldo INA`.
 
-### Tarea 5: Adaptador USGS + NWS (EE. UU.)
+### Task 5: Adaptador USGS + NWS (EE. UU.)
 
 **Archivos:** Crear `fuente/fuentes/usgs_nws.py`, `tests/test_usgs_nws.py`, `tests/fixtures/usgs_iv_07010000.json`, `tests/fixtures/nwps_EADM7.json` (recortes **reales**: obtenerlos con WebFetch/curl desde las URLs de abajo; no escribirlos de memoria).
 
@@ -125,7 +125,7 @@
 - [ ] **Paso 1: tests** — `test_parse_usgs_lee_pies_y_hora_utc` (St. Louis: valor 7.97 ft y `2026-10-20T14:00:00-05:00` → `19:00:00Z`), `test_parse_usgs_descarta_valores_centinela`, `test_parse_nwps_st_louis` (`Umbrales(28,30,35,"oficial")`), `test_nwps_sin_categorias_es_en_estudio`, `test_una_nwps_caida_no_tumba_las_demas`, `test_usgs_caido_lanza_fuenteerror`, `test_lecturas_en_pies` (`unidad=="ft"`, `fuente=="usgs"`), `test_parse_pronostico_lee_puntos_en_pies`, `test_pronostico_vacio_devuelve_lista_vacia`.
 - [ ] **Paso 2–5:** RED, implementar, verde, commit — `feat: adaptador USGS y NWS`.
 
-### Tarea 6: Registros de Argentina y EE. UU. y conexión de las fuentes reales
+### Task 6: Registros de Argentina y EE. UU. y conexión de las fuentes reales
 
 **Archivos:**
 - Crear: `fuente/paises/ar/estaciones.json`, `fuente/paises/us/estaciones.json`, `tests/test_registros.py`
@@ -141,7 +141,7 @@
 - [ ] **Paso 1: tests** — `test_registros_cargan_sin_error` (los tres países), `test_ids_unicos_entre_paises`, `test_ar_us_usan_unidades_de_su_fuente` (`ina`/`agp`→`m`, `usgs`→`ft`), `test_zonas_validas`, `test_barranqueras_tiene_umbrales_apa`, `test_ejecutar_recorre_fuentes_del_registro` (fuentes simuladas `ina`/`usgs` producen lecturas en `latest.json`).
 - [ ] **Paso 2–5:** RED, implementar, verde, commit — `feat: registros de Argentina y EE. UU. y fuentes reales por país`.
 
-### Tarea 7: Página con pestañas por país y datos por país
+### Task 7: Página con pestañas por país y datos por país
 
 **Archivos:** Modificar `fuente/page.html`, `fuente/web/logica.js`, `fuente/textos.json`, `fuente/armar_sitio.py`; pruebas `tests/web/logica.test.js`, `tests/test_pagina.py`.
 
@@ -156,7 +156,7 @@
   - Prueba de humo con navegador: `python3 -m http.server` desde la raíz y Playwright (Chromium preinstalado): abrir `#ar`, `#es`, `#us`, `#xx`; sin errores de consola; captura de pantalla de cada una guardada fuera del repo.
 - [ ] **Paso 2–5:** RED, implementar, verde, commit — `feat: pestañas por país`.
 
-### Tarea 8: Inglés, unidades y formatos
+### Task 8: Inglés, unidades y formatos
 
 **Archivos:** Modificar `fuente/textos.json`, `fuente/web/logica.js`, `fuente/page.html`; pruebas `tests/test_pagina.py`, `tests/web/logica.test.js`.
 
@@ -165,7 +165,7 @@
 - [ ] **Paso 1: tests** — node: `formatoValor(6.1,"m","es")=="6,1 m"`, `(28,"ft","en")=="28 ft"`, `(41.2,"m3s","ca")=="41,2 m³/s"`; `edadTexto` en inglés (`"12 min ago"`); pytest: la paridad de claves cubre `es`, `ca` y `en` (incluye `tile_desc`, `foot`, `fuentes_nombres`, `zonas` y `paises`); ningún texto de `en` queda igual a `es` salvo nombres propios (comprobación de al menos el 90 % de las claves de texto distintas).
 - [ ] **Paso 2–5:** RED, implementar (traducciones reales, sin copiar el castellano), verde, commit — `feat: inglés y formatos por unidad`.
 
-### Tarea 9: Fichas con módulos: crecidas históricas y gráfico con pronóstico y simulador
+### Task 9: Fichas con módulos: crecidas históricas y gráfico con pronóstico y simulador
 
 **Archivos:**
 - Crear: `fuente/paises/<pais>/rios/<id>/historicos.json` para Paraná en Barranqueras (portar `historicos.json` de Pablo: 1983 8,6 m, 1992 8,25 m, 2013 7,09 m y el tope de las defensas 9,5 m, cada uno con `nota`); `fuente/web/modulos.js` (render de módulos con d3 local)
@@ -180,7 +180,7 @@
 - [ ] **Paso 1: tests** — node: `compararConHistoricas(7.2,[{evento:"1983",valor:8.6}])[0].diferencia` ≈ `-1.4`; `simular(6.2,{bajo:5.5,medio:6,alto:6.5}).nivel==2`; `simular` con `valor` nulo no lanza; `serieConPronostico` marca el último observado y los pronosticados; pytest: la página incluye el contenedor del módulo solo para el río con archivos; los archivos de módulos tienen el esquema esperado.
 - [ ] **Paso 2–5:** RED, implementar con d3 local, verde, comprobación visual en navegador (captura), commit — `feat: módulos de ficha (históricas, gráfico con simulador)`.
 
-### Tarea 10: Ficha especial del Paraná en Barranqueras y la represa del Río Negro
+### Task 10: Ficha especial del Paraná en Barranqueras y la represa del Río Negro
 
 **Archivos:** Crear `fuente/paises/ar/rios/parana-barranqueras/{situacion.json,umbrales.json,lluvia.json,pronostico.json}` y `fuente/web/ficha_barranqueras.js`; modificar `fuente/page.html` (punto de montaje), `tests/test_pagina.py`, `tests/web/ficha_barranqueras.test.js`. Referencia: `apuratejose/fuente/page.html` (esquema de la represa y compuertas, líneas ~887–1260 y la secuencia de «corte» ~1558–1700) y los JSON de `apuratejose/fuente/data/`.
 
@@ -190,7 +190,7 @@
 - [ ] **Paso 1: tests** — node: `reglaCompuertas(5.9,6)=="abiertas"`, `(6,6)=="puede cerrar"`, `(6.6,6)=="cerradas"`; pytest: `index.html` no contiene `cloudflare`, `clarity` ni `apuratejose.com.ar`; los JSON de la ficha tienen las claves que usa el módulo.
 - [ ] **Paso 2–5:** RED, portar, verde, captura en navegador, commit — `feat: ficha del Paraná y la represa del Río Negro`.
 
-### Tarea 11: Satélite Sentinel‑2 por río
+### Task 11: Satélite Sentinel‑2 por río
 
 **Archivos:** Crear `fuente/satelite.py`, `.github/workflows/satelite.yml`, `tests/test_satelite.py`, `tests/test_workflow.py` (casos nuevos); modificar `fuente/page.html` (módulo con comparador y carga bajo demanda). Referencia: `apuratejose/fuente/sat_s2.py` (`BBOX`, `buscar`, filtro de nubes con la banda SCL).
 
@@ -202,7 +202,7 @@
 - [ ] **Paso 1: tests** — `test_nubosidad_cuenta_nubes_y_sombras` con una matriz SCL pequeña; `test_buscar_filtra_las_que_no_cubren_el_recuadro`; `test_sin_pasadas_nuevas_no_escribe`; `test_workflow_satelite_tiene_permisos_y_concurrency`; `test_fixture_de_busqueda_real` (recorte real guardado en `tests/fixtures/`).
 - [ ] **Paso 2–5:** RED, implementar, verde, commit — `feat: satélite Sentinel-2 por río`.
 
-### Tarea 12: Tarjetas para compartir
+### Task 12: Tarjetas para compartir
 
 **Archivos:** Crear `fuente/og.py` (adaptado de `apuratejose/fuente/og.py`, 116 líneas), `fuente/fonts/` (Liberation, SIL OFL, con su licencia), `tests/test_og.py`; modificar `fuente/armar_sitio.py`.
 
@@ -211,7 +211,7 @@
 - [ ] **Paso 1: tests** — `test_dibujar_crea_png_1200x630` (si Pillow no está, `pytest.skip`), `test_sin_pillow_devuelve_false`, `test_textos_de_la_tarjeta_salen_de_los_datos`, `test_armar_sitio_incluye_og_image`.
 - [ ] **Paso 2–5:** RED, implementar, verde, comprobación visual de las tarjetas (sin aspecto genérico de plantilla: tipografía clara, jerarquía, un solo acento), commit — `feat: tarjetas para compartir`.
 
-### Tarea 13: Ebro y Guadalquivir (condicional)
+### Task 13: Ebro y Guadalquivir (condicional)
 
 **Archivos:** posible `fuente/fuentes/saih_ebro.py`, `fuente/fuentes/saih_guadalquivir.py`, sus tests y fixtures; entradas nuevas en `fuente/paises/es/estaciones.json`.
 
@@ -219,7 +219,7 @@
 - [ ] **Paso 2: decisión** — si una fuente es fiable, implementarla con el mismo patrón (parse + fixture real + tests) y añadir las estaciones (Ebro en Zaragoza, Guadalquivir en Sevilla); si no, **no se implementa** y se anota como pendiente de fase 2. Un resultado negativo cierra la tarea sin código.
 - [ ] **Paso 3: commit** — `feat: SAIH Ebro y Guadalquivir` o, si no procede, solo la nota en el libro.
 
-### Tarea 14: Documentación, créditos, datos iniciales y cierre
+### Task 14: Documentación, créditos, datos iniciales y cierre
 
 **Archivos:** Modificar `README.md`, `LICENSE` (mantener las dos líneas de copyright), `fuente/notificar.py` (`SITIO`), `data/` (datos iniciales de los tres países), `index.html` (reconstruido), `tests/test_pagina.py`.
 
