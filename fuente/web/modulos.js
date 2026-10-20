@@ -78,5 +78,21 @@
     return !Number.isFinite(t) || ahoraMs - t > HORAS_VENCIDO * 3600000;
   }
 
-  return { HORAS_VENCIDO, compararConHistoricas, simular, leerEntrada, serieConPronostico, pronosticoVencido };
+  // Reglas de edad de los demás instantáneos manuales o de modelo (cada uno lleva su fecha y se marca vencido):
+  //  - situación (reporte escrito a mano): 36 h, igual que un pronóstico; fecha = `actualizado` o, sin hora, 00:00 UTC de `fecha`.
+  //  - lluvia (previsión Open-Meteo del robot, se renueva cada hora): 6 h desde `generado_utc`.
+  const HORAS_VENCIDA_LLUVIA = 6;
+  const venceA = (iso, ahoraMs, horas) => {
+    const t = Date.parse(iso || "");
+    return !Number.isFinite(t) || ahoraMs - t > horas * 3600000;
+  };
+  function situacionVencida(doc, ahoraMs) {
+    if (!doc) return true;
+    return venceA(doc.actualizado || (doc.fecha ? doc.fecha + "T00:00:00Z" : ""), ahoraMs, HORAS_VENCIDO);
+  }
+  function lluviaVencida(doc, ahoraMs) {
+    return !doc || venceA(doc.generado_utc, ahoraMs, HORAS_VENCIDA_LLUVIA);
+  }
+
+  return { HORAS_VENCIDO, HORAS_VENCIDA_LLUVIA, situacionVencida, lluviaVencida, compararConHistoricas, simular, leerEntrada, serieConPronostico, pronosticoVencido };
 });

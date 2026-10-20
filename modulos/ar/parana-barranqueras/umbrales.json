@@ -1,0 +1,52 @@
+{
+  "estacion": "parana-barranqueras",
+  "unidad": "m",
+  "fuente": "APA Chaco, INA y Prefectura Naval (Manual de Operaciones de la APA, Res. 049/02), según el proyecto de Pablo Dodda (licencia MIT, compartido con su permiso)",
+  "niveles": [
+    {
+      "altura_m": 4.2,
+      "tipo": "aviso",
+      "nombre": {
+        "es": "Se corta el camino a Isla Soto",
+        "ca": "Es talla el camí a Isla Soto",
+        "en": "The road to Isla Soto is cut off"
+      }
+    },
+    {
+      "altura_m": 5.0,
+      "tipo": "aviso",
+      "nombre": {
+        "es": "Se cortan caminos de Isla del Cerrito",
+        "ca": "Es tallen camins d'Isla del Cerrito",
+        "en": "Roads on Isla del Cerrito are cut off"
+      }
+    },
+    {
+      "altura_m": 5.5,
+      "tipo": "aviso",
+      "nombre": {
+        "es": "Extremar precauciones en zonas bajas",
+        "ca": "Extremar les precaucions a les zones baixes",
+        "en": "Take extra care in low-lying areas"
+      }
+    },
+    {
+      "altura_m": 6.0,
+      "tipo": "alerta",
+      "nombre": {
+        "es": "Alerta: la APA puede cerrar las compuertas del Río Negro",
+        "ca": "Alerta: l'APA pot tancar les comportes del Río Negro",
+        "en": "Alert: the APA may close the Río Negro gates"
+      }
+    },
+    {
+      "altura_m": 6.5,
+      "tipo": "evacuacion",
+      "nombre": {
+        "es": "Evacuación",
+        "ca": "Evacuació",
+        "en": "Evacuation"
+      }
+    }
+  ]
+}

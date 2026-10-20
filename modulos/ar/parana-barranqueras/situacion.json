@@ -1,0 +1,21 @@
+{
+  "estacion": "parana-barranqueras",
+  "fecha": "2026-10-19",
+  "actualizado": "2026-10-20T15:14:23-03:00",
+  "resumen": {
+    "es": "El Paraná está sobre 6 m: según el manual de la APA, las compuertas se cierran y el agua del Río Negro sale por bombeo. La APA (19 oct) dijo que las 14 bombas del dique están funcionando.",
+    "ca": "El Paraná és per sobre dels 6 m: segons el manual de l'APA, les comportes es tanquen i l'aigua del Río Negro surt per bombeig. L'APA (19 oct) va dir que les 14 bombes de la resclosa estan funcionant.",
+    "en": "The Paraná is above 6 m. Under the APA manual the gates close and the Río Negro's water is pumped out. The APA said on 19 Oct that the 14 pumps at the dam are running."
+  },
+  "pronostico_texto": {
+    "es": "APA (19 oct): el pico sería de unos 7,30 m entre el martes 20 y el miércoles 21; después bajaría un poco pero seguiría alto, cerca de 6 m por un tiempo. El INA (13 oct) pronosticaba entre 6,75 y 7,55 m para el 20 de octubre.",
+    "ca": "APA (19 oct): el pic seria d'uns 7,30 m entre el dimarts 20 i el dimecres 21; després baixaria una mica però continuaria alt, a prop de 6 m durant un temps. L'INA (13 oct) pronosticava entre 6,75 i 7,55 m per al 20 d'octubre.",
+    "en": "APA (19 Oct): the peak would be about 7.30 m between Tuesday 20 and Wednesday 21; after that it would drop a little but stay high, near 6 m for a while. INA (13 Oct) forecast between 6.75 and 7.55 m for 20 October."
+  },
+  "fuentes": {
+    "es": "APA Chaco (Orlando Morán, 19 de octubre), Comité Provincial de Emergencia (18 de octubre), INA (pronóstico del 13 de octubre), estación del puerto de Barranqueras. Texto del proyecto de Pablo Dodda (licencia MIT, compartido con su permiso).",
+    "ca": "APA Chaco (Orlando Morán, 19 d'octubre), Comité Provincial de Emergencia (18 d'octubre), INA (pronòstic del 13 d'octubre), estació del port de Barranqueras. Text del projecte de Pablo Dodda (llicència MIT, compartit amb el seu permís).",
+    "en": "APA Chaco (Orlando Morán, 19 October), Comité Provincial de Emergencia (18 October), INA (forecast of 13 October), Barranqueras port station. Text from Pablo Dodda's project (MIT license, shared with his permission)."
+  },
+  "fuente_url": "https://www.diariolavozdelchaco.com/2026/10/19/el-parana-alcanzo-los-7-metros-y-podria-llegar-a-730-en-los-proximos-dias/"
+}

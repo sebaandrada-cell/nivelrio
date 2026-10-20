@@ -100,3 +100,23 @@ test("pronosticoVencido: más de 36 h desde la fecha del pronóstico", () => {
   assert.equal(M.pronosticoVencido({}, ahora), true);       // sin fecha no se puede afirmar que sea vigente
   assert.equal(M.pronosticoVencido(null, ahora), true);
 });
+
+const AHORA = Date.parse("2026-10-20T20:00:00Z");
+
+test("situacionVencida: 36 h desde `actualizado`, o desde las 00:00 UTC de `fecha` si no hay hora", () => {
+  assert.equal(M.situacionVencida({ actualizado: "2026-10-20T15:14:23-03:00", fecha: "2026-10-19" }, AHORA), false);
+  assert.equal(M.situacionVencida({ actualizado: "2026-10-19T07:59:00Z" }, AHORA), true);  // 36 h 1 min
+  assert.equal(M.situacionVencida({ actualizado: "2026-10-19T08:01:00Z" }, AHORA), false);
+  assert.equal(M.situacionVencida({ fecha: "2026-10-19" }, AHORA), true);   // desde las 00:00 UTC del 19: 44 h
+  assert.equal(M.situacionVencida({ fecha: "2026-10-20" }, AHORA), false);
+});
+
+test("situacionVencida: sin documento o sin fecha legible no se puede afirmar que sea vigente", () => {
+  for (const d of [null, undefined, {}, { fecha: "ayer" }, { actualizado: "no" }]) assert.equal(M.situacionVencida(d, AHORA), true);
+});
+
+test("lluviaVencida: la previsión de lluvia se renueva cada hora; pasadas 6 h está vencida", () => {
+  assert.equal(M.lluviaVencida({ generado_utc: "2026-10-20T14:30:00Z" }, AHORA), false);
+  assert.equal(M.lluviaVencida({ generado_utc: "2026-10-20T13:59:00Z" }, AHORA), true);
+  for (const d of [null, {}, { generado_utc: "x" }]) assert.equal(M.lluviaVencida(d, AHORA), true);
+});

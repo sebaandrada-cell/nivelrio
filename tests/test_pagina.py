@@ -35,9 +35,11 @@ def test_index_sin_analitica(html):
 
 
 def test_index_sin_restos_del_proyecto_original(html):
-    # Paraná y Barranqueras ya son contenido legítimo de la pestaña de Argentina; el resto sigue sin aparecer.
-    for marca in ("Resistencia", "apuratejose", "Río Negro"):
-        assert marca not in html
+    # Paraná, Barranqueras y Río Negro ya son contenido legítimo de la pestaña de Argentina. Lo que no debe aparecer son
+    # los restos del sitio original: su dominio, su analítica y su ciudad.
+    bajo = html.lower()
+    for marca in ("apuratejose", "cloudflare", "clarity", "resistencia"):
+        assert marca not in bajo, marca
 
 
 def pie(lang, pais="es"):
@@ -182,7 +184,7 @@ def test_el_ingles_esta_traducido_de_verdad():
 def test_el_ingles_no_arrastra_palabras_del_castellano():
     propios = ("Instituto Nacional del Agua", "Administración General de Puertos", "Administración Provincial del Agua del Chaco",
                "Confederación Hidrográfica del Júcar", "Agència Catalana de l'Aigua", "Protecció Civil de Catalunya", "Protecció Civil",
-               "Defensa Civil", "Rambla del Poyo")
+               "Defensa Civil", "Rambla del Poyo", "Río Negro")
     palabras = re.compile(r"\b(el|los|las|del|para|con|una|por|que|sin|más|ríos?|caudal|nivel(?:es)?|aviso|peligro|hace|datos)\b", re.I)
     for ruta, v in _hojas(TEXTOS["en"]):
         texto = re.sub(r"<[^>]+>", "", str(v))
@@ -285,3 +287,76 @@ def test_la_pagina_nunca_pide_archivos_manuales_bajo_data():
     # lo único que se pide bajo data/<pais>/rios/ es el pronóstico del robot
     pedidos = re.findall(r'robotDe\("([^"]+)"\)', plantilla)
     assert set(pedidos) == {"pronostico.json"}
+
+
+# ---------- ficha del Paraná en Barranqueras (T10) ----------
+FICHA = TEXTOS["es"]["ficha_barr"]
+
+
+def test_textos_de_la_ficha_en_todos_los_idiomas_con_los_mismos_marcadores():
+    for lang in IDIOMAS:
+        t = TEXTOS[lang]["ficha_barr"]
+        assert list(t) == list(FICHA), lang
+        for k, v in t.items():
+            assert v.strip(), (lang, k)
+            assert set(re.findall(r"\{(\w+)\}", v)) == set(re.findall(r"\{(\w+)\}", FICHA[k])), (lang, k)
+
+
+def test_el_modulo_de_la_ficha_usa_todos_sus_textos_y_no_pide_otros():
+    js = (RAIZ / "fuente" / "web" / "ficha_barranqueras.js").read_text(encoding="utf-8")
+    usados = set(re.findall(r"\bt\.([a-z_0-9]+)", js)) | {"corte_paso_" + str(n) for n in range(4)}
+    assert usados <= set(FICHA), usados - set(FICHA)
+    dinamicos = {"palabra_abiertas", "palabra_cerradas", "palabra_puede", "estado_abiertas", "estado_cerradas", "estado_puede"}  # se eligen por estado
+    assert set(FICHA) <= usados | dinamicos, set(FICHA) - usados
+    for k in dinamicos:
+        assert f'"{k}"' in js or k in js, k
+
+
+def test_el_esquema_se_declara_regla_de_la_apa_en_los_tres_idiomas():
+    # el dibujo explica la regla; no puede pasar por el estado real de las compuertas
+    esperado = {"es": ("regla de la APA", "no recibe el estado real"), "ca": ("regla de l'APA", "no rep l'estat real"), "en": ("APA rule", "does not receive the real state")}
+    for lang, (regla, real) in esperado.items():
+        t = TEXTOS[lang]["ficha_barr"]
+        assert regla in t["regla_chip"] and regla in t["esquema_h"] and real in t["esquema_aviso"], lang
+        assert "{palabra}" in t["regla_chip"]
+    for lang in IDIOMAS:  # nada de «las compuertas están cerradas» sin la regla delante
+        t = TEXTOS[lang]["ficha_barr"]
+        for k in ("estado_abiertas", "estado_puede", "estado_cerradas"):
+            assert re.search(r"APA", t[k]), (lang, k)
+
+
+def test_el_corte_se_declara_ejemplo_en_los_tres_idiomas():
+    for lang, palabra in {"es": "ejemplo", "ca": "exemple", "en": "example"}.items():
+        t = TEXTOS[lang]["ficha_barr"]
+        assert palabra in t["corte_aviso"].lower() and palabra in t["corte_lbl_parana"].lower() and palabra in t["corte_lbl_rn"].lower(), lang
+
+
+def test_la_pagina_carga_la_ficha_solo_si_el_indice_la_pide(html):
+    # ninguna estación escrita en la plantilla: el índice de módulos (ficha.json) dice qué estación lleva ficha y cuál
+    assert 'includes("ficha")' in html and 'manualDe("ficha.json")' in html
+    assert '"modulos/ficha_" + nombre + ".js"' in html
+    assert "parana-barranqueras" not in html
+    assert re.search(r'<script[^>]*src="[^"]*ficha', html) is None  # no va en la carga inicial
+    assert "document.createElement(\"script\")" in html
+    assert "[data-ficha]" in html and "window[\"Ficha\"" in html
+
+
+def test_la_ficha_no_anima_si_la_persona_pide_menos_movimiento(html):
+    css = html.split("<style>", 1)[1].split("</style>", 1)[0]
+    ficha = css.split("Ficha especial del Paraná", 1)[1]
+    fuera = re.sub(r"@media \(prefers-reduced-motion: no-preference\) \{.*?\n\}\n", "", ficha, flags=re.S)
+    for marca in ("transition", "animation", "@keyframes"):
+        assert marca not in fuera, marca
+    assert "transition" in ficha and "animation" in ficha  # sí hay movimiento, pero solo dentro del permiso
+    assert "prefers-reduced-motion: no-preference" in css
+
+
+def test_el_svg_de_la_ficha_tiene_alternativa_en_texto():
+    js = (RAIZ / "fuente" / "web" / "ficha_barranqueras.js").read_text(encoding="utf-8")
+    assert 'role="img" aria-describedby="fb-desc"' in js and 'id="fb-desc"' in js
+    assert 'aria-label="${esc(t.corte_desc)}"' in js and 'aria-live="polite"' in js
+
+
+def test_la_ficha_sigue_citando_a_pablo_en_el_pie():
+    for lang in IDIOMAS:
+        assert "Pablo Dodda" in " ".join(TEXTOS[lang]["foot"])

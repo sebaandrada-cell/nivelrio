@@ -8,6 +8,7 @@ import html
 import json
 import os
 import re
+import shutil
 from datetime import datetime
 
 F = os.path.dirname(os.path.abspath(__file__))
@@ -40,7 +41,9 @@ def armar() -> str:
 # Los archivos manuales viven en fuente/paises/<pais>/rios/<id>/ (en el repo) y el armado los valida y copia a
 # modulos/<pais>/<id>/ en la raíz del sitio, fuera de data/. Así no dependen de la caché de Actions que restaura data/ ni
 # los toca el robot (que solo escribe data/<pais>/rios/<id>/pronostico.json).
-ARCHIVOS_MODULOS = ("historicos", "pronostico_manual")
+ARCHIVOS_MODULOS = ("historicos", "pronostico_manual", "situacion", "umbrales", "ficha")
+FICHAS = ("barranqueras",)  # fichas especiales con script propio (fuente/web/ficha_<nombre>.js)
+TIPOS_NIVEL = ("aviso", "alerta", "evacuacion")
 IDIOMAS = ("es", "ca", "en")
 UNIDADES = ("m3s", "m", "ft")
 TIPOS_HISTORICO = ("crecida", "defensa")
@@ -128,7 +131,87 @@ def validar_pronostico_manual(d) -> None:
             raise ValueError(f"pronostico_manual: puntos[{i}] con mínimo mayor que el máximo")
 
 
-_VALIDADORES = {"historicos": validar_historicos, "pronostico_manual": validar_pronostico_manual}
+def _en_tres(x, donde: str) -> None:
+    if not (isinstance(x, dict) and set(x) == set(IDIOMAS) and all(_texto(x[l]) for l in IDIOMAS)):
+        raise ValueError(f"{donde}: debe traer {', '.join(IDIOMAS)}")
+
+
+def validar_situacion(d) -> None:
+    """Reporte escrito a mano: lleva su fecha (la página lo marca vencido pasadas 36 h) y nunca el estado de las compuertas."""
+    if not isinstance(d, dict):
+        raise ValueError("situacion: debe ser un objeto")
+    if not _texto(d.get("estacion")):
+        raise ValueError("situacion: falta estacion")
+    if not isinstance(d.get("fecha"), str) or not re.fullmatch(r"\d{4}-\d\d-\d\d", d["fecha"]):
+        raise ValueError(f"situacion: fecha inválida (AAAA-MM-DD): {d.get('fecha')!r}")
+    try:
+        datetime.fromisoformat(d["fecha"])
+    except ValueError:
+        raise ValueError(f"situacion: fecha inválida: {d['fecha']!r}") from None
+    if "actualizado" in d:
+        try:
+            ok = datetime.fromisoformat(d["actualizado"]).tzinfo is not None
+        except (TypeError, ValueError):
+            ok = False
+        if not ok:
+            raise ValueError(f"situacion: actualizado debe ser una fecha ISO con zona horaria: {d['actualizado']!r}")
+    for k in ("resumen", "fuentes"):
+        _en_tres(d.get(k), f"situacion: {k}")
+    if "pronostico_texto" in d:
+        _en_tres(d["pronostico_texto"], "situacion: pronostico_texto")
+    if "fuente_url" in d and not (isinstance(d["fuente_url"], str) and d["fuente_url"].startswith("https://")):
+        raise ValueError("situacion: fuente_url debe ser una dirección https")
+    prohibidas = [k for k in d if k.lower().startswith("compuertas")]
+    if prohibidas:
+        raise ValueError(f"situacion: no declara el estado de las compuertas ({prohibidas[0]}): lo calcula la regla de la APA con la altura medida")
+
+
+def validar_umbrales(d) -> None:
+    if not isinstance(d, dict):
+        raise ValueError("umbrales: debe ser un objeto")
+    if not _texto(d.get("estacion")):
+        raise ValueError("umbrales: falta estacion")
+    if d.get("unidad") != "m":
+        raise ValueError(f"umbrales: unidad inválida: {d.get('unidad')!r}")
+    if not _texto(d.get("fuente")):
+        raise ValueError("umbrales: falta fuente")
+    niveles = d.get("niveles")
+    if not isinstance(niveles, list) or not niveles:
+        raise ValueError("umbrales: niveles debe ser una lista no vacía")
+    for i, n in enumerate(niveles):
+        if not isinstance(n, dict) or not _numero(n.get("altura_m")):
+            raise ValueError(f"umbrales: niveles[{i}].altura_m no es numérica")
+        if n.get("tipo") not in TIPOS_NIVEL:
+            raise ValueError(f"umbrales: niveles[{i}] tipo inválido: {n.get('tipo')!r}")
+        _en_tres(n.get("nombre"), f"umbrales: niveles[{i}].nombre")
+    alturas = [n["altura_m"] for n in niveles]
+    if alturas != sorted(set(alturas)):
+        raise ValueError("umbrales: las alturas deben ir de menor a mayor y sin repetirse")
+    for tipo in ("alerta", "evacuacion"):
+        if sum(1 for n in niveles if n["tipo"] == tipo) != 1:
+            raise ValueError(f"umbrales: debe haber exactamente un nivel de tipo {tipo}")
+
+
+def validar_ficha(d) -> None:
+    if not isinstance(d, dict) or not _texto(d.get("estacion")):
+        raise ValueError("ficha: falta estacion")
+    if d.get("ficha") not in FICHAS:
+        raise ValueError(f"ficha: ficha desconocida: {d.get('ficha')!r} (solo {', '.join(FICHAS)})")
+
+
+_VALIDADORES = {"historicos": validar_historicos, "pronostico_manual": validar_pronostico_manual,
+                "situacion": validar_situacion, "umbrales": validar_umbrales, "ficha": validar_ficha}
+
+
+def _contrastar_con_registro(clave: str, doc: dict, estacion: dict) -> None:
+    """Los niveles oficiales son los del registro de estaciones: un archivo manual no puede contradecirlos."""
+    if clave != "umbrales":
+        return
+    um = estacion.get("umbrales") or {}
+    esperado = {"alerta": um.get("medio"), "evacuacion": um.get("alto")}
+    for n in doc["niveles"]:
+        if n["tipo"] in esperado and n["altura_m"] != esperado[n["tipo"]]:
+            raise ValueError(f"el nivel de {n['tipo']} ({n['altura_m']}) contradice al registro de estaciones ({esperado[n['tipo']]}); manda el registro")
 
 
 def _leer_modulos(src: str):
@@ -164,6 +247,7 @@ def _leer_modulos(src: str):
                         raise ValueError(f"unidad {doc['unidad']!r} distinta de la de la estación ({estaciones[id_]['unidad']!r})")
                     if "estacion" in doc and doc["estacion"] != id_:
                         raise ValueError(f"estacion {doc['estacion']!r} no es {id_!r}")
+                    _contrastar_con_registro(clave, doc, estaciones[id_])
                 except ValueError as e:
                     raise ValueError(f"{cc}/rios/{id_}/{nombre}: {e}") from None
                 docs[clave] = doc
@@ -218,8 +302,16 @@ def copiar_modulos(src: str, destino: str) -> dict:
     return indice
 
 
+def copiar_scripts_de_fichas(destino: str) -> None:
+    """Publica los scripts de las fichas especiales (se cargan solo cuando la estación los pide) en <destino>/ficha_<nombre>.js."""
+    os.makedirs(destino, exist_ok=True)
+    for nombre in FICHAS:
+        shutil.copyfile(os.path.join(F, "web", f"ficha_{nombre}.js"), os.path.join(destino, f"ficha_{nombre}.js"))
+
+
 def main() -> None:
     copiar_modulos(os.path.join(F, "paises"), os.path.join(RAIZ, "modulos"))
+    copiar_scripts_de_fichas(os.path.join(RAIZ, "modulos"))
     with open(os.path.join(RAIZ, "index.html"), "w", encoding="utf-8") as f:
         f.write(armar())
     print("index.html listo")

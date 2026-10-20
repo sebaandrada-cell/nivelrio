@@ -21,18 +21,18 @@
   --radius: 10px;
   --bg: #f7f6f2; --panel: #ffffff; --fg: #1f1e1b; --muted: #6b6860; --line: #e3e0d8; --grid: #ece9e1;
   --n0: #2e7d4f; --n1: #a07d0a; --n2: #c46a12; --n3: #c0392b; --sd: #8a867c;
-  --accent: #2f6fd0;
+  --accent: #2f6fd0; --rn: #2f7a72;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #191917; --panel: #23221f; --fg: #ecebe6; --muted: #a3a097; --line: #3a3833; --grid: #302f2b;
-    --n0: #5fbf85; --n1: #e0c04a; --n2: #f0a04b; --n3: #ef6f61; --sd: #8f8b81; --accent: #6ea3ff;
+    --n0: #5fbf85; --n1: #e0c04a; --n2: #f0a04b; --n3: #ef6f61; --sd: #8f8b81; --accent: #6ea3ff; --rn: #4f9a90;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --bg: #191917; --panel: #23221f; --fg: #ecebe6; --muted: #a3a097; --line: #3a3833; --grid: #302f2b;
-  --n0: #5fbf85; --n1: #e0c04a; --n2: #f0a04b; --n3: #ef6f61; --sd: #8f8b81; --accent: #6ea3ff;
+  --n0: #5fbf85; --n1: #e0c04a; --n2: #f0a04b; --n3: #ef6f61; --sd: #8f8b81; --accent: #6ea3ff; --rn: #4f9a90;
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
@@ -142,6 +142,57 @@ svg.hb { width: 100%; height: auto; display: block; }
 svg.hb text { font-size: 11px; fill: var(--fg); }
 svg.hb .mu { fill: var(--muted); }
 @media (prefers-reduced-motion: no-preference) { .card { transition: border-color .3s; } }
+/* Ficha especial del Paraná en Barranqueras (esquema de compuertas y corte bajo el dique). Sin movimiento salvo que se permita. */
+.card:has(.fb) { grid-column: 1 / -1; }
+.fichab { border-top: 1px solid var(--line); padding-top: 10px; }
+.fb { display: grid; gap: 8px; }
+.fb p { margin: 0; max-width: 56rem; line-height: 1.5; }
+.fb-sub { font-size: var(--fs-body); font-weight: 600; margin: 10px 0 0; }
+.fb-fig { margin: 0; max-width: 560px; }
+.fb-desc { font-size: var(--fs-cap); color: var(--muted); line-height: 1.5; margin-top: 4px; }
+.fb-svg { width: 100%; height: auto; display: block; overflow: visible; }
+.fb-tx { font-size: 10px; fill: var(--fg); }
+.fb-b { font-weight: 600; }
+.fb-mu { fill: var(--muted); }
+.fb-ev-t { fill: var(--n3); font-weight: 600; }
+.fb-al-t { fill: var(--n2); font-weight: 600; }
+.fb-agua-pa { fill: var(--accent); opacity: .3; }
+.fb-agua-rn { fill: var(--rn); opacity: .35; }
+.fb-sup-pa, .fb-sup-rn { stroke-width: 1.5; }
+.fb-sup-pa { stroke: var(--accent); }
+.fb-sup-rn { stroke: var(--rn); }
+.fb-ev, .fb-al { stroke-width: 1.5; fill: none; }
+.fb-ev { stroke: var(--n3); stroke-dasharray: 3 3; }
+.fb-al { stroke: var(--n2); stroke-dasharray: 7 4; }
+.fb-muro { fill: var(--muted); }
+.fb-muro-sombra { fill: none; stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 3 3; }
+.fb-flujo { fill: none; stroke: var(--rn); stroke-width: 2.5; stroke-dasharray: 6 6; }
+.fb-tubo { stroke: var(--accent); }
+.fb-tubo-borde { fill: none; stroke: var(--muted); stroke-width: 7; stroke-linejoin: round; }
+.fb-punta { fill: none; stroke: var(--rn); stroke-width: 2; }
+.fb-bomba { fill: var(--fg); }
+.fb-suelo { stroke: var(--muted); }
+.fb-arena { fill: #c9a63e; opacity: .42; }
+.fb-arcilla { fill: #8f6446; opacity: .55; }
+.fb-hueco { fill: var(--panel); }
+.fb-c .fb-hueco, .fb-c .fb-filtra, .fb-c .fb-union { opacity: 0; }
+.fb-c.p1 .fb-hueco, .fb-c.p1 .fb-filtra { opacity: 1; }
+.fb-c.p2 .fb-filtra { opacity: 0; }
+.fb-c.p2 .fb-dique { transform: translate(6px, 30px) rotate(18deg); transform-origin: 166px 112px; }
+.fb-c.p2 .fb-dique-t, .fb-c.p3 .fb-dique-t, .fb-c.p3 .fb-rn-t, .fb-c.p3 .fb-rn-linea { opacity: 0; }
+.fb-c.p3 .fb-union { opacity: .3; }
+.fb-c.p3 line.fb-union { opacity: 1; }
+.fb-cap { font-weight: 600; }
+.fb-ctl { display: flex; flex-wrap: wrap; gap: 8px; }
+.fb-btn { font: inherit; font-size: var(--fs-cap); min-height: 40px; padding: 6px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--panel); color: var(--fg); cursor: pointer; }
+.fb-btn:disabled { color: var(--muted); cursor: default; opacity: .6; }
+@media (prefers-reduced-motion: no-preference) {
+  .fb-c .fb-hueco, .fb-c .fb-filtra, .fb-c .fb-union, .fb-c .fb-dique-t, .fb-c .fb-rn-t, .fb-c .fb-rn-linea { transition: opacity .6s; }
+  .fb-c .fb-dique { transition: transform .9s ease-in; }
+  .fb-flujo { animation: fb-corre 1.2s linear infinite; }
+  @keyframes fb-corre { to { stroke-dashoffset: -12; } }
+}
+
 </style>
 </head>
 <body>
@@ -353,11 +404,14 @@ svg.hb .mu { fill: var(--muted); }
     // Los archivos manuales viven en modulos/ (fuera de data/, que la caché de Actions restaura); solo el pronóstico del robot está en data/.
     const manualDe = (nombre) => getJson("modulos/" + p + "/" + encodeURIComponent(e.id) + "/" + nombre).catch(() => null);
     const robotDe = (nombre) => getJson(L.rutaDatos(p, "rios/" + encodeURIComponent(e.id) + "/" + nombre)).catch(() => null);
-    const [historicos, manual, nws] = await Promise.all([
+    const [historicos, manual, nws, situacion, umbrales, ficha] = await Promise.all([
       tiene.includes("historicos") ? manualDe("historicos.json") : null,
       tiene.includes("pronostico_manual") ? manualDe("pronostico_manual.json") : null,
-      e.fuente === "usgs" ? robotDe("pronostico.json") : null]);
-    const r = { t: Date.now(), historicos, nws, manual };
+      e.fuente === "usgs" ? robotDe("pronostico.json") : null,
+      tiene.includes("situacion") ? manualDe("situacion.json") : null,
+      tiene.includes("umbrales") ? manualDe("umbrales.json") : null,
+      tiene.includes("ficha") ? manualDe("ficha.json") : null]);
+    const r = { t: Date.now(), historicos, nws, manual, situacion, umbrales, ficha };
     if (p === pais) D.rios[e.id] = r;
     return r;
   }
@@ -509,9 +563,30 @@ svg.hb .mu { fill: var(--muted); }
     });
   }
 
+  // ---------- ficha especial de una estación ----------
+  // El índice de módulos dice qué ficha lleva cada estación (ficha.json). Su script se descarga solo cuando esa estación está abierta.
+  const scriptsCargados = {};
+  function cargarScript(src) {
+    if (!scriptsCargados[src]) scriptsCargados[src] = new Promise((ok, mal) => {
+      const s = document.createElement("script");
+      s.src = src; s.onload = ok; s.onerror = () => { delete scriptsCargados[src]; mal(new Error(src)); };
+      document.head.appendChild(s);
+    });
+    return scriptsCargados[src];
+  }
+  async function montarFicha(el, e) {
+    const r = D.rios[e.id], nombre = r && r.ficha ? String(r.ficha.ficha || "") : "";
+    if (!/^[a-z]+$/.test(nombre)) { el.hidden = true; return; }
+    try { await cargarScript("modulos/ficha_" + nombre + ".js"); } catch (err) { el.hidden = true; return; }
+    const F = window["Ficha" + nombre[0].toUpperCase() + nombre.slice(1)];
+    if (!F || !el.isConnected) return;
+    F.montar(el, { estacion: e, situacion: r.situacion, umbrales: r.umbrales, pronostico: r.manual, lluvia: D.prev, lang, textos: t().ficha_barr });
+  }
+
   // Rellena lo que depende de los archivos del río, cuando ya se descargaron.
   function pintarRio(fila, e) {
     const r = D.rios[e.id] || {};
+    const fb = fila.querySelector("[data-ficha]"); if (fb) montarFicha(fb, e);
     const ch = fila.querySelector(".chbox"); if (ch) grafico(ch, e);
     const nota = fila.querySelector(".mnote"); if (nota) nota.innerHTML = notaGrafico(e);
     const h = fila.querySelector('[data-mod="historicas"]');
@@ -536,7 +611,7 @@ svg.hb .mu { fill: var(--muted); }
       `<div class="srow"><div class="h"><b>${esc(e.nombre)}</b>${tag(e.nivel, e.sd)}</div>
         <div class="meta"><span>${esc(val(e.valor, e.unidad || "m3s"))}</span><span>${esc(L.edadTexto(L.edadMin(e.t_utc, Date.now()), lang))}</span></div>
         <div class="meta"><span>${esc(umbralesTexto(e.umbrales, e.unidad))}</span><span>${esc(L.tipoUmbralTexto(e.umbrales.tipo, lang))}</span></div>
-        ${(D.hist[e.id] || []).length >= 2 ? `<h4 class="mh">${esc(t().mod_chart_h)}</h4>` : ""}<div class="chbox" data-id="${esc(e.id)}"></div>${modulos(e)}</div>`).join("");
+        ${(D.hist[e.id] || []).length >= 2 ? `<h4 class="mh">${esc(t().mod_chart_h)}</h4>` : ""}<div class="chbox" data-id="${esc(e.id)}"></div>${modulos(e)}${(D.mod[e.id] || []).includes("ficha") ? '<div class="fichab" data-ficha></div>' : ""}</div>`).join("");
     const filas = [...body.querySelectorAll(".srow")];
     g.estaciones.forEach((e, i) => {
       grafico(filas[i].querySelector(".chbox"), e);
