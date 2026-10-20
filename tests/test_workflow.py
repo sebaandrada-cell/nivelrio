@@ -54,3 +54,9 @@ def test_notificar_corre_aunque_falle_la_publicacion(wf):
     """Si el push falla, el estado ya está en la caché: sin always() el aviso se perdería para siempre."""
     paso = next(p for p in pasos(wf) if p.get("id") == "notificar")
     assert "always()" in paso["if"]
+
+
+def test_git_add_data_cubre_las_carpetas_por_pais(wf):
+    """`git add data` incluye data/<pais>/ y data/paises.json; no hace falta listar países en el workflow."""
+    texto = RUTA.read_text(encoding="utf-8")
+    assert "git add data\n" in texto

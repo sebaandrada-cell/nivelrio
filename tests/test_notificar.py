@@ -58,3 +58,37 @@ def test_solo_notifica_subidas_y_sd_en_n2_n3():
     ]
     sel = notificar.seleccionar(cs)
     assert sel == [cs[0], cs[2], cs[3]]
+
+
+def test_issue_incluye_pais_y_unidad_en_pies(tmp_path):
+    t, c = notificar.redactar_issue(cambio(0, 3), "Memphis", "Mississippi", 40.5, "ft", 10,
+                                    fuente="usgs", tipo_umbral="oficial", pais="us")
+    assert t.startswith("[US] ") and "nivel N3" in t
+    assert "40.5 ft" in c and "weather.gov" in c and "USGS" in c
+    assert c.rstrip().endswith("#us") or "#us" in c
+
+
+def test_pie_argentina_menciona_ina():
+    _, c = notificar.redactar_issue(cambio(0, 2), "Corrientes", "Paraná", 6.1, "m", 4, fuente="ina", pais="ar")
+    assert "Protección Civil" in c and "INA" in c and "6.1 m" in c
+
+
+def test_sitio_configurable_por_entorno(monkeypatch):
+    monkeypatch.setenv("SITIO", "https://ejemplo.test/x/")
+    _, c = notificar.redactar_issue(cambio(), "A", "B", 1.0, "m3s", 1, pais="es")
+    assert "https://ejemplo.test/x/#es" in c
+
+
+def test_notificar_recorre_todos_los_paises(tmp_path, monkeypatch, capsys):
+    import json
+    for pais, id_, nombre in (("es", "a1", "Girona"), ("ar", "i1", "Corrientes")):
+        d = tmp_path / pais
+        d.mkdir()
+        (d / "cambios.json").write_text(json.dumps([cambio(0, 2, id_=id_)]))
+        (d / "latest.json").write_text(json.dumps({"estaciones": [{
+            "id": id_, "nombre": nombre, "rio": "R", "valor": 1.0, "unidad": "m" if pais == "ar" else "m3s",
+            "edad_min": 3, "fuente": "ina" if pais == "ar" else "aca", "umbrales": {"tipo": "oficial"}, "pais": pais}]}))
+    monkeypatch.setattr(notificar, "DIR_DATA", str(tmp_path))
+    assert notificar.main(["--dry-run"]) == 0
+    out = capsys.readouterr().out
+    assert "[ES] R · Girona" in out and "[AR] R · Corrientes" in out

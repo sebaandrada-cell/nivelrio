@@ -22,8 +22,9 @@ VENTANA_MIN = 90          # minutos de historia de Sentilo que se miran para no 
 CERCA_DEL_UMBRAL = 0.8    # fracción del umbral bajo desde la que se pide la ventana
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
-RUTA_ESTACIONES = os.path.join(AQUI, "paises", "es", "estaciones.json")
+DIR_PAISES = os.path.join(AQUI, "paises")
 DIR_DATA = os.path.join(AQUI, "..", "data")
+FUENTES_DATOS = ("aca", "chj", "ina", "agp", "usgs")  # contrato: callable(estaciones) -> (lecturas, umbrales_vivos)
 
 
 def _iso(d: datetime) -> str:
@@ -82,7 +83,7 @@ def _eleva(avisos: list[Aviso], est) -> bool:
 def _lectura_para_evaluar(est, lectura, prev, ahora, ventana):
     """Para estaciones ACA cerca del umbral, el máximo de la ventana sustituye al último valor."""
     u = est.umbrales
-    if lectura is None or lectura.unidad != "m3s" or est.fuente != "aca" or u.bajo is None:
+    if ventana is None or lectura is None or lectura.unidad != "m3s" or est.fuente != "aca" or u.bajo is None:
         return lectura
     if not (prev.nivel >= 1 or lectura.valor >= CERCA_DEL_UMBRAL * u.bajo):
         return lectura
@@ -117,7 +118,7 @@ def _puede_llegar(est, caudal, observado, nivel_actual):
     """Etiqueta informativa. Se compara el observado con el mínimo del modelo (su caudal de base): si el
     modelo prevé una crecida, su máximo se parece poco al caudal de hoy, y eso no lo hace incoherente."""
     from fuentes import prevision
-    if not caudal or observado is None or not prevision.coherente(observado, caudal[0]):
+    if est.magnitud != "caudal" or not caudal or observado is None or not prevision.coherente(observado, caudal[0]):
         return None
     n = prevision.nivel_posible(est.umbrales, caudal[1])
     return n if n > nivel_actual else None
@@ -132,8 +133,9 @@ def _doc_prevision(ahora, estaciones, bruto) -> dict:
             por_est[e.id] = {"lluvia_48h_mm": None, "caudal": None, "puede_llegar": None}
             continue
         lluvia = p["lluvia"]
+        caudal = list(p["caudal"]) if p["caudal"] and e.magnitud == "caudal" else None  # GloFAS modela caudal, no cota
         por_est[e.id] = {"lluvia_48h_mm": round(sum(mm for _, mm, _ in lluvia[:2]), 1),
-                         "caudal": list(p["caudal"]) if p["caudal"] else None, "puede_llegar": None}
+                         "caudal": caudal, "puede_llegar": None}
         dias = zonas.setdefault(e.zona, [])
         for i, (fecha, mm, prob) in enumerate(lluvia):
             if i < len(dias):
@@ -150,10 +152,14 @@ def ejecutar(ahora: datetime, estaciones: list, fuentes: dict, dir_data: str) ->
 
     # --- lecturas y umbrales vivos ---
     lecturas, vivos = {}, {}
-    for clave in ("aca", "chj"):
+    for clave in FUENTES_DATOS:
         ests = [e for e in estaciones if e.fuente == clave]
         if not ests:
-            ok[clave] = True
+            if clave in fuentes:  # fuente cableada para el país pero sin estaciones hoy: figura como sana
+                ok[clave] = True
+            continue
+        if clave not in fuentes:  # la fuente no está cableada para este país: sus estaciones quedan en «sin datos»
+            ok[clave] = False
             continue
         try:
             ls, um = fuentes[clave](ests)
@@ -164,12 +170,15 @@ def ejecutar(ahora: datetime, estaciones: list, fuentes: dict, dir_data: str) ->
             ok[clave] = False
 
     # --- avisos: si la fuente cae se conservan los últimos, un aviso rojo no desaparece por un corte ---
-    try:
-        avisos = list(fuentes["avisos"]())
-        ok["avisos"] = True
-    except FuenteError:
-        avisos = [_aviso_desde_dict(d) for d in _leer(os.path.join(dir_data, "avisos.json"), [])]
-        ok["avisos"] = False
+    if "avisos" in fuentes:
+        try:
+            avisos = list(fuentes["avisos"]())
+            ok["avisos"] = True
+        except FuenteError:
+            avisos = [_aviso_desde_dict(d) for d in _leer(os.path.join(dir_data, "avisos.json"), [])]
+            ok["avisos"] = False
+    else:
+        avisos = []
 
     # --- niveles ---
     cambios, nuevos, filas, historial = [], {}, [], {}
@@ -178,21 +187,21 @@ def ejecutar(ahora: datetime, estaciones: list, fuentes: dict, dir_data: str) ->
         existia = est.id in estados_json
         prev = estado_desde_dict(estados_json[est.id]) if existia else ESTADO_INICIAL
         lectura = lecturas.get(est.id)
-        nuevo = evaluar(prev, _lectura_para_evaluar(e, lectura, prev, ahora, fuentes["aca_ventana"]), e, ahora,
+        nuevo = evaluar(prev, _lectura_para_evaluar(e, lectura, prev, ahora, fuentes.get("aca_ventana")), e, ahora,
                         aviso_rojo=_eleva(avisos, e))
         nuevos[est.id] = nuevo
         if (nuevo.nivel != prev.nivel or nuevo.sd != prev.sd) and (existia or nuevo.nivel > 0):
             cambios.append({"estacion_id": est.id, "nivel_antes": prev.nivel, "nivel_despues": nuevo.nivel,
                             "sd": nuevo.sd, "elevado_por_aviso": nuevo.elevado_por_aviso})
-        if lectura is not None and lectura.unidad == "m3s":
+        if lectura is not None and lectura.unidad == est.unidad:
             valor, t = lectura.valor, lectura.t_utc
         else:
             valor, t = nuevo.ultimo_valor, nuevo.ultimo_t_utc
-        if lectura is not None and lectura.unidad == "m3s" and not nuevo.sd:
+        if lectura is not None and lectura.unidad == est.unidad and not nuevo.sd:
             historial[est.id] = (lectura.t_utc, lectura.valor)
         filas.append({
             "id": est.id, "rio": est.rio, "nombre": est.nombre, "cuenca": est.cuenca, "zona": est.zona,
-            "valor": valor, "unidad": "m3s", "t_utc": _iso(t) if t else None,
+            "valor": valor, "unidad": est.unidad, "pais": est.pais, "t_utc": _iso(t) if t else None,
             "edad_min": int((ahora - t).total_seconds() // 60) if t else None,
             "nivel": nuevo.nivel, "sd": nuevo.sd,
             "umbrales": {"bajo": e.umbrales.bajo, "medio": e.umbrales.medio, "alto": e.umbrales.alto, "tipo": e.umbrales.tipo},
@@ -202,15 +211,16 @@ def ejecutar(ahora: datetime, estaciones: list, fuentes: dict, dir_data: str) ->
     # --- previsión: informativa, una vez por hora; nunca toca niveles ni cambios ---
     ruta_prev = os.path.join(dir_data, "prevision.json")
     doc = _leer(ruta_prev, None)
-    ok["prevision"] = previo.get("fuentes_ok", {}).get("prevision", True)
+    if "prevision" in fuentes:
+        ok["prevision"] = previo.get("fuentes_ok", {}).get("prevision", True)
     generado = _desde_iso(doc["generado_utc"]) if doc and doc.get("generado_utc") else None
-    if generado is None or ahora - generado >= PERIODO_HORARIO:
+    if "prevision" in fuentes and (generado is None or ahora - generado >= PERIODO_HORARIO):
         try:
             doc = _doc_prevision(ahora, estaciones, fuentes["prevision"](estaciones))
             ok["prevision"] = True
         except Exception:  # noqa: BLE001 - la previsión es informativa: ningún fallo suyo puede frenar las alertas
             ok["prevision"] = False
-    if doc:
+    if doc and "prevision" in fuentes:
         por_id = {f["id"]: f for f in filas}
         for est in estaciones:
             p = doc["estaciones"].get(est.id)
@@ -247,7 +257,34 @@ def debe_publicar(cambios: list[dict], ahora: datetime, ultima=None) -> bool:
     return bool(cambios) or ultima is None or ahora - ultima >= PERIODO_HORARIO
 
 
-def _fuentes_reales() -> dict:
+def ejecutar_todo(ahora: datetime, paises: dict, fuentes_por_pais: dict, raiz_data: str) -> dict:
+    """Ejecuta cada país aislado en raiz_data/<pais>. Un país que lanza cualquier excepción se registra en stderr
+    y se salta: sus archivos quedan como estaban. Devuelve {pais: cambios} solo de los que corrieron bien."""
+    resultado = {}
+    for pais, estaciones in paises.items():
+        try:
+            resultado[pais] = ejecutar(ahora, estaciones, fuentes_por_pais.get(pais, {}), os.path.join(raiz_data, pais))
+        except Exception as exc:  # noqa: BLE001 - el aislamiento por país es el contrato
+            print(f"{pais}: falló la ejecución: {exc!r}", file=sys.stderr)
+    ruta = os.path.join(raiz_data, "paises.json")
+    indice = _leer(ruta, {})
+    for pais in resultado:
+        latest = _leer(os.path.join(raiz_data, pais, "latest.json"), {})
+        filas = latest.get("estaciones", [])
+        por_nivel = [0, 0, 0, 0]
+        for f in filas:
+            por_nivel[f["nivel"]] += 1
+        indice[pais] = {"generado_utc": latest.get("generado_utc", _iso(ahora)), "estaciones": len(filas),
+                        "por_nivel": por_nivel, "sd": sum(1 for f in filas if f["sd"]),
+                        "fuentes_ok": latest.get("fuentes_ok", {})}
+    if resultado:
+        escribir_json(ruta, indice)
+    return resultado
+
+
+def _fuentes_reales(pais: str = "es") -> dict:
+    if pais != "es":
+        return {}  # las fuentes de AR y US las cablean sus tareas
     from fuentes import aca, avisos, chj, prevision
     cache = {}
 
@@ -286,20 +323,37 @@ def _fuentes_reales() -> dict:
     return {"aca": f_aca, "aca_ventana": f_ventana, "chj": f_chj, "avisos": f_avisos, "prevision": prevision.bajar}
 
 
+def _paises_con_registro(dir_paises: str = DIR_PAISES) -> list[str]:
+    try:
+        carpetas = sorted(os.listdir(dir_paises))
+    except OSError:
+        return []
+    return [c for c in carpetas if os.path.isfile(os.path.join(dir_paises, c, "estaciones.json"))]
+
+
 def main() -> int:
     from estaciones import cargar
     ahora = datetime.now(timezone.utc).replace(microsecond=0)
-    cambios = ejecutar(ahora, cargar(RUTA_ESTACIONES, "es"), _fuentes_reales(), DIR_DATA)
-    escribir_json(os.path.join(DIR_DATA, "cambios.json"), cambios)
-    publicar = debe_publicar(cambios, ahora, ultima_publicacion(DIR_DATA))
+    paises, fuentes_por_pais = {}, {}
+    for pais in _paises_con_registro():
+        try:
+            paises[pais] = cargar(os.path.join(DIR_PAISES, pais, "estaciones.json"), pais)
+            fuentes_por_pais[pais] = _fuentes_reales(pais)
+        except Exception as exc:  # noqa: BLE001 - un registro roto no frena a los demás países
+            print(f"{pais}: no se pudo cargar el registro: {exc!r}", file=sys.stderr)
+    por_pais = ejecutar_todo(ahora, paises, fuentes_por_pais, DIR_DATA)
+    for pais, cambios in por_pais.items():
+        escribir_json(os.path.join(DIR_DATA, pais, "cambios.json"), cambios)
+    todos = [c for cs in por_pais.values() for c in cs]
+    publicar = debe_publicar(todos, ahora, ultima_publicacion(DIR_DATA))
     if publicar:
         registrar_publicacion(DIR_DATA, ahora)
-    print(f"{_iso(ahora)}: {len(cambios)} cambios, publicar={publicar}")
+    print(f"{_iso(ahora)}: {len(todos)} cambios en {len(por_pais)}/{len(_paises_con_registro())} países, publicar={publicar}")
     salida = os.environ.get("GITHUB_OUTPUT")
     if salida:
         with open(salida, "a", encoding="utf-8") as f:
             f.write(f"publicar={'true' if publicar else 'false'}\n")
-    return 0
+    return 0 if por_pais else 1
 
 
 if __name__ == "__main__":

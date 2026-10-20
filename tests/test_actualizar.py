@@ -117,7 +117,7 @@ def test_latest_json_tiene_el_formato_acordado(tmp_path):
     assert set(doc) == {"generado_utc", "estaciones", "avisos", "fuentes_ok"}
     e = doc["estaciones"][0]
     assert set(e) == {"id", "rio", "nombre", "cuenca", "valor", "unidad", "t_utc", "edad_min", "nivel", "sd",
-                      "umbrales", "elevado_por_aviso", "fuente", "zona"}
+                      "umbrales", "elevado_por_aviso", "fuente", "zona", "pais"}
     assert e["valor"] == 25.0 and e["edad_min"] == 5 and e["t_utc"] == "2026-10-19T20:15:00Z"
     assert set(doc["fuentes_ok"]) == {"aca", "chj", "avisos", "prevision"}
 
@@ -373,3 +373,92 @@ def test_ventana_no_cuenta_dos_veces_la_misma_muestra(tmp_path):
     cambios = correr(tmp_path, [e], fuentes(aca=[lec("a1", 80.0, ahora=t2)], ventana=pico), ahora=t2)
     assert cambios == []
     assert latest(tmp_path)["a1"]["nivel"] == 0
+
+
+# ---- multipaís ----
+
+def est_ina(**kw):
+    base = dict(id="i1", fuente="ina", componente=None, ref="42", zona="litoral-parana", pais="ar",
+                magnitud="altura", unidad="m", umbrales=Umbrales(3.0, 4.0, 5.0, "oficial"))
+    base.update(kw)
+    return make_estacion(**base)
+
+
+def fuentes_ar(lecturas=(), error=None):
+    def f_ina(ests):
+        if error:
+            raise error
+        return list(lecturas), {}
+    return {"ina": f_ina}
+
+
+def test_un_pais_roto_no_frena_a_los_demas(tmp_path, capsys):
+    paises = {"es": [est_aca()], "ar": [est_ina()]}
+    # estado previo de ar: debe quedar intacto
+    (tmp_path / "ar").mkdir()
+    (tmp_path / "ar" / "latest.json").write_text('{"previo": true}', encoding="utf-8")
+    por_pais = {"es": fuentes(aca=[lec("a1", 25.0)]), "ar": fuentes_ar(error=RuntimeError("boom"))}
+    por_pais["ar"]["ina"] = lambda ests: (_ for _ in ()).throw(RuntimeError("boom"))
+    res = actualizar.ejecutar_todo(AHORA, paises, por_pais, str(tmp_path))
+    assert "es" in res and "ar" not in res
+    assert latest(tmp_path / "es")["a1"]["nivel"] == 1
+    assert leer(tmp_path / "ar", "latest.json") == {"previo": True}
+    assert "ar" in capsys.readouterr().err
+
+
+def test_pais_sin_avisos_ni_prevision_no_los_pide(tmp_path):
+    actualizar.ejecutar(AHORA, [est_ina()], fuentes_ar([lec("i1", 3.5, unidad="m", fuente="ina")]), str(tmp_path))
+    ok = leer(tmp_path, "latest.json")["fuentes_ok"]
+    assert ok == {"ina": True}
+    assert leer(tmp_path, "latest.json")["avisos"] == []
+    assert latest(tmp_path)["i1"]["nivel"] == 1
+    assert latest(tmp_path)["i1"]["unidad"] == "m" and latest(tmp_path)["i1"]["pais"] == "ar"
+
+
+def test_fuente_necesaria_ausente_marca_ok_falso(tmp_path):
+    actualizar.ejecutar(AHORA, [est_ina()], {}, str(tmp_path))
+    assert leer(tmp_path, "latest.json")["fuentes_ok"] == {"ina": False}
+    assert latest(tmp_path)["i1"]["sd"] is True
+
+
+def test_altura_no_genera_puede_llegar(tmp_path):
+    e = est_ina()
+    bruto = {"i1": {"lluvia": [("2026-10-20", 10.0, 80), ("2026-10-21", 5.0, 50)], "caudal": (1.0, 9999.0)}}
+    f = fuentes_ar([lec("i1", 1.0, unidad="m", fuente="ina")])
+    f["prevision"] = lambda ests: bruto
+    actualizar.ejecutar(AHORA, [e], f, str(tmp_path))
+    assert leer(tmp_path, "prevision.json")["estaciones"]["i1"]["puede_llegar"] is None
+
+
+def test_primera_ejecucion_avisa_una_vez(tmp_path):
+    ests = [est_aca(id="a1"), est_aca(id="a2")]
+    f = fuentes(aca=[lec("a1", 3.0), lec("a2", 3.0)])
+    f["aca"] = lambda e: ([lec("a1", 50.0), lec("a2", 3.0)], {})
+    c1 = correr(tmp_path, ests, f)
+    assert [(c["estacion_id"], c["nivel_despues"]) for c in c1] == [("a1", 3)]
+    assert correr(tmp_path, ests, f) == []
+
+
+def test_indice_de_paises(tmp_path):
+    ests = [est_aca(id="a1"), est_aca(id="a2"), est_aca(id="a3")]
+    f = fuentes(aca=[lec("a1", 25.0), lec("a2", 3.0)])
+    actualizar.ejecutar_todo(AHORA, {"es": ests}, {"es": f}, str(tmp_path))
+    idx = leer(tmp_path, "paises.json")
+    assert idx["es"]["estaciones"] == 3 and idx["es"]["sd"] == 1
+    assert idx["es"]["por_nivel"] == [2, 1, 0, 0]
+    assert idx["es"]["generado_utc"] == "2026-10-19T20:20:00Z"
+    assert idx["es"]["fuentes_ok"]["aca"] is True
+
+
+def test_indice_conserva_entrada_del_pais_que_falla(tmp_path):
+    actualizar.escribir_json(str(tmp_path / "paises.json"), {"ar": {"estaciones": 7}})
+    paises = {"es": [est_aca()], "ar": [est_ina()]}
+    por_pais = {"es": fuentes(aca=[lec("a1", 3.0)]), "ar": {"ina": lambda e: (_ for _ in ()).throw(RuntimeError("x"))}}
+    actualizar.ejecutar_todo(AHORA, paises, por_pais, str(tmp_path))
+    idx = leer(tmp_path, "paises.json")
+    assert idx["ar"] == {"estaciones": 7} and idx["es"]["estaciones"] == 1
+
+
+def test_fuentes_reales_solo_es():
+    assert actualizar._fuentes_reales("ar") == {}
+    assert set(actualizar._fuentes_reales("es")) == {"aca", "aca_ventana", "chj", "avisos", "prevision"}
