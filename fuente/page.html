@@ -47,9 +47,13 @@ h1 { font-family: var(--font-serif); font-weight: 400; font-size: var(--fs-title
 .seg { display: inline-flex; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--panel); }
 .seg button { background: transparent; color: var(--muted); border: 0; padding: 7px 12px; font: inherit; font-size: var(--fs-cap); cursor: pointer; }
 .seg button[aria-pressed="true"] { background: var(--bg); color: var(--fg); font-weight: 600; }
-.tabs { display: flex; gap: var(--gap-xs); border-bottom: 1px solid var(--line); overflow-x: auto; }
-.tabs button { background: transparent; color: var(--muted); border: 0; border-bottom: 2px solid transparent; margin-bottom: -1px; padding: 9px 14px;
-  font: inherit; font-size: var(--fs-head); cursor: pointer; white-space: nowrap; display: inline-flex; gap: 8px; align-items: baseline; }
+.tabs { display: flex; flex-wrap: wrap; align-items: center; gap: 2px var(--gap-xs); border-bottom: 1px solid var(--line); }
+.tab-group { flex: 0 0 100%; padding: 7px 10px 2px; color: var(--muted); font-size: 11px; font-weight: 600;
+  letter-spacing: .06em; text-transform: uppercase; }
+.tab-group[data-group="regions"] { border-top: 1px solid var(--line); margin-top: 3px; }
+.tabs button { flex: 0 1 auto; max-width: 100%; background: transparent; color: var(--muted); border: 0; border-bottom: 2px solid transparent;
+  margin-bottom: -1px; padding: 8px 10px; font: inherit; font-size: var(--fs-body); cursor: pointer; white-space: normal;
+  text-align: left; display: inline-flex; gap: 6px; align-items: baseline; }
 .tabs button[aria-selected="true"] { color: var(--fg); border-bottom-color: var(--fg); font-weight: 600; }
 .tabs button:hover { color: var(--fg); }
 .tabs .badge { font-size: var(--fs-cap); font-weight: 600; font-variant-numeric: tabular-nums; color: var(--c); }
@@ -251,6 +255,7 @@ svg.hb .mu { fill: var(--muted); }
   const COL = ["var(--n0)", "var(--n1)", "var(--n2)", "var(--n3)", "var(--sd)"];
   const ZONA_HORARIA = { ar: "America/Argentina/Buenos_Aires", es: "Europe/Madrid", us: undefined }; // EE. UU.: la del navegador
   const FUENTES = { aca: "ACA", chj: "CHJ", ina: "INA", agp: "AGP", usgs: "USGS", glofas: "GloFAS" };
+  const REGION_TABS = new Set(["asia", "centroamerica", "sudamerica", "oceania", "africa"]);
   const REFRESCO_MS = 5 * 60 * 1000;
   const HIST_MS = 30 * 60 * 1000;
   const RANGOS_H = [48, 24 * 15, 24 * 92];
@@ -714,16 +719,36 @@ svg.hb .mu { fill: var(--muted); }
     const claves = Object.keys(t().paises);
     const actuales = [...tabs.querySelectorAll("button[data-p]")].map((b) => b.dataset.p);
     if (actuales.join(",") !== claves.join(",")) {
-      tabs.replaceChildren(...claves.map((p) => {
+      const hijos = [];
+      let etiquetaRegiones = false;
+      claves.forEach((p, i) => {
+        if (i === 0) {
+          const etiqueta = document.createElement("span");
+          etiqueta.className = "tab-group";
+          etiqueta.dataset.group = "countries";
+          etiqueta.setAttribute("aria-hidden", "true");
+          hijos.push(etiqueta);
+        }
+        if (REGION_TABS.has(p) && !etiquetaRegiones) {
+          const etiqueta = document.createElement("span");
+          etiqueta.className = "tab-group";
+          etiqueta.dataset.group = "regions";
+          etiqueta.setAttribute("aria-hidden", "true");
+          hijos.push(etiqueta);
+          etiquetaRegiones = true;
+        }
         const b = document.createElement("button");
         b.type = "button";
         b.setAttribute("role", "tab");
         b.id = "tab-" + p;
         b.dataset.p = p;
         b.setAttribute("aria-controls", "panel");
-        return b;
-      }));
+        hijos.push(b);
+      });
+      tabs.replaceChildren(...hijos);
     }
+    tabs.querySelector('[data-group="countries"]').textContent = t().tab_group_countries;
+    tabs.querySelector('[data-group="regions"]').textContent = t().tab_group_regions;
     tabs.querySelectorAll("button[data-p]").forEach((b) => {
       const p = b.dataset.p, sel = p === pais;
       const r = L.resumenPais(D.indice && D.indice[p]);

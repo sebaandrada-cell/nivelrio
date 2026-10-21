@@ -128,6 +128,9 @@ def test_pagina_tiene_pestanas_accesibles(html):
     assert 'b.setAttribute("role", "tab")' in html
     assert 'role="tabpanel"' in html
     assert "aria-selected" in html
+    assert "flex-wrap: wrap" in html
+    assert 'data-group="regions"' in html
+    assert "overflow-x: auto" not in html
 
 
 def test_pagina_lee_los_datos_por_pais(html):
@@ -139,7 +142,7 @@ def test_pagina_lee_los_datos_por_pais(html):
 def test_textos_nuevos_en_todos_los_idiomas():
     for lang in IDIOMAS:
         t = TEXTOS[lang]
-        for k in ("pais_sin_datos", "pais_desconocido", "tab_label"):
+        for k in ("pais_sin_datos", "pais_desconocido", "tab_label", "tab_group_countries", "tab_group_regions"):
             assert t[k], (lang, k)
         for k in ("titulo", "desc", "est_title", "sub", "prev_note", "model_only", "model_only_note", "foot"):
             assert t["region_default"][k], (lang, k)
