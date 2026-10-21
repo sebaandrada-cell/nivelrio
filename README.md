@@ -29,7 +29,7 @@ Los adaptadores están en `fuente/fuentes/` y los registros de estaciones en `fu
 
 ## Actualización y estructura
 
-GitHub Actions ejecuta `fuente/actualizar.py` cada 15 minutos. Los datos se publican en `data/<pais>/`; la página (`index.html`) carga únicamente el país seleccionado. El flujo publica cuando cambia un nivel o ha transcurrido aproximadamente una hora, debido a los retrasos variables de los cron de Actions. Los fallos de una fuente o país se aíslan para no detener la actualización de los demás.
+GitHub Actions ejecuta `fuente/actualizar.py` cada 15 minutos y publica cambios relevantes. El programador vive en la rama predeterminada, pero obtiene y actualiza el código de `multipais`, porque GitHub solo ejecuta cron de Actions desde la rama predeterminada. Los datos se publican en `data/<pais>/`; la página (`index.html`) carga únicamente el país seleccionado. El flujo crea una publicación al cambiar un nivel o aproximadamente cada hora, debido a los retrasos variables de los cron de Actions. Los fallos de una fuente o país se aíslan para no detener la actualización de los demás.
 
 ```text
 fuente/actualizar.py       descarga de fuentes, niveles y publicación de datos
