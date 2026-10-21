@@ -1,5 +1,5 @@
 {
- "generado_utc": "2026-10-21T13:02:29Z",
+ "generado_utc": "2026-10-21T13:06:14Z",
  "estaciones": [
   {
    "id": "parana-barranqueras",
@@ -7,11 +7,11 @@
    "nombre": "Barranqueras",
    "cuenca": "Paraná",
    "zona": "chaco-corrientes",
-   "valor": 7.3,
+   "valor": 7.13,
    "unidad": "m",
    "pais": "ar",
-   "t_utc": "2026-10-21T12:00:00Z",
-   "edad_min": 62,
+   "t_utc": "2026-10-20T03:00:00Z",
+   "edad_min": 2046,
    "nivel": 3,
    "sd": false,
    "umbrales": {
@@ -33,7 +33,7 @@
    "unidad": "m",
    "pais": "ar",
    "t_utc": "2026-10-20T03:00:00Z",
-   "edad_min": 2042,
+   "edad_min": 2046,
    "nivel": 3,
    "sd": false,
    "umbrales": {
@@ -55,7 +55,7 @@
    "unidad": "m",
    "pais": "ar",
    "t_utc": "2026-10-20T03:00:00Z",
-   "edad_min": 2042,
+   "edad_min": 2046,
    "nivel": 0,
    "sd": false,
    "umbrales": {
@@ -77,7 +77,7 @@
    "unidad": "m",
    "pais": "ar",
    "t_utc": "2026-10-20T03:00:00Z",
-   "edad_min": 2042,
+   "edad_min": 2046,
    "nivel": 0,
    "sd": false,
    "umbrales": {
@@ -99,7 +99,7 @@
    "unidad": "m",
    "pais": "ar",
    "t_utc": "2026-10-20T03:00:00Z",
-   "edad_min": 2042,
+   "edad_min": 2046,
    "nivel": 0,
    "sd": false,
    "umbrales": {
@@ -121,7 +121,7 @@
    "unidad": "m",
    "pais": "ar",
    "t_utc": "2026-10-20T03:00:00Z",
-   "edad_min": 2042,
+   "edad_min": 2046,
    "nivel": 1,
    "sd": false,
    "umbrales": {

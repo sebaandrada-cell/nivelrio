@@ -1,5 +1,5 @@
 {
- "generado_utc": "2026-10-21T13:02:29Z",
+ "generado_utc": "2026-10-21T13:06:14Z",
  "estaciones": [
   {
    "id": "mississippi-st-louis",
@@ -11,7 +11,7 @@
    "unidad": "ft",
    "pais": "us",
    "t_utc": "2026-10-21T12:30:00Z",
-   "edad_min": 32,
+   "edad_min": 36,
    "nivel": 0,
    "sd": false,
    "umbrales": {

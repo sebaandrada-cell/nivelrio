@@ -1,6 +1,6 @@
 {
  "ar": {
-  "generado_utc": "2026-10-21T13:02:29Z",
+  "generado_utc": "2026-10-21T13:06:14Z",
   "estaciones": 6,
   "por_nivel": [
    3,
@@ -16,11 +16,11 @@
   }
  },
  "es": {
-  "generado_utc": "2026-10-21T13:02:29Z",
+  "generado_utc": "2026-10-21T13:06:14Z",
   "estaciones": 32,
   "por_nivel": [
-   31,
-   1,
+   32,
+   0,
    0,
    0
   ],
@@ -33,7 +33,7 @@
   }
  },
  "us": {
-  "generado_utc": "2026-10-21T13:02:29Z",
+  "generado_utc": "2026-10-21T13:06:14Z",
   "estaciones": 1,
   "por_nivel": [
    1,

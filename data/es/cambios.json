@@ -1,1 +1,9 @@
-[]
+[
+ {
+  "estacion_id": "llobregat-guardiola",
+  "nivel_antes": 1,
+  "nivel_despues": 0,
+  "sd": false,
+  "elevado_por_aviso": false
+ }
+]
