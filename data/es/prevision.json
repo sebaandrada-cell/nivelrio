@@ -1,5 +1,5 @@
 {
- "generado_utc": "2026-10-21T18:05:02Z",
+ "generado_utc": "2026-10-21T21:45:16Z",
  "fuente": "Open-Meteo (CC BY 4.0)",
  "zonas": {
   "barcelona": [
@@ -10,13 +10,13 @@
    },
    {
     "fecha": "2026-10-22",
-    "mm": 0.6,
-    "prob": 58
+    "mm": 1.7,
+    "prob": 63
    },
    {
     "fecha": "2026-10-23",
-    "mm": 0.4,
-    "prob": 40
+    "mm": 1.6,
+    "prob": 38
    }
   ],
   "interior": [
@@ -27,30 +27,30 @@
    },
    {
     "fecha": "2026-10-22",
-    "mm": 0.0,
-    "prob": 15
+    "mm": 0.4,
+    "prob": 35
    },
    {
     "fecha": "2026-10-23",
     "mm": 0.0,
-    "prob": 5
+    "prob": 3
    }
   ],
   "girona": [
    {
     "fecha": "2026-10-21",
-    "mm": 1.45,
-    "prob": 90
+    "mm": 4.2,
+    "prob": 95
    },
    {
     "fecha": "2026-10-22",
-    "mm": 2.75,
-    "prob": 73
+    "mm": 3.1,
+    "prob": 93
    },
    {
     "fecha": "2026-10-23",
-    "mm": 5.1,
-    "prob": 85
+    "mm": 4.73,
+    "prob": 88
    }
   ],
   "tarragona": [
@@ -79,7 +79,7 @@
    {
     "fecha": "2026-10-22",
     "mm": 0.0,
-    "prob": 5
+    "prob": 10
    },
    {
     "fecha": "2026-10-23",
@@ -170,7 +170,7 @@
    "puede_llegar": null
   },
   "ter-girona": {
-   "lluvia_48h_mm": 0.8,
+   "lluvia_48h_mm": 0.7,
    "caudal": [
     0.0,
     0.0
@@ -186,7 +186,7 @@
    "puede_llegar": null
   },
   "ter-roda-de-ter": {
-   "lluvia_48h_mm": 0.2,
+   "lluvia_48h_mm": 0.6,
    "caudal": [
     5.89,
     50.76
@@ -194,7 +194,7 @@
    "puede_llegar": null
   },
   "ter-torroella": {
-   "lluvia_48h_mm": 0.4,
+   "lluvia_48h_mm": 0.1,
    "caudal": [
     0.14,
     0.73
@@ -202,7 +202,7 @@
    "puede_llegar": null
   },
   "fluvia-esponella": {
-   "lluvia_48h_mm": 1.5,
+   "lluvia_48h_mm": 0.5,
    "caudal": [
     3.29,
     19.75
@@ -210,7 +210,7 @@
    "puede_llegar": null
   },
   "fluvia-olot": {
-   "lluvia_48h_mm": 2.4,
+   "lluvia_48h_mm": 2.1,
    "caudal": [
     0.12,
     0.41
@@ -218,7 +218,7 @@
    "puede_llegar": null
   },
   "muga-pont-de-molins": {
-   "lluvia_48h_mm": 1.8,
+   "lluvia_48h_mm": 3.3,
    "caudal": [
     0.07,
     0.18
@@ -226,7 +226,7 @@
    "puede_llegar": null
   },
   "muga-castello-d-empuries": {
-   "lluvia_48h_mm": 3.2,
+   "lluvia_48h_mm": 3.1,
    "caudal": [
     0.48,
     1.01
@@ -234,7 +234,7 @@
    "puede_llegar": null
   },
   "muga-sant-llorenc": {
-   "lluvia_48h_mm": 1.6,
+   "lluvia_48h_mm": 5.1,
    "caudal": [
     0.38,
     3.08
@@ -250,7 +250,7 @@
    "puede_llegar": 1
   },
   "tordera-sant-celoni": {
-   "lluvia_48h_mm": 0.6,
+   "lluvia_48h_mm": 1.7,
    "caudal": [
     0.12,
     0.98
@@ -298,11 +298,8 @@
    "puede_llegar": null
   },
   "turia-quart-de-poblet": {
-   "lluvia_48h_mm": 0.0,
-   "caudal": [
-    0.67,
-    3.97
-   ],
+   "lluvia_48h_mm": null,
+   "caudal": null,
    "puede_llegar": null
   },
   "turia-vilamarxant": {

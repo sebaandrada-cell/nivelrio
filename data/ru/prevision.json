@@ -1,5 +1,5 @@
 {
- "generado_utc": "2026-10-21T18:05:02Z",
+ "generado_utc": "2026-10-21T21:45:16Z",
  "fuente": "Open-Meteo (CC BY 4.0)",
  "zonas": {
   "volga": [
@@ -15,8 +15,8 @@
    },
    {
     "fecha": "2026-10-23",
-    "mm": 0.0,
-    "prob": 8
+    "mm": 0.4,
+    "prob": 13
    }
   ]
  },

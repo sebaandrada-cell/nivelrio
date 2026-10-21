@@ -1,16 +1,16 @@
 {
- "generado_utc": "2026-10-21T18:05:02Z",
+ "generado_utc": "2026-10-21T21:45:16Z",
  "fuente": "Open-Meteo (CC BY 4.0)",
  "zonas": {
   "danube": [
    {
     "fecha": "2026-10-21",
-    "mm": 1.4,
+    "mm": 3.3,
     "prob": 71
    },
    {
     "fecha": "2026-10-22",
-    "mm": 15.2,
+    "mm": 11.0,
     "prob": 100
    },
    {
@@ -22,7 +22,7 @@
  },
  "estaciones": {
   "danube-budapest-model": {
-   "lluvia_48h_mm": 16.6,
+   "lluvia_48h_mm": 14.3,
    "caudal": null,
    "puede_llegar": null
   }

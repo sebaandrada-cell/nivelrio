@@ -1,72 +1,72 @@
 {
- "generado_utc": "2026-10-21T18:05:02Z",
+ "generado_utc": "2026-10-21T21:45:16Z",
  "fuente": "Open-Meteo (CC BY 4.0)",
  "zonas": {
   "san-juan": [
    {
     "fecha": "2026-10-21",
-    "mm": 8.3,
+    "mm": 14.5,
     "prob": 100
    },
    {
     "fecha": "2026-10-22",
-    "mm": 6.0,
+    "mm": 5.8,
     "prob": 100
    },
    {
     "fecha": "2026-10-23",
-    "mm": 11.3,
+    "mm": 15.3,
     "prob": 100
    }
   ],
   "usumacinta": [
    {
     "fecha": "2026-10-21",
-    "mm": 29.3,
+    "mm": 26.7,
     "prob": 100
    },
    {
     "fecha": "2026-10-22",
-    "mm": 11.8,
+    "mm": 13.1,
     "prob": 95
    },
    {
     "fecha": "2026-10-23",
-    "mm": 2.0,
+    "mm": 2.6,
     "prob": 45
    }
   ],
   "lempa": [
    {
     "fecha": "2026-10-21",
-    "mm": 3.4,
+    "mm": 5.6,
     "prob": 90
    },
    {
     "fecha": "2026-10-22",
-    "mm": 2.2,
+    "mm": 2.6,
     "prob": 89
    },
    {
     "fecha": "2026-10-23",
-    "mm": 0.2,
+    "mm": 0.7,
     "prob": 90
    }
   ]
  },
  "estaciones": {
   "san-juan-nicaragua-model": {
-   "lluvia_48h_mm": 14.3,
+   "lluvia_48h_mm": 20.3,
    "caudal": null,
    "puede_llegar": null
   },
   "usumacinta-tenosique-model": {
-   "lluvia_48h_mm": 41.1,
+   "lluvia_48h_mm": 39.8,
    "caudal": null,
    "puede_llegar": null
   },
   "lempa-san-marcos-lempa-model": {
-   "lluvia_48h_mm": 5.6,
+   "lluvia_48h_mm": 8.2,
    "caudal": null,
    "puede_llegar": null
   }

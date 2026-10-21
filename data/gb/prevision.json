@@ -1,28 +1,28 @@
 {
- "generado_utc": "2026-10-21T18:05:02Z",
+ "generado_utc": "2026-10-21T21:45:16Z",
  "fuente": "Open-Meteo (CC BY 4.0)",
  "zonas": {
   "thames": [
    {
     "fecha": "2026-10-21",
-    "mm": 5.7,
+    "mm": 5.5,
     "prob": 100
    },
    {
     "fecha": "2026-10-22",
-    "mm": 1.8,
+    "mm": 4.2,
     "prob": 100
    },
    {
     "fecha": "2026-10-23",
-    "mm": 10.7,
+    "mm": 13.3,
     "prob": 100
    }
   ]
  },
  "estaciones": {
   "thames-kingston-model": {
-   "lluvia_48h_mm": 7.5,
+   "lluvia_48h_mm": 9.7,
    "caudal": null,
    "puede_llegar": null
   }
