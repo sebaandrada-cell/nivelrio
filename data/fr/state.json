@@ -1,0 +1,13 @@
+{
+ "seine-alfortville-model": {
+  "nivel": 0,
+  "nivel_propio": 0,
+  "sd": true,
+  "ultimo_valor": null,
+  "ultimo_t_utc": null,
+  "cnt_sobre": 0,
+  "cnt_bajo": 0,
+  "bajo_desde": null,
+  "elevado_por_aviso": false
+ }
+}

@@ -1,5 +1,5 @@
 {
- "generado_utc": "2026-10-21T12:56:47Z",
+ "generado_utc": "2026-10-21T14:01:29Z",
  "fuente": "Open-Meteo (CC BY 4.0)",
  "zonas": {
   "mississippi": [
@@ -18,10 +18,98 @@
     "mm": 0.0,
     "prob": 0
    }
+  ],
+  "missouri": [
+   {
+    "fecha": "2026-10-21",
+    "mm": 0.0,
+    "prob": 13
+   },
+   {
+    "fecha": "2026-10-22",
+    "mm": 0.0,
+    "prob": 2
+   },
+   {
+    "fecha": "2026-10-23",
+    "mm": 0.0,
+    "prob": 1
+   }
+  ],
+  "ohio": [
+   {
+    "fecha": "2026-10-21",
+    "mm": 0.0,
+    "prob": 0
+   },
+   {
+    "fecha": "2026-10-22",
+    "mm": 0.0,
+    "prob": 0
+   },
+   {
+    "fecha": "2026-10-23",
+    "mm": 0.0,
+    "prob": 0
+   }
+  ],
+  "colorado": [
+   {
+    "fecha": "2026-10-21",
+    "mm": 3.7,
+    "prob": 57
+   },
+   {
+    "fecha": "2026-10-22",
+    "mm": 21.7,
+    "prob": 61
+   },
+   {
+    "fecha": "2026-10-23",
+    "mm": 6.53,
+    "prob": 77
+   }
+  ],
+  "rio-grande": [
+   {
+    "fecha": "2026-10-21",
+    "mm": 0.0,
+    "prob": 19
+   },
+   {
+    "fecha": "2026-10-22",
+    "mm": 0.0,
+    "prob": 12
+   },
+   {
+    "fecha": "2026-10-23",
+    "mm": 4.65,
+    "prob": 53
+   }
   ]
  },
  "estaciones": {
   "mississippi-st-louis": {
+   "lluvia_48h_mm": 0.0,
+   "caudal": null,
+   "puede_llegar": null
+  },
+  "missouri-kansas-city": {
+   "lluvia_48h_mm": 0.0,
+   "caudal": null,
+   "puede_llegar": null
+  },
+  "ohio-cincinnati": {
+   "lluvia_48h_mm": 0.0,
+   "caudal": null,
+   "puede_llegar": null
+  },
+  "colorado-colorado-utah": {
+   "lluvia_48h_mm": 25.4,
+   "caudal": null,
+   "puede_llegar": null
+  },
+  "rio-grande-albuquerque": {
    "lluvia_48h_mm": 0.0,
    "caudal": null,
    "puede_llegar": null

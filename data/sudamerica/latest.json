@@ -1,0 +1,75 @@
+{
+ "generado_utc": "2026-10-21T14:01:29Z",
+ "estaciones": [
+  {
+   "id": "amazonas-manaus-model",
+   "rio": "Amazonas",
+   "nombre": "Manaus",
+   "cuenca": "Amazonas",
+   "zona": "amazonas",
+   "valor": null,
+   "unidad": "m3s",
+   "pais": "sudamerica",
+   "t_utc": null,
+   "edad_min": null,
+   "nivel": 0,
+   "sd": true,
+   "umbrales": {
+    "bajo": null,
+    "medio": null,
+    "alto": null,
+    "tipo": "en_estudio"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "glofas"
+  },
+  {
+   "id": "orinoco-ciudad-bolivar-model",
+   "rio": "Orinoco",
+   "nombre": "Ciudad Bolívar",
+   "cuenca": "Orinoco",
+   "zona": "orinoco",
+   "valor": null,
+   "unidad": "m3s",
+   "pais": "sudamerica",
+   "t_utc": null,
+   "edad_min": null,
+   "nivel": 0,
+   "sd": true,
+   "umbrales": {
+    "bajo": null,
+    "medio": null,
+    "alto": null,
+    "tipo": "en_estudio"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "glofas"
+  },
+  {
+   "id": "parana-rosario-model",
+   "rio": "Paraná",
+   "nombre": "Rosario",
+   "cuenca": "Paraná",
+   "zona": "parana",
+   "valor": null,
+   "unidad": "m3s",
+   "pais": "sudamerica",
+   "t_utc": null,
+   "edad_min": null,
+   "nivel": 0,
+   "sd": true,
+   "umbrales": {
+    "bajo": null,
+    "medio": null,
+    "alto": null,
+    "tipo": "en_estudio"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "glofas"
+  }
+ ],
+ "avisos": [],
+ "fuentes_ok": {
+  "prevision": true
+ }
+}

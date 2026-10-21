@@ -1,0 +1,75 @@
+{
+ "generado_utc": "2026-10-21T14:01:29Z",
+ "estaciones": [
+  {
+   "id": "san-juan-nicaragua-model",
+   "rio": "San Juan",
+   "nombre": "San Carlos",
+   "cuenca": "San Juan",
+   "zona": "san-juan",
+   "valor": null,
+   "unidad": "m3s",
+   "pais": "centroamerica",
+   "t_utc": null,
+   "edad_min": null,
+   "nivel": 0,
+   "sd": true,
+   "umbrales": {
+    "bajo": null,
+    "medio": null,
+    "alto": null,
+    "tipo": "en_estudio"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "glofas"
+  },
+  {
+   "id": "usumacinta-tenosique-model",
+   "rio": "Usumacinta",
+   "nombre": "Tenosique",
+   "cuenca": "Usumacinta",
+   "zona": "usumacinta",
+   "valor": null,
+   "unidad": "m3s",
+   "pais": "centroamerica",
+   "t_utc": null,
+   "edad_min": null,
+   "nivel": 0,
+   "sd": true,
+   "umbrales": {
+    "bajo": null,
+    "medio": null,
+    "alto": null,
+    "tipo": "en_estudio"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "glofas"
+  },
+  {
+   "id": "lempa-san-marcos-lempa-model",
+   "rio": "Lempa",
+   "nombre": "San Marcos Lempa",
+   "cuenca": "Lempa",
+   "zona": "lempa",
+   "valor": null,
+   "unidad": "m3s",
+   "pais": "centroamerica",
+   "t_utc": null,
+   "edad_min": null,
+   "nivel": 0,
+   "sd": true,
+   "umbrales": {
+    "bajo": null,
+    "medio": null,
+    "alto": null,
+    "tipo": "en_estudio"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "glofas"
+  }
+ ],
+ "avisos": [],
+ "fuentes_ok": {
+  "prevision": true
+ }
+}

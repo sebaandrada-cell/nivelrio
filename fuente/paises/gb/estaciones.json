@@ -1,0 +1,17 @@
+[
+  {
+    "id": "thames-kingston-model",
+    "rio": "Thames",
+    "nombre": "Kingston",
+    "cuenca": "Thames",
+    "fuente": "glofas",
+    "muestreo_min": 1440,
+    "lat": 51.412,
+    "lon": -0.3,
+    "zona": "thames",
+    "umbrales": {"bajo": null, "medio": null, "alto": null, "tipo": "en_estudio"},
+    "pais": "gb",
+    "magnitud": "caudal",
+    "unidad": "m3s"
+  }
+]

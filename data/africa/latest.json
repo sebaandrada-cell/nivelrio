@@ -1,0 +1,75 @@
+{
+ "generado_utc": "2026-10-21T14:01:29Z",
+ "estaciones": [
+  {
+   "id": "nile-khartoum-model",
+   "rio": "Nile",
+   "nombre": "Khartoum",
+   "cuenca": "Nile",
+   "zona": "nile",
+   "valor": null,
+   "unidad": "m3s",
+   "pais": "africa",
+   "t_utc": null,
+   "edad_min": null,
+   "nivel": 0,
+   "sd": true,
+   "umbrales": {
+    "bajo": null,
+    "medio": null,
+    "alto": null,
+    "tipo": "en_estudio"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "glofas"
+  },
+  {
+   "id": "congo-kisangani-model",
+   "rio": "Congo",
+   "nombre": "Kisangani",
+   "cuenca": "Congo",
+   "zona": "congo",
+   "valor": null,
+   "unidad": "m3s",
+   "pais": "africa",
+   "t_utc": null,
+   "edad_min": null,
+   "nivel": 0,
+   "sd": true,
+   "umbrales": {
+    "bajo": null,
+    "medio": null,
+    "alto": null,
+    "tipo": "en_estudio"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "glofas"
+  },
+  {
+   "id": "niger-lokoja-model",
+   "rio": "Niger",
+   "nombre": "Lokoja",
+   "cuenca": "Niger",
+   "zona": "niger",
+   "valor": null,
+   "unidad": "m3s",
+   "pais": "africa",
+   "t_utc": null,
+   "edad_min": null,
+   "nivel": 0,
+   "sd": true,
+   "umbrales": {
+    "bajo": null,
+    "medio": null,
+    "alto": null,
+    "tipo": "en_estudio"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "glofas"
+  }
+ ],
+ "avisos": [],
+ "fuentes_ok": {
+  "prevision": true
+ }
+}

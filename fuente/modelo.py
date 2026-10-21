@@ -30,7 +30,7 @@ class Estacion:
     rio: str
     nombre: str
     cuenca: str
-    fuente: str  # "aca" | "chj" | "ina" | "agp" | "usgs"
+    fuente: str  # "aca" | "chj" | "ina" | "agp" | "usgs" | "glofas" (modelo, no observación)
     muestreo_min: int
     umbrales: Umbrales
     componente: str | None  # código Sentilo

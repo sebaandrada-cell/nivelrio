@@ -1,6 +1,6 @@
 {
  "ar": {
-  "generado_utc": "2026-10-21T13:06:14Z",
+  "generado_utc": "2026-10-21T14:01:29Z",
   "estaciones": 6,
   "por_nivel": [
    3,
@@ -16,15 +16,15 @@
   }
  },
  "es": {
-  "generado_utc": "2026-10-21T13:06:14Z",
-  "estaciones": 32,
+  "generado_utc": "2026-10-21T14:01:29Z",
+  "estaciones": 33,
   "por_nivel": [
-   32,
+   33,
    0,
    0,
    0
   ],
-  "sd": 3,
+  "sd": 4,
   "fuentes_ok": {
    "aca": true,
    "chj": true,
@@ -33,10 +33,10 @@
   }
  },
  "us": {
-  "generado_utc": "2026-10-21T13:06:14Z",
-  "estaciones": 1,
+  "generado_utc": "2026-10-21T14:01:29Z",
+  "estaciones": 5,
   "por_nivel": [
-   1,
+   5,
    0,
    0,
    0
@@ -44,6 +44,202 @@
   "sd": 0,
   "fuentes_ok": {
    "usgs": true,
+   "prevision": true
+  }
+ },
+ "africa": {
+  "generado_utc": "2026-10-21T14:01:29Z",
+  "estaciones": 3,
+  "por_nivel": [
+   3,
+   0,
+   0,
+   0
+  ],
+  "sd": 3,
+  "fuentes_ok": {
+   "prevision": true
+  }
+ },
+ "asia": {
+  "generado_utc": "2026-10-21T14:01:29Z",
+  "estaciones": 3,
+  "por_nivel": [
+   3,
+   0,
+   0,
+   0
+  ],
+  "sd": 3,
+  "fuentes_ok": {
+   "prevision": true
+  }
+ },
+ "centroamerica": {
+  "generado_utc": "2026-10-21T14:01:29Z",
+  "estaciones": 3,
+  "por_nivel": [
+   3,
+   0,
+   0,
+   0
+  ],
+  "sd": 3,
+  "fuentes_ok": {
+   "prevision": true
+  }
+ },
+ "de": {
+  "generado_utc": "2026-10-21T14:01:29Z",
+  "estaciones": 1,
+  "por_nivel": [
+   1,
+   0,
+   0,
+   0
+  ],
+  "sd": 1,
+  "fuentes_ok": {
+   "prevision": true
+  }
+ },
+ "fr": {
+  "generado_utc": "2026-10-21T14:01:29Z",
+  "estaciones": 1,
+  "por_nivel": [
+   1,
+   0,
+   0,
+   0
+  ],
+  "sd": 1,
+  "fuentes_ok": {
+   "prevision": true
+  }
+ },
+ "gb": {
+  "generado_utc": "2026-10-21T14:01:29Z",
+  "estaciones": 1,
+  "por_nivel": [
+   1,
+   0,
+   0,
+   0
+  ],
+  "sd": 1,
+  "fuentes_ok": {
+   "prevision": true
+  }
+ },
+ "hu": {
+  "generado_utc": "2026-10-21T14:01:29Z",
+  "estaciones": 1,
+  "por_nivel": [
+   1,
+   0,
+   0,
+   0
+  ],
+  "sd": 1,
+  "fuentes_ok": {
+   "prevision": true
+  }
+ },
+ "it": {
+  "generado_utc": "2026-10-21T14:01:29Z",
+  "estaciones": 1,
+  "por_nivel": [
+   1,
+   0,
+   0,
+   0
+  ],
+  "sd": 1,
+  "fuentes_ok": {
+   "prevision": true
+  }
+ },
+ "nl": {
+  "generado_utc": "2026-10-21T14:01:29Z",
+  "estaciones": 1,
+  "por_nivel": [
+   1,
+   0,
+   0,
+   0
+  ],
+  "sd": 1,
+  "fuentes_ok": {
+   "prevision": true
+  }
+ },
+ "oceania": {
+  "generado_utc": "2026-10-21T14:01:29Z",
+  "estaciones": 3,
+  "por_nivel": [
+   3,
+   0,
+   0,
+   0
+  ],
+  "sd": 3,
+  "fuentes_ok": {
+   "prevision": true
+  }
+ },
+ "pl": {
+  "generado_utc": "2026-10-21T14:01:29Z",
+  "estaciones": 1,
+  "por_nivel": [
+   1,
+   0,
+   0,
+   0
+  ],
+  "sd": 1,
+  "fuentes_ok": {
+   "prevision": true
+  }
+ },
+ "pt": {
+  "generado_utc": "2026-10-21T14:01:29Z",
+  "estaciones": 1,
+  "por_nivel": [
+   1,
+   0,
+   0,
+   0
+  ],
+  "sd": 1,
+  "fuentes_ok": {
+   "prevision": true
+  }
+ },
+ "ru": {
+  "generado_utc": "2026-10-21T14:01:29Z",
+  "estaciones": 1,
+  "por_nivel": [
+   1,
+   0,
+   0,
+   0
+  ],
+  "sd": 1,
+  "fuentes_ok": {
+   "prevision": true
+  }
+ },
+ "sudamerica": {
+  "generado_utc": "2026-10-21T14:01:29Z",
+  "estaciones": 3,
+  "por_nivel": [
+   3,
+   0,
+   0,
+   0
+  ],
+  "sd": 3,
+  "fuentes_ok": {
    "prevision": true
   }
  }

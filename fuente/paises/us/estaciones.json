@@ -22,5 +22,97 @@
     "unidad": "ft",
     "ref": "07010000",
     "lid": "EADM7"
+  },
+  {
+    "id": "missouri-kansas-city",
+    "rio": "Missouri",
+    "nombre": "Kansas City",
+    "cuenca": "Missouri",
+    "fuente": "usgs",
+    "muestreo_min": 60,
+    "componente": null,
+    "id_cha": null,
+    "lat": 39.1117222,
+    "lon": -94.5881389,
+    "zona": "missouri",
+    "umbrales": {
+      "bajo": null,
+      "medio": null,
+      "alto": null,
+      "tipo": "en_estudio"
+    },
+    "pais": "us",
+    "magnitud": "altura",
+    "unidad": "ft",
+    "ref": "06893000"
+  },
+  {
+    "id": "ohio-cincinnati",
+    "rio": "Ohio",
+    "nombre": "Cincinnati",
+    "cuenca": "Ohio",
+    "fuente": "usgs",
+    "muestreo_min": 60,
+    "componente": null,
+    "id_cha": null,
+    "lat": 39.0945044,
+    "lon": -84.5104983,
+    "zona": "ohio",
+    "umbrales": {
+      "bajo": null,
+      "medio": null,
+      "alto": null,
+      "tipo": "en_estudio"
+    },
+    "pais": "us",
+    "magnitud": "altura",
+    "unidad": "ft",
+    "ref": "03255000"
+  },
+  {
+    "id": "colorado-colorado-utah",
+    "rio": "Colorado",
+    "nombre": "Colorado-Utah State Line",
+    "cuenca": "Colorado",
+    "fuente": "usgs",
+    "muestreo_min": 60,
+    "componente": null,
+    "id_cha": null,
+    "lat": 39.1327434,
+    "lon": -109.02707585,
+    "zona": "colorado",
+    "umbrales": {
+      "bajo": null,
+      "medio": null,
+      "alto": null,
+      "tipo": "en_estudio"
+    },
+    "pais": "us",
+    "magnitud": "altura",
+    "unidad": "ft",
+    "ref": "09163500"
+  },
+  {
+    "id": "rio-grande-albuquerque",
+    "rio": "Rio Grande",
+    "nombre": "Albuquerque",
+    "cuenca": "Rio Grande",
+    "fuente": "usgs",
+    "muestreo_min": 60,
+    "componente": null,
+    "id_cha": null,
+    "lat": 35.08916667,
+    "lon": -106.6806944,
+    "zona": "rio-grande",
+    "umbrales": {
+      "bajo": null,
+      "medio": null,
+      "alto": null,
+      "tipo": "en_estudio"
+    },
+    "pais": "us",
+    "magnitud": "altura",
+    "unidad": "ft",
+    "ref": "08330000"
   }
 ]

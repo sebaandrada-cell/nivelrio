@@ -107,21 +107,25 @@ def test_pruebas_de_logica_js_pasan():
 def test_textos_no_prometen_mas_de_lo_que_hay():
     for lang in IDIOMAS:
         t = TEXTOS[lang]
-        for desc in [t["desc"]] + [p["desc"] for p in t["paises"].values()]:
+        for desc in [t["desc"], t["region_default"]["desc"]] + [
+            p.get("desc", t["region_default"]["desc"]) for p in t["paises"].values()
+        ]:
             assert "oficiales" not in desc and "oficials" not in desc and "official" not in desc
             assert "15" not in desc  # se publica cada hora salvo cambios
         assert "Segre" not in t["zonas"]["interior"]
         assert "Segre" in pie(lang) and "Poyo" in pie(lang)  # límites de cobertura y de cuencas rápidas
 
 
-PAISES = ("ar", "es", "us")
-CLAVES_PAIS = ("nombre", "titulo", "desc", "sub", "prev_note", "foot")
+PAISES = ("ar", "es", "us", "de", "fr", "gb", "it", "nl", "pl", "pt", "hu", "ru",
+          "asia", "centroamerica", "sudamerica", "oceania", "africa")
+CLAVES_PAIS = ("nombre",)
 
 
 def test_pagina_tiene_pestanas_accesibles(html):
     assert 'role="tablist"' in html
-    for p in PAISES:
-        assert re.search(rf'<button[^>]*role="tab"[^>]*data-p="{p}"|<button[^>]*data-p="{p}"[^>]*role="tab"', html), p
+    assert 'const claves = Object.keys(t().paises)' in html
+    assert 'document.createElement("button")' in html
+    assert 'b.setAttribute("role", "tab")' in html
     assert 'role="tabpanel"' in html
     assert "aria-selected" in html
 
@@ -137,6 +141,8 @@ def test_textos_nuevos_en_todos_los_idiomas():
         t = TEXTOS[lang]
         for k in ("pais_sin_datos", "pais_desconocido", "tab_label"):
             assert t[k], (lang, k)
+        for k in ("titulo", "desc", "est_title", "sub", "prev_note", "model_only", "model_only_note", "foot"):
+            assert t["region_default"][k], (lang, k)
         assert set(t["paises"]) == set(PAISES)
         for p in PAISES:
             for k in CLAVES_PAIS:
@@ -153,7 +159,7 @@ def test_cada_zona_de_cada_pais_tiene_texto():
 
 def test_cada_fuente_de_datos_tiene_nombre_para_el_aviso_de_caida():
     for lang in IDIOMAS:
-        for k in ("aca", "chj", "ina", "agp", "usgs", "avisos", "prevision"):
+        for k in ("aca", "chj", "ina", "agp", "usgs", "glofas", "avisos", "prevision"):
             assert TEXTOS[lang]["fuentes_nombres"][k], (lang, k)
 
 

@@ -1,5 +1,5 @@
 {
- "generado_utc": "2026-10-21T13:06:14Z",
+ "generado_utc": "2026-10-21T14:01:29Z",
  "estaciones": [
   {
    "id": "mississippi-st-louis",
@@ -7,11 +7,11 @@
    "nombre": "St. Louis",
    "cuenca": "Mississippi",
    "zona": "mississippi",
-   "valor": 7.45,
+   "valor": 7.46,
    "unidad": "ft",
    "pais": "us",
-   "t_utc": "2026-10-21T12:30:00Z",
-   "edad_min": 36,
+   "t_utc": "2026-10-21T13:30:00Z",
+   "edad_min": 31,
    "nivel": 0,
    "sd": false,
    "umbrales": {
@@ -19,6 +19,94 @@
     "medio": 30.0,
     "alto": 35.0,
     "tipo": "oficial"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "usgs"
+  },
+  {
+   "id": "missouri-kansas-city",
+   "rio": "Missouri",
+   "nombre": "Kansas City",
+   "cuenca": "Missouri",
+   "zona": "missouri",
+   "valor": 12.6,
+   "unidad": "ft",
+   "pais": "us",
+   "t_utc": "2026-10-21T13:30:00Z",
+   "edad_min": 31,
+   "nivel": 0,
+   "sd": false,
+   "umbrales": {
+    "bajo": null,
+    "medio": null,
+    "alto": null,
+    "tipo": "en_estudio"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "usgs"
+  },
+  {
+   "id": "ohio-cincinnati",
+   "rio": "Ohio",
+   "nombre": "Cincinnati",
+   "cuenca": "Ohio",
+   "zona": "ohio",
+   "valor": 27.03,
+   "unidad": "ft",
+   "pais": "us",
+   "t_utc": "2026-10-21T13:00:00Z",
+   "edad_min": 61,
+   "nivel": 0,
+   "sd": false,
+   "umbrales": {
+    "bajo": null,
+    "medio": null,
+    "alto": null,
+    "tipo": "en_estudio"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "usgs"
+  },
+  {
+   "id": "colorado-colorado-utah",
+   "rio": "Colorado",
+   "nombre": "Colorado-Utah State Line",
+   "cuenca": "Colorado",
+   "zona": "colorado",
+   "valor": 3.17,
+   "unidad": "ft",
+   "pais": "us",
+   "t_utc": "2026-10-21T12:45:00Z",
+   "edad_min": 76,
+   "nivel": 0,
+   "sd": false,
+   "umbrales": {
+    "bajo": null,
+    "medio": null,
+    "alto": null,
+    "tipo": "en_estudio"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "usgs"
+  },
+  {
+   "id": "rio-grande-albuquerque",
+   "rio": "Rio Grande",
+   "nombre": "Albuquerque",
+   "cuenca": "Rio Grande",
+   "zona": "rio-grande",
+   "valor": 2.5,
+   "unidad": "ft",
+   "pais": "us",
+   "t_utc": "2026-10-21T13:15:00Z",
+   "edad_min": 46,
+   "nivel": 0,
+   "sd": false,
+   "umbrales": {
+    "bajo": null,
+    "medio": null,
+    "alto": null,
+    "tipo": "en_estudio"
    },
    "elevado_por_aviso": false,
    "fuente": "usgs"

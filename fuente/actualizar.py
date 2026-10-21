@@ -133,7 +133,9 @@ def _doc_prevision(ahora, estaciones, bruto) -> dict:
             por_est[e.id] = {"lluvia_48h_mm": None, "caudal": None, "puede_llegar": None}
             continue
         lluvia = p["lluvia"]
-        caudal = list(p["caudal"]) if p["caudal"] and e.magnitud == "caudal" else None  # GloFAS modela caudal, no cota
+        # GloFAS values at un-gauged points cannot be checked against a local observation; do not publish them as
+        # river-flow forecasts until the model/grid assignment has been validated for that station.
+        caudal = list(p["caudal"]) if p["caudal"] and e.magnitud == "caudal" and e.fuente != "glofas" else None
         por_est[e.id] = {"lluvia_48h_mm": round(sum(mm for _, mm, _ in lluvia[:2]), 1),
                          "caudal": caudal, "puede_llegar": None}
         dias = zonas.setdefault(e.zona, [])
@@ -365,12 +367,16 @@ def _fuentes_us() -> dict:
 
 
 def _fuentes_reales(pais: str = "es") -> dict:
+    from estaciones import PAISES
+    if pais not in PAISES:
+        return {}
     if pais == "ar":
         return _fuentes_ar()
     if pais == "us":
         return _fuentes_us()
     if pais != "es":
-        return {}
+        from fuentes import prevision
+        return {"prevision": prevision.bajar}
     from fuentes import aca, avisos, chj, prevision
     cache = {}
 

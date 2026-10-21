@@ -1,0 +1,30 @@
+{
+ "generado_utc": "2026-10-21T14:01:29Z",
+ "fuente": "Open-Meteo (CC BY 4.0)",
+ "zonas": {
+  "meuse": [
+   {
+    "fecha": "2026-10-21",
+    "mm": 0.5,
+    "prob": 98
+   },
+   {
+    "fecha": "2026-10-22",
+    "mm": 0.8,
+    "prob": 67
+   },
+   {
+    "fecha": "2026-10-23",
+    "mm": 9.0,
+    "prob": 100
+   }
+  ]
+ },
+ "estaciones": {
+  "meuse-venlo-model": {
+   "lluvia_48h_mm": 1.3,
+   "caudal": null,
+   "puede_llegar": null
+  }
+ }
+}

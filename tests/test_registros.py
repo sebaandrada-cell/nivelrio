@@ -1,10 +1,11 @@
+import json
 import os
 from datetime import datetime, timedelta, timezone
 
 
 import actualizar
 from conftest import make_estacion
-from estaciones import ZONAS, cargar
+from estaciones import PAISES, ZONAS, cargar
 from modelo import Lectura, Umbrales
 
 PAISES_DIR = os.path.join(os.path.dirname(__file__), "..", "fuente", "paises")
@@ -15,12 +16,12 @@ def registro(pais):
 
 
 def test_registros_cargan_sin_error():
-    for pais in ("es", "ar", "us"):
+    for pais in PAISES:
         assert registro(pais), pais
 
 
 def test_ids_unicos_entre_paises():
-    ids = [e.id for p in ("es", "ar", "us") for e in registro(p)]
+    ids = [e.id for p in PAISES for e in registro(p)]
     assert len(ids) == len(set(ids))
 
 
@@ -29,11 +30,11 @@ def test_ar_us_usan_unidades_de_su_fuente():
         assert e.fuente in ("ina", "agp") and e.unidad == "m" and e.magnitud == "altura" and e.pais == "ar"
     for e in registro("us"):
         assert e.fuente == "usgs" and e.unidad == "ft" and e.magnitud == "altura" and e.pais == "us"
-        assert e.ref and e.lid and e.muestreo_min == 60
+        assert e.ref and e.muestreo_min == 60
 
 
 def test_zonas_validas():
-    for p in ("ar", "us"):
+    for p in PAISES:
         for e in registro(p):
             assert e.zona in ZONAS[p]
 
@@ -60,7 +61,33 @@ def test_ina_refs_y_muestreo():
 
 def test_us_refs_verificados():
     ref = {e.id: (e.ref, e.lid) for e in registro("us")}
-    assert ref == {"mississippi-st-louis": ("07010000", "EADM7")}
+    assert ref == {"mississippi-st-louis": ("07010000", "EADM7"),
+                   "missouri-kansas-city": ("06893000", None),
+                   "ohio-cincinnati": ("03255000", None),
+                   "colorado-colorado-utah": ("09163500", None),
+                   "rio-grande-albuquerque": ("08330000", None)}
+
+
+def test_cobertura_modelada_por_pais_y_region():
+    europeos = ("de", "fr", "gb", "it", "nl", "pl", "pt", "hu", "ru")
+    regiones = ("asia", "centroamerica", "sudamerica", "oceania", "africa")
+    assert all(len(registro(p)) == 1 and registro(p)[0].fuente == "glofas" for p in europeos)
+    assert all(len(registro(p)) == 3 and all(e.fuente == "glofas" for e in registro(p)) for p in regiones)
+    assert [e.id for e in registro("es") if e.fuente == "glofas"] == ["ebro-zaragoza-modelo"]
+
+
+def test_glofas_no_se_publica_como_lectura_ni_alerta(tmp_path):
+    est = registro("de")[0]
+    ahora = datetime(2026, 10, 21, 12, 0, tzinfo=timezone.utc)
+    bruto = {est.id: {"lluvia": [("2026-10-21", 1.0, 50)], "caudal": (10.0, 20.0)}}
+    cambios = actualizar.ejecutar(ahora, [est], {"prevision": lambda _: bruto}, str(tmp_path))
+    latest = json.loads((tmp_path / "latest.json").read_text(encoding="utf-8"))
+    forecast = json.loads((tmp_path / "prevision.json").read_text(encoding="utf-8"))
+    fila = latest["estaciones"][0]
+    assert cambios == []
+    assert fila["fuente"] == "glofas" and fila["valor"] is None and fila["t_utc"] is None
+    assert fila["nivel"] == 0 and fila["sd"] is True
+    assert forecast["estaciones"][est.id]["caudal"] is None
 
 
 def test_ejecutar_recorre_fuentes_del_registro(tmp_path):

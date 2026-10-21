@@ -1,6 +1,6 @@
 # Nivel Río
 
-Panel público multipaís para consultar niveles y caudales de ríos con riesgo de crecida en **Argentina, España y Estados Unidos**. Es una página estática, sin servidor ni analítica, con interfaz en castellano, catalán e inglés.
+Panel público multipaís para consultar niveles y caudales de ríos con riesgo de crecida en **Argentina, España, Estados Unidos, Europa y otras regiones**. Es una página estática, sin servidor ni analítica, con interfaz en castellano, catalán e inglés.
 
 El proyecto combina el diseño de «Apurate José», de Pablo Dodda, con adaptadores de datos, niveles con histéresis y pruebas del proyecto Nivel Río. Mantiene la atribución y la licencia MIT del trabajo original.
 
@@ -8,22 +8,24 @@ El proyecto combina el diseño de «Apurate José», de Pablo Dodda, con adaptad
 
 ## Cobertura y fuentes
 
-El registro inicial contiene 6 estaciones de Argentina, 32 de España y 1 estación del Mississippi en Estados Unidos. La cobertura publicada depende de la disponibilidad de cada fuente.
+El registro contiene 6 estaciones de Argentina, 32 estaciones observadas en España, 5 estaciones USGS de Estados Unidos, el Ebro en Zaragoza y 24 puntos de modelo en otras regiones. La página distingue explícitamente las previsiones modeladas de las lecturas de estación.
 
-| País | Fuente de observación | Umbrales y avisos | Limitaciones principales |
+| País o región | Fuente de observación o modelo | Umbrales y avisos | Limitaciones principales |
 |---|---|---|---|
 | Argentina | INA; AGP para Barranqueras con INA como respaldo | Niveles del INA; umbrales locales de APA Chaco para Barranqueras | La lectura del INA es diaria. Algunos umbrales aún están en estudio. |
-| España | ACA Sentilo para cuencas internas de Catalunya; SAIH de la CHJ para estaciones valencianas | Umbrales oficiales de CHJ donde existen; umbrales estimados y claramente etiquetados para ACA; avisos AEMET e INUNCAT | No hay cobertura validada del Segre, Ebre ni Noguera en esta entrega. La ACA no publica umbrales por estación en formato máquina. |
-| Estados Unidos | USGS para observaciones; NWS/NWPS para niveles de inundación y pronóstico oficial | Umbrales oficiales del NWS cuando los datos son completos y coherentes | Una estación sin umbrales válidos se muestra «en estudio», sin nivel de alerta propio. |
+| España | ACA Sentilo para cuencas internas de Catalunya; SAIH de la CHJ para estaciones valencianas; GloFAS para el Ebro en Zaragoza | Umbrales oficiales de CHJ donde existen; umbrales estimados y claramente etiquetados para ACA; avisos AEMET e INUNCAT | El Ebro solo tiene previsión de modelo, no lectura de estación ni alertas. La ACA no publica umbrales por estación en formato máquina. |
+| Estados Unidos | USGS para el Mississippi, Missouri, Ohio, Colorado y Rio Grande; NWS/NWPS donde hay un identificador de estación válido | Umbrales oficiales del NWS cuando los datos son completos y coherentes | Las estaciones nuevas aún no tienen umbrales de inundación vinculados y se muestran «en estudio», sin nivel de alerta propio. |
+| Alemania, Francia, Reino Unido, Italia, Países Bajos, Polonia, Portugal, Hungría y Rusia | GloFAS mediante Open-Meteo | Sin umbrales ni alertas | Una pestaña por país; no hay mediciones. Los caudales del modelo se ocultan hasta validar cada punto. |
+| Asia, Centroamérica, Sudamérica, Oceanía y África | GloFAS mediante Open-Meteo | Sin umbrales ni alertas | Una pestaña por región con tres puntos; no son lecturas actuales. Los caudales del modelo se ocultan hasta validar cada punto. |
 
-Los adaptadores están en `fuente/fuentes/` y los registros de estaciones en `fuente/paises/{ar,es,us}/estaciones.json`. Las estaciones seleccionadas representan ríos conocidos o potencialmente peligrosos; no pretenden cubrir todos los cursos fluviales.
+Los adaptadores están en `fuente/fuentes/` y los registros de estaciones en `fuente/paises/<pais-o-region>/estaciones.json`. Las estaciones seleccionadas representan ríos conocidos o potencialmente peligrosos; no pretenden cubrir todos los cursos fluviales.
 
 ## Cómo interpretar la página
 
 - La escala N0 (normal) a N3 (peligro) es propia del proyecto, no una escala oficial. Cada nivel muestra texto y símbolo, además del color.
 - Los umbrales se identifican como **oficiales**, **estimados** o **en estudio**. Un umbral estimado no debe interpretarse como cota oficial de desbordamiento.
 - Los avisos meteorológicos y de Protección Civil se presentan como contexto. Solo los avisos configurados explícitamente pueden elevar el nivel mostrado.
-- Las previsiones de lluvia y caudal son orientativas; no cambian los niveles de alerta ni generan notificaciones. El modelo global GloFAS no representa bien las crecidas repentinas de ramblas y rieras.
+- Las previsiones de lluvia y caudal son orientativas; no cambian los niveles de alerta ni generan notificaciones. Los puntos GloFAS están marcados como **solo modelo**: no son mediciones en tiempo real y su resolución aproximada de 5 km puede asociarlos a un cauce incorrecto. Por eso se ocultan sus caudales hasta validar cada ubicación; no deben usarse para decisiones de emergencia.
 - Una lectura obsoleta o ausente se marca «sin datos»; no equivale a un estado normal.
 - Las notificaciones automáticas se publican como incidencias de GitHub cuando hay cambios de nivel que cumplen las reglas del proyecto. No se envían por correo ni mensajería.
 
@@ -35,7 +37,7 @@ GitHub Actions ejecuta `fuente/actualizar.py` cada 15 minutos y publica cambios 
 fuente/actualizar.py       descarga de fuentes, niveles y publicación de datos
 fuente/alertas.py          máquina de estados y lógica de histéresis
 fuente/estaciones.py       validación de catálogos por país
-fuente/fuentes/            adaptadores ACA, CHJ, INA, AGP, USGS/NWS y previsión
+fuente/fuentes/            adaptadores ACA, CHJ, INA, AGP, USGS/NWS y previsión GloFAS
 fuente/paises/             estaciones y módulos de cada país y río
 fuente/page.html           plantilla de la web
 fuente/textos.json         textos en español, catalán e inglés

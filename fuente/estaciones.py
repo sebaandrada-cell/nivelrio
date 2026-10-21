@@ -3,12 +3,27 @@ import json
 
 from modelo import Estacion, Umbrales
 
-FUENTES = ("aca", "chj", "ina", "agp", "usgs")
-PAISES = ("ar", "es", "us")
+FUENTES = ("aca", "chj", "ina", "agp", "usgs", "glofas")
+PAISES = ("ar", "es", "us", "de", "fr", "gb", "it", "nl", "pl", "pt", "hu", "ru",
+          "asia", "centroamerica", "sudamerica", "oceania", "africa")
 ZONAS = {
-    "es": ("tarragona", "barcelona", "girona", "interior", "valencia"),
+    "es": ("tarragona", "barcelona", "girona", "interior", "valencia", "ebro"),
     "ar": ("chaco-corrientes", "litoral-parana", "uruguay"),
-    "us": ("mississippi",),
+    "us": ("mississippi", "missouri", "ohio", "colorado", "rio-grande"),
+    "de": ("rhine",),
+    "fr": ("seine",),
+    "gb": ("thames",),
+    "it": ("po",),
+    "nl": ("meuse",),
+    "pl": ("vistula",),
+    "pt": ("tagus",),
+    "hu": ("danube",),
+    "ru": ("volga",),
+    "asia": ("yangtze", "ganges", "mekong"),
+    "centroamerica": ("san-juan", "usumacinta", "lempa"),
+    "sudamerica": ("amazonas", "orinoco", "parana"),
+    "oceania": ("murray", "sepik", "waikato"),
+    "africa": ("nile", "congo", "niger"),
 }
 MAGNITUDES = ("caudal", "altura")
 UNIDADES = ("m3s", "m", "ft")
@@ -44,8 +59,6 @@ def cargar(ruta: str, pais: str) -> list[Estacion]:
             raise ValueError(f"{id_}: falta id_cha")
         if d["fuente"] in ("ina", "agp", "usgs") and not d.get("ref"):
             raise ValueError(f"{id_}: falta ref")
-        if d["fuente"] == "usgs" and not d.get("lid"):
-            raise ValueError(f"{id_}: falta lid")
         if d.get("pais", pais) != pais:
             raise ValueError(f"{id_}: país {d.get('pais')!r} no es {pais!r}")
         if d.get("zona") not in ZONAS[pais]:

@@ -1,0 +1,31 @@
+{
+ "generado_utc": "2026-10-21T14:01:29Z",
+ "estaciones": [
+  {
+   "id": "tagus-santarem-model",
+   "rio": "Tagus",
+   "nombre": "Santarém",
+   "cuenca": "Tagus",
+   "zona": "tagus",
+   "valor": null,
+   "unidad": "m3s",
+   "pais": "pt",
+   "t_utc": null,
+   "edad_min": null,
+   "nivel": 0,
+   "sd": true,
+   "umbrales": {
+    "bajo": null,
+    "medio": null,
+    "alto": null,
+    "tipo": "en_estudio"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "glofas"
+  }
+ ],
+ "avisos": [],
+ "fuentes_ok": {
+  "prevision": true
+ }
+}

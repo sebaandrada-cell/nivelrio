@@ -1,0 +1,47 @@
+[
+  {
+    "id": "amazonas-manaus-model",
+    "rio": "Amazonas",
+    "nombre": "Manaus",
+    "cuenca": "Amazonas",
+    "fuente": "glofas",
+    "muestreo_min": 1440,
+    "lat": -3.12,
+    "lon": -60.02,
+    "zona": "amazonas",
+    "umbrales": {"bajo": null, "medio": null, "alto": null, "tipo": "en_estudio"},
+    "pais": "sudamerica",
+    "magnitud": "caudal",
+    "unidad": "m3s"
+  },
+  {
+    "id": "orinoco-ciudad-bolivar-model",
+    "rio": "Orinoco",
+    "nombre": "Ciudad Bolívar",
+    "cuenca": "Orinoco",
+    "fuente": "glofas",
+    "muestreo_min": 1440,
+    "lat": 8.12,
+    "lon": -63.55,
+    "zona": "orinoco",
+    "umbrales": {"bajo": null, "medio": null, "alto": null, "tipo": "en_estudio"},
+    "pais": "sudamerica",
+    "magnitud": "caudal",
+    "unidad": "m3s"
+  },
+  {
+    "id": "parana-rosario-model",
+    "rio": "Paraná",
+    "nombre": "Rosario",
+    "cuenca": "Paraná",
+    "fuente": "glofas",
+    "muestreo_min": 1440,
+    "lat": -32.95,
+    "lon": -60.64,
+    "zona": "parana",
+    "umbrales": {"bajo": null, "medio": null, "alto": null, "tipo": "en_estudio"},
+    "pais": "sudamerica",
+    "magnitud": "caudal",
+    "unidad": "m3s"
+  }
+]

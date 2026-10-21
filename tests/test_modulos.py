@@ -161,7 +161,8 @@ def test_el_armado_rechaza_un_archivo_con_esquema_malo(tmp_path):
 
 def test_en_el_repo_solo_barranqueras_tiene_archivos_de_modulos():
     indice = armar_sitio.indice_modulos(RAIZ / "fuente" / "paises")
-    assert indice == {"ar": {"parana-barranqueras": list(ARCHIVOS_BARRANQUERAS)}, "es": {}, "us": {}}
+    assert indice["ar"] == {"parana-barranqueras": list(ARCHIVOS_BARRANQUERAS)}
+    assert all(datos == {} for pais, datos in indice.items() if pais != "ar")
 
 
 @pytest.mark.skipif(NODE is None, reason="node no está instalado")

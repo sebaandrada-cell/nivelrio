@@ -90,8 +90,8 @@ def test_cargar_exige_pais_y_zona_del_pais(tmp_path):
     us = _est(fuente="usgs", componente=None, zona="mississippi", unidad="ft", magnitud="altura", pais="us")
     with pytest.raises(ValueError, match="ref"):
         cargar(_escribir(tmp_path, [dict(us, lid="MEMT1")]), "us")
-    with pytest.raises(ValueError, match="lid"):
-        cargar(_escribir(tmp_path, [dict(us, ref="07032000")]), "us")
+    sin_lid = cargar(_escribir(tmp_path, [dict(us, ref="07032000")]), "us")[0]
+    assert sin_lid.ref == "07032000" and sin_lid.lid is None
     ok = cargar(_escribir(tmp_path, [dict(us, ref="07032000", lid="MEMT1")]), "us")[0]
     assert (ok.ref, ok.lid, ok.pais) == ("07032000", "MEMT1", "us")
     with pytest.raises(ValueError, match="magnitud"):
@@ -102,9 +102,13 @@ def test_cargar_exige_pais_y_zona_del_pais(tmp_path):
         cargar(_escribir(tmp_path, [_est(pais="ar")]), "es")
 
 
-def test_registro_es_migrado_conserva_32_estaciones():
+def test_registro_es_conserva_32_estaciones_de_observacion_y_ebro_modelado():
     import os
     ruta = os.path.join(os.path.dirname(__file__), "..", "fuente", "paises", "es", "estaciones.json")
     res = cargar(ruta, "es")
-    assert len(res) == 32
-    assert all(e.unidad == "m3s" and e.magnitud == "caudal" and e.pais == "es" for e in res)
+    assert len(res) == 33
+    observadas = [e for e in res if e.fuente != "glofas"]
+    ebro = [e for e in res if e.fuente == "glofas"]
+    assert len(observadas) == 32
+    assert all(e.unidad == "m3s" and e.magnitud == "caudal" and e.pais == "es" for e in observadas)
+    assert len(ebro) == 1 and ebro[0].rio == "Ebro" and ebro[0].umbrales.tipo == "en_estudio"

@@ -1,0 +1,75 @@
+{
+ "generado_utc": "2026-10-21T14:01:29Z",
+ "estaciones": [
+  {
+   "id": "yangtze-wuhan-model",
+   "rio": "Yangtze",
+   "nombre": "Wuhan",
+   "cuenca": "Yangtze",
+   "zona": "yangtze",
+   "valor": null,
+   "unidad": "m3s",
+   "pais": "asia",
+   "t_utc": null,
+   "edad_min": null,
+   "nivel": 0,
+   "sd": true,
+   "umbrales": {
+    "bajo": null,
+    "medio": null,
+    "alto": null,
+    "tipo": "en_estudio"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "glofas"
+  },
+  {
+   "id": "ganges-varanasi-model",
+   "rio": "Ganges",
+   "nombre": "Varanasi",
+   "cuenca": "Ganges",
+   "zona": "ganges",
+   "valor": null,
+   "unidad": "m3s",
+   "pais": "asia",
+   "t_utc": null,
+   "edad_min": null,
+   "nivel": 0,
+   "sd": true,
+   "umbrales": {
+    "bajo": null,
+    "medio": null,
+    "alto": null,
+    "tipo": "en_estudio"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "glofas"
+  },
+  {
+   "id": "mekong-stung-treng-model",
+   "rio": "Mekong",
+   "nombre": "Stung Treng",
+   "cuenca": "Mekong",
+   "zona": "mekong",
+   "valor": null,
+   "unidad": "m3s",
+   "pais": "asia",
+   "t_utc": null,
+   "edad_min": null,
+   "nivel": 0,
+   "sd": true,
+   "umbrales": {
+    "bajo": null,
+    "medio": null,
+    "alto": null,
+    "tipo": "en_estudio"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "glofas"
+  }
+ ],
+ "avisos": [],
+ "fuentes_ok": {
+  "prevision": true
+ }
+}

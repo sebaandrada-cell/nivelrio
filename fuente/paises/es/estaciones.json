@@ -702,5 +702,27 @@
     "pais": "es",
     "magnitud": "caudal",
     "unidad": "m3s"
+  },
+  {
+    "id": "ebro-zaragoza-modelo",
+    "rio": "Ebro",
+    "nombre": "Zaragoza",
+    "cuenca": "Ebro",
+    "fuente": "glofas",
+    "muestreo_min": 1440,
+    "componente": null,
+    "id_cha": null,
+    "lat": 41.65,
+    "lon": -0.88,
+    "zona": "ebro",
+    "umbrales": {
+      "bajo": null,
+      "medio": null,
+      "alto": null,
+      "tipo": "en_estudio"
+    },
+    "pais": "es",
+    "magnitud": "caudal",
+    "unidad": "m3s"
   }
 ]

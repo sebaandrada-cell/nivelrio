@@ -1,0 +1,47 @@
+[
+  {
+    "id": "san-juan-nicaragua-model",
+    "rio": "San Juan",
+    "nombre": "San Carlos",
+    "cuenca": "San Juan",
+    "fuente": "glofas",
+    "muestreo_min": 1440,
+    "lat": 10.83,
+    "lon": -84.9,
+    "zona": "san-juan",
+    "umbrales": {"bajo": null, "medio": null, "alto": null, "tipo": "en_estudio"},
+    "pais": "centroamerica",
+    "magnitud": "caudal",
+    "unidad": "m3s"
+  },
+  {
+    "id": "usumacinta-tenosique-model",
+    "rio": "Usumacinta",
+    "nombre": "Tenosique",
+    "cuenca": "Usumacinta",
+    "fuente": "glofas",
+    "muestreo_min": 1440,
+    "lat": 17.47,
+    "lon": -91.43,
+    "zona": "usumacinta",
+    "umbrales": {"bajo": null, "medio": null, "alto": null, "tipo": "en_estudio"},
+    "pais": "centroamerica",
+    "magnitud": "caudal",
+    "unidad": "m3s"
+  },
+  {
+    "id": "lempa-san-marcos-lempa-model",
+    "rio": "Lempa",
+    "nombre": "San Marcos Lempa",
+    "cuenca": "Lempa",
+    "fuente": "glofas",
+    "muestreo_min": 1440,
+    "lat": 13.405,
+    "lon": -88.865,
+    "zona": "lempa",
+    "umbrales": {"bajo": null, "medio": null, "alto": null, "tipo": "en_estudio"},
+    "pais": "centroamerica",
+    "magnitud": "caudal",
+    "unidad": "m3s"
+  }
+]

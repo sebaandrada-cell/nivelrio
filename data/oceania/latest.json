@@ -1,0 +1,75 @@
+{
+ "generado_utc": "2026-10-21T14:01:29Z",
+ "estaciones": [
+  {
+   "id": "murray-renmark-model",
+   "rio": "Murray",
+   "nombre": "Renmark",
+   "cuenca": "Murray",
+   "zona": "murray",
+   "valor": null,
+   "unidad": "m3s",
+   "pais": "oceania",
+   "t_utc": null,
+   "edad_min": null,
+   "nivel": 0,
+   "sd": true,
+   "umbrales": {
+    "bajo": null,
+    "medio": null,
+    "alto": null,
+    "tipo": "en_estudio"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "glofas"
+  },
+  {
+   "id": "sepik-angoram-model",
+   "rio": "Sepik",
+   "nombre": "Angoram",
+   "cuenca": "Sepik",
+   "zona": "sepik",
+   "valor": null,
+   "unidad": "m3s",
+   "pais": "oceania",
+   "t_utc": null,
+   "edad_min": null,
+   "nivel": 0,
+   "sd": true,
+   "umbrales": {
+    "bajo": null,
+    "medio": null,
+    "alto": null,
+    "tipo": "en_estudio"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "glofas"
+  },
+  {
+   "id": "waikato-hamilton-model",
+   "rio": "Waikato",
+   "nombre": "Hamilton",
+   "cuenca": "Waikato",
+   "zona": "waikato",
+   "valor": null,
+   "unidad": "m3s",
+   "pais": "oceania",
+   "t_utc": null,
+   "edad_min": null,
+   "nivel": 0,
+   "sd": true,
+   "umbrales": {
+    "bajo": null,
+    "medio": null,
+    "alto": null,
+    "tipo": "en_estudio"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "glofas"
+  }
+ ],
+ "avisos": [],
+ "fuentes_ok": {
+  "prevision": true
+ }
+}

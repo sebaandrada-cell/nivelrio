@@ -1,0 +1,74 @@
+{
+ "generado_utc": "2026-10-21T14:01:29Z",
+ "fuente": "Open-Meteo (CC BY 4.0)",
+ "zonas": {
+  "yangtze": [
+   {
+    "fecha": "2026-10-21",
+    "mm": 0.2,
+    "prob": 9
+   },
+   {
+    "fecha": "2026-10-22",
+    "mm": 0.3,
+    "prob": 26
+   },
+   {
+    "fecha": "2026-10-23",
+    "mm": 0.0,
+    "prob": 11
+   }
+  ],
+  "ganges": [
+   {
+    "fecha": "2026-10-21",
+    "mm": 0.0,
+    "prob": 0
+   },
+   {
+    "fecha": "2026-10-22",
+    "mm": 0.0,
+    "prob": 0
+   },
+   {
+    "fecha": "2026-10-23",
+    "mm": 0.0,
+    "prob": 0
+   }
+  ],
+  "mekong": [
+   {
+    "fecha": "2026-10-21",
+    "mm": 1.6,
+    "prob": 64
+   },
+   {
+    "fecha": "2026-10-22",
+    "mm": 13.0,
+    "prob": 53
+   },
+   {
+    "fecha": "2026-10-23",
+    "mm": 2.1,
+    "prob": 20
+   }
+  ]
+ },
+ "estaciones": {
+  "yangtze-wuhan-model": {
+   "lluvia_48h_mm": 0.5,
+   "caudal": null,
+   "puede_llegar": null
+  },
+  "ganges-varanasi-model": {
+   "lluvia_48h_mm": 0.0,
+   "caudal": null,
+   "puede_llegar": null
+  },
+  "mekong-stung-treng-model": {
+   "lluvia_48h_mm": 14.6,
+   "caudal": null,
+   "puede_llegar": null
+  }
+ }
+}

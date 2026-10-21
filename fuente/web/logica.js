@@ -142,7 +142,8 @@
   }
 
   // ---------- países ----------
-  const PAISES = ["ar", "es", "us"];
+  const PAISES = ["ar", "es", "us", "de", "fr", "gb", "it", "nl", "pl", "pt", "hu", "ru",
+    "asia", "centroamerica", "sudamerica", "oceania", "africa"];
   const POR_NIVEL_VACIO = () => [0, 0, 0, 0];
 
   function paisDesdeHash(hash, porDefecto) {

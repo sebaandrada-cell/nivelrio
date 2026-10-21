@@ -1,0 +1,17 @@
+[
+  {
+    "id": "seine-alfortville-model",
+    "rio": "Seine",
+    "nombre": "Alfortville",
+    "cuenca": "Seine",
+    "fuente": "glofas",
+    "muestreo_min": 1440,
+    "lat": 48.780238,
+    "lon": 2.418295,
+    "zona": "seine",
+    "umbrales": {"bajo": null, "medio": null, "alto": null, "tipo": "en_estudio"},
+    "pais": "fr",
+    "magnitud": "caudal",
+    "unidad": "m3s"
+  }
+]

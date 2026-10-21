@@ -120,6 +120,32 @@ def test_lecturas_en_pies():
     assert l.t_utc == datetime(2026, 10, 20, 19, 30, tzinfo=timezone.utc)
 
 
+def test_usgs_consulta_varios_rios_en_una_peticion():
+    refs = ("03255000", "06893000", "07010000", "08330000", "09163500")
+    d = json.loads(USGS)
+    serie = d["value"]["timeSeries"][0]
+    series = []
+    for ref in refs:
+        copia = copy.deepcopy(serie)
+        copia["sourceInfo"]["siteCode"][0]["value"] = ref
+        series.append(copia)
+    d["value"]["timeSeries"] = series
+    urls = []
+
+    def abrir(req, timeout=None):
+        urls.append(req.full_url)
+        return Resp(json.dumps(d))
+
+    ests = [est(id_, ref, None) for id_, ref in (
+        ("mississippi", refs[0]), ("missouri", refs[1]), ("ohio", refs[2]),
+        ("colorado", refs[3]), ("rio-grande", refs[4]))]
+    lecturas, umbrales = usgs_nws.bajar_todo(ests, abrir=abrir)
+    assert len(urls) == 1 and "sites=" + ",".join(refs) in urls[0]
+    assert {l.estacion_id for l in lecturas} == {e.id for e in ests}
+    assert set(umbrales) == {e.id for e in ests}
+    assert all(u == EN_ESTUDIO for u in umbrales.values())
+
+
 def test_parse_pronostico_lee_puntos_en_pies():
     pts = usgs_nws.parse_pronostico(PRON)
     assert len(pts) == 6
