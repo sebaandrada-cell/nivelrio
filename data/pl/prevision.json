@@ -1,5 +1,5 @@
 {
- "generado_utc": "2026-10-21T14:01:29Z",
+ "generado_utc": "2026-10-21T18:05:02Z",
  "fuente": "Open-Meteo (CC BY 4.0)",
  "zonas": {
   "vistula": [
@@ -10,19 +10,19 @@
    },
    {
     "fecha": "2026-10-22",
-    "mm": 13.3,
+    "mm": 13.5,
     "prob": 100
    },
    {
     "fecha": "2026-10-23",
-    "mm": 0.0,
-    "prob": 83
+    "mm": 0.1,
+    "prob": 71
    }
   ]
  },
  "estaciones": {
   "vistula-warsaw-model": {
-   "lluvia_48h_mm": 13.3,
+   "lluvia_48h_mm": 13.5,
    "caudal": null,
    "puede_llegar": null
   }

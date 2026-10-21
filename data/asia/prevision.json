@@ -1,22 +1,22 @@
 {
- "generado_utc": "2026-10-21T14:01:29Z",
+ "generado_utc": "2026-10-21T18:05:02Z",
  "fuente": "Open-Meteo (CC BY 4.0)",
  "zonas": {
   "yangtze": [
    {
     "fecha": "2026-10-21",
     "mm": 0.2,
-    "prob": 9
+    "prob": 16
    },
    {
     "fecha": "2026-10-22",
     "mm": 0.3,
-    "prob": 26
+    "prob": 17
    },
    {
     "fecha": "2026-10-23",
     "mm": 0.0,
-    "prob": 11
+    "prob": 1
    }
   ],
   "ganges": [
@@ -40,17 +40,17 @@
    {
     "fecha": "2026-10-21",
     "mm": 1.6,
-    "prob": 64
+    "prob": 84
    },
    {
     "fecha": "2026-10-22",
     "mm": 13.0,
-    "prob": 53
+    "prob": 65
    },
    {
     "fecha": "2026-10-23",
     "mm": 2.1,
-    "prob": 20
+    "prob": 45
    }
   ]
  },

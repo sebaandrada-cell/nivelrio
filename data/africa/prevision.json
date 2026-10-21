@@ -1,5 +1,5 @@
 {
- "generado_utc": "2026-10-21T14:01:29Z",
+ "generado_utc": "2026-10-21T18:05:02Z",
  "fuente": "Open-Meteo (CC BY 4.0)",
  "zonas": {
   "nile": [
@@ -28,12 +28,12 @@
    {
     "fecha": "2026-10-22",
     "mm": 3.1,
-    "prob": 81
+    "prob": 72
    },
    {
     "fecha": "2026-10-23",
     "mm": 8.4,
-    "prob": 55
+    "prob": 59
    }
   ],
   "niger": [
@@ -45,12 +45,12 @@
    {
     "fecha": "2026-10-22",
     "mm": 1.0,
-    "prob": 4
+    "prob": 24
    },
    {
     "fecha": "2026-10-23",
     "mm": 0.0,
-    "prob": 4
+    "prob": 6
    }
   ]
  },

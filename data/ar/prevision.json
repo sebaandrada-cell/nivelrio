@@ -1,39 +1,39 @@
 {
- "generado_utc": "2026-10-21T14:01:29Z",
+ "generado_utc": "2026-10-21T18:05:02Z",
  "fuente": "Open-Meteo (CC BY 4.0)",
  "zonas": {
   "chaco-corrientes": [
    {
     "fecha": "2026-10-21",
     "mm": 1.2,
-    "prob": 79
+    "prob": 61
    },
    {
     "fecha": "2026-10-22",
     "mm": 7.2,
-    "prob": 90
+    "prob": 94
    },
    {
     "fecha": "2026-10-23",
     "mm": 4.3,
-    "prob": 73
+    "prob": 74
    }
   ],
   "litoral-parana": [
    {
     "fecha": "2026-10-21",
     "mm": 0.3,
-    "prob": 25
+    "prob": 19
    },
    {
     "fecha": "2026-10-22",
     "mm": 12.6,
-    "prob": 95
+    "prob": 100
    },
    {
     "fecha": "2026-10-23",
     "mm": 3.1,
-    "prob": 80
+    "prob": 91
    }
   ],
   "uruguay": [
@@ -45,12 +45,12 @@
    {
     "fecha": "2026-10-22",
     "mm": 0.8,
-    "prob": 63
+    "prob": 65
    },
    {
     "fecha": "2026-10-23",
     "mm": 1.0,
-    "prob": 64
+    "prob": 71
    }
   ]
  },
