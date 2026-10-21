@@ -1,0 +1,68 @@
+{
+ "parana-barranqueras": {
+  "nivel": 3,
+  "nivel_propio": 3,
+  "sd": false,
+  "ultimo_valor": 7.3,
+  "ultimo_t_utc": "2026-10-21T12:00:00Z",
+  "cnt_sobre": 0,
+  "cnt_bajo": 0,
+  "bajo_desde": null,
+  "elevado_por_aviso": false
+ },
+ "parana-corrientes": {
+  "nivel": 3,
+  "nivel_propio": 3,
+  "sd": false,
+  "ultimo_valor": 7.27,
+  "ultimo_t_utc": "2026-10-20T03:00:00Z",
+  "cnt_sobre": 0,
+  "cnt_bajo": 0,
+  "bajo_desde": null,
+  "elevado_por_aviso": false
+ },
+ "parana-santa-fe": {
+  "nivel": 0,
+  "nivel_propio": 0,
+  "sd": false,
+  "ultimo_valor": 3.79,
+  "ultimo_t_utc": "2026-10-20T03:00:00Z",
+  "cnt_sobre": 0,
+  "cnt_bajo": 0,
+  "bajo_desde": null,
+  "elevado_por_aviso": false
+ },
+ "parana-parana": {
+  "nivel": 0,
+  "nivel_propio": 0,
+  "sd": false,
+  "ultimo_valor": 3.77,
+  "ultimo_t_utc": "2026-10-20T03:00:00Z",
+  "cnt_sobre": 0,
+  "cnt_bajo": 0,
+  "bajo_desde": null,
+  "elevado_por_aviso": false
+ },
+ "parana-rosario": {
+  "nivel": 0,
+  "nivel_propio": 0,
+  "sd": false,
+  "ultimo_valor": 3.49,
+  "ultimo_t_utc": "2026-10-20T03:00:00Z",
+  "cnt_sobre": 0,
+  "cnt_bajo": 0,
+  "bajo_desde": null,
+  "elevado_por_aviso": false
+ },
+ "uruguay-concordia": {
+  "nivel": 1,
+  "nivel_propio": 1,
+  "sd": false,
+  "ultimo_valor": 10.62,
+  "ultimo_t_utc": "2026-10-20T03:00:00Z",
+  "cnt_sobre": 0,
+  "cnt_bajo": 0,
+  "bajo_desde": null,
+  "elevado_por_aviso": false
+ }
+}

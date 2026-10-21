@@ -1,0 +1,13 @@
+{
+ "mississippi-st-louis": {
+  "nivel": 0,
+  "nivel_propio": 0,
+  "sd": false,
+  "ultimo_valor": 7.45,
+  "ultimo_t_utc": "2026-10-21T12:30:00Z",
+  "cnt_sobre": 0,
+  "cnt_bajo": 0,
+  "bajo_desde": null,
+  "elevado_por_aviso": false
+ }
+}

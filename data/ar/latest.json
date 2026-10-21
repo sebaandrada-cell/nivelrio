@@ -1,0 +1,143 @@
+{
+ "generado_utc": "2026-10-21T13:02:29Z",
+ "estaciones": [
+  {
+   "id": "parana-barranqueras",
+   "rio": "Paraná",
+   "nombre": "Barranqueras",
+   "cuenca": "Paraná",
+   "zona": "chaco-corrientes",
+   "valor": 7.3,
+   "unidad": "m",
+   "pais": "ar",
+   "t_utc": "2026-10-21T12:00:00Z",
+   "edad_min": 62,
+   "nivel": 3,
+   "sd": false,
+   "umbrales": {
+    "bajo": 5.5,
+    "medio": 6.0,
+    "alto": 6.5,
+    "tipo": "oficial"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "agp"
+  },
+  {
+   "id": "parana-corrientes",
+   "rio": "Paraná",
+   "nombre": "Corrientes",
+   "cuenca": "Paraná",
+   "zona": "chaco-corrientes",
+   "valor": 7.27,
+   "unidad": "m",
+   "pais": "ar",
+   "t_utc": "2026-10-20T03:00:00Z",
+   "edad_min": 2042,
+   "nivel": 3,
+   "sd": false,
+   "umbrales": {
+    "bajo": 5.85,
+    "medio": 6.5,
+    "alto": 7.0,
+    "tipo": "oficial"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "ina"
+  },
+  {
+   "id": "parana-santa-fe",
+   "rio": "Paraná",
+   "nombre": "Santa Fe",
+   "cuenca": "Paraná",
+   "zona": "litoral-parana",
+   "valor": 3.79,
+   "unidad": "m",
+   "pais": "ar",
+   "t_utc": "2026-10-20T03:00:00Z",
+   "edad_min": 2042,
+   "nivel": 0,
+   "sd": false,
+   "umbrales": {
+    "bajo": 4.77,
+    "medio": 5.3,
+    "alto": 5.7,
+    "tipo": "oficial"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "ina"
+  },
+  {
+   "id": "parana-parana",
+   "rio": "Paraná",
+   "nombre": "Paraná",
+   "cuenca": "Paraná",
+   "zona": "litoral-parana",
+   "valor": 3.77,
+   "unidad": "m",
+   "pais": "ar",
+   "t_utc": "2026-10-20T03:00:00Z",
+   "edad_min": 2042,
+   "nivel": 0,
+   "sd": false,
+   "umbrales": {
+    "bajo": 4.23,
+    "medio": 4.7,
+    "alto": 5.0,
+    "tipo": "oficial"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "ina"
+  },
+  {
+   "id": "parana-rosario",
+   "rio": "Paraná",
+   "nombre": "Rosario",
+   "cuenca": "Paraná",
+   "zona": "litoral-parana",
+   "valor": 3.49,
+   "unidad": "m",
+   "pais": "ar",
+   "t_utc": "2026-10-20T03:00:00Z",
+   "edad_min": 2042,
+   "nivel": 0,
+   "sd": false,
+   "umbrales": {
+    "bajo": 4.5,
+    "medio": 5.0,
+    "alto": 5.25,
+    "tipo": "oficial"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "ina"
+  },
+  {
+   "id": "uruguay-concordia",
+   "rio": "Uruguay",
+   "nombre": "Concordia",
+   "cuenca": "Uruguay",
+   "zona": "uruguay",
+   "valor": 10.62,
+   "unidad": "m",
+   "pais": "ar",
+   "t_utc": "2026-10-20T03:00:00Z",
+   "edad_min": 2042,
+   "nivel": 1,
+   "sd": false,
+   "umbrales": {
+    "bajo": 9.9,
+    "medio": 11.0,
+    "alto": 12.5,
+    "tipo": "oficial"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "ina"
+  }
+ ],
+ "avisos": [],
+ "fuentes_ok": {
+  "ina": true,
+  "agp": true,
+  "prevision": true
+ }
+}

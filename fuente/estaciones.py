@@ -8,7 +8,7 @@ PAISES = ("ar", "es", "us")
 ZONAS = {
     "es": ("tarragona", "barcelona", "girona", "interior", "valencia"),
     "ar": ("chaco-corrientes", "litoral-parana", "uruguay"),
-    "us": ("mississippi", "missouri-ohio", "red-river"),
+    "us": ("mississippi",),
 }
 MAGNITUDES = ("caudal", "altura")
 UNIDADES = ("m3s", "m", "ft")

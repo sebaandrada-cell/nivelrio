@@ -60,10 +60,7 @@ def test_ina_refs_y_muestreo():
 
 def test_us_refs_verificados():
     ref = {e.id: (e.ref, e.lid) for e in registro("us")}
-    assert ref["mississippi-st-louis"] == ("07010000", "EADM7")
-    assert ref["missouri-kansas-city"] == ("06893000", "KCDM7")
-    assert ref["ohio-cincinnati"] == ("03255000", "CCNO1")
-    assert ref["red-fargo"] == ("05054000", "FGON8")
+    assert ref == {"mississippi-st-louis": ("07010000", "EADM7")}
 
 
 def test_ejecutar_recorre_fuentes_del_registro(tmp_path):

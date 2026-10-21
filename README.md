@@ -8,7 +8,7 @@ El proyecto combina el diseño de «Apurate José», de Pablo Dodda, con adaptad
 
 ## Cobertura y fuentes
 
-El registro inicial contiene 6 estaciones de Argentina, 32 de España y 4 de Estados Unidos. La cobertura publicada depende de la disponibilidad de cada fuente.
+El registro inicial contiene 6 estaciones de Argentina, 32 de España y 1 estación del Mississippi en Estados Unidos. La cobertura publicada depende de la disponibilidad de cada fuente.
 
 | País | Fuente de observación | Umbrales y avisos | Limitaciones principales |
 |---|---|---|---|

@@ -23,9 +23,7 @@
       "chaco-corrientes": "Chaco y Corrientes",
       "litoral-parana": "Litoral: Santa Fe, Paraná y Rosario",
       "uruguay": "Río Uruguay (Concordia)",
-      "mississippi": "Mississippi (St. Louis)",
-      "missouri-ohio": "Missouri y Ohio (Kansas City, Cincinnati)",
-      "red-river": "Red River of the North (Fargo)"
+      "mississippi": "Mississippi (St. Louis)"
     },
     "est_title": "Ríos, de mayor a menor peligro",
     "filt_all": "Todos",
@@ -113,8 +111,8 @@
       "us": {
         "nombre": "EE. UU.",
         "titulo": "Ríos del centro de Estados Unidos",
-        "desc": "Altura de los ríos Mississippi, Missouri, Ohio y Red River of the North. Lecturas del USGS, actualizadas en esta página cada hora.",
-        "sub": "Altura de los ríos Mississippi, Missouri, Ohio y Red River of the North, en pies, tal como la publica el USGS.",
+        "desc": "Nivel del río Mississippi en St. Louis. Lecturas del USGS, actualizadas en esta página cada hora.",
+        "sub": "Nivel del río Mississippi en St. Louis, en pies, tal como lo publica el USGS.",
         "prev_note": "Lluvia acumulada por día (mm) y probabilidad máxima, el valor más alto entre las estaciones de cada zona. Fuente: Open-Meteo.com (CC BY 4.0). Esta página todavía no muestra el pronóstico de río del Servicio Meteorológico Nacional (NWS). La previsión nunca cambia el nivel de alerta.",
         "foot": [
           "<b>Informativo.</b> Datos provisionales sin validar. No sustituye al Servicio Meteorológico Nacional (NWS) ni a las autoridades locales de emergencias. Siga siempre sus instrucciones. En una emergencia llame al 911.",
@@ -244,9 +242,7 @@
       "chaco-corrientes": "Chaco i Corrientes",
       "litoral-parana": "Litoral: Santa Fe, Paraná i Rosario",
       "uruguay": "Riu Uruguai (Concordia)",
-      "mississippi": "Mississippi (St. Louis)",
-      "missouri-ohio": "Missouri i Ohio (Kansas City, Cincinnati)",
-      "red-river": "Red River of the North (Fargo)"
+      "mississippi": "Mississippi (St. Louis)"
     },
     "est_title": "Rius, de més a menys perill",
     "filt_all": "Tots",
@@ -334,8 +330,8 @@
       "us": {
         "nombre": "EUA",
         "titulo": "Rius del centre dels Estats Units",
-        "desc": "Alçada dels rius Mississippi, Missouri, Ohio i Red River of the North. Lectures de l'USGS, actualitzades en aquesta pàgina cada hora.",
-        "sub": "Alçada dels rius Mississippi, Missouri, Ohio i Red River of the North, en peus, tal com la publica l'USGS.",
+        "desc": "Nivell del riu Mississippi a St. Louis. Lectures de l'USGS, actualitzades en aquesta pàgina cada hora.",
+        "sub": "Nivell del riu Mississippi a St. Louis, en peus, tal com el publica l'USGS.",
         "prev_note": "Pluja acumulada per dia (mm) i probabilitat màxima, el valor més alt entre les estacions de cada zona. Font: Open-Meteo.com (CC BY 4.0). Aquesta pàgina encara no mostra el pronòstic de riu del Servei Meteorològic Nacional (NWS). La previsió mai no canvia el nivell d'alerta.",
         "foot": [
           "<b>Informatiu.</b> Dades provisionals sense validar. No substitueix el Servei Meteorològic Nacional (NWS) ni les autoritats locals d'emergències. Seguiu sempre les seves instruccions. En una emergència truqueu al 911.",
@@ -465,9 +461,7 @@
       "chaco-corrientes": "Chaco and Corrientes",
       "litoral-parana": "Litoral: Santa Fe, Paraná and Rosario",
       "uruguay": "Uruguay River (Concordia)",
-      "mississippi": "Mississippi (St. Louis)",
-      "missouri-ohio": "Missouri and Ohio (Kansas City, Cincinnati)",
-      "red-river": "Red River of the North (Fargo)"
+      "mississippi": "Mississippi (St. Louis)"
     },
     "est_title": "Rivers, from highest to lowest risk",
     "filt_all": "All",
@@ -555,8 +549,8 @@
       "us": {
         "nombre": "US",
         "titulo": "Rivers of the central United States",
-        "desc": "Heights of the Mississippi, Missouri, Ohio and Red River of the North. USGS readings, refreshed on this page every hour.",
-        "sub": "Heights of the Mississippi, Missouri, Ohio and Red River of the North, in feet, as USGS publishes them.",
+        "desc": "Mississippi River level at St. Louis. USGS readings, refreshed on this page every hour.",
+        "sub": "Mississippi River level at St. Louis, in feet as published by USGS.",
         "prev_note": "Rain accumulated per day (mm) and peak probability, taking the highest value among the stations in each zone. Source: Open-Meteo.com (CC BY 4.0). This page doesn't show the National Weather Service (NWS) river forecast yet. The forecast never changes the alert level.",
         "foot": [
           "<b>For information only.</b> Provisional, unvalidated data. It does not replace the National Weather Service (NWS) or your local emergency management office. Follow their instructions at all times. In an emergency call 911.",

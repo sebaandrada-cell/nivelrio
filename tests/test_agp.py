@@ -1,15 +1,15 @@
 """Tests del adaptador AGP (Paraná en Barranqueras).
 
-Fixture tests/fixtures/agp_barranqueras.dat: SINTÉTICO. No es un recorte real: el servidor
-hidrografia2.agpse.gob.ar no pasa la verificación TLS desde el entorno de desarrollo y el
-adaptador no la desactiva, así que no se pudo bajar. Se escribió a partir del formato que
+Fixture tests/fixtures/agp_barranqueras.dat: SINTÉTICO. Se escribió a partir del formato que
 documenta el parser de Pablo Dodda (4 líneas de cabecera; columnas TIMESTAMP, RECORD,
 NIvel_Avg, Altura_Avg, Offset): 6 filas válidas, una `NAN` y una fuera de rango (0 < h < 15).
-La última válida es 2026-10-20 14:00 (Argentina) = 17:00 UTC, 7,13 m.
+La última válida del fixture es 2026-10-20 14:00 (Argentina) = 17:00 UTC, 7,13 m.
 """
+import subprocess
 import urllib.error
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 
@@ -56,16 +56,47 @@ def test_bajar_devuelve_el_texto():
     assert agp.bajar(abrir=lambda req, timeout: Resp(TEXTO), dormir=lambda s: None) == TEXTO
 
 
-def test_error_de_certificado_no_se_reintenta_sin_verificar():
+def test_error_tls_usa_curl_con_verificacion_predeterminada():
     kwargs = []
 
     def abrir(req, **kw):
         kwargs.append(kw)
         raise urllib.error.URLError("[SSL: CERTIFICATE_VERIFY_FAILED] unable to get local issuer certificate")
 
-    with pytest.raises(FuenteError):
-        agp.bajar(abrir=abrir, dormir=lambda s: None)
+    llamadas = []
+
+    def ejecutar(args, **kw):
+        llamadas.append((args, kw))
+        return SimpleNamespace(stdout=TEXTO)
+
+    assert agp.bajar(abrir=abrir, intentos=1, dormir=lambda s: None, ejecutar=ejecutar) == TEXTO
     assert kwargs and all("context" not in kw for kw in kwargs)
+    args, opciones = llamadas[0]
+    assert args[:5] == ["curl", "--fail", "--silent", "--show-error", "--location"]
+    assert args[-1] == agp.URL
+    assert "--insecure" not in args and opciones["check"] is True
+
+
+def test_error_de_red_no_tls_no_activa_curl():
+    def abrir(req, **kw):
+        raise urllib.error.URLError("connection refused")
+
+    def ejecutar(*args, **kwargs):
+        pytest.fail("curl solo debe usarse para errores de verificación TLS")
+
+    with pytest.raises(FuenteError, match="AGP"):
+        agp.bajar(abrir=abrir, intentos=1, dormir=lambda s: None, ejecutar=ejecutar)
+
+
+def test_error_de_curl_tls_se_informa():
+    def abrir(req, **kw):
+        raise urllib.error.URLError("[SSL: CERTIFICATE_VERIFY_FAILED] unable to get local issuer certificate")
+
+    def ejecutar(*args, **kwargs):
+        raise subprocess.CalledProcessError(60, args[0], stderr="certificate verify failed")
+
+    with pytest.raises(FuenteError, match="TLS verificado"):
+        agp.bajar(abrir=abrir, intentos=1, dormir=lambda s: None, ejecutar=ejecutar)
 
 
 def test_lecturas_para_solo_estaciones_agp():

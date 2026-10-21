@@ -13,12 +13,13 @@ inyectar alturas falsas en un panel de alertas de inundación. Un error de certi
 FuenteError y la estación se cubre con la lectura del INA (misma estación, ver `elegir`).
 """
 import re
+import subprocess
 import time
 import urllib.request
 from datetime import datetime, timedelta, timezone
 
 from fuentes import red
-from modelo import Lectura
+from modelo import FuenteError, Lectura
 
 URL = "https://hidrografia2.agpse.gob.ar/histdat/Barranqueras.dat"
 
@@ -48,9 +49,32 @@ def parse(texto: str) -> tuple[datetime, float] | None:
     return ultima
 
 
-def bajar(abrir=urllib.request.urlopen, intentos: int = 3, dormir=time.sleep) -> str:
-    return red.get_texto(URL, fuente="AGP", abrir=abrir, intentos=intentos, dormir=dormir,
-                         accept="text/plain,*/*")
+def _validar(texto: str) -> None:
+    if parse(texto) is None:
+        raise ValueError("respuesta sin lecturas válidas")
+
+
+def bajar(abrir=urllib.request.urlopen, intentos: int = 3, dormir=time.sleep,
+          ejecutar=subprocess.run) -> str:
+    try:
+        return red.get_texto(URL, fuente="AGP", abrir=abrir, intentos=intentos, dormir=dormir,
+                             validar=_validar, accept="text/plain,*/*")
+    except FuenteError as exc:
+        if "CERTIFICATE_VERIFY_FAILED" not in str(exc):
+            raise
+
+    try:
+        resultado = ejecutar(
+            ["curl", "--fail", "--silent", "--show-error", "--location", "--max-time", "45", URL],
+            capture_output=True, check=True, text=True, encoding="utf-8", timeout=50,
+        )
+    except (FileNotFoundError, subprocess.CalledProcessError, subprocess.TimeoutExpired, UnicodeDecodeError) as exc:
+        raise FuenteError(f"AGP: descarga con TLS verificado falló: {exc}") from exc
+    try:
+        _validar(resultado.stdout)
+    except ValueError as exc:
+        raise FuenteError(f"AGP: respuesta inválida en descarga con TLS verificado: {exc}") from exc
+    return resultado.stdout
 
 
 def lecturas_para(estaciones, ultima: tuple[datetime, float] | None) -> list[Lectura]:

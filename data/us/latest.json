@@ -1,0 +1,32 @@
+{
+ "generado_utc": "2026-10-21T13:02:29Z",
+ "estaciones": [
+  {
+   "id": "mississippi-st-louis",
+   "rio": "Mississippi",
+   "nombre": "St. Louis",
+   "cuenca": "Mississippi",
+   "zona": "mississippi",
+   "valor": 7.45,
+   "unidad": "ft",
+   "pais": "us",
+   "t_utc": "2026-10-21T12:30:00Z",
+   "edad_min": 32,
+   "nivel": 0,
+   "sd": false,
+   "umbrales": {
+    "bajo": 28.0,
+    "medio": 30.0,
+    "alto": 35.0,
+    "tipo": "oficial"
+   },
+   "elevado_por_aviso": false,
+   "fuente": "usgs"
+  }
+ ],
+ "avisos": [],
+ "fuentes_ok": {
+  "usgs": true,
+  "prevision": true
+ }
+}

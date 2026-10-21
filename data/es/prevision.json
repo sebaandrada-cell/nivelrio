@@ -1,0 +1,349 @@
+{
+ "generado_utc": "2026-10-21T12:56:47Z",
+ "fuente": "Open-Meteo (CC BY 4.0)",
+ "zonas": {
+  "barcelona": [
+   {
+    "fecha": "2026-10-21",
+    "mm": 0.3,
+    "prob": 50
+   },
+   {
+    "fecha": "2026-10-22",
+    "mm": 1.6,
+    "prob": 33
+   },
+   {
+    "fecha": "2026-10-23",
+    "mm": 3.9,
+    "prob": 43
+   }
+  ],
+  "interior": [
+   {
+    "fecha": "2026-10-21",
+    "mm": 0.4,
+    "prob": 20
+   },
+   {
+    "fecha": "2026-10-22",
+    "mm": 0.0,
+    "prob": 8
+   },
+   {
+    "fecha": "2026-10-23",
+    "mm": 0.0,
+    "prob": 3
+   }
+  ],
+  "girona": [
+   {
+    "fecha": "2026-10-21",
+    "mm": 10.05,
+    "prob": 90
+   },
+   {
+    "fecha": "2026-10-22",
+    "mm": 3.2,
+    "prob": 80
+   },
+   {
+    "fecha": "2026-10-23",
+    "mm": 6.9,
+    "prob": 83
+   }
+  ],
+  "tarragona": [
+   {
+    "fecha": "2026-10-21",
+    "mm": 0.0,
+    "prob": 0
+   },
+   {
+    "fecha": "2026-10-22",
+    "mm": 0.0,
+    "prob": 0
+   },
+   {
+    "fecha": "2026-10-23",
+    "mm": 0.0,
+    "prob": 3
+   }
+  ],
+  "valencia": [
+   {
+    "fecha": "2026-10-21",
+    "mm": 0.0,
+    "prob": 0
+   },
+   {
+    "fecha": "2026-10-22",
+    "mm": 0.0,
+    "prob": 3
+   },
+   {
+    "fecha": "2026-10-23",
+    "mm": 0.0,
+    "prob": 0
+   }
+  ]
+ },
+ "estaciones": {
+  "llobregat-sant-joan-despi": {
+   "lluvia_48h_mm": 0.0,
+   "caudal": [
+    0.58,
+    2.43
+   ],
+   "puede_llegar": null
+  },
+  "llobregat-sant-vicenc-dels-horts": {
+   "lluvia_48h_mm": 0.0,
+   "caudal": [
+    0.58,
+    2.43
+   ],
+   "puede_llegar": null
+  },
+  "llobregat-castellbisbal": {
+   "lluvia_48h_mm": 0.0,
+   "caudal": [
+    45.88,
+    218.79
+   ],
+   "puede_llegar": null
+  },
+  "llobregat-castellbell": {
+   "lluvia_48h_mm": 0.0,
+   "caudal": [
+    0.21,
+    0.69
+   ],
+   "puede_llegar": null
+  },
+  "llobregat-guardiola": {
+   "lluvia_48h_mm": 0.1,
+   "caudal": [
+    0.14,
+    1.16
+   ],
+   "puede_llegar": null
+  },
+  "cardener-cardona": {
+   "lluvia_48h_mm": 0.0,
+   "caudal": [
+    4.22,
+    23.95
+   ],
+   "puede_llegar": 1
+  },
+  "cardener-suria": {
+   "lluvia_48h_mm": 0.0,
+   "caudal": [
+    0.23,
+    0.74
+   ],
+   "puede_llegar": null
+  },
+  "anoia-sant-sadurni": {
+   "lluvia_48h_mm": 0.0,
+   "caudal": [
+    13.19,
+    69.96
+   ],
+   "puede_llegar": null
+  },
+  "anoia-martorell": {
+   "lluvia_48h_mm": 0.0,
+   "caudal": [
+    45.88,
+    218.79
+   ],
+   "puede_llegar": null
+  },
+  "besos-santa-coloma": {
+   "lluvia_48h_mm": 0.0,
+   "caudal": [
+    0.31,
+    1.23
+   ],
+   "puede_llegar": null
+  },
+  "ter-girona": {
+   "lluvia_48h_mm": 4.0,
+   "caudal": [
+    0.0,
+    0.0
+   ],
+   "puede_llegar": null
+  },
+  "ter-colomers": {
+   "lluvia_48h_mm": 1.6,
+   "caudal": [
+    14.0,
+    93.84
+   ],
+   "puede_llegar": null
+  },
+  "ter-roda-de-ter": {
+   "lluvia_48h_mm": 0.4,
+   "caudal": [
+    5.89,
+    50.76
+   ],
+   "puede_llegar": null
+  },
+  "ter-torroella": {
+   "lluvia_48h_mm": 1.3,
+   "caudal": [
+    0.14,
+    0.73
+   ],
+   "puede_llegar": null
+  },
+  "fluvia-esponella": {
+   "lluvia_48h_mm": 3.2,
+   "caudal": [
+    3.29,
+    19.75
+   ],
+   "puede_llegar": null
+  },
+  "fluvia-olot": {
+   "lluvia_48h_mm": 1.6,
+   "caudal": [
+    0.12,
+    0.41
+   ],
+   "puede_llegar": null
+  },
+  "muga-pont-de-molins": {
+   "lluvia_48h_mm": 6.8,
+   "caudal": [
+    0.07,
+    0.18
+   ],
+   "puede_llegar": null
+  },
+  "muga-castello-d-empuries": {
+   "lluvia_48h_mm": 5.5,
+   "caudal": [
+    0.48,
+    1.01
+   ],
+   "puede_llegar": null
+  },
+  "muga-sant-llorenc": {
+   "lluvia_48h_mm": 11.2,
+   "caudal": [
+    0.38,
+    3.08
+   ],
+   "puede_llegar": null
+  },
+  "tordera-fogars-de-la-selva": {
+   "lluvia_48h_mm": 0.3,
+   "caudal": [
+    5.17,
+    53.83
+   ],
+   "puede_llegar": 1
+  },
+  "tordera-sant-celoni": {
+   "lluvia_48h_mm": 1.9,
+   "caudal": [
+    0.12,
+    0.98
+   ],
+   "puede_llegar": null
+  },
+  "francoli-montblanc": {
+   "lluvia_48h_mm": 0.0,
+   "caudal": [
+    0.14,
+    3.12
+   ],
+   "puede_llegar": null
+  },
+  "francoli-tarragona": {
+   "lluvia_48h_mm": 0.0,
+   "caudal": [
+    0.21,
+    1.02
+   ],
+   "puede_llegar": null
+  },
+  "gaia-vilabella": {
+   "lluvia_48h_mm": 0.0,
+   "caudal": [
+    0.12,
+    0.34
+   ],
+   "puede_llegar": null
+  },
+  "foix-castellet-i-la-gornal": {
+   "lluvia_48h_mm": 0.0,
+   "caudal": [
+    0.32,
+    0.46
+   ],
+   "puede_llegar": null
+  },
+  "turia-manises": {
+   "lluvia_48h_mm": 0.0,
+   "caudal": [
+    61.23,
+    119.78
+   ],
+   "puede_llegar": null
+  },
+  "turia-quart-de-poblet": {
+   "lluvia_48h_mm": 0.0,
+   "caudal": [
+    0.67,
+    3.97
+   ],
+   "puede_llegar": null
+  },
+  "turia-vilamarxant": {
+   "lluvia_48h_mm": 0.0,
+   "caudal": [
+    57.48,
+    103.95
+   ],
+   "puede_llegar": null
+  },
+  "turia-bugarra": {
+   "lluvia_48h_mm": 0.0,
+   "caudal": [
+    41.27,
+    53.33
+   ],
+   "puede_llegar": null
+  },
+  "xuquer-algemesi": {
+   "lluvia_48h_mm": 0.0,
+   "caudal": [
+    0.13,
+    1.03
+   ],
+   "puede_llegar": null
+  },
+  "xuquer-salida-de-tous": {
+   "lluvia_48h_mm": 0.0,
+   "caudal": [
+    0.12,
+    0.34
+   ],
+   "puede_llegar": null
+  },
+  "poyo-n-iii": {
+   "lluvia_48h_mm": 0.0,
+   "caudal": [
+    0.64,
+    5.15
+   ],
+   "puede_llegar": null
+  }
+ }
+}

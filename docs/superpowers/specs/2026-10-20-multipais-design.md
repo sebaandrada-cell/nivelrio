@@ -66,7 +66,7 @@ Hoy (20‑oct) el INA marca Barranqueras y Corrientes en `evacuacion`: la primer
 ## 10. Ríos de la primera entrega
 - **Argentina:** Paraná en Barranqueras (con la represa del Río Negro de Pablo), Corrientes, Santa Fe, Paraná (ciudad) y Rosario; Uruguay en Concordia.
 - **España:** las 32 estaciones actuales de Catalunya y Valencia; Ebro (Zaragoza) y Guadalquivir (Sevilla) si pasan la verificación.
-- **EE. UU.:** Mississippi (St. Louis, Memphis, Nueva Orleans), Missouri (Kansas City), Ohio (Cincinnati), Red River of the North (Fargo). Los LID se confirman contra la API en el plan.
+- **EE. UU.:** Mississippi en St. Louis. Se limita esta primera fase a una estación del Mississippi; se podrán sumar otros puntos del río después de validarlos.
 
 ## 11. Pruebas
 Pytest para cada adaptador con fixtures reales, para el motor con magnitudes distintas y para el aislamiento por país; pruebas node para el enrutado por pestañas y el formato por unidad; la prueba de paridad de textos pasa a es/ca/en. La suite actual (162 + 16) debe seguir verde tras migrar Catalunya al nuevo esquema.

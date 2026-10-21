@@ -1,0 +1,50 @@
+{
+ "ar": {
+  "generado_utc": "2026-10-21T13:02:29Z",
+  "estaciones": 6,
+  "por_nivel": [
+   3,
+   1,
+   0,
+   2
+  ],
+  "sd": 0,
+  "fuentes_ok": {
+   "ina": true,
+   "agp": true,
+   "prevision": true
+  }
+ },
+ "es": {
+  "generado_utc": "2026-10-21T13:02:29Z",
+  "estaciones": 32,
+  "por_nivel": [
+   31,
+   1,
+   0,
+   0
+  ],
+  "sd": 3,
+  "fuentes_ok": {
+   "aca": true,
+   "chj": true,
+   "avisos": true,
+   "prevision": true
+  }
+ },
+ "us": {
+  "generado_utc": "2026-10-21T13:02:29Z",
+  "estaciones": 1,
+  "por_nivel": [
+   1,
+   0,
+   0,
+   0
+  ],
+  "sd": 0,
+  "fuentes_ok": {
+   "usgs": true,
+   "prevision": true
+  }
+ }
+}
