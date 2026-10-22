@@ -1,5 +1,5 @@
 {
- "generado_utc": "2026-10-22T05:24:58Z",
+ "generado_utc": "2026-10-22T10:30:07Z",
  "fuente": "Open-Meteo (CC BY 4.0)",
  "zonas": {
   "mississippi": [
@@ -56,35 +56,35 @@
   "colorado": [
    {
     "fecha": "2026-10-22",
-    "mm": 19.4,
-    "prob": 60
+    "mm": 28.8,
+    "prob": 64
    },
    {
     "fecha": "2026-10-23",
-    "mm": 4.0,
-    "prob": 58
+    "mm": 22.8,
+    "prob": 63
    },
    {
     "fecha": "2026-10-24",
-    "mm": 0.5,
-    "prob": 48
+    "mm": 1.6,
+    "prob": 45
    }
   ],
   "rio-grande": [
    {
     "fecha": "2026-10-22",
-    "mm": 0.0,
-    "prob": 29
+    "mm": 2.2,
+    "prob": 18
    },
    {
     "fecha": "2026-10-23",
-    "mm": 0.4,
-    "prob": 47
+    "mm": 1.1,
+    "prob": 45
    },
    {
     "fecha": "2026-10-24",
-    "mm": 4.9,
-    "prob": 73
+    "mm": 4.2,
+    "prob": 70
    }
   ]
  },
@@ -105,12 +105,12 @@
    "puede_llegar": null
   },
   "colorado-colorado-utah": {
-   "lluvia_48h_mm": 23.4,
+   "lluvia_48h_mm": 51.6,
    "caudal": null,
    "puede_llegar": null
   },
   "rio-grande-albuquerque": {
-   "lluvia_48h_mm": 0.4,
+   "lluvia_48h_mm": 3.3,
    "caudal": null,
    "puede_llegar": null
   }

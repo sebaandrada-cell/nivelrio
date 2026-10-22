@@ -3,28 +3,28 @@
   "estacion_id": "muga-sant-llorenc",
   "nivel_antes": 0,
   "nivel_despues": 0,
-  "sd": true,
+  "sd": false,
   "elevado_por_aviso": false
  },
  {
   "estacion_id": "tordera-fogars-de-la-selva",
   "nivel_antes": 0,
   "nivel_despues": 0,
-  "sd": true,
+  "sd": false,
   "elevado_por_aviso": false
  },
  {
   "estacion_id": "tordera-sant-celoni",
   "nivel_antes": 0,
   "nivel_despues": 0,
-  "sd": true,
+  "sd": false,
   "elevado_por_aviso": false
  },
  {
   "estacion_id": "foix-castellet-i-la-gornal",
   "nivel_antes": 0,
   "nivel_despues": 0,
-  "sd": true,
+  "sd": false,
   "elevado_por_aviso": false
  }
 ]

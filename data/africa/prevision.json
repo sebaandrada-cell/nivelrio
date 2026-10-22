@@ -1,5 +1,5 @@
 {
- "generado_utc": "2026-10-22T05:24:58Z",
+ "generado_utc": "2026-10-22T10:30:07Z",
  "fuente": "Open-Meteo (CC BY 4.0)",
  "zonas": {
   "nile": [
@@ -22,34 +22,34 @@
   "congo": [
    {
     "fecha": "2026-10-22",
-    "mm": 11.8,
+    "mm": 9.7,
     "prob": 84
    },
    {
     "fecha": "2026-10-23",
-    "mm": 10.2,
+    "mm": 10.4,
     "prob": 49
    },
    {
     "fecha": "2026-10-24",
-    "mm": 2.8,
+    "mm": 2.7,
     "prob": 58
    }
   ],
   "niger": [
    {
     "fecha": "2026-10-22",
-    "mm": 0.2,
+    "mm": 0.9,
     "prob": 10
    },
    {
     "fecha": "2026-10-23",
-    "mm": 0.0,
+    "mm": 0.2,
     "prob": 12
    },
    {
     "fecha": "2026-10-24",
-    "mm": 0.0,
+    "mm": 0.1,
     "prob": 4
    }
   ]
@@ -61,12 +61,12 @@
    "puede_llegar": null
   },
   "congo-kisangani-model": {
-   "lluvia_48h_mm": 22.0,
+   "lluvia_48h_mm": 20.1,
    "caudal": null,
    "puede_llegar": null
   },
   "niger-lokoja-model": {
-   "lluvia_48h_mm": 0.2,
+   "lluvia_48h_mm": 1.1,
    "caudal": null,
    "puede_llegar": null
   }
