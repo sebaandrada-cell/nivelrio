@@ -1,5 +1,5 @@
 {
- "generado_utc": "2026-10-22T00:30:45Z",
+ "generado_utc": "2026-10-22T05:24:58Z",
  "fuente": "Open-Meteo (CC BY 4.0)",
  "zonas": {
   "murray": [
@@ -10,30 +10,30 @@
    },
    {
     "fecha": "2026-10-23",
-    "mm": 0.1,
-    "prob": 14
+    "mm": 0.0,
+    "prob": 8
    },
    {
     "fecha": "2026-10-24",
-    "mm": 6.2,
+    "mm": 5.7,
     "prob": 84
    }
   ],
   "sepik": [
    {
     "fecha": "2026-10-22",
-    "mm": 0.0,
-    "prob": 59
+    "mm": 0.1,
+    "prob": 43
    },
    {
     "fecha": "2026-10-23",
-    "mm": 9.7,
-    "prob": 96
+    "mm": 3.5,
+    "prob": 94
    },
    {
     "fecha": "2026-10-24",
-    "mm": 2.5,
-    "prob": 96
+    "mm": 2.0,
+    "prob": 86
    }
   ],
   "waikato": [
@@ -44,29 +44,29 @@
    },
    {
     "fecha": "2026-10-23",
-    "mm": 0.0,
+    "mm": 0.1,
     "prob": 0
    },
    {
     "fecha": "2026-10-24",
-    "mm": 0.1,
-    "prob": 8
+    "mm": 0.2,
+    "prob": 10
    }
   ]
  },
  "estaciones": {
   "murray-renmark-model": {
-   "lluvia_48h_mm": 0.1,
+   "lluvia_48h_mm": 0.0,
    "caudal": null,
    "puede_llegar": null
   },
   "sepik-angoram-model": {
-   "lluvia_48h_mm": 9.7,
+   "lluvia_48h_mm": 3.6,
    "caudal": null,
    "puede_llegar": null
   },
   "waikato-hamilton-model": {
-   "lluvia_48h_mm": 0.0,
+   "lluvia_48h_mm": 0.1,
    "caudal": null,
    "puede_llegar": null
   }

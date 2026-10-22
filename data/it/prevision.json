@@ -1,5 +1,5 @@
 {
- "generado_utc": "2026-10-22T00:30:45Z",
+ "generado_utc": "2026-10-22T05:24:58Z",
  "fuente": "Open-Meteo (CC BY 4.0)",
  "zonas": {
   "po": [
@@ -10,19 +10,19 @@
    },
    {
     "fecha": "2026-10-23",
-    "mm": 3.05,
-    "prob": 45
+    "mm": 7.8,
+    "prob": 48
    },
    {
     "fecha": "2026-10-24",
     "mm": 0.1,
-    "prob": 42
+    "prob": 33
    }
   ]
  },
  "estaciones": {
   "po-ferrara-model": {
-   "lluvia_48h_mm": 3.0,
+   "lluvia_48h_mm": 7.8,
    "caudal": null,
    "puede_llegar": null
   }

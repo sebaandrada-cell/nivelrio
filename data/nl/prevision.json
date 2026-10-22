@@ -1,28 +1,28 @@
 {
- "generado_utc": "2026-10-22T00:30:45Z",
+ "generado_utc": "2026-10-22T05:24:58Z",
  "fuente": "Open-Meteo (CC BY 4.0)",
  "zonas": {
   "meuse": [
    {
     "fecha": "2026-10-22",
-    "mm": 4.7,
-    "prob": 59
+    "mm": 0.4,
+    "prob": 61
    },
    {
     "fecha": "2026-10-23",
-    "mm": 13.5,
-    "prob": 98
+    "mm": 11.1,
+    "prob": 97
    },
    {
     "fecha": "2026-10-24",
-    "mm": 8.48,
-    "prob": 96
+    "mm": 8.0,
+    "prob": 92
    }
   ]
  },
  "estaciones": {
   "meuse-venlo-model": {
-   "lluvia_48h_mm": 18.2,
+   "lluvia_48h_mm": 11.5,
    "caudal": null,
    "puede_llegar": null
   }
