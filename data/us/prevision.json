@@ -1,13 +1,8 @@
 {
- "generado_utc": "2026-10-21T21:45:16Z",
+ "generado_utc": "2026-10-22T00:30:45Z",
  "fuente": "Open-Meteo (CC BY 4.0)",
  "zonas": {
   "mississippi": [
-   {
-    "fecha": "2026-10-21",
-    "mm": 0.0,
-    "prob": 1
-   },
    {
     "fecha": "2026-10-22",
     "mm": 0.0,
@@ -15,17 +10,17 @@
    },
    {
     "fecha": "2026-10-23",
+    "mm": 0.0,
+    "prob": 0
+   },
+   {
+    "fecha": "2026-10-24",
     "mm": 0.0,
     "prob": 0
    }
   ],
   "missouri": [
    {
-    "fecha": "2026-10-21",
-    "mm": 0.0,
-    "prob": 13
-   },
-   {
     "fecha": "2026-10-22",
     "mm": 0.0,
     "prob": 0
@@ -34,14 +29,14 @@
     "fecha": "2026-10-23",
     "mm": 0.0,
     "prob": 1
+   },
+   {
+    "fecha": "2026-10-24",
+    "mm": 0.0,
+    "prob": 0
    }
   ],
   "ohio": [
-   {
-    "fecha": "2026-10-21",
-    "mm": 0.0,
-    "prob": 0
-   },
    {
     "fecha": "2026-10-22",
     "mm": 0.0,
@@ -49,42 +44,47 @@
    },
    {
     "fecha": "2026-10-23",
+    "mm": 0.0,
+    "prob": 0
+   },
+   {
+    "fecha": "2026-10-24",
     "mm": 0.0,
     "prob": 0
    }
   ],
   "colorado": [
    {
-    "fecha": "2026-10-21",
-    "mm": 8.0,
-    "prob": 82
-   },
-   {
     "fecha": "2026-10-22",
-    "mm": 8.1,
-    "prob": 57
+    "mm": 5.5,
+    "prob": 64
    },
    {
     "fecha": "2026-10-23",
     "mm": 6.85,
     "prob": 78
+   },
+   {
+    "fecha": "2026-10-24",
+    "mm": 0.5,
+    "prob": 35
    }
   ],
   "rio-grande": [
    {
-    "fecha": "2026-10-21",
-    "mm": 0.0,
-    "prob": 19
-   },
-   {
     "fecha": "2026-10-22",
     "mm": 0.0,
-    "prob": 17
+    "prob": 23
    },
    {
     "fecha": "2026-10-23",
     "mm": 1.2,
     "prob": 52
+   },
+   {
+    "fecha": "2026-10-24",
+    "mm": 4.3,
+    "prob": 72
    }
   ]
  },
@@ -105,12 +105,12 @@
    "puede_llegar": null
   },
   "colorado-colorado-utah": {
-   "lluvia_48h_mm": 16.1,
+   "lluvia_48h_mm": 12.3,
    "caudal": null,
    "puede_llegar": null
   },
   "rio-grande-albuquerque": {
-   "lluvia_48h_mm": 0.0,
+   "lluvia_48h_mm": 1.2,
    "caudal": null,
    "puede_llegar": null
   }

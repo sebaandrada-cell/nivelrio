@@ -1,30 +1,25 @@
 {
- "generado_utc": "2026-10-21T21:45:16Z",
+ "generado_utc": "2026-10-22T00:30:45Z",
  "fuente": "Open-Meteo (CC BY 4.0)",
  "zonas": {
   "chaco-corrientes": [
    {
-    "fecha": "2026-10-21",
-    "mm": 4.0,
-    "prob": 61
-   },
-   {
     "fecha": "2026-10-22",
     "mm": 20.5,
-    "prob": 94
+    "prob": 96
    },
    {
     "fecha": "2026-10-23",
     "mm": 24.8,
-    "prob": 74
+    "prob": 71
+   },
+   {
+    "fecha": "2026-10-24",
+    "mm": 16.4,
+    "prob": 79
    }
   ],
   "litoral-parana": [
-   {
-    "fecha": "2026-10-21",
-    "mm": 0.1,
-    "prob": 19
-   },
    {
     "fecha": "2026-10-22",
     "mm": 25.5,
@@ -33,55 +28,60 @@
    {
     "fecha": "2026-10-23",
     "mm": 7.2,
-    "prob": 91
+    "prob": 86
+   },
+   {
+    "fecha": "2026-10-24",
+    "mm": 0.9,
+    "prob": 41
    }
   ],
   "uruguay": [
    {
-    "fecha": "2026-10-21",
-    "mm": 0.4,
-    "prob": 27
-   },
-   {
     "fecha": "2026-10-22",
     "mm": 0.4,
-    "prob": 65
+    "prob": 90
    },
    {
     "fecha": "2026-10-23",
     "mm": 1.9,
-    "prob": 71
+    "prob": 92
+   },
+   {
+    "fecha": "2026-10-24",
+    "mm": 0.0,
+    "prob": 40
    }
   ]
  },
  "estaciones": {
   "parana-barranqueras": {
-   "lluvia_48h_mm": 22.5,
+   "lluvia_48h_mm": 43.3,
    "caudal": null,
    "puede_llegar": null
   },
   "parana-corrientes": {
-   "lluvia_48h_mm": 24.5,
+   "lluvia_48h_mm": 37.7,
    "caudal": null,
    "puede_llegar": null
   },
   "parana-santa-fe": {
-   "lluvia_48h_mm": 3.9,
+   "lluvia_48h_mm": 4.2,
    "caudal": null,
    "puede_llegar": null
   },
   "parana-parana": {
-   "lluvia_48h_mm": 2.3,
+   "lluvia_48h_mm": 2.5,
    "caudal": null,
    "puede_llegar": null
   },
   "parana-rosario": {
-   "lluvia_48h_mm": 25.5,
+   "lluvia_48h_mm": 32.7,
    "caudal": null,
    "puede_llegar": null
   },
   "uruguay-concordia": {
-   "lluvia_48h_mm": 0.8,
+   "lluvia_48h_mm": 2.3,
    "caudal": null,
    "puede_llegar": null
   }
