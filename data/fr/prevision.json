@@ -1,28 +1,28 @@
 {
- "generado_utc": "2026-10-22T10:30:07Z",
+ "generado_utc": "2026-10-22T15:40:50Z",
  "fuente": "Open-Meteo (CC BY 4.0)",
  "zonas": {
   "seine": [
    {
     "fecha": "2026-10-22",
-    "mm": 0.2,
-    "prob": 71
+    "mm": 1.1,
+    "prob": 50
    },
    {
     "fecha": "2026-10-23",
-    "mm": 8.9,
-    "prob": 92
+    "mm": 2.6,
+    "prob": 95
    },
    {
     "fecha": "2026-10-24",
-    "mm": 15.4,
+    "mm": 15.95,
     "prob": 100
    }
   ]
  },
  "estaciones": {
   "seine-alfortville-model": {
-   "lluvia_48h_mm": 9.1,
+   "lluvia_48h_mm": 3.7,
    "caudal": null,
    "puede_llegar": null
   }
