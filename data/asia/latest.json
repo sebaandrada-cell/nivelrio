@@ -1,5 +1,5 @@
 {
- "generado_utc": "2026-10-23T21:59:40Z",
+ "generado_utc": "2026-10-23T23:22:37Z",
  "estaciones": [
   {
    "id": "yangtze-wuhan-model",
@@ -70,6 +70,6 @@
  ],
  "avisos": [],
  "fuentes_ok": {
-  "prevision": false
+  "prevision": true
  }
 }

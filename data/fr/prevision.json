@@ -1,29 +1,32 @@
 {
- "generado_utc": "2026-10-23T20:17:39Z",
+ "generado_utc": "2026-10-23T23:22:37Z",
  "fuente": "Open-Meteo (CC BY 4.0)",
  "zonas": {
-  "seine": [
-   {
-    "fecha": "2026-10-23",
-    "mm": 6.6,
-    "prob": 90
-   },
+  "loire": [
    {
     "fecha": "2026-10-24",
-    "mm": 12.35,
+    "mm": 8.8,
     "prob": 100
    },
    {
     "fecha": "2026-10-25",
-    "mm": 8.18,
-    "prob": 98
+    "mm": 7.05,
+    "prob": 100
+   },
+   {
+    "fecha": "2026-10-26",
+    "mm": 0.8,
+    "prob": 43
    }
   ]
  },
  "estaciones": {
-  "seine-alfortville-model": {
-   "lluvia_48h_mm": 18.9,
-   "caudal": null,
+  "loire-orleans": {
+   "lluvia_48h_mm": 15.9,
+   "caudal": [
+    52.09,
+    129.92
+   ],
    "puede_llegar": null
   }
  }

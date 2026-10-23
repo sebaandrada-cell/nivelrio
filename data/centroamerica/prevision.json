@@ -1,5 +1,5 @@
 {
- "generado_utc": "2026-10-23T21:59:40Z",
+ "generado_utc": "2026-10-23T23:22:37Z",
  "fuente": "Open-Meteo (CC BY 4.0)",
  "zonas": {
   "san-juan": [
@@ -18,6 +18,40 @@
     "mm": 0.0,
     "prob": 23
    }
+  ],
+  "usumacinta": [
+   {
+    "fecha": "2026-10-24",
+    "mm": 0.3,
+    "prob": 27
+   },
+   {
+    "fecha": "2026-10-25",
+    "mm": 0.3,
+    "prob": 8
+   },
+   {
+    "fecha": "2026-10-26",
+    "mm": 1.0,
+    "prob": 27
+   }
+  ],
+  "lempa": [
+   {
+    "fecha": "2026-10-24",
+    "mm": 2.4,
+    "prob": 89
+   },
+   {
+    "fecha": "2026-10-25",
+    "mm": 0.0,
+    "prob": 7
+   },
+   {
+    "fecha": "2026-10-26",
+    "mm": 0.0,
+    "prob": 14
+   }
   ]
  },
  "estaciones": {
@@ -27,12 +61,12 @@
    "puede_llegar": null
   },
   "usumacinta-tenosique-model": {
-   "lluvia_48h_mm": null,
+   "lluvia_48h_mm": 0.6,
    "caudal": null,
    "puede_llegar": null
   },
   "lempa-san-marcos-lempa-model": {
-   "lluvia_48h_mm": null,
+   "lluvia_48h_mm": 2.4,
    "caudal": null,
    "puede_llegar": null
   }

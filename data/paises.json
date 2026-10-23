@@ -1,6 +1,6 @@
 {
  "ar": {
-  "generado_utc": "2026-10-23T20:17:39Z",
+  "generado_utc": "2026-10-23T23:22:37Z",
   "estaciones": 6,
   "por_nivel": [
    3,
@@ -16,7 +16,7 @@
   }
  },
  "es": {
-  "generado_utc": "2026-10-23T20:17:39Z",
+  "generado_utc": "2026-10-23T23:22:37Z",
   "estaciones": 33,
   "por_nivel": [
    33,
@@ -33,7 +33,7 @@
   }
  },
  "us": {
-  "generado_utc": "2026-10-23T20:17:39Z",
+  "generado_utc": "2026-10-23T23:22:37Z",
   "estaciones": 5,
   "por_nivel": [
    5,
@@ -48,7 +48,7 @@
   }
  },
  "africa": {
-  "generado_utc": "2026-10-23T20:17:39Z",
+  "generado_utc": "2026-10-23T23:22:37Z",
   "estaciones": 3,
   "por_nivel": [
    3,
@@ -62,7 +62,7 @@
   }
  },
  "asia": {
-  "generado_utc": "2026-10-23T20:17:39Z",
+  "generado_utc": "2026-10-23T23:22:37Z",
   "estaciones": 3,
   "por_nivel": [
    3,
@@ -76,7 +76,7 @@
   }
  },
  "centroamerica": {
-  "generado_utc": "2026-10-23T20:17:39Z",
+  "generado_utc": "2026-10-23T23:22:37Z",
   "estaciones": 3,
   "por_nivel": [
    3,
@@ -90,7 +90,7 @@
   }
  },
  "de": {
-  "generado_utc": "2026-10-23T20:17:39Z",
+  "generado_utc": "2026-10-23T23:22:37Z",
   "estaciones": 1,
   "por_nivel": [
    1,
@@ -98,13 +98,14 @@
    0,
    0
   ],
-  "sd": 1,
+  "sd": 0,
   "fuentes_ok": {
+   "pegelonline": true,
    "prevision": true
   }
  },
  "fr": {
-  "generado_utc": "2026-10-23T20:17:39Z",
+  "generado_utc": "2026-10-23T23:22:37Z",
   "estaciones": 1,
   "por_nivel": [
    1,
@@ -112,13 +113,14 @@
    0,
    0
   ],
-  "sd": 1,
+  "sd": 0,
   "fuentes_ok": {
+   "hubeau": true,
    "prevision": true
   }
  },
  "gb": {
-  "generado_utc": "2026-10-23T20:17:39Z",
+  "generado_utc": "2026-10-23T23:22:37Z",
   "estaciones": 1,
   "por_nivel": [
    1,
@@ -126,13 +128,14 @@
    0,
    0
   ],
-  "sd": 1,
+  "sd": 0,
   "fuentes_ok": {
+   "ea_uk": true,
    "prevision": true
   }
  },
  "hu": {
-  "generado_utc": "2026-10-23T20:17:39Z",
+  "generado_utc": "2026-10-23T23:22:37Z",
   "estaciones": 1,
   "por_nivel": [
    1,
@@ -146,7 +149,7 @@
   }
  },
  "it": {
-  "generado_utc": "2026-10-23T20:17:39Z",
+  "generado_utc": "2026-10-23T23:22:37Z",
   "estaciones": 1,
   "por_nivel": [
    1,
@@ -160,7 +163,7 @@
   }
  },
  "nl": {
-  "generado_utc": "2026-10-23T20:17:39Z",
+  "generado_utc": "2026-10-23T23:22:37Z",
   "estaciones": 1,
   "por_nivel": [
    1,
@@ -174,7 +177,7 @@
   }
  },
  "oceania": {
-  "generado_utc": "2026-10-23T20:17:39Z",
+  "generado_utc": "2026-10-23T23:22:37Z",
   "estaciones": 3,
   "por_nivel": [
    3,
@@ -188,7 +191,7 @@
   }
  },
  "pl": {
-  "generado_utc": "2026-10-23T20:17:39Z",
+  "generado_utc": "2026-10-23T23:22:37Z",
   "estaciones": 1,
   "por_nivel": [
    1,
@@ -198,11 +201,12 @@
   ],
   "sd": 1,
   "fuentes_ok": {
+   "imgw": true,
    "prevision": true
   }
  },
  "pt": {
-  "generado_utc": "2026-10-23T20:17:39Z",
+  "generado_utc": "2026-10-23T23:22:37Z",
   "estaciones": 1,
   "por_nivel": [
    1,
@@ -216,7 +220,7 @@
   }
  },
  "ru": {
-  "generado_utc": "2026-10-23T20:17:39Z",
+  "generado_utc": "2026-10-23T23:22:37Z",
   "estaciones": 1,
   "por_nivel": [
    1,
@@ -230,7 +234,7 @@
   }
  },
  "sudamerica": {
-  "generado_utc": "2026-10-23T20:17:39Z",
+  "generado_utc": "2026-10-23T23:22:37Z",
   "estaciones": 3,
   "por_nivel": [
    3,

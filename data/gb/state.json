@@ -2,9 +2,9 @@
  "severn-shrewsbury": {
   "nivel": 0,
   "nivel_propio": 0,
-  "sd": true,
-  "ultimo_valor": null,
-  "ultimo_t_utc": null,
+  "sd": false,
+  "ultimo_valor": 0.861,
+  "ultimo_t_utc": "2026-10-23T22:45:00Z",
   "cnt_sobre": 0,
   "cnt_bajo": 0,
   "bajo_desde": null,

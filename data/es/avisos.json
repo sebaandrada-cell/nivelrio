@@ -1,1 +1,26 @@
-[]
+[
+ {
+  "origen": "AEMET",
+  "nivel": "amarillo",
+  "zona": "Prelitoral de Barcelona",
+  "descripcion": "Lluvias: Aviso de precipitación acumulada en una hora de nivel amarillo de 01:00 24-10-2026 CEST (UTC+2) a 06:59 24-10-2026 CEST (UTC+2).",
+  "t_utc": "2026-10-23T23:00:00Z",
+  "region": "cat"
+ },
+ {
+  "origen": "AEMET",
+  "nivel": "amarillo",
+  "zona": "Litoral de Barcelona",
+  "descripcion": "Lluvias: Aviso de precipitación acumulada en una hora de nivel amarillo de 01:00 24-10-2026 CEST (UTC+2) a 06:59 24-10-2026 CEST (UTC+2).",
+  "t_utc": "2026-10-23T23:00:00Z",
+  "region": "cat"
+ },
+ {
+  "origen": "AEMET",
+  "nivel": "amarillo",
+  "zona": "Litoral sur de Girona",
+  "descripcion": "Lluvias: Aviso de precipitación acumulada en una hora de nivel amarillo de 01:00 24-10-2026 CEST (UTC+2) a 06:59 24-10-2026 CEST (UTC+2).",
+  "t_utc": "2026-10-23T23:00:00Z",
+  "region": "cat"
+ }
+]

@@ -1,5 +1,5 @@
 {
- "generado_utc": "2026-10-23T22:08:36Z",
+ "generado_utc": "2026-10-23T23:22:37Z",
  "estaciones": [
   {
    "id": "rhine-cologne",
@@ -7,11 +7,11 @@
    "nombre": "Cologne",
    "cuenca": "Rhine",
    "zona": "rhine",
-   "valor": 0.68,
+   "valor": 0.69,
    "unidad": "m",
    "pais": "de",
-   "t_utc": "2026-10-23T22:00:00Z",
-   "edad_min": 8,
+   "t_utc": "2026-10-23T23:15:00Z",
+   "edad_min": 7,
    "nivel": 0,
    "sd": false,
    "umbrales": {

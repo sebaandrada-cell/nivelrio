@@ -1,90 +1,90 @@
 {
- "generado_utc": "2026-10-23T20:17:39Z",
+ "generado_utc": "2026-10-23T23:22:37Z",
  "fuente": "Open-Meteo (CC BY 4.0)",
  "zonas": {
   "mississippi": [
    {
-    "fecha": "2026-10-23",
-    "mm": 0.0,
-    "prob": 0
-   },
-   {
     "fecha": "2026-10-24",
     "mm": 0.0,
-    "prob": 2
+    "prob": 1
    },
    {
     "fecha": "2026-10-25",
     "mm": 0.0,
     "prob": 1
+   },
+   {
+    "fecha": "2026-10-26",
+    "mm": 0.0,
+    "prob": 0
    }
   ],
   "missouri": [
    {
-    "fecha": "2026-10-23",
-    "mm": 0.0,
-    "prob": 0
-   },
-   {
     "fecha": "2026-10-24",
     "mm": 0.0,
     "prob": 1
    },
    {
     "fecha": "2026-10-25",
+    "mm": 0.0,
+    "prob": 1
+   },
+   {
+    "fecha": "2026-10-26",
     "mm": 0.0,
     "prob": 1
    }
   ],
   "ohio": [
    {
-    "fecha": "2026-10-23",
-    "mm": 0.0,
-    "prob": 0
-   },
-   {
     "fecha": "2026-10-24",
     "mm": 0.0,
     "prob": 0
    },
    {
     "fecha": "2026-10-25",
+    "mm": 0.0,
+    "prob": 0
+   },
+   {
+    "fecha": "2026-10-26",
     "mm": 0.0,
     "prob": 0
    }
   ],
   "colorado": [
    {
-    "fecha": "2026-10-23",
-    "mm": 1.4,
-    "prob": 85
-   },
-   {
     "fecha": "2026-10-24",
-    "mm": 2.9,
-    "prob": 20
+    "mm": 5.5,
+    "prob": 23
    },
    {
     "fecha": "2026-10-25",
     "mm": 2.8,
-    "prob": 52
+    "prob": 46
+   },
+   {
+    "fecha": "2026-10-26",
+    "mm": 0.0,
+    "prob": 28
    }
   ],
   "rio-grande": [
    {
-    "fecha": "2026-10-23",
-    "mm": 0.4,
-    "prob": 43
-   },
-   {
     "fecha": "2026-10-24",
-    "mm": 6.2,
-    "prob": 57
+    "mm": 18.7,
+    "prob": 51
    },
    {
     "fecha": "2026-10-25",
     "mm": 0.0,
-    "prob": 42
+    "prob": 32
+   },
+   {
+    "fecha": "2026-10-26",
+    "mm": 0.0,
+    "prob": 21
    }
   ]
  },
@@ -105,12 +105,12 @@
    "puede_llegar": null
   },
   "colorado-colorado-utah": {
-   "lluvia_48h_mm": 4.3,
+   "lluvia_48h_mm": 8.3,
    "caudal": null,
    "puede_llegar": null
   },
   "rio-grande-albuquerque": {
-   "lluvia_48h_mm": 6.6,
+   "lluvia_48h_mm": 18.7,
    "caudal": null,
    "puede_llegar": null
   }

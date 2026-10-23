@@ -1,14 +1,9 @@
 {
- "generado_utc": "2026-10-23T20:17:39Z",
+ "generado_utc": "2026-10-23T23:22:37Z",
  "fuente": "Open-Meteo (CC BY 4.0)",
  "zonas": {
   "yangtze": [
    {
-    "fecha": "2026-10-23",
-    "mm": 0.2,
-    "prob": 60
-   },
-   {
     "fecha": "2026-10-24",
     "mm": 0.0,
     "prob": 0
@@ -17,31 +12,31 @@
     "fecha": "2026-10-25",
     "mm": 0.0,
     "prob": 0
+   },
+   {
+    "fecha": "2026-10-26",
+    "mm": 0.0,
+    "prob": 8
    }
   ],
   "ganges": [
    {
-    "fecha": "2026-10-23",
-    "mm": 0.0,
-    "prob": 0
-   },
-   {
     "fecha": "2026-10-24",
     "mm": 0.0,
     "prob": 0
    },
    {
     "fecha": "2026-10-25",
+    "mm": 0.0,
+    "prob": 0
+   },
+   {
+    "fecha": "2026-10-26",
     "mm": 0.0,
     "prob": 0
    }
   ],
   "mekong": [
-   {
-    "fecha": "2026-10-23",
-    "mm": 0.1,
-    "prob": 25
-   },
    {
     "fecha": "2026-10-24",
     "mm": 1.8,
@@ -51,12 +46,17 @@
     "fecha": "2026-10-25",
     "mm": 4.9,
     "prob": 64
+   },
+   {
+    "fecha": "2026-10-26",
+    "mm": 0.1,
+    "prob": 52
    }
   ]
  },
  "estaciones": {
   "yangtze-wuhan-model": {
-   "lluvia_48h_mm": 0.2,
+   "lluvia_48h_mm": 0.0,
    "caudal": null,
    "puede_llegar": null
   },
@@ -66,7 +66,7 @@
    "puede_llegar": null
   },
   "mekong-stung-treng-model": {
-   "lluvia_48h_mm": 1.9,
+   "lluvia_48h_mm": 6.7,
    "caudal": null,
    "puede_llegar": null
   }

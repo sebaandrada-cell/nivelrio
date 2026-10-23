@@ -1,28 +1,28 @@
 {
- "generado_utc": "2026-10-23T20:17:39Z",
+ "generado_utc": "2026-10-23T23:22:37Z",
  "fuente": "Open-Meteo (CC BY 4.0)",
  "zonas": {
-  "thames": [
-   {
-    "fecha": "2026-10-23",
-    "mm": 19.9,
-    "prob": 100
-   },
+  "severn": [
    {
     "fecha": "2026-10-24",
-    "mm": 12.4,
+    "mm": 14.3,
     "prob": 100
    },
    {
     "fecha": "2026-10-25",
-    "mm": 0.6,
-    "prob": 93
+    "mm": 0.1,
+    "prob": 31
+   },
+   {
+    "fecha": "2026-10-26",
+    "mm": 8.7,
+    "prob": 92
    }
   ]
  },
  "estaciones": {
-  "thames-kingston-model": {
-   "lluvia_48h_mm": 32.3,
+  "severn-shrewsbury": {
+   "lluvia_48h_mm": 14.4,
    "caudal": null,
    "puede_llegar": null
   }

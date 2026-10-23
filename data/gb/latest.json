@@ -1,5 +1,5 @@
 {
- "generado_utc": "2026-10-23T22:08:36Z",
+ "generado_utc": "2026-10-23T23:22:37Z",
  "estaciones": [
   {
    "id": "severn-shrewsbury",
@@ -7,13 +7,13 @@
    "nombre": "Shrewsbury",
    "cuenca": "Severn",
    "zona": "severn",
-   "valor": 0.852,
+   "valor": 0.861,
    "unidad": "m",
    "pais": "gb",
-   "t_utc": "2026-10-23T21:15:00Z",
-   "edad_min": 53,
+   "t_utc": "2026-10-23T22:45:00Z",
+   "edad_min": 37,
    "nivel": 0,
-   "sd": true,
+   "sd": false,
    "umbrales": {
     "bajo": null,
     "medio": null,
@@ -27,6 +27,6 @@
  "avisos": [],
  "fuentes_ok": {
   "ea_uk": true,
-  "prevision": false
+  "prevision": true
  }
 }
