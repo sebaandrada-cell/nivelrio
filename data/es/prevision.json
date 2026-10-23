@@ -1,16 +1,16 @@
 {
- "generado_utc": "2026-10-23T16:56:21Z",
+ "generado_utc": "2026-10-23T20:17:39Z",
  "fuente": "Open-Meteo (CC BY 4.0)",
  "zonas": {
   "barcelona": [
    {
     "fecha": "2026-10-23",
-    "mm": 0.1,
+    "mm": 0.0,
     "prob": 53
    },
    {
     "fecha": "2026-10-24",
-    "mm": 3.9,
+    "mm": 2.0,
     "prob": 93
    },
    {
@@ -27,7 +27,7 @@
    },
    {
     "fecha": "2026-10-24",
-    "mm": 0.5,
+    "mm": 0.8,
     "prob": 13
    },
    {
@@ -39,12 +39,12 @@
   "girona": [
    {
     "fecha": "2026-10-23",
-    "mm": 2.48,
+    "mm": 1.3,
     "prob": 88
    },
    {
     "fecha": "2026-10-24",
-    "mm": 1.3,
+    "mm": 2.5,
     "prob": 95
    },
    {
@@ -78,8 +78,8 @@
    },
    {
     "fecha": "2026-10-24",
-    "mm": 0.1,
-    "prob": 15
+    "mm": 0.0,
+    "prob": 3
    },
    {
     "fecha": "2026-10-25",
@@ -90,7 +90,7 @@
  },
  "estaciones": {
   "llobregat-sant-joan-despi": {
-   "lluvia_48h_mm": 1.3,
+   "lluvia_48h_mm": 0.0,
    "caudal": [
     0.5,
     0.66
@@ -98,7 +98,7 @@
    "puede_llegar": null
   },
   "llobregat-sant-vicenc-dels-horts": {
-   "lluvia_48h_mm": 1.3,
+   "lluvia_48h_mm": 0.0,
    "caudal": [
     0.5,
     0.66
@@ -106,7 +106,7 @@
    "puede_llegar": null
   },
   "llobregat-castellbisbal": {
-   "lluvia_48h_mm": 0.6,
+   "lluvia_48h_mm": 1.6,
    "caudal": [
     24.76,
     46.64
@@ -154,7 +154,7 @@
    "puede_llegar": null
   },
   "anoia-martorell": {
-   "lluvia_48h_mm": 0.6,
+   "lluvia_48h_mm": 1.6,
    "caudal": [
     24.76,
     46.64
@@ -162,7 +162,7 @@
    "puede_llegar": null
   },
   "besos-santa-coloma": {
-   "lluvia_48h_mm": 4.0,
+   "lluvia_48h_mm": 2.0,
    "caudal": [
     0.23,
     0.49
@@ -170,7 +170,7 @@
    "puede_llegar": null
   },
   "ter-girona": {
-   "lluvia_48h_mm": 1.1,
+   "lluvia_48h_mm": 3.2,
    "caudal": [
     0.0,
     0.0
@@ -178,7 +178,7 @@
    "puede_llegar": null
   },
   "ter-colomers": {
-   "lluvia_48h_mm": 1.7,
+   "lluvia_48h_mm": 1.6,
    "caudal": [
     10.67,
     16.74
@@ -186,7 +186,7 @@
    "puede_llegar": null
   },
   "ter-roda-de-ter": {
-   "lluvia_48h_mm": 0.5,
+   "lluvia_48h_mm": 0.8,
    "caudal": [
     4.79,
     6.59
@@ -194,7 +194,7 @@
    "puede_llegar": null
   },
   "ter-torroella": {
-   "lluvia_48h_mm": 1.1,
+   "lluvia_48h_mm": 1.2,
    "caudal": [
     0.13,
     0.45
@@ -202,7 +202,7 @@
    "puede_llegar": null
   },
   "fluvia-esponella": {
-   "lluvia_48h_mm": 1.1,
+   "lluvia_48h_mm": 0.0,
    "caudal": [
     4.5,
     5.7
@@ -210,7 +210,7 @@
    "puede_llegar": null
   },
   "fluvia-olot": {
-   "lluvia_48h_mm": 2.5,
+   "lluvia_48h_mm": 0.0,
    "caudal": [
     0.16,
     0.2
@@ -218,7 +218,7 @@
    "puede_llegar": null
   },
   "muga-pont-de-molins": {
-   "lluvia_48h_mm": 1.1,
+   "lluvia_48h_mm": 0.1,
    "caudal": [
     0.03,
     0.1
@@ -226,7 +226,7 @@
    "puede_llegar": null
   },
   "muga-castello-d-empuries": {
-   "lluvia_48h_mm": 0.7,
+   "lluvia_48h_mm": 2.9,
    "caudal": [
     0.37,
     0.69
@@ -234,7 +234,7 @@
    "puede_llegar": null
   },
   "muga-sant-llorenc": {
-   "lluvia_48h_mm": 1.4,
+   "lluvia_48h_mm": 0.0,
    "caudal": [
     0.61,
     0.75
@@ -242,7 +242,7 @@
    "puede_llegar": null
   },
   "tordera-fogars-de-la-selva": {
-   "lluvia_48h_mm": 1.1,
+   "lluvia_48h_mm": 0.7,
    "caudal": [
     4.5,
     6.94
@@ -250,7 +250,7 @@
    "puede_llegar": null
   },
   "tordera-sant-celoni": {
-   "lluvia_48h_mm": 1.2,
+   "lluvia_48h_mm": 1.1,
    "caudal": [
     0.1,
     0.16
@@ -290,7 +290,7 @@
    "puede_llegar": null
   },
   "turia-manises": {
-   "lluvia_48h_mm": 0.1,
+   "lluvia_48h_mm": 0.0,
    "caudal": [
     39.55,
     60.94
@@ -298,27 +298,18 @@
    "puede_llegar": null
   },
   "turia-quart-de-poblet": {
-   "lluvia_48h_mm": 0.0,
-   "caudal": [
-    0.51,
-    0.67
-   ],
+   "lluvia_48h_mm": null,
+   "caudal": null,
    "puede_llegar": null
   },
   "turia-vilamarxant": {
-   "lluvia_48h_mm": 0.0,
-   "caudal": [
-    37.19,
-    57.21
-   ],
+   "lluvia_48h_mm": null,
+   "caudal": null,
    "puede_llegar": null
   },
   "turia-bugarra": {
-   "lluvia_48h_mm": 0.1,
-   "caudal": [
-    26.67,
-    40.88
-   ],
+   "lluvia_48h_mm": null,
+   "caudal": null,
    "puede_llegar": null
   },
   "xuquer-algemesi": {
