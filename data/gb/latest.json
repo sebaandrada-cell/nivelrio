@@ -1,17 +1,17 @@
 {
- "generado_utc": "2026-10-23T20:17:39Z",
+ "generado_utc": "2026-10-23T22:08:36Z",
  "estaciones": [
   {
-   "id": "thames-kingston-model",
-   "rio": "Thames",
-   "nombre": "Kingston",
-   "cuenca": "Thames",
-   "zona": "thames",
-   "valor": null,
-   "unidad": "m3s",
+   "id": "severn-shrewsbury",
+   "rio": "Severn",
+   "nombre": "Shrewsbury",
+   "cuenca": "Severn",
+   "zona": "severn",
+   "valor": 0.852,
+   "unidad": "m",
    "pais": "gb",
-   "t_utc": null,
-   "edad_min": null,
+   "t_utc": "2026-10-23T21:15:00Z",
+   "edad_min": 53,
    "nivel": 0,
    "sd": true,
    "umbrales": {
@@ -21,11 +21,12 @@
     "tipo": "en_estudio"
    },
    "elevado_por_aviso": false,
-   "fuente": "glofas"
+   "fuente": "ea_uk"
   }
  ],
  "avisos": [],
  "fuentes_ok": {
-  "prevision": true
+  "ea_uk": true,
+  "prevision": false
  }
 }

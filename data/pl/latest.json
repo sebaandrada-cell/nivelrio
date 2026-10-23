@@ -1,19 +1,19 @@
 {
- "generado_utc": "2026-10-23T20:17:39Z",
+ "generado_utc": "2026-10-23T22:08:36Z",
  "estaciones": [
   {
-   "id": "vistula-warsaw-model",
+   "id": "vistula-warsaw",
    "rio": "Vistula",
    "nombre": "Warsaw",
    "cuenca": "Vistula",
    "zona": "vistula",
-   "valor": null,
-   "unidad": "m3s",
+   "valor": 1.08,
+   "unidad": "m",
    "pais": "pl",
-   "t_utc": null,
-   "edad_min": null,
+   "t_utc": "2026-10-23T21:50:00Z",
+   "edad_min": 18,
    "nivel": 0,
-   "sd": true,
+   "sd": false,
    "umbrales": {
     "bajo": null,
     "medio": null,
@@ -21,11 +21,12 @@
     "tipo": "en_estudio"
    },
    "elevado_por_aviso": false,
-   "fuente": "glofas"
+   "fuente": "imgw"
   }
  ],
  "avisos": [],
  "fuentes_ok": {
+  "imgw": true,
   "prevision": true
  }
 }
