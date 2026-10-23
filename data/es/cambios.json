@@ -1,9 +1,23 @@
 [
  {
-  "estacion_id": "fluvia-esponella",
+  "estacion_id": "besos-santa-coloma",
   "nivel_antes": 0,
   "nivel_despues": 0,
   "sd": true,
+  "elevado_por_aviso": false
+ },
+ {
+  "estacion_id": "fluvia-esponella",
+  "nivel_antes": 0,
+  "nivel_despues": 0,
+  "sd": false,
+  "elevado_por_aviso": false
+ },
+ {
+  "estacion_id": "turia-vilamarxant",
+  "nivel_antes": 0,
+  "nivel_despues": 0,
+  "sd": false,
   "elevado_por_aviso": false
  }
 ]

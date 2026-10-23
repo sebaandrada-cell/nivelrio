@@ -1,13 +1,8 @@
 {
- "generado_utc": "2026-10-22T15:40:50Z",
+ "generado_utc": "2026-10-23T16:56:21Z",
  "fuente": "Open-Meteo (CC BY 4.0)",
  "zonas": {
   "nile": [
-   {
-    "fecha": "2026-10-22",
-    "mm": 0.0,
-    "prob": 0
-   },
    {
     "fecha": "2026-10-23",
     "mm": 0.0,
@@ -15,41 +10,46 @@
    },
    {
     "fecha": "2026-10-24",
+    "mm": 0.0,
+    "prob": 0
+   },
+   {
+    "fecha": "2026-10-25",
     "mm": 0.0,
     "prob": 0
    }
   ],
   "congo": [
    {
-    "fecha": "2026-10-22",
-    "mm": 9.0,
-    "prob": 85
-   },
-   {
     "fecha": "2026-10-23",
-    "mm": 0.4,
-    "prob": 43
+    "mm": 1.8,
+    "prob": 67
    },
    {
     "fecha": "2026-10-24",
-    "mm": 10.3,
-    "prob": 68
+    "mm": 5.2,
+    "prob": 76
+   },
+   {
+    "fecha": "2026-10-25",
+    "mm": 10.6,
+    "prob": 71
    }
   ],
   "niger": [
    {
-    "fecha": "2026-10-22",
-    "mm": 0.1,
-    "prob": 22
-   },
-   {
     "fecha": "2026-10-23",
-    "mm": 0.2,
-    "prob": 22
+    "mm": 0.0,
+    "prob": 3
    },
    {
     "fecha": "2026-10-24",
-    "mm": 0.1,
+    "mm": 1.2,
+    "prob": 18
+   },
+   {
+    "fecha": "2026-10-25",
+    "mm": 0.0,
     "prob": 8
    }
   ]
@@ -61,12 +61,12 @@
    "puede_llegar": null
   },
   "congo-kisangani-model": {
-   "lluvia_48h_mm": 9.4,
+   "lluvia_48h_mm": 7.0,
    "caudal": null,
    "puede_llegar": null
   },
   "niger-lokoja-model": {
-   "lluvia_48h_mm": 0.3,
+   "lluvia_48h_mm": 1.2,
    "caudal": null,
    "puede_llegar": null
   }

@@ -1,90 +1,90 @@
 {
- "generado_utc": "2026-10-22T15:40:50Z",
+ "generado_utc": "2026-10-23T16:56:21Z",
  "fuente": "Open-Meteo (CC BY 4.0)",
  "zonas": {
   "mississippi": [
    {
-    "fecha": "2026-10-22",
+    "fecha": "2026-10-23",
     "mm": 0.0,
     "prob": 0
    },
    {
-    "fecha": "2026-10-23",
+    "fecha": "2026-10-24",
     "mm": 0.0,
-    "prob": 1
+    "prob": 2
    },
    {
-    "fecha": "2026-10-24",
+    "fecha": "2026-10-25",
     "mm": 0.0,
     "prob": 1
    }
   ],
   "missouri": [
    {
-    "fecha": "2026-10-22",
+    "fecha": "2026-10-23",
     "mm": 0.0,
     "prob": 0
    },
    {
-    "fecha": "2026-10-23",
+    "fecha": "2026-10-24",
     "mm": 0.0,
     "prob": 1
    },
    {
-    "fecha": "2026-10-24",
+    "fecha": "2026-10-25",
     "mm": 0.0,
     "prob": 1
    }
   ],
   "ohio": [
    {
-    "fecha": "2026-10-22",
-    "mm": 0.0,
-    "prob": 0
-   },
-   {
     "fecha": "2026-10-23",
     "mm": 0.0,
     "prob": 0
    },
    {
     "fecha": "2026-10-24",
+    "mm": 0.0,
+    "prob": 0
+   },
+   {
+    "fecha": "2026-10-25",
     "mm": 0.0,
     "prob": 0
    }
   ],
   "colorado": [
    {
-    "fecha": "2026-10-22",
-    "mm": 7.5,
-    "prob": 64
-   },
-   {
     "fecha": "2026-10-23",
-    "mm": 2.2,
-    "prob": 63
+    "mm": 1.4,
+    "prob": 85
    },
    {
     "fecha": "2026-10-24",
-    "mm": 1.5,
-    "prob": 44
+    "mm": 6.5,
+    "prob": 20
+   },
+   {
+    "fecha": "2026-10-25",
+    "mm": 3.57,
+    "prob": 53
    }
   ],
   "rio-grande": [
    {
-    "fecha": "2026-10-22",
-    "mm": 2.2,
-    "prob": 17
-   },
-   {
     "fecha": "2026-10-23",
-    "mm": 4.7,
-    "prob": 36
+    "mm": 0.4,
+    "prob": 43
    },
    {
     "fecha": "2026-10-24",
-    "mm": 4.4,
-    "prob": 68
+    "mm": 13.0,
+    "prob": 58
+   },
+   {
+    "fecha": "2026-10-25",
+    "mm": 0.03,
+    "prob": 61
    }
   ]
  },
@@ -105,12 +105,12 @@
    "puede_llegar": null
   },
   "colorado-colorado-utah": {
-   "lluvia_48h_mm": 9.7,
+   "lluvia_48h_mm": 7.9,
    "caudal": null,
    "puede_llegar": null
   },
   "rio-grande-albuquerque": {
-   "lluvia_48h_mm": 6.9,
+   "lluvia_48h_mm": 13.4,
    "caudal": null,
    "puede_llegar": null
   }
