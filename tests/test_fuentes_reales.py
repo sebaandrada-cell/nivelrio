@@ -62,7 +62,11 @@ def test_claves_por_pais():
     assert set(actualizar._fuentes_reales("ar")) == {"ina", "agp", "prevision"}
     assert set(actualizar._fuentes_reales("us")) == {"usgs", "prevision", "pronostico_rio"}
     assert set(actualizar._fuentes_reales("es")) == {"aca", "aca_ventana", "chj", "avisos", "prevision"}
-    for pais in ("de", "fr", "gb", "it", "nl", "pl", "pt", "hu", "ru", "asia",
+    assert set(actualizar._fuentes_reales("de")) == {"pegelonline", "prevision"}
+    assert set(actualizar._fuentes_reales("fr")) == {"hubeau", "prevision"}
+    assert set(actualizar._fuentes_reales("gb")) == {"ea_uk", "prevision"}
+    assert set(actualizar._fuentes_reales("pl")) == {"imgw", "prevision"}
+    for pais in ("it", "nl", "pt", "hu", "ru", "asia",
                  "centroamerica", "sudamerica", "oceania", "africa"):
         assert set(actualizar._fuentes_reales(pais)) == {"prevision"}
     assert actualizar._fuentes_reales("xx") == {}

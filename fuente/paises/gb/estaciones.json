@@ -1,17 +1,18 @@
 [
   {
-    "id": "thames-kingston-model",
-    "rio": "Thames",
-    "nombre": "Kingston",
-    "cuenca": "Thames",
-    "fuente": "glofas",
-    "muestreo_min": 1440,
-    "lat": 51.412,
-    "lon": -0.3,
-    "zona": "thames",
+    "id": "severn-shrewsbury",
+    "rio": "Severn",
+    "nombre": "Shrewsbury",
+    "cuenca": "Severn",
+    "fuente": "ea_uk",
+    "muestreo_min": 15,
+    "ref": "2077",
+    "lat": 52.709797,
+    "lon": -2.75808,
+    "zona": "severn",
     "umbrales": {"bajo": null, "medio": null, "alto": null, "tipo": "en_estudio"},
     "pais": "gb",
-    "magnitud": "caudal",
-    "unidad": "m3s"
+    "magnitud": "altura",
+    "unidad": "m"
   }
 ]

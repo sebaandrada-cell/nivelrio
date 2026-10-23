@@ -1,0 +1,19 @@
+{
+  "@context": "http://environment.data.gov.uk/flood-monitoring/meta/context.jsonld",
+  "meta": {
+    "publisher": "Environment Agency",
+    "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+    "documentation": "http://environment.data.gov.uk/flood-monitoring/doc/reference",
+    "version": "0.9",
+    "comment": "Status: Beta service",
+    "limit": 1
+  },
+  "items": [
+    {
+      "@id": "http://environment.data.gov.uk/flood-monitoring/data/readings/2077-level-stage-i-15_min-mASD/2026-10-23T19-45-00Z",
+      "dateTime": "2026-10-23T19:45:00Z",
+      "measure": "http://environment.data.gov.uk/flood-monitoring/id/measures/2077-level-stage-i-15_min-mASD",
+      "value": 0.844
+    }
+  ]
+}

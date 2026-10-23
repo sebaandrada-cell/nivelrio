@@ -69,15 +69,41 @@ def test_us_refs_verificados():
 
 
 def test_cobertura_modelada_por_pais_y_region():
-    europeos = ("de", "fr", "gb", "it", "nl", "pl", "pt", "hu", "ru")
+    """DE/FR/GB/PL ya tienen una estación real (ver test_estaciones_reales_de_fr_gb_pl); el resto de
+    Europa y las demás regiones siguen solo con el modelo GloFAS porque no se encontró una fuente
+    pública confiable para reemplazarlas."""
+    europeos_sin_fuente_real = ("it", "nl", "pt", "hu", "ru")
     regiones = ("asia", "centroamerica", "sudamerica", "oceania", "africa")
-    assert all(len(registro(p)) == 1 and registro(p)[0].fuente == "glofas" for p in europeos)
+    assert all(len(registro(p)) == 1 and registro(p)[0].fuente == "glofas" for p in europeos_sin_fuente_real)
     assert all(len(registro(p)) == 3 and all(e.fuente == "glofas" for e in registro(p)) for p in regiones)
     assert [e.id for e in registro("es") if e.fuente == "glofas"] == ["ebro-zaragoza-modelo"]
 
 
+def test_estaciones_reales_de_fr_gb_pl():
+    """Reemplazan al punto GloFAS sin lectura: una estación oficial real por país, con umbral
+    "en_estudio" porque ninguna fuente publica los tres niveles bajo/medio/alto necesarios."""
+    de = registro("de")
+    assert len(de) == 1 and de[0].id == "rhine-cologne" and de[0].fuente == "pegelonline"
+    assert de[0].ref == "a6ee8177-107b-47dd-bcfd-30960ccc6e9c" and de[0].magnitud == "altura" and de[0].unidad == "m"
+
+    fr = registro("fr")
+    assert len(fr) == 1 and fr[0].id == "loire-orleans" and fr[0].fuente == "hubeau"
+    assert fr[0].ref == "K435001010" and fr[0].magnitud == "caudal" and fr[0].unidad == "m3s"
+
+    gb = registro("gb")
+    assert len(gb) == 1 and gb[0].id == "severn-shrewsbury" and gb[0].fuente == "ea_uk"
+    assert gb[0].ref == "2077" and gb[0].magnitud == "altura" and gb[0].unidad == "m"
+
+    pl = registro("pl")
+    assert len(pl) == 1 and pl[0].id == "vistula-warsaw" and pl[0].fuente == "imgw"
+    assert pl[0].ref == "152210170" and pl[0].magnitud == "altura" and pl[0].unidad == "m"
+
+    for e in (de[0], fr[0], gb[0], pl[0]):
+        assert e.umbrales == Umbrales(None, None, None, "en_estudio")
+
+
 def test_glofas_no_se_publica_como_lectura_ni_alerta(tmp_path):
-    est = registro("de")[0]
+    est = registro("it")[0]  # "it" sigue sin fuente real; "de" ya tiene PEGELONLINE (ver arriba)
     ahora = datetime(2026, 10, 21, 12, 0, tzinfo=timezone.utc)
     bruto = {est.id: {"lluvia": [("2026-10-21", 1.0, 50)], "caudal": (10.0, 20.0)}}
     cambios = actualizar.ejecutar(ahora, [est], {"prevision": lambda _: bruto}, str(tmp_path))

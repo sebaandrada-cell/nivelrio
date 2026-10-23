@@ -24,7 +24,7 @@ CERCA_DEL_UMBRAL = 0.8    # fracción del umbral bajo desde la que se pide la ve
 AQUI = os.path.dirname(os.path.abspath(__file__))
 DIR_PAISES = os.path.join(AQUI, "paises")
 DIR_DATA = os.path.join(AQUI, "..", "data")
-FUENTES_DATOS = ("aca", "chj", "ina", "agp", "usgs")  # contrato: callable(estaciones) -> (lecturas, umbrales_vivos)
+FUENTES_DATOS = ("aca", "chj", "ina", "agp", "usgs", "pegelonline", "hubeau", "ea_uk", "imgw")  # contrato: callable(estaciones) -> (lecturas, umbrales_vivos)
 
 
 def _iso(d: datetime) -> str:
@@ -366,6 +366,42 @@ def _fuentes_us() -> dict:
     return {"usgs": f_usgs, "prevision": prevision.bajar, "pronostico_rio": f_pronostico}
 
 
+def _fuentes_de() -> dict:
+    from fuentes import pegelonline, prevision
+
+    def f_pegelonline(ests):
+        return pegelonline.bajar_todo(ests)
+
+    return {"pegelonline": f_pegelonline, "prevision": prevision.bajar}
+
+
+def _fuentes_fr() -> dict:
+    from fuentes import hubeau, prevision
+
+    def f_hubeau(ests):
+        return hubeau.bajar_todo(ests)
+
+    return {"hubeau": f_hubeau, "prevision": prevision.bajar}
+
+
+def _fuentes_gb() -> dict:
+    from fuentes import ea_uk, prevision
+
+    def f_ea_uk(ests):
+        return ea_uk.bajar_todo(ests)
+
+    return {"ea_uk": f_ea_uk, "prevision": prevision.bajar}
+
+
+def _fuentes_pl() -> dict:
+    from fuentes import imgw, prevision
+
+    def f_imgw(ests):
+        return imgw.bajar_todo(ests)
+
+    return {"imgw": f_imgw, "prevision": prevision.bajar}
+
+
 def _fuentes_reales(pais: str = "es") -> dict:
     from estaciones import PAISES
     if pais not in PAISES:
@@ -374,6 +410,14 @@ def _fuentes_reales(pais: str = "es") -> dict:
         return _fuentes_ar()
     if pais == "us":
         return _fuentes_us()
+    if pais == "de":
+        return _fuentes_de()
+    if pais == "fr":
+        return _fuentes_fr()
+    if pais == "gb":
+        return _fuentes_gb()
+    if pais == "pl":
+        return _fuentes_pl()
     if pais != "es":
         from fuentes import prevision
         return {"prevision": prevision.bajar}

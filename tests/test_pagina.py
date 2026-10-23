@@ -162,7 +162,8 @@ def test_cada_zona_de_cada_pais_tiene_texto():
 
 def test_cada_fuente_de_datos_tiene_nombre_para_el_aviso_de_caida():
     for lang in IDIOMAS:
-        for k in ("aca", "chj", "ina", "agp", "usgs", "glofas", "avisos", "prevision"):
+        for k in ("aca", "chj", "ina", "agp", "usgs", "glofas", "avisos", "prevision",
+                  "pegelonline", "hubeau", "ea_uk", "imgw"):
             assert TEXTOS[lang]["fuentes_nombres"][k], (lang, k)
 
 
