@@ -1,0 +1,29 @@
+{
+  "count": 660,
+  "first": "https://hubeau.eaufrance.fr/api/v2/hydrometrie/observations_tr?code_entite=K435001010&grandeur_hydro=Q&sort=desc&format=json&cursor=&size=1",
+  "prev": null,
+  "next": "https://hubeau.eaufrance.fr/api/v2/hydrometrie/observations_tr?code_entite=K435001010&grandeur_hydro=Q&sort=desc&format=json&cursor=AoJwmuGZtaEDPwpLNDM1MDAxMF9LNDM1MDAxMDEwX1FfMjAyNi0xMC0yM1QyMDoxNTowMA%3D%3D&size=1",
+  "api_version": "2.0.1",
+  "data": [
+    {
+      "code_site": "K4350010",
+      "code_station": "K435001010",
+      "grandeur_hydro": "Q",
+      "date_debut_serie": "2026-10-23T13:25:01Z",
+      "date_fin_serie": "2026-10-23T20:15:00Z",
+      "code_systeme_alti_serie": 31,
+      "date_obs": "2026-10-23T20:15:00Z",
+      "resultat_obs": 36100.0,
+      "code_methode_obs": 8,
+      "libelle_methode_obs": "Calculée",
+      "code_qualification_obs": 16,
+      "libelle_qualification_obs": "Non qualifiée",
+      "longitude": 1.90452268,
+      "latitude": 47.89796478,
+      "code_statut": 4,
+      "libelle_statut": "Brute",
+      "code_continuite": 0,
+      "libelle_continuite": "Continue"
+    }
+  ]
+}

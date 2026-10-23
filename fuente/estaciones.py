@@ -3,7 +3,7 @@ import json
 
 from modelo import Estacion, Umbrales
 
-FUENTES = ("aca", "chj", "ina", "agp", "usgs", "glofas")
+FUENTES = ("aca", "chj", "ina", "agp", "usgs", "glofas", "pegelonline", "hubeau", "ea_uk", "imgw")
 PAISES = ("ar", "es", "us", "de", "fr", "gb", "it", "nl", "pl", "pt", "hu", "ru",
           "asia", "centroamerica", "sudamerica", "oceania", "africa")
 ZONAS = {
@@ -11,8 +11,8 @@ ZONAS = {
     "ar": ("chaco-corrientes", "litoral-parana", "uruguay"),
     "us": ("mississippi", "missouri", "ohio", "colorado", "rio-grande"),
     "de": ("rhine",),
-    "fr": ("seine",),
-    "gb": ("thames",),
+    "fr": ("loire",),
+    "gb": ("severn",),
     "it": ("po",),
     "nl": ("meuse",),
     "pl": ("vistula",),
@@ -57,7 +57,7 @@ def cargar(ruta: str, pais: str) -> list[Estacion]:
             raise ValueError(f"{id_}: falta componente")
         if d["fuente"] == "chj" and not d.get("id_cha"):
             raise ValueError(f"{id_}: falta id_cha")
-        if d["fuente"] in ("ina", "agp", "usgs") and not d.get("ref"):
+        if d["fuente"] in ("ina", "agp", "usgs", "pegelonline", "hubeau", "ea_uk", "imgw") and not d.get("ref"):
             raise ValueError(f"{id_}: falta ref")
         if d.get("pais", pais) != pais:
             raise ValueError(f"{id_}: país {d.get('pais')!r} no es {pais!r}")

@@ -1,17 +1,18 @@
 [
   {
-    "id": "vistula-warsaw-model",
+    "id": "vistula-warsaw",
     "rio": "Vistula",
     "nombre": "Warsaw",
     "cuenca": "Vistula",
-    "fuente": "glofas",
-    "muestreo_min": 1440,
-    "lat": 52.23,
-    "lon": 21.01,
+    "fuente": "imgw",
+    "muestreo_min": 10,
+    "ref": "152210170",
+    "lat": 52.2472,
+    "lon": 21.0208,
     "zona": "vistula",
     "umbrales": {"bajo": null, "medio": null, "alto": null, "tipo": "en_estudio"},
     "pais": "pl",
-    "magnitud": "caudal",
-    "unidad": "m3s"
+    "magnitud": "altura",
+    "unidad": "m"
   }
 ]
