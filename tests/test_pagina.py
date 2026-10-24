@@ -169,7 +169,7 @@ def test_cada_fuente_de_datos_tiene_nombre_para_el_aviso_de_caida():
 
 def test_pagina_oculta_estaciones_solo_modeladas_y_enlaza_la_actualizacion_manual(html):
     assert 'latest.estaciones.filter((e) => e.fuente !== "glofas")' in html
-    assert "actions/workflows/actualizar.yml?ref=main" in html
+    assert "actions/workflows/actualizar.yml?ref=multipais" in html
     assert "inicia sesión" in html
     assert "permiso de escritura" in html
 

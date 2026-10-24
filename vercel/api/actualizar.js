@@ -3,7 +3,7 @@
 //   GITHUB_TOKEN  token fine-grained solo para nivelrio, permiso "Actions: Read and write"
 const REPO = "sebaandrada-cell/nivelrio";
 const WORKFLOW = "actualizar.yml";
-const REF = "main";
+const REF = "multipais";
 const ORIGEN = "https://sebaandrada-cell.github.io";
 const PAISES = ["todos", "ar", "es", "us", "de", "fr", "gb", "pl"];
 const ESPERA_MS = 60 * 1000;
