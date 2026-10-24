@@ -1,5 +1,5 @@
 {
- "generado_utc": "2026-10-24T09:53:20Z",
+ "generado_utc": "2026-10-24T11:24:20Z",
  "fuente": "Open-Meteo (CC BY 4.0)",
  "zonas": {
   "chaco-corrientes": [
@@ -23,17 +23,17 @@
    {
     "fecha": "2026-10-24",
     "mm": 10.5,
-    "prob": 71
+    "prob": 100
    },
    {
     "fecha": "2026-10-25",
     "mm": 2.7,
-    "prob": 64
+    "prob": 67
    },
    {
     "fecha": "2026-10-26",
     "mm": 0.1,
-    "prob": 18
+    "prob": 23
    }
   ],
   "uruguay": [
