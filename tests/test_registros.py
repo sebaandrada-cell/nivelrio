@@ -5,7 +5,7 @@ from datetime import datetime, timedelta, timezone
 
 import actualizar
 from conftest import make_estacion
-from estaciones import PAISES, ZONAS, cargar
+from estaciones import FUENTES, PAISES, ZONAS, cargar
 from modelo import Lectura, Umbrales
 
 PAISES_DIR = os.path.join(os.path.dirname(__file__), "..", "fuente", "paises")
@@ -68,15 +68,10 @@ def test_us_refs_verificados():
                    "rio-grande-albuquerque": ("08330000", None)}
 
 
-def test_cobertura_modelada_por_pais_y_region():
-    """DE/FR/GB/PL ya tienen una estación real (ver test_estaciones_reales_de_fr_gb_pl); el resto de
-    Europa y las demás regiones siguen solo con el modelo GloFAS porque no se encontró una fuente
-    pública confiable para reemplazarlas."""
-    europeos_sin_fuente_real = ("it", "nl", "pt", "hu", "ru")
-    regiones = ("asia", "centroamerica", "sudamerica", "oceania", "africa")
-    assert all(len(registro(p)) == 1 and registro(p)[0].fuente == "glofas" for p in europeos_sin_fuente_real)
-    assert all(len(registro(p)) == 3 and all(e.fuente == "glofas" for e in registro(p)) for p in regiones)
-    assert [e.id for e in registro("es") if e.fuente == "glofas"] == ["ebro-zaragoza-modelo"]
+def test_registros_solo_incluyen_paises_con_estaciones_observadas():
+    assert PAISES == ("ar", "es", "us", "de", "fr", "gb", "pl")
+    assert "glofas" not in FUENTES
+    assert all(e.fuente != "glofas" for pais in PAISES for e in registro(pais))
 
 
 def test_estaciones_reales_de_fr_gb_pl():
@@ -100,20 +95,6 @@ def test_estaciones_reales_de_fr_gb_pl():
 
     for e in (de[0], fr[0], gb[0], pl[0]):
         assert e.umbrales == Umbrales(None, None, None, "en_estudio")
-
-
-def test_glofas_no_se_publica_como_lectura_ni_alerta(tmp_path):
-    est = registro("it")[0]  # "it" sigue sin fuente real; "de" ya tiene PEGELONLINE (ver arriba)
-    ahora = datetime(2026, 10, 21, 12, 0, tzinfo=timezone.utc)
-    bruto = {est.id: {"lluvia": [("2026-10-21", 1.0, 50)], "caudal": (10.0, 20.0)}}
-    cambios = actualizar.ejecutar(ahora, [est], {"prevision": lambda _: bruto}, str(tmp_path))
-    latest = json.loads((tmp_path / "latest.json").read_text(encoding="utf-8"))
-    forecast = json.loads((tmp_path / "prevision.json").read_text(encoding="utf-8"))
-    fila = latest["estaciones"][0]
-    assert cambios == []
-    assert fila["fuente"] == "glofas" and fila["valor"] is None and fila["t_utc"] is None
-    assert fila["nivel"] == 0 and fila["sd"] is True
-    assert forecast["estaciones"][est.id]["caudal"] is None
 
 
 def test_ejecutar_recorre_fuentes_del_registro(tmp_path):

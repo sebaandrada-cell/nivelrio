@@ -24,7 +24,7 @@ def test_disparadores_cron_15_min_y_manual(wf):
 
 def test_permisos_minimos_y_sin_cancelar_ejecuciones(wf):
     assert wf["permissions"] == {"contents": "write", "issues": "write"}
-    assert wf["concurrency"] == {"group": "actualizar", "cancel-in-progress": False}
+    assert wf["concurrency"] == {"group": "actualizar-datos-multipais", "cancel-in-progress": False}
 
 
 def test_los_pasos_de_red_tienen_timeout(wf):
@@ -69,3 +69,14 @@ def test_cache_con_prefijo_v2_para_no_resucitar_el_formato_plano(wf):
     assert restaurar["with"]["restore-keys"].strip().startswith("data-v2-")
     assert restaurar["with"]["key"].startswith("data-v2-")
     assert guardar["with"]["key"].startswith("data-v2-")
+
+
+def test_actualizacion_manual_permite_seleccionar_pais_y_rio(wf):
+    on = wf.get(True, wf.get("on"))
+    inputs = on["workflow_dispatch"]["inputs"]
+    assert inputs["pais"]["default"] == "todos"
+    assert inputs["rio"]["default"] == "todos"
+    paso = next(p for p in pasos(wf) if p.get("id") == "actualizar")
+    assert paso["env"]["PAIS"] == "${{ inputs.pais || 'todos' }}"
+    assert paso["env"]["RIO"] == "${{ inputs.rio || 'todos' }}"
+    assert paso["run"] == 'python fuente/actualizar.py --pais "$PAIS" --rio "$RIO"'

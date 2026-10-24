@@ -1,1 +1,9 @@
-[]
+[
+ {
+  "estacion_id": "ter-roda-de-ter",
+  "nivel_antes": 0,
+  "nivel_despues": 0,
+  "sd": false,
+  "elevado_por_aviso": false
+ }
+]

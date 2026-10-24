@@ -102,13 +102,10 @@ def test_cargar_exige_pais_y_zona_del_pais(tmp_path):
         cargar(_escribir(tmp_path, [_est(pais="ar")]), "es")
 
 
-def test_registro_es_conserva_32_estaciones_de_observacion_y_ebro_modelado():
+def test_registro_es_conserva_solo_estaciones_observadas():
     import os
     ruta = os.path.join(os.path.dirname(__file__), "..", "fuente", "paises", "es", "estaciones.json")
     res = cargar(ruta, "es")
-    assert len(res) == 33
-    observadas = [e for e in res if e.fuente != "glofas"]
-    ebro = [e for e in res if e.fuente == "glofas"]
-    assert len(observadas) == 32
-    assert all(e.unidad == "m3s" and e.magnitud == "caudal" and e.pais == "es" for e in observadas)
-    assert len(ebro) == 1 and ebro[0].rio == "Ebro" and ebro[0].umbrales.tipo == "en_estudio"
+    assert len(res) == 32
+    assert all(e.fuente in ("aca", "chj") and e.unidad == "m3s" and e.magnitud == "caudal" and e.pais == "es"
+               for e in res)

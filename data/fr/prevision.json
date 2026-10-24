@@ -1,28 +1,28 @@
 {
- "generado_utc": "2026-10-24T07:02:24Z",
+ "generado_utc": "2026-10-24T09:53:20Z",
  "fuente": "Open-Meteo (CC BY 4.0)",
  "zonas": {
   "loire": [
    {
     "fecha": "2026-10-24",
-    "mm": 11.1,
+    "mm": 10.3,
     "prob": 100
    },
    {
     "fecha": "2026-10-25",
-    "mm": 8.18,
+    "mm": 10.4,
     "prob": 100
    },
    {
     "fecha": "2026-10-26",
-    "mm": 0.2,
+    "mm": 0.3,
     "prob": 33
    }
   ]
  },
  "estaciones": {
   "loire-orleans": {
-   "lluvia_48h_mm": 19.3,
+   "lluvia_48h_mm": 20.7,
    "caudal": [
     64.46,
     189.99

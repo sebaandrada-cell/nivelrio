@@ -11,7 +11,7 @@ import tempfile
 from dataclasses import replace
 from datetime import datetime, timedelta, timezone
 
-from alertas import ESTADO_INICIAL, estado_a_dict, estado_desde_dict, evaluar
+from alertas import ESTADO_INICIAL, estado_a_dict, estado_desde_dict, evaluar, limite_sd
 from modelo import Aviso, FuenteError
 
 # INUNCAT en ALERTA es el estado habitual de Catalunya durante episodios largos: si forzara N3, todas las
@@ -147,17 +147,27 @@ def _doc_prevision(ahora, estaciones, bruto) -> dict:
     return {"generado_utc": _iso(ahora), "fuente": "Open-Meteo (CC BY 4.0)", "zonas": zonas, "estaciones": por_est}
 
 
-def ejecutar(ahora: datetime, estaciones: list, fuentes: dict, dir_data: str) -> list[dict]:
+def ejecutar(ahora: datetime, estaciones: list, fuentes: dict, dir_data: str, rio: str | None = None) -> list[dict]:
+    ids_activos = {e.id for e in estaciones}
+    objetivo = estaciones if rio is None else [e for e in estaciones if e.id == rio or e.rio == rio]
+    if not objetivo:
+        raise ValueError(f"río o estación desconocidos: {rio!r}")
+
     estados_json = _leer(os.path.join(dir_data, "state.json"), {})
+    estados_json = {id_: estado for id_, estado in estados_json.items() if id_ in ids_activos}
     previo = _leer(os.path.join(dir_data, "latest.json"), {})
-    ok = {}
+    filas_previas = {
+        f["id"]: f for f in previo.get("estaciones", [])
+        if f.get("id") in ids_activos and f.get("fuente") != "glofas"
+    }
+    ok = dict(previo.get("fuentes_ok", {}))
 
     # --- lecturas y umbrales vivos ---
     lecturas, vivos = {}, {}
     for clave in FUENTES_DATOS:
-        ests = [e for e in estaciones if e.fuente == clave]
+        ests = [e for e in objetivo if e.fuente == clave]
         if not ests:
-            if clave in fuentes:  # fuente cableada para el país pero sin estaciones hoy: figura como sana
+            if rio is None and clave in fuentes:
                 ok[clave] = True
             continue
         if clave not in fuentes:  # la fuente no está cableada para este país: sus estaciones quedan en «sin datos»
@@ -183,8 +193,9 @@ def ejecutar(ahora: datetime, estaciones: list, fuentes: dict, dir_data: str) ->
         avisos = []
 
     # --- niveles ---
-    cambios, nuevos, filas, historial = [], {}, [], {}
-    for est in estaciones:
+    cambios, nuevos, historial = [], {id_: estado_desde_dict(d) for id_, d in estados_json.items()}, {}
+    filas_por_id = dict(filas_previas)
+    for est in objetivo:
         e = replace(est, umbrales=vivos.get(est.id, est.umbrales))
         existia = est.id in estados_json
         prev = estado_desde_dict(estados_json[est.id]) if existia else ESTADO_INICIAL
@@ -201,14 +212,54 @@ def ejecutar(ahora: datetime, estaciones: list, fuentes: dict, dir_data: str) ->
             valor, t = nuevo.ultimo_valor, nuevo.ultimo_t_utc
         if lectura is not None and lectura.unidad == est.unidad and not nuevo.sd:
             historial[est.id] = (lectura.t_utc, lectura.valor)
-        filas.append({
+        filas_por_id[est.id] = {
             "id": est.id, "rio": est.rio, "nombre": est.nombre, "cuenca": est.cuenca, "zona": est.zona,
             "valor": valor, "unidad": est.unidad, "pais": est.pais, "t_utc": _iso(t) if t else None,
             "edad_min": int((ahora - t).total_seconds() // 60) if t else None,
             "nivel": nuevo.nivel, "sd": nuevo.sd,
             "umbrales": {"bajo": e.umbrales.bajo, "medio": e.umbrales.medio, "alto": e.umbrales.alto, "tipo": e.umbrales.tipo},
             "elevado_por_aviso": nuevo.elevado_por_aviso, "fuente": est.fuente,
-        })
+        }
+
+    objetivo_ids = {e.id for e in objetivo}
+    for est in estaciones:
+        if est.id in objetivo_ids:
+            continue
+        existia = est.id in estados_json
+        fila_previa = filas_por_id.get(est.id)
+        if existia:
+            prev = estado_desde_dict(estados_json[est.id])
+        elif fila_previa:
+            t_previa = _desde_iso(fila_previa["t_utc"]) if fila_previa.get("t_utc") else None
+            nivel_previo = int(fila_previa.get("nivel", 0))
+            prev = replace(ESTADO_INICIAL, nivel=nivel_previo, nivel_propio=nivel_previo,
+                           sd=bool(fila_previa.get("sd", False)), ultimo_valor=fila_previa.get("valor"),
+                           ultimo_t_utc=t_previa, elevado_por_aviso=bool(fila_previa.get("elevado_por_aviso", False)))
+            existia = True
+        else:
+            prev = ESTADO_INICIAL
+        if existia:
+            t = prev.ultimo_t_utc
+            sd = (prev.sd or t is None or t > ahora or ahora - t > limite_sd(est))
+            nuevo = replace(prev, sd=sd)
+            nuevos[est.id] = nuevo
+            if nuevo.sd != prev.sd:
+                cambios.append({"estacion_id": est.id, "nivel_antes": prev.nivel, "nivel_despues": nuevo.nivel,
+                                "sd": nuevo.sd, "elevado_por_aviso": nuevo.elevado_por_aviso})
+        else:
+            nuevo = replace(prev, sd=True)
+            nuevos[est.id] = nuevo
+        filas_por_id[est.id] = {
+            "id": est.id, "rio": est.rio, "nombre": est.nombre, "cuenca": est.cuenca, "zona": est.zona,
+            "valor": nuevo.ultimo_valor, "unidad": est.unidad, "pais": est.pais,
+            "t_utc": _iso(nuevo.ultimo_t_utc) if nuevo.ultimo_t_utc else None,
+            "edad_min": int((ahora - nuevo.ultimo_t_utc).total_seconds() // 60) if nuevo.ultimo_t_utc else None,
+            "nivel": nuevo.nivel, "sd": nuevo.sd,
+            "umbrales": {"bajo": est.umbrales.bajo, "medio": est.umbrales.medio,
+                         "alto": est.umbrales.alto, "tipo": est.umbrales.tipo},
+            "elevado_por_aviso": nuevo.elevado_por_aviso, "fuente": est.fuente,
+        }
+    filas = [filas_por_id[e.id] for e in estaciones]
 
     # --- previsión: informativa, una vez por hora; nunca toca niveles ni cambios ---
     ruta_prev = os.path.join(dir_data, "prevision.json")
@@ -273,17 +324,21 @@ def debe_publicar(cambios: list[dict], ahora: datetime, ultima=None) -> bool:
     return bool(cambios) or ultima is None or ahora - ultima >= PERIODO_HORARIO
 
 
-def ejecutar_todo(ahora: datetime, paises: dict, fuentes_por_pais: dict, raiz_data: str) -> dict:
+def ejecutar_todo(ahora: datetime, paises: dict, fuentes_por_pais: dict, raiz_data: str,
+                  rios_por_pais: dict | None = None) -> dict:
     """Ejecuta cada país aislado en raiz_data/<pais>. Un país que lanza cualquier excepción se registra en stderr
     y se salta: sus archivos quedan como estaban. Devuelve {pais: cambios} solo de los que corrieron bien."""
     resultado = {}
     for pais, estaciones in paises.items():
         try:
-            resultado[pais] = ejecutar(ahora, estaciones, fuentes_por_pais.get(pais, {}), os.path.join(raiz_data, pais))
+            resultado[pais] = ejecutar(ahora, estaciones, fuentes_por_pais.get(pais, {}),
+                                       os.path.join(raiz_data, pais), (rios_por_pais or {}).get(pais))
         except Exception as exc:  # noqa: BLE001 - el aislamiento por país es el contrato
             print(f"{pais}: falló la ejecución: {exc!r}", file=sys.stderr)
     ruta = os.path.join(raiz_data, "paises.json")
     indice = _leer(ruta, {})
+    from estaciones import PAISES
+    indice = {pais: entrada for pais, entrada in indice.items() if pais in PAISES}
     for pais in resultado:
         latest = _leer(os.path.join(raiz_data, pais, "latest.json"), {})
         filas = latest.get("estaciones", [])
@@ -460,24 +515,43 @@ def _fuentes_reales(pais: str = "es") -> dict:
 
 
 def _paises_con_registro(dir_paises: str = DIR_PAISES) -> list[str]:
-    try:
-        carpetas = sorted(os.listdir(dir_paises))
-    except OSError:
-        return []
-    return [c for c in carpetas if os.path.isfile(os.path.join(dir_paises, c, "estaciones.json"))]
+    from estaciones import PAISES
+    return [pais for pais in PAISES if os.path.isfile(os.path.join(dir_paises, pais, "estaciones.json"))]
 
 
-def main() -> int:
-    from estaciones import cargar
+def main(argv=None) -> int:
+    import argparse
+    from estaciones import PAISES, cargar
+
+    parser = argparse.ArgumentParser(description="Actualiza los datos observados de los ríos.")
+    parser.add_argument("--pais", choices=("todos", *PAISES), default="todos")
+    parser.add_argument("--rio", default="todos", help="Nombre del río o ID de estación; por defecto, todos.")
+    args = parser.parse_args(argv or [])
+
     ahora = datetime.now(timezone.utc).replace(microsecond=0)
     paises, fuentes_por_pais = {}, {}
-    for pais in _paises_con_registro():
+    paises_a_cargar = _paises_con_registro() if args.pais == "todos" else [args.pais]
+    for pais in paises_a_cargar:
         try:
             paises[pais] = cargar(os.path.join(DIR_PAISES, pais, "estaciones.json"), pais)
             fuentes_por_pais[pais] = _fuentes_reales(pais)
         except Exception as exc:  # noqa: BLE001 - un registro roto no frena a los demás países
             print(f"{pais}: no se pudo cargar el registro: {exc!r}", file=sys.stderr)
-    por_pais = ejecutar_todo(ahora, paises, fuentes_por_pais, DIR_DATA)
+
+    rios_por_pais = {}
+    if args.rio.strip().casefold() != "todos":
+        rio = args.rio.strip()
+        coincidencias = {
+            pais: estaciones for pais, estaciones in paises.items()
+            if any(e.id == rio or e.rio.casefold() == rio.casefold() for e in estaciones)
+        }
+        if not coincidencias or (args.pais != "todos" and args.pais not in coincidencias):
+            print(f"No se encontró el río o estación {rio!r} en el país seleccionado.", file=sys.stderr)
+            return 2
+        paises = coincidencias
+        rios_por_pais = {pais: rio for pais in paises}
+
+    por_pais = ejecutar_todo(ahora, paises, fuentes_por_pais, DIR_DATA, rios_por_pais)
     for pais, cambios in por_pais.items():
         escribir_json(os.path.join(DIR_DATA, pais, "cambios.json"), cambios)
     # Un país que no corrió no puede dejar su cambios.json anterior: notificar lo reenviaría en cada ejecución.
@@ -485,7 +559,8 @@ def main() -> int:
         if pais not in por_pais and os.path.isdir(os.path.join(DIR_DATA, pais)):
             escribir_json(os.path.join(DIR_DATA, pais, "cambios.json"), [])
     todos = [c for cs in por_pais.values() for c in cs]
-    publicar = debe_publicar(todos, ahora, ultima_publicacion(DIR_DATA))
+    publicar = (debe_publicar(todos, ahora, ultima_publicacion(DIR_DATA))
+                or os.environ.get("GITHUB_EVENT_NAME") == "workflow_dispatch")
     if publicar:
         registrar_publicacion(DIR_DATA, ahora)
     print(f"{_iso(ahora)}: {len(todos)} cambios en {len(por_pais)}/{len(_paises_con_registro())} países, publicar={publicar}")
@@ -497,4 +572,4 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(main(sys.argv[1:]))

@@ -4,13 +4,33 @@ on:
   schedule:
     - cron: "*/15 * * * *"
   workflow_dispatch:
+    inputs:
+      pais:
+        description: País que se actualizará (todos los ríos del país)
+        required: true
+        type: choice
+        default: todos
+        options:
+          - todos
+          - ar
+          - es
+          - us
+          - de
+          - fr
+          - gb
+          - pl
+      rio:
+        description: Río específico de ese país; usa "todos" para actualizarlos todos
+        required: true
+        type: string
+        default: todos
 
 permissions:
   contents: write
   issues: write
 
 concurrency:
-  group: actualizar
+  group: actualizar-datos-multipais
   cancel-in-progress: false
 
 jobs:
@@ -31,12 +51,16 @@ jobs:
         with:
           path: data
           key: data-v2-sin-coincidencia
-          restore-keys: data-v2-
+          restore-keys: |
+            data-v2-
 
       - id: actualizar
         name: descargar fuentes y evaluar alertas
         timeout-minutes: 5
-        run: python fuente/actualizar.py
+        env:
+          PAIS: ${{ inputs.pais || 'todos' }}
+          RIO: ${{ inputs.rio || 'todos' }}
+        run: python fuente/actualizar.py --pais "$PAIS" --rio "$RIO"
 
       - name: guardar estado
         uses: actions/cache/save@v4

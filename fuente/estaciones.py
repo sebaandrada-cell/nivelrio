@@ -3,27 +3,16 @@ import json
 
 from modelo import Estacion, Umbrales
 
-FUENTES = ("aca", "chj", "ina", "agp", "usgs", "glofas", "pegelonline", "hubeau", "ea_uk", "imgw")
-PAISES = ("ar", "es", "us", "de", "fr", "gb", "it", "nl", "pl", "pt", "hu", "ru",
-          "asia", "centroamerica", "sudamerica", "oceania", "africa")
+FUENTES = ("aca", "chj", "ina", "agp", "usgs", "pegelonline", "hubeau", "ea_uk", "imgw")
+PAISES = ("ar", "es", "us", "de", "fr", "gb", "pl")
 ZONAS = {
-    "es": ("tarragona", "barcelona", "girona", "interior", "valencia", "ebro"),
+    "es": ("tarragona", "barcelona", "girona", "interior", "valencia"),
     "ar": ("chaco-corrientes", "litoral-parana", "uruguay"),
     "us": ("mississippi", "missouri", "ohio", "colorado", "rio-grande"),
     "de": ("rhine",),
     "fr": ("loire",),
     "gb": ("severn",),
-    "it": ("po",),
-    "nl": ("meuse",),
     "pl": ("vistula",),
-    "pt": ("tagus",),
-    "hu": ("danube",),
-    "ru": ("volga",),
-    "asia": ("yangtze", "ganges", "mekong"),
-    "centroamerica": ("san-juan", "usumacinta", "lempa"),
-    "sudamerica": ("amazonas", "orinoco", "parana"),
-    "oceania": ("murray", "sepik", "waikato"),
-    "africa": ("nile", "congo", "niger"),
 }
 MAGNITUDES = ("caudal", "altura")
 UNIDADES = ("m3s", "m", "ft")

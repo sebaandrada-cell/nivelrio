@@ -112,9 +112,11 @@
     "ago_updated": "Actualizado",
     "noscript": "Esta página necesita JavaScript para mostrar los datos.",
     "details_show": "Ver estaciones e historial",
+    "update_river": "Solicitar actualización",
+    "update_help": "En GitHub Actions, inicia sesión, elige este país y escribe «{rio}» en Río. Hace falta permiso de escritura.",
     "title": "Nivel de ríos",
-    "desc": "Lecturas de estaciones públicas donde están disponibles y previsiones de modelo en otras regiones. Las estimaciones no son mediciones ni generan alertas.",
-    "tab_label": "País o región",
+    "desc": "Lecturas actuales de estaciones públicas en Argentina, España, Estados Unidos, Alemania, Francia, Reino Unido y Polonia.",
+    "tab_label": "País",
     "tab_group_countries": "Países",
     "tab_group_regions": "Regiones",
     "pais_sin_datos": "Todavía no hay datos de este país. Aparecerán cuando se complete la primera lectura.",
@@ -150,13 +152,13 @@
       "es": {
         "nombre": "España",
         "titulo": "Ríos de España",
-        "desc": "Lecturas de estaciones en Catalunya y previsión de modelo para el Ebro en Zaragoza.",
-        "sub": "Lecturas de estaciones en Catalunya y previsión de modelo para el Ebro en Zaragoza, sin observación en tiempo real.",
-        "prev_note": "Lluvia acumulada por día (mm) y probabilidad máxima, el valor más alto entre las estaciones de cada zona. Fuente: Open-Meteo.com (CC BY 4.0). No existe una previsión oficial de caudales para estos ríos: el caudal esperado de cada tarjeta sale de un modelo global (GloFAS, malla de unos 5 km, un dato por día). Sirve de orientación y no capta las crecidas rápidas de rambla. La previsión nunca cambia el nivel de alerta.",
+        "desc": "Lecturas de estaciones públicas en Catalunya y la Comunitat Valenciana.",
+        "sub": "Niveles observados en estaciones públicas. La edad de cada lectura aparece en su tarjeta.",
+        "prev_note": "Lluvia acumulada por día (mm) y probabilidad máxima, el valor más alto entre las estaciones de cada zona. Fuente: Open-Meteo.com (CC BY 4.0). La previsión de lluvia no cambia el nivel de alerta.",
         "foot": [
           "<b>Informativo.</b> Datos provisionales sin validar. No sustituye a Protecció Civil. Siga siempre sus instrucciones. En una emergencia llame al 112.",
-          "<b>Límites.</b> Cuencas rápidas como la rambla del Poyo pueden crecer en menos de una hora, más rápido que esta página. El Ebro en Zaragoza solo tiene una previsión de modelo, no una lectura de estación ni alertas; Segre y Noguera no están cubiertos. Los ríos sin umbral muestran solo el caudal.",
-          "Fuentes: Agència Catalana de l'Aigua (ACA), Confederación Hidrográfica del Júcar (SAIH), AEMET, Protecció Civil de Catalunya (INUNCAT) y Open-Meteo.com (CC BY 4.0). Los niveles Vigilancia, Aviso y Peligro son una escala propia de esta página, no una escala oficial. Los umbrales de Catalunya son estimaciones calculadas a partir de la serie histórica; los de Valencia son los oficiales de la CHJ."
+          "<b>Límites.</b> Cuencas rápidas como la rambla del Poyo pueden crecer en menos de una hora, más rápido que esta página. Segre y Noguera no están cubiertos. Los ríos sin umbral muestran solo el caudal.",
+          "Fuentes: Agència Catalana de l'Aigua (ACA), Confederación Hidrográfica del Júcar (SAIH), AEMET y Protecció Civil de Catalunya (INUNCAT). Los niveles Vigilancia, Aviso y Peligro son una escala propia de esta página, no una escala oficial. Los umbrales de Catalunya son estimaciones calculadas a partir de la serie histórica; los de Valencia son los oficiales de la CHJ."
         ]
       },
       "us": {
@@ -396,9 +398,11 @@
     "ago_updated": "Actualitzat",
     "noscript": "Aquesta pàgina necessita JavaScript per mostrar les dades.",
     "details_show": "Veure estacions i historial",
+    "update_river": "Sol·licitar actualització",
+    "update_help": "A GitHub Actions, inicia sessió, tria aquest país i escriu «{rio}» a Riu. Cal permís d'escriptura.",
     "title": "Nivell dels rius",
-    "desc": "Lectures d'estacions públiques quan n'hi ha i previsions de model en altres regions. Les estimacions no són mesures ni generen alertes.",
-    "tab_label": "País o regió",
+    "desc": "Lectures actuals d'estacions públiques a l'Argentina, Espanya, els Estats Units, Alemanya, França, el Regne Unit i Polònia.",
+    "tab_label": "País",
     "tab_group_countries": "Països",
     "tab_group_regions": "Regions",
     "pais_sin_datos": "Encara no hi ha dades d'aquest país. Apareixeran quan es completi la primera lectura.",
@@ -434,13 +438,13 @@
       "es": {
         "nombre": "Espanya",
         "titulo": "Rius d'Espanya",
-        "desc": "Lectures d'estacions a Catalunya i previsió de model per a l'Ebre a Saragossa.",
-        "sub": "Lectures d'estacions a Catalunya i previsió de model per a l'Ebre a Saragossa, sense observació en temps real.",
-        "prev_note": "Pluja acumulada per dia (mm) i probabilitat màxima, el valor més alt entre les estacions de cada zona. Font: Open-Meteo.com (CC BY 4.0). No hi ha cap previsió oficial de cabals per a aquests rius: el cabal esperat de cada targeta surt d'un model global (GloFAS, malla d'uns 5 km, una dada per dia). Serveix d'orientació i no capta les crescudes ràpides de riera. La previsió mai no canvia el nivell d'alerta.",
+        "desc": "Lectures d'estacions públiques a Catalunya i la Comunitat Valenciana.",
+        "sub": "Nivells observats en estacions públiques. L'edat de cada lectura apareix a la seva targeta.",
+        "prev_note": "Pluja acumulada per dia (mm) i probabilitat màxima, el valor més alt entre les estacions de cada zona. Font: Open-Meteo.com (CC BY 4.0). La previsió de pluja no canvia el nivell d'alerta.",
         "foot": [
           "<b>Informatiu.</b> Dades provisionals sense validar. No substitueix Protecció Civil. Seguiu sempre les seves instruccions. En una emergència truqueu al 112.",
-          "<b>Límits.</b> Les conques ràpides com la rambla del Poyo poden créixer en menys d'una hora, més de pressa que aquesta pàgina. L'Ebre a Saragossa només té una previsió de model, no una lectura d'estació ni alertes; el Segre i la Noguera no estan coberts. Els rius sense llindar només mostren el cabal.",
-          "Fonts: Agència Catalana de l'Aigua (ACA), Confederación Hidrográfica del Júcar (SAIH), AEMET, Protecció Civil de Catalunya (INUNCAT) i Open-Meteo.com (CC BY 4.0). Els nivells Vigilància, Avís i Perill són una escala pròpia d'aquesta pàgina, no una escala oficial. Els llindars de Catalunya són estimacions calculades a partir de la sèrie històrica; els de València són els oficials de la CHJ."
+          "<b>Límits.</b> Les conques ràpides com la rambla del Poyo poden créixer en menys d'una hora, més de pressa que aquesta pàgina. El Segre i la Noguera no estan coberts. Els rius sense llindar només mostren el cabal.",
+          "Fonts: Agència Catalana de l'Aigua (ACA), Confederación Hidrográfica del Júcar (SAIH), AEMET i Protecció Civil de Catalunya (INUNCAT). Els nivells Vigilància, Avís i Perill són una escala pròpia d'aquesta pàgina, no una escala oficial. Els llindars de Catalunya són estimacions calculades a partir de la sèrie històrica; els de València són els oficials de la CHJ."
         ]
       },
       "us": {
@@ -680,9 +684,11 @@
     "ago_updated": "Updated",
     "noscript": "This page needs JavaScript to show the data.",
     "details_show": "Show stations and history",
+    "update_river": "Request an update",
+    "update_help": "In GitHub Actions, sign in, choose this country, and enter “{rio}” under River. Write access is required.",
     "title": "River levels",
-    "desc": "Public gauge readings where available and model forecasts in other regions. Estimates are not measurements and do not trigger alerts.",
-    "tab_label": "Country or region",
+    "desc": "Current public gauge readings in Argentina, Spain, the United States, Germany, France, the United Kingdom, and Poland.",
+    "tab_label": "Country",
     "tab_group_countries": "Countries",
     "tab_group_regions": "Regions",
     "pais_sin_datos": "There's no data for this country yet. It will appear once the first reading is in.",
@@ -718,13 +724,13 @@
       "es": {
         "nombre": "Spain",
         "titulo": "Rivers of Spain",
-        "desc": "Gauge readings in Catalonia and a model forecast for the Ebro at Zaragoza.",
-        "sub": "Gauge readings in Catalonia and a model forecast for the Ebro at Zaragoza, with no real-time observation.",
-        "prev_note": "Rain accumulated per day (mm) and peak probability, taking the highest value among the stations in each zone. Source: Open-Meteo.com (CC BY 4.0). There is no official flow forecast for these rivers: the expected flow on each card comes from a global model (GloFAS, roughly 5 km grid, one value per day). Treat it as a rough guide; it misses flash floods in ramblas. The forecast never changes the alert level.",
+        "desc": "Public gauge readings in Catalonia and the Valencian Community.",
+        "sub": "Observed levels from public gauges. The age of each reading appears on its card.",
+        "prev_note": "Rain accumulated per day (mm) and peak probability, taking the highest value among the stations in each zone. Source: Open-Meteo.com (CC BY 4.0). The rain forecast does not change alert levels.",
         "foot": [
           "<b>For information only.</b> Provisional, unvalidated data. It does not replace Protecció Civil. Follow their instructions at all times. In an emergency call 112.",
-          "<b>Limits.</b> Flash-flood basins like the Rambla del Poyo can rise in under an hour, faster than this page updates. The Ebro at Zaragoza has only a model forecast, not a gauge reading or alerts; Segre and Noguera are not covered. Rivers without a threshold show flow only.",
-          "Sources: Agència Catalana de l'Aigua (ACA), Confederación Hidrográfica del Júcar (SAIH), AEMET, Protecció Civil de Catalunya (INUNCAT) and Open-Meteo.com (CC BY 4.0). The Watch, Alert and Danger levels are this page's own scale, not an official one. Catalonia's thresholds are estimates calculated from the historical record; Valencia's are the official CHJ ones."
+          "<b>Limits.</b> Flash-flood basins like the Rambla del Poyo can rise in under an hour, faster than this page updates. Segre and Noguera are not covered. Rivers without a threshold show flow only.",
+          "Sources: Agència Catalana de l'Aigua (ACA), Confederación Hidrográfica del Júcar (SAIH), AEMET, and Protecció Civil de Catalunya (INUNCAT). The Watch, Alert and Danger levels are this page's own scale, not an official one. Catalonia's thresholds are estimates calculated from the historical record; Valencia's are the official CHJ ones."
         ]
       },
       "us": {

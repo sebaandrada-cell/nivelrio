@@ -68,7 +68,7 @@ def test_claves_por_pais():
     assert set(actualizar._fuentes_reales("pl")) == {"imgw", "prevision"}
     for pais in ("it", "nl", "pt", "hu", "ru", "asia",
                  "centroamerica", "sudamerica", "oceania", "africa"):
-        assert set(actualizar._fuentes_reales(pais)) == {"prevision"}
+        assert actualizar._fuentes_reales(pais) == {}
     assert actualizar._fuentes_reales("xx") == {}
 
 

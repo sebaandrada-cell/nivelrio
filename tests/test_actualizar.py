@@ -451,12 +451,69 @@ def test_indice_de_paises(tmp_path):
 
 
 def test_indice_conserva_entrada_del_pais_que_falla(tmp_path):
-    actualizar.escribir_json(str(tmp_path / "paises.json"), {"ar": {"estaciones": 7}})
+    actualizar.escribir_json(str(tmp_path / "paises.json"), {"ar": {"estaciones": 7}, "it": {"estaciones": 1}})
     paises = {"es": [est_aca()], "ar": [est_ina()]}
     por_pais = {"es": fuentes(aca=[lec("a1", 3.0)]), "ar": {"ina": lambda e: (_ for _ in ()).throw(RuntimeError("x"))}}
     actualizar.ejecutar_todo(AHORA, paises, por_pais, str(tmp_path))
     idx = leer(tmp_path, "paises.json")
     assert idx["ar"] == {"estaciones": 7} and idx["es"]["estaciones"] == 1
+    assert "it" not in idx
+
+
+def test_actualizacion_de_un_rio_conserva_las_demas_estaciones(tmp_path):
+    ests = [est_aca(id="a1", rio="Paraná"), est_aca(id="a2", rio="Uruguay", muestreo_min=30)]
+    correr(tmp_path, ests, fuentes(aca=[lec("a1", 5.0), lec("a2", 6.0)]))
+    antes = latest(tmp_path)
+
+    cambios = actualizar.ejecutar(
+        AHORA + timedelta(minutes=15), ests, fuentes(aca=[lec("a1", 25.0)]), str(tmp_path), rio="Paraná"
+    )
+    despues = latest(tmp_path)
+
+    assert despues["a1"]["valor"] == 25.0
+    assert despues["a2"]["valor"] == antes["a2"]["valor"]
+    assert despues["a2"]["t_utc"] == antes["a2"]["t_utc"]
+    assert despues["a2"]["edad_min"] == 20
+    assert [c["estacion_id"] for c in cambios] == ["a1"]
+
+
+def test_actualizacion_de_un_rio_marca_obsoletas_las_demas_estaciones(tmp_path):
+    ests = [est_aca(id="a1", rio="Paraná"), est_aca(id="a2", rio="Uruguay")]
+    correr(tmp_path, ests, fuentes(aca=[lec("a1", 5.0), lec("a2", 6.0)]))
+    t2 = AHORA + timedelta(minutes=20)
+
+    actualizar.ejecutar(t2, ests, fuentes(aca=[lec("a1", 25.0, ahora=t2)]), str(tmp_path), rio="Paraná")
+    despues = latest(tmp_path)
+
+    assert despues["a2"]["sd"] is True
+    assert despues["a2"]["valor"] == 6.0
+    assert despues["a2"]["edad_min"] == 25
+
+
+def test_actualizacion_rechaza_rio_desconocido(tmp_path):
+    with pytest.raises(ValueError, match="río o estación desconocidos"):
+        actualizar.ejecutar(AHORA, [est_aca()], fuentes(), str(tmp_path), rio="Ninguno")
+
+
+def test_main_pasa_el_pais_y_rio_seleccionados_al_actualizador(tmp_path, monkeypatch):
+    import estaciones
+    ests = [est_aca(id="a1", rio="Paraná"), est_aca(id="a2", rio="Uruguay")]
+    recibido = {}
+    monkeypatch.setattr(actualizar, "DIR_DATA", str(tmp_path))
+    monkeypatch.setattr(actualizar, "_paises_con_registro", lambda *args: ["ar"])
+    monkeypatch.setattr(estaciones, "cargar", lambda ruta, pais: ests)
+    monkeypatch.setattr(actualizar, "_fuentes_reales", lambda pais: fuentes())
+
+    def ejecutar_todo(ahora, paises, fuentes_por_pais, raiz_data, rios_por_pais):
+        recibido.update(paises=paises, rios=rios_por_pais)
+        return {"ar": []}
+
+    monkeypatch.setattr(actualizar, "ejecutar_todo", ejecutar_todo)
+    monkeypatch.delenv("GITHUB_EVENT_NAME", raising=False)
+    monkeypatch.delenv("GITHUB_OUTPUT", raising=False)
+
+    assert actualizar.main(["--pais", "ar", "--rio", "Paraná"]) == 0
+    assert recibido == {"paises": {"ar": ests}, "rios": {"ar": "Paraná"}}
 
 
 def test_fuentes_reales_por_pais():

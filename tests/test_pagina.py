@@ -116,20 +116,19 @@ def test_textos_no_prometen_mas_de_lo_que_hay():
         assert "Segre" in pie(lang) and "Poyo" in pie(lang)  # límites de cobertura y de cuencas rápidas
 
 
-PAISES = ("ar", "es", "us", "de", "fr", "gb", "it", "nl", "pl", "pt", "hu", "ru",
-          "asia", "centroamerica", "sudamerica", "oceania", "africa")
+PAISES = ("ar", "es", "us", "de", "fr", "gb", "pl")
 CLAVES_PAIS = ("nombre",)
 
 
 def test_pagina_tiene_pestanas_accesibles(html):
     assert 'role="tablist"' in html
-    assert 'const claves = Object.keys(t().paises)' in html
+    assert "const claves = L.PAISES.filter((p) => t().paises[p])" in html
     assert 'document.createElement("button")' in html
     assert 'b.setAttribute("role", "tab")' in html
     assert 'role="tabpanel"' in html
     assert "aria-selected" in html
     assert "flex-wrap: wrap" in html
-    assert 'data-group="regions"' in html
+    assert 'data-group="regions"' not in html
     assert "overflow-x: auto" not in html
 
 
@@ -146,10 +145,11 @@ def test_textos_nuevos_en_todos_los_idiomas():
             assert t[k], (lang, k)
         for k in ("titulo", "desc", "est_title", "sub", "prev_note", "model_only", "model_only_note", "foot"):
             assert t["region_default"][k], (lang, k)
-        assert set(t["paises"]) == set(PAISES)
+        assert set(PAISES).issubset(t["paises"])
         for p in PAISES:
             for k in CLAVES_PAIS:
                 assert t["paises"][p][k], (lang, p, k)
+        assert t["update_river"] and t["update_help"]
 
 
 def test_cada_zona_de_cada_pais_tiene_texto():
@@ -165,6 +165,13 @@ def test_cada_fuente_de_datos_tiene_nombre_para_el_aviso_de_caida():
         for k in ("aca", "chj", "ina", "agp", "usgs", "glofas", "avisos", "prevision",
                   "pegelonline", "hubeau", "ea_uk", "imgw"):
             assert TEXTOS[lang]["fuentes_nombres"][k], (lang, k)
+
+
+def test_pagina_oculta_estaciones_solo_modeladas_y_enlaza_la_actualizacion_manual(html):
+    assert 'latest.estaciones.filter((e) => e.fuente !== "glofas")' in html
+    assert "actions/workflows/actualizar.yml?ref=main" in html
+    assert "inicia sesión" in html
+    assert "permiso de escritura" in html
 
 
 def _hojas(x, ruta=""):

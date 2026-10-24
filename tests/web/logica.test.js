@@ -138,9 +138,8 @@ test("serieConActual añade la lectura actual para que el pico horario no falsee
   assert.deepEqual(L.serieConActual(hist, "2026-10-19T10:50:00Z", null), hist);
 });
 
-test("PAISES incluye países y regiones en orden", () => {
-  assert.deepEqual(L.PAISES, ["ar", "es", "us", "de", "fr", "gb", "it", "nl", "pl", "pt", "hu", "ru",
-    "asia", "centroamerica", "sudamerica", "oceania", "africa"]);
+test("PAISES incluye solo países con estaciones observadas", () => {
+  assert.deepEqual(L.PAISES, ["ar", "es", "us", "de", "fr", "gb", "pl"]);
 });
 
 test("paisDesdeHash acepta países conocidos y cae al valor por defecto", () => {

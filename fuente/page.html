@@ -50,7 +50,6 @@ h1 { font-family: var(--font-serif); font-weight: 400; font-size: var(--fs-title
 .tabs { display: flex; flex-wrap: wrap; align-items: center; gap: 2px var(--gap-xs); border-bottom: 1px solid var(--line); }
 .tab-group { flex: 0 0 100%; padding: 7px 10px 2px; color: var(--muted); font-size: 11px; font-weight: 600;
   letter-spacing: .06em; text-transform: uppercase; }
-.tab-group[data-group="regions"] { border-top: 1px solid var(--line); margin-top: 3px; }
 .tabs button { flex: 0 1 auto; max-width: 100%; background: transparent; color: var(--muted); border: 0; border-bottom: 2px solid transparent;
   margin-bottom: -1px; padding: 8px 10px; font: inherit; font-size: var(--fs-body); cursor: pointer; white-space: normal;
   text-align: left; display: inline-flex; gap: 6px; align-items: baseline; }
@@ -96,6 +95,8 @@ svg.sp { width: 100%; height: auto; display: block; }
 .lad i.on { background: var(--c); }
 .meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 12px; font-size: var(--fs-cap); color: var(--muted); line-height: 1.4; }
 .sdnote { font-size: var(--fs-cap); color: var(--muted); }
+.update { width: fit-content; border: 1px solid var(--line); border-radius: 7px; padding: 7px 10px; color: var(--accent); font-weight: 600; text-decoration: none; }
+.update:hover { background: var(--bg); }
 .foot { color: var(--muted); font-size: var(--fs-cap); line-height: 1.6; border-top: 1px solid var(--line); padding-top: var(--gap-md); }
 .foot p { margin: 0 0 var(--gap-xs); max-width: 56rem; }
 .foot b { color: var(--fg); }
@@ -254,8 +255,8 @@ svg.hb .mu { fill: var(--muted); }
   const T = JSON.parse(document.getElementById("textos").textContent);
   const COL = ["var(--n0)", "var(--n1)", "var(--n2)", "var(--n3)", "var(--sd)"];
   const ZONA_HORARIA = { ar: "America/Argentina/Buenos_Aires", es: "Europe/Madrid", us: undefined }; // EE. UU.: la del navegador
-  const FUENTES = { aca: "ACA", chj: "CHJ", ina: "INA", agp: "AGP", usgs: "USGS", glofas: "GloFAS" };
-  const REGION_TABS = new Set(["asia", "centroamerica", "sudamerica", "oceania", "africa"]);
+  const FUENTES = { aca: "ACA", chj: "CHJ", ina: "INA", agp: "AGP", usgs: "USGS" };
+  const URL_ACTUALIZAR = "https://github.com/sebaandrada-cell/nivelrio/actions/workflows/actualizar.yml?ref=main";
   const REFRESCO_MS = 5 * 60 * 1000;
   const HIST_MS = 30 * 60 * 1000;
   const RANGOS_H = [48, 24 * 15, 24 * 92];
@@ -310,6 +311,7 @@ svg.hb .mu { fill: var(--muted); }
     if (D.indice && !D.indice[p]) { vaciarPais(); D.sinDatos = true; render(); return; }
     try {
       const latest = await getJson(L.rutaDatos(p, "latest.json"));
+      latest.estaciones = latest.estaciones.filter((e) => e.fuente !== "glofas");
       const prev = await getJson(L.rutaDatos(p, "prevision.json")).catch(() => null);
       const mod = await getJson("modulos/modulos.json").catch(() => ({}));
       let hist = D.hist, histT = D.histT;
@@ -360,46 +362,40 @@ svg.hb .mu { fill: var(--muted); }
     if (!p) return "";
     const chip = (p.puede_llegar && !e.sd)
       ? `<span class="tag fchip" style="--c:${COL[p.puede_llegar]}"><span aria-hidden="true">${L.nivelRotulo(p.puede_llegar, false, lang).simbolo}</span> ${esc(t().fcmay)} ${esc(L.nivelRotulo(p.puede_llegar, false, lang).texto)}</span>` : "";
-    const q = e.fuente === "glofas" || (e.unidad && e.unidad !== "m3s") ? "" : p.caudal ? `<span>${esc(t().fcq)}: <b>${num(p.caudal[0])}–${val(p.caudal[1], "m3s")}</b> <span class="sdnote">(${esc(t().fcwarn)})</span></span>` : `<span class="sdnote">${esc(t().fcnone)}</span>`;
+    const q = (e.unidad && e.unidad !== "m3s") ? "" : p.caudal ? `<span>${esc(t().fcq)}: <b>${num(p.caudal[0])}–${val(p.caudal[1], "m3s")}</b> <span class="sdnote">(${esc(t().fcwarn)})</span></span>` : `<span class="sdnote">${esc(t().fcnone)}</span>`;
     const lluvia = p.lluvia_48h_mm == null ? "" : `<span>${esc(t().rain48)}: <b>${val(p.lluvia_48h_mm, "mm")}</b></span>`;
     return `<div class="fc"><div class="fh">${esc(t().forecast_h)}</div><div class="fl">${lluvia}${q}</div>${chip}</div>`;
   }
 
   function tarjeta(g) {
-    const e = g.principal, r = L.nivelRotulo(e.nivel, false, lang), soloModelo = e.fuente === "glofas";
-    const rio = soloModelo ? (t().zonas[e.zona] || g.rio) : g.rio;
+    const e = g.principal, r = L.nivelRotulo(e.nivel, false, lang);
     const color = e.sd && e.nivel < 2 ? COL[4] : COL[e.nivel];
-    const tags = soloModelo
-      ? `<span class="tag" style="--c:${COL[4]}">${esc(tp().model_only)}</span>`
-      : e.sd
+    const tags = e.sd
       ? tag(e.nivel, true) + `<span class="tag" style="--c:${COL[e.nivel]}" title="${esc(t().last_level)}"><span aria-hidden="true">${r.simbolo}</span> ${esc(r.texto)}</span>`
       : tag(e.nivel, false);
     const hist = D.hist[e.id] || [];
     const tend = L.tendencia(L.serieConActual(hist, e.t_utc, e.valor));
     const trTxt = e.sd || !tend ? "" : tend === "sube" ? `▲ ${t().rise}` : tend === "baja" ? `▼ ${t().fall}` : `● ${t().flat}`;
-    const valor = soloModelo
-      ? `<div class="big" style="color:var(--sd)">—</div><div class="tr">${esc(tp().no_observation)}</div>`
-      : e.valor == null
+    const valor = e.valor == null
       ? `<div class="big" style="color:var(--sd)">—</div><div class="tr">${esc(t().no_value)}</div>`
       : `<div class="big">${num(e.valor)} <small>${esc(uni(e))}</small></div><div class="tr ${tend === "sube" && e.nivel >= 1 ? "up" : ""}">${esc(trTxt)}</div>`;
     const pts = L.filtrarRango(hist, Date.now(), 48);
     const spark = pts.length >= 3 ? sparkline(pts, e.umbrales, e.nivel, e.sd, e.unidad) : "";
     const lad = [1, 2, 3].map((k) => `<i class="${e.nivel >= k && !e.sd ? "on" : ""}" style="--c:${COL[k]}"></i>`).join("");
-    const nota = soloModelo
-      ? `<div class="sdnote">${esc(tp().model_only_note)}</div>`
-      : e.sd ? `<div class="sdnote">${esc(t().sd_note)}</div>` : "";
-    const detalle = soloModelo ? "" : `<details class="det" data-rio="${esc(g.rio)}"><summary>${esc(t().stations_of)} (${g.estaciones.length}) · ${esc(t().chart_title.toLowerCase())}</summary><div class="dbody"></div></details>`;
-    const metas = soloModelo
-      ? `<div class="meta"><span>${esc(t().source)}: ${esc(FUENTES[e.fuente] || e.fuente)}</span></div>`
-      : `<div class="meta"><span>${esc(umbralesTexto(e.umbrales, e.unidad))}</span><span>${esc(L.tipoUmbralTexto(e.umbrales.tipo, lang))}</span></div>
+    const nota = e.sd ? `<div class="sdnote">${esc(t().sd_note)}</div>` : "";
+    const detalle = `<details class="det" data-rio="${esc(g.rio)}"><summary>${esc(t().stations_of)} (${g.estaciones.length}) · ${esc(t().chart_title.toLowerCase())}</summary><div class="dbody"></div></details>`;
+    const metas = `<div class="meta"><span>${esc(umbralesTexto(e.umbrales, e.unidad))}</span><span>${esc(L.tipoUmbralTexto(e.umbrales.tipo, lang))}</span></div>
       <div class="meta"><span>${esc(L.edadTexto(L.edadMin(e.t_utc, Date.now()), lang))}</span><span>${esc(t().source)}: ${esc(FUENTES[e.fuente] || e.fuente)}</span></div>`;
+    const ayudaActualizar = t().update_help.replace("{rio}", g.rio);
     return `<article class="card n${e.nivel}" style="--c:${color}">
-      <div class="ch"><div><div class="rio">${esc(rio)}</div><div class="est">${esc(e.nombre)}</div></div><div class="tags">${tags}</div></div>
+      <div class="ch"><div><div class="rio">${esc(g.rio)}</div><div class="est">${esc(e.nombre)}</div></div><div class="tags">${tags}</div></div>
       <div class="val">${valor}</div>${spark}
       <div class="lad" aria-hidden="true">${lad}</div>${nota}
       ${bloquePrevision(e)}
       ${metas}
       ${detalle}
+      <a class="update" href="${URL_ACTUALIZAR}" target="_blank" rel="noopener noreferrer">${esc(t().update_river)}</a>
+      <div class="sdnote">${esc(ayudaActualizar)}</div>
     </article>`;
   }
 
@@ -671,7 +667,8 @@ svg.hb .mu { fill: var(--muted); }
   function pintarPrevision() {
     const el = document.getElementById("prev");
     const z = D.prev && D.prev.zonas;
-    const claves = z ? Object.keys(t().zonas).filter((k) => z[k] && z[k].length) : [];
+    const zonasActivas = new Set(D.latest.estaciones.map((e) => e.zona));
+    const claves = z ? Object.keys(t().zonas).filter((k) => zonasActivas.has(k) && z[k] && z[k].length) : [];
     if (!claves.length) { el.innerHTML = `<h2>${esc(t().prev_title)}</h2><div class="sdnote">${esc(t().prev_none)}</div>`; return; }
     const dias = z[claves[0]].map((d) => new Date(d.fecha + "T12:00:00Z").toLocaleDateString(loc(), { weekday: "short", day: "numeric", timeZone: "UTC" }));
     const nivLluvia = (mm) => mm >= 60 ? 3 : mm >= 30 ? 2 : mm >= 10 ? 1 : 0;
@@ -716,11 +713,10 @@ svg.hb .mu { fill: var(--muted); }
   function pintarPestanas() {
     const tabs = document.getElementById("tabs");
     tabs.setAttribute("aria-label", t().tab_label);
-    const claves = Object.keys(t().paises);
+    const claves = L.PAISES.filter((p) => t().paises[p]);
     const actuales = [...tabs.querySelectorAll("button[data-p]")].map((b) => b.dataset.p);
     if (actuales.join(",") !== claves.join(",")) {
       const hijos = [];
-      let etiquetaRegiones = false;
       claves.forEach((p, i) => {
         if (i === 0) {
           const etiqueta = document.createElement("span");
@@ -728,14 +724,6 @@ svg.hb .mu { fill: var(--muted); }
           etiqueta.dataset.group = "countries";
           etiqueta.setAttribute("aria-hidden", "true");
           hijos.push(etiqueta);
-        }
-        if (REGION_TABS.has(p) && !etiquetaRegiones) {
-          const etiqueta = document.createElement("span");
-          etiqueta.className = "tab-group";
-          etiqueta.dataset.group = "regions";
-          etiqueta.setAttribute("aria-hidden", "true");
-          hijos.push(etiqueta);
-          etiquetaRegiones = true;
         }
         const b = document.createElement("button");
         b.type = "button";
@@ -748,7 +736,6 @@ svg.hb .mu { fill: var(--muted); }
       tabs.replaceChildren(...hijos);
     }
     tabs.querySelector('[data-group="countries"]').textContent = t().tab_group_countries;
-    tabs.querySelector('[data-group="regions"]').textContent = t().tab_group_regions;
     tabs.querySelectorAll("button[data-p]").forEach((b) => {
       const p = b.dataset.p, sel = p === pais;
       const r = L.resumenPais(D.indice && D.indice[p]);
