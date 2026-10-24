@@ -1,11 +1,11 @@
 {
- "generado_utc": "2026-10-23T23:22:37Z",
+ "generado_utc": "2026-10-24T01:52:46Z",
  "fuente": "Open-Meteo (CC BY 4.0)",
  "zonas": {
   "barcelona": [
    {
     "fecha": "2026-10-24",
-    "mm": 1.7,
+    "mm": 1.4,
     "prob": 93
    },
    {
@@ -22,7 +22,7 @@
   "interior": [
    {
     "fecha": "2026-10-24",
-    "mm": 0.2,
+    "mm": 0.0,
     "prob": 28
    },
    {
@@ -39,7 +39,7 @@
   "girona": [
    {
     "fecha": "2026-10-24",
-    "mm": 1.9,
+    "mm": 3.1,
     "prob": 93
    },
    {
@@ -69,47 +69,13 @@
     "mm": 0.0,
     "prob": 0
    }
-  ],
-  "valencia": [
-   {
-    "fecha": "2026-10-24",
-    "mm": 0.3,
-    "prob": 20
-   },
-   {
-    "fecha": "2026-10-25",
-    "mm": 0.0,
-    "prob": 0
-   },
-   {
-    "fecha": "2026-10-26",
-    "mm": 0.0,
-    "prob": 0
-   }
-  ],
-  "ebro": [
-   {
-    "fecha": "2026-10-24",
-    "mm": 0.0,
-    "prob": 0
-   },
-   {
-    "fecha": "2026-10-25",
-    "mm": 0.0,
-    "prob": 0
-   },
-   {
-    "fecha": "2026-10-26",
-    "mm": 0.0,
-    "prob": 0
-   }
   ]
  },
  "estaciones": {
   "llobregat-sant-joan-despi": {
    "lluvia_48h_mm": 0.0,
    "caudal": [
-    0.5,
+    0.47,
     0.66
    ],
    "puede_llegar": null
@@ -117,77 +83,77 @@
   "llobregat-sant-vicenc-dels-horts": {
    "lluvia_48h_mm": 0.0,
    "caudal": [
-    0.5,
+    0.47,
     0.66
    ],
    "puede_llegar": null
   },
   "llobregat-castellbisbal": {
-   "lluvia_48h_mm": 0.1,
+   "lluvia_48h_mm": 0.0,
    "caudal": [
-    24.76,
-    46.64
+    19.09,
+    33.12
    ],
    "puede_llegar": null
   },
   "llobregat-castellbell": {
    "lluvia_48h_mm": 0.0,
    "caudal": [
-    0.12,
-    0.22
+    0.09,
+    0.16
    ],
    "puede_llegar": null
   },
   "llobregat-guardiola": {
    "lluvia_48h_mm": 0.0,
    "caudal": [
-    0.07,
-    0.12
+    0.05,
+    0.09
    ],
    "puede_llegar": null
   },
   "cardener-cardona": {
    "lluvia_48h_mm": 0.0,
    "caudal": [
-    2.28,
-    4.38
+    1.71,
+    3.12
    ],
    "puede_llegar": null
   },
   "cardener-suria": {
    "lluvia_48h_mm": 0.0,
    "caudal": [
-    0.12,
-    0.23
+    0.09,
+    0.16
    ],
    "puede_llegar": null
   },
   "anoia-sant-sadurni": {
    "lluvia_48h_mm": 0.0,
    "caudal": [
-    7.15,
-    13.29
+    5.58,
+    9.47
    ],
    "puede_llegar": null
   },
   "anoia-martorell": {
-   "lluvia_48h_mm": 0.1,
+   "lluvia_48h_mm": 0.0,
    "caudal": [
-    24.76,
-    46.64
+    19.09,
+    33.12
    ],
    "puede_llegar": null
   },
   "besos-santa-coloma": {
-   "lluvia_48h_mm": 1.7,
+   "lluvia_48h_mm": 0.7,
    "caudal": [
-    0.23,
+    0.19,
     0.49
    ],
    "puede_llegar": null
   },
   "ter-girona": {
-   "lluvia_48h_mm": 1.9,
+   "lluvia_48h_mm": 3.1,
    "caudal": [
     0.0,
     0.0
@@ -195,25 +161,25 @@
    "puede_llegar": null
   },
   "ter-colomers": {
-   "lluvia_48h_mm": 0.9,
+   "lluvia_48h_mm": 0.6,
    "caudal": [
-    10.67,
-    16.74
+    9.16,
+    13.66
    ],
    "puede_llegar": null
   },
   "ter-roda-de-ter": {
-   "lluvia_48h_mm": 0.2,
+   "lluvia_48h_mm": 0.0,
    "caudal": [
-    4.79,
-    6.59
+    4.07,
+    5.71
    ],
    "puede_llegar": null
   },
   "ter-torroella": {
-   "lluvia_48h_mm": 1.1,
+   "lluvia_48h_mm": 0.6,
    "caudal": [
-    0.13,
+    0.09,
     0.45
    ],
    "puede_llegar": null
@@ -221,7 +187,7 @@
   "fluvia-esponella": {
    "lluvia_48h_mm": 0.0,
    "caudal": [
-    4.5,
+    3.73,
     5.7
    ],
    "puede_llegar": null
@@ -229,7 +195,7 @@
   "fluvia-olot": {
    "lluvia_48h_mm": 0.0,
    "caudal": [
-    0.16,
+    0.14,
     0.2
    ],
    "puede_llegar": null
@@ -237,31 +203,31 @@
   "muga-pont-de-molins": {
    "lluvia_48h_mm": 0.0,
    "caudal": [
-    0.03,
-    0.1
+    0.02,
+    0.06
    ],
    "puede_llegar": null
   },
   "muga-castello-d-empuries": {
    "lluvia_48h_mm": 0.2,
    "caudal": [
-    0.37,
-    0.69
+    0.32,
+    0.6
    ],
    "puede_llegar": null
   },
   "muga-sant-llorenc": {
    "lluvia_48h_mm": 0.0,
    "caudal": [
-    0.61,
+    0.48,
     0.75
    ],
    "puede_llegar": null
   },
   "tordera-fogars-de-la-selva": {
-   "lluvia_48h_mm": 1.2,
+   "lluvia_48h_mm": 1.3,
    "caudal": [
-    4.5,
+    4.07,
     6.94
    ],
    "puede_llegar": null
@@ -269,101 +235,74 @@
   "tordera-sant-celoni": {
    "lluvia_48h_mm": 1.4,
    "caudal": [
-    0.1,
-    0.16
+    0.09,
+    0.15
    ],
    "puede_llegar": null
   },
   "francoli-montblanc": {
    "lluvia_48h_mm": 0.0,
    "caudal": [
-    0.05,
-    0.14
+    0.04,
+    0.09
    ],
    "puede_llegar": null
   },
   "francoli-tarragona": {
    "lluvia_48h_mm": 0.0,
    "caudal": [
-    0.12,
-    0.21
+    0.1,
+    0.16
    ],
    "puede_llegar": null
   },
   "gaia-vilabella": {
-   "lluvia_48h_mm": 0.0,
-   "caudal": [
-    0.07,
-    0.12
-   ],
+   "lluvia_48h_mm": null,
+   "caudal": null,
    "puede_llegar": null
   },
   "foix-castellet-i-la-gornal": {
-   "lluvia_48h_mm": 0.0,
-   "caudal": [
-    0.23,
-    0.32
-   ],
+   "lluvia_48h_mm": null,
+   "caudal": null,
    "puede_llegar": null
   },
   "turia-manises": {
-   "lluvia_48h_mm": 0.1,
-   "caudal": [
-    39.55,
-    60.94
-   ],
+   "lluvia_48h_mm": null,
+   "caudal": null,
    "puede_llegar": null
   },
   "turia-quart-de-poblet": {
-   "lluvia_48h_mm": 0.0,
-   "caudal": [
-    0.51,
-    0.67
-   ],
+   "lluvia_48h_mm": null,
+   "caudal": null,
    "puede_llegar": null
   },
   "turia-vilamarxant": {
-   "lluvia_48h_mm": 0.0,
-   "caudal": [
-    37.19,
-    57.21
-   ],
+   "lluvia_48h_mm": null,
+   "caudal": null,
    "puede_llegar": null
   },
   "turia-bugarra": {
-   "lluvia_48h_mm": 0.3,
-   "caudal": [
-    26.67,
-    40.88
-   ],
+   "lluvia_48h_mm": null,
+   "caudal": null,
    "puede_llegar": null
   },
   "xuquer-algemesi": {
-   "lluvia_48h_mm": 0.0,
-   "caudal": [
-    0.08,
-    0.13
-   ],
+   "lluvia_48h_mm": null,
+   "caudal": null,
    "puede_llegar": null
   },
   "xuquer-salida-de-tous": {
-   "lluvia_48h_mm": 0.0,
-   "caudal": [
-    0.09,
-    0.12
-   ],
+   "lluvia_48h_mm": null,
+   "caudal": null,
    "puede_llegar": null
   },
   "poyo-n-iii": {
-   "lluvia_48h_mm": 0.0,
-   "caudal": [
-    0.27,
-    0.64
-   ],
+   "lluvia_48h_mm": null,
+   "caudal": null,
    "puede_llegar": null
   },
   "ebro-zaragoza-modelo": {
-   "lluvia_48h_mm": 0.0,
+   "lluvia_48h_mm": null,
    "caudal": null,
    "puede_llegar": null
   }

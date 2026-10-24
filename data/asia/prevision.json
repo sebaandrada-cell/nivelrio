@@ -1,5 +1,5 @@
 {
- "generado_utc": "2026-10-23T23:22:37Z",
+ "generado_utc": "2026-10-24T01:52:46Z",
  "fuente": "Open-Meteo (CC BY 4.0)",
  "zonas": {
   "yangtze": [
@@ -39,17 +39,17 @@
   "mekong": [
    {
     "fecha": "2026-10-24",
-    "mm": 1.8,
+    "mm": 1.2,
     "prob": 29
    },
    {
     "fecha": "2026-10-25",
-    "mm": 4.9,
+    "mm": 8.4,
     "prob": 64
    },
    {
     "fecha": "2026-10-26",
-    "mm": 0.1,
+    "mm": 0.3,
     "prob": 52
    }
   ]
@@ -66,7 +66,7 @@
    "puede_llegar": null
   },
   "mekong-stung-treng-model": {
-   "lluvia_48h_mm": 6.7,
+   "lluvia_48h_mm": 9.6,
    "caudal": null,
    "puede_llegar": null
   }
