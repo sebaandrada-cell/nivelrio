@@ -97,6 +97,8 @@ svg.sp { width: 100%; height: auto; display: block; }
 .sdnote { font-size: var(--fs-cap); color: var(--muted); }
 .update { width: fit-content; border: 1px solid var(--line); border-radius: 7px; padding: 7px 10px; color: var(--accent); font-weight: 600; text-decoration: none; }
 .update:hover { background: var(--bg); }
+button.update { background: none; font: inherit; font-weight: 600; cursor: pointer; }
+button.update:disabled { opacity: .6; cursor: default; }
 .foot { color: var(--muted); font-size: var(--fs-cap); line-height: 1.6; border-top: 1px solid var(--line); padding-top: var(--gap-md); }
 .foot p { margin: 0 0 var(--gap-xs); max-width: 56rem; }
 .foot b { color: var(--fg); }
@@ -257,6 +259,8 @@ svg.hb .mu { fill: var(--muted); }
   const ZONA_HORARIA = { ar: "America/Argentina/Buenos_Aires", es: "Europe/Madrid", us: undefined }; // EE. UU.: la del navegador
   const FUENTES = { aca: "ACA", chj: "CHJ", ina: "INA", agp: "AGP", usgs: "USGS" };
   const URL_ACTUALIZAR = "https://github.com/sebaandrada-cell/nivelrio/actions/workflows/actualizar.yml?ref=main";
+  // URL de la función de Vercel (vercel/api/actualizar.js). Vacía: el botón abre GitHub Actions.
+  const URL_API_ACTUALIZAR = "";
   const REFRESCO_MS = 5 * 60 * 1000;
   const HIST_MS = 30 * 60 * 1000;
   const RANGOS_H = [48, 24 * 15, 24 * 92];
@@ -386,7 +390,7 @@ svg.hb .mu { fill: var(--muted); }
     const detalle = `<details class="det" data-rio="${esc(g.rio)}"><summary>${esc(t().stations_of)} (${g.estaciones.length}) · ${esc(t().chart_title.toLowerCase())}</summary><div class="dbody"></div></details>`;
     const metas = `<div class="meta"><span>${esc(umbralesTexto(e.umbrales, e.unidad))}</span><span>${esc(L.tipoUmbralTexto(e.umbrales.tipo, lang))}</span></div>
       <div class="meta"><span>${esc(L.edadTexto(L.edadMin(e.t_utc, Date.now()), lang))}</span><span>${esc(t().source)}: ${esc(FUENTES[e.fuente] || e.fuente)}</span></div>`;
-    const ayudaActualizar = t().update_help.replace("{rio}", g.rio);
+    const ayudaActualizar = URL_API_ACTUALIZAR ? t().update_note : t().update_help.replace("{rio}", g.rio);
     return `<article class="card n${e.nivel}" style="--c:${color}">
       <div class="ch"><div><div class="rio">${esc(g.rio)}</div><div class="est">${esc(e.nombre)}</div></div><div class="tags">${tags}</div></div>
       <div class="val">${valor}</div>${spark}
@@ -394,10 +398,31 @@ svg.hb .mu { fill: var(--muted); }
       ${bloquePrevision(e)}
       ${metas}
       ${detalle}
-      <a class="update" href="${URL_ACTUALIZAR}" target="_blank" rel="noopener noreferrer">${esc(t().update_river)}</a>
-      <div class="sdnote">${esc(ayudaActualizar)}</div>
+      ${URL_API_ACTUALIZAR
+        ? `<button type="button" class="update" data-actualizar="${esc(g.rio)}">${esc(t().update_river)}</button>`
+        : `<a class="update" href="${URL_ACTUALIZAR}" target="_blank" rel="noopener noreferrer">${esc(t().update_river)}</a>`}
+      <div class="sdnote" data-estado-act>${esc(ayudaActualizar)}</div>
     </article>`;
   }
+
+  document.addEventListener("click", async (ev) => {
+    const b = ev.target.closest("button[data-actualizar]");
+    if (!b || !URL_API_ACTUALIZAR) return;
+    const aviso = b.parentElement.querySelector("[data-estado-act]");
+    b.disabled = true;
+    aviso.textContent = t().update_sending;
+    try {
+      const r = await fetch(URL_API_ACTUALIZAR, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ pais, rio: b.dataset.actualizar }),
+      });
+      aviso.textContent = r.ok ? t().update_ok : r.status === 429 ? t().update_wait : t().update_err;
+    } catch (_) {
+      aviso.textContent = t().update_err;
+    }
+    setTimeout(() => { b.disabled = false; }, 60000);
+  });
 
   // ---------- módulos de ficha: archivos por río ----------
   const fmt = (txt, vars) => String(txt).replace(/\{(\w+)\}/g, (m, k) => (k in vars ? vars[k] : m));
