@@ -19,6 +19,11 @@ on:
           - fr
           - gb
           - pl
+      rio:
+        description: Nombre del río o ID de estación; usa "todos" para actualizar el país completo
+        required: true
+        type: string
+        default: todos
 
 permissions:
   contents: write
@@ -31,6 +36,7 @@ concurrency:
 jobs:
   actualizar:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Descargar código de multipaís
         uses: actions/checkout@v4
@@ -47,27 +53,30 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: data
-          key: datos-multipais-v2-${{ github.run_id }}-${{ github.run_attempt }}
+          key: data-v2-sin-coincidencia
           restore-keys: |
-            datos-multipais-v2-
             data-v2-
 
       - name: Actualizar estaciones
         id: actualizar
+        timeout-minutes: 5
         env:
           PAIS: ${{ inputs.pais || 'todos' }}
-        run: python fuente/actualizar.py --pais "$PAIS"
+          RIO: ${{ inputs.rio || 'todos' }}
+        run: python fuente/actualizar.py --pais "$PAIS" --rio "$RIO"
 
       - name: Guardar estado de actualización
-        if: always()
         uses: actions/cache/save@v4
         with:
           path: data
-          key: datos-multipais-v2-${{ github.run_id }}-${{ github.run_attempt }}
+          key: data-v2-${{ github.run_id }}-${{ github.run_attempt }}
 
       - name: Publicar datos actualizados
+        id: publicar
         if: steps.actualizar.outputs.publicar == 'true'
+        timeout-minutes: 3
         run: |
+          set -eu
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git add data
@@ -79,7 +88,9 @@ jobs:
           git push origin HEAD:multipais
 
       - name: Notificar cambios de nivel
-        if: success()
+        id: notificar
+        if: always() && steps.actualizar.outcome == 'success'
+        timeout-minutes: 3
         env:
           GH_TOKEN: ${{ github.token }}
         run: python fuente/notificar.py
