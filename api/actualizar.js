@@ -4,19 +4,20 @@
 const REPO = "sebaandrada-cell/nivelrio";
 const WORKFLOW = "actualizar.yml";
 const REF = "multipais";
-const ORIGEN = "https://sebaandrada-cell.github.io";
+const ORIGENES = ["https://nivelrio.vercel.app", "https://sebaandrada-cell.github.io"];
 const PAISES = ["todos", "ar", "es", "us", "de", "fr", "gb", "pl"];
 const ESPERA_MS = 60 * 1000;
 const ultimo = new Map(); // por instancia: freno básico; el workflow además se encola con concurrency
 
 module.exports = async (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", ORIGEN);
+  const origen = ORIGENES.includes(req.headers.origin) ? req.headers.origin : ORIGENES[0];
+  res.setHeader("Access-Control-Allow-Origin", origen);
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   res.setHeader("Vary", "Origin");
   if (req.method === "OPTIONS") return res.status(204).end();
   if (req.method !== "POST") return res.status(405).json({ error: "metodo" });
-  if (req.headers.origin !== ORIGEN) return res.status(403).json({ error: "origen" });
+  if (!ORIGENES.includes(req.headers.origin)) return res.status(403).json({ error: "origen" });
 
   const cuerpo = typeof req.body === "string" ? JSON.parse(req.body || "{}") : req.body || {};
   const pais = String(cuerpo.pais || "");

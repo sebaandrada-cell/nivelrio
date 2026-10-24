@@ -1,0 +1,6 @@
+fuente
+tests
+docs
+.github
+*.md
+pytest.ini
