@@ -1,28 +1,28 @@
 {
- "generado_utc": "2026-10-24T01:52:46Z",
+ "generado_utc": "2026-10-24T07:02:24Z",
  "fuente": "Open-Meteo (CC BY 4.0)",
  "zonas": {
   "severn": [
    {
     "fecha": "2026-10-24",
-    "mm": 13.5,
+    "mm": 12.4,
     "prob": 100
    },
    {
     "fecha": "2026-10-25",
-    "mm": 0.1,
-    "prob": 31
+    "mm": 0.2,
+    "prob": 37
    },
    {
     "fecha": "2026-10-26",
-    "mm": 8.1,
-    "prob": 92
+    "mm": 8.38,
+    "prob": 100
    }
   ]
  },
  "estaciones": {
   "severn-shrewsbury": {
-   "lluvia_48h_mm": 13.6,
+   "lluvia_48h_mm": 12.6,
    "caudal": null,
    "puede_llegar": null
   }

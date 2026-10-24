@@ -1,5 +1,5 @@
 {
- "generado_utc": "2026-10-24T01:52:46Z",
+ "generado_utc": "2026-10-24T07:02:24Z",
  "estaciones": [
   {
    "id": "parana-barranqueras",
@@ -11,7 +11,7 @@
    "unidad": "m",
    "pais": "ar",
    "t_utc": "2026-10-23T03:00:00Z",
-   "edad_min": 1372,
+   "edad_min": 1682,
    "nivel": 3,
    "sd": false,
    "umbrales": {
@@ -33,7 +33,7 @@
    "unidad": "m",
    "pais": "ar",
    "t_utc": "2026-10-23T03:00:00Z",
-   "edad_min": 1372,
+   "edad_min": 1682,
    "nivel": 3,
    "sd": false,
    "umbrales": {
@@ -55,7 +55,7 @@
    "unidad": "m",
    "pais": "ar",
    "t_utc": "2026-10-23T03:00:00Z",
-   "edad_min": 1372,
+   "edad_min": 1682,
    "nivel": 0,
    "sd": false,
    "umbrales": {
@@ -77,7 +77,7 @@
    "unidad": "m",
    "pais": "ar",
    "t_utc": "2026-10-23T03:00:00Z",
-   "edad_min": 1372,
+   "edad_min": 1682,
    "nivel": 0,
    "sd": false,
    "umbrales": {
@@ -99,7 +99,7 @@
    "unidad": "m",
    "pais": "ar",
    "t_utc": "2026-10-23T03:00:00Z",
-   "edad_min": 1372,
+   "edad_min": 1682,
    "nivel": 0,
    "sd": false,
    "umbrales": {
@@ -121,7 +121,7 @@
    "unidad": "m",
    "pais": "ar",
    "t_utc": "2026-10-23T03:00:00Z",
-   "edad_min": 1372,
+   "edad_min": 1682,
    "nivel": 1,
    "sd": false,
    "umbrales": {

@@ -1,28 +1,28 @@
 {
- "generado_utc": "2026-10-24T01:52:46Z",
+ "generado_utc": "2026-10-24T07:02:24Z",
  "fuente": "Open-Meteo (CC BY 4.0)",
  "zonas": {
   "vistula": [
    {
     "fecha": "2026-10-24",
     "mm": 0.0,
-    "prob": 2
+    "prob": 0
    },
    {
     "fecha": "2026-10-25",
-    "mm": 1.9,
+    "mm": 1.8,
     "prob": 100
    },
    {
     "fecha": "2026-10-26",
-    "mm": 1.0,
-    "prob": 82
+    "mm": 0.6,
+    "prob": 93
    }
   ]
  },
  "estaciones": {
   "vistula-warsaw": {
-   "lluvia_48h_mm": 1.9,
+   "lluvia_48h_mm": 1.8,
    "caudal": null,
    "puede_llegar": null
   }

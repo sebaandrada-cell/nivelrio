@@ -1,5 +1,5 @@
 {
- "generado_utc": "2026-10-24T01:52:46Z",
+ "generado_utc": "2026-10-24T07:02:24Z",
  "fuente": "Open-Meteo (CC BY 4.0)",
  "zonas": {
   "po": [
@@ -11,7 +11,7 @@
    {
     "fecha": "2026-10-25",
     "mm": 0.0,
-    "prob": 3
+    "prob": 0
    },
    {
     "fecha": "2026-10-26",

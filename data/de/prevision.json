@@ -1,28 +1,28 @@
 {
- "generado_utc": "2026-10-24T01:52:46Z",
+ "generado_utc": "2026-10-24T07:02:24Z",
  "fuente": "Open-Meteo (CC BY 4.0)",
  "zonas": {
   "rhine": [
    {
     "fecha": "2026-10-24",
-    "mm": 6.3,
+    "mm": 6.1,
     "prob": 100
    },
    {
     "fecha": "2026-10-25",
-    "mm": 24.8,
+    "mm": 22.5,
     "prob": 100
    },
    {
     "fecha": "2026-10-26",
-    "mm": 2.0,
-    "prob": 66
+    "mm": 3.18,
+    "prob": 76
    }
   ]
  },
  "estaciones": {
   "rhine-cologne": {
-   "lluvia_48h_mm": 31.1,
+   "lluvia_48h_mm": 28.6,
    "caudal": null,
    "puede_llegar": null
   }

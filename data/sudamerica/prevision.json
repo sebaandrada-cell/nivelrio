@@ -1,67 +1,67 @@
 {
- "generado_utc": "2026-10-24T01:52:46Z",
+ "generado_utc": "2026-10-24T07:02:24Z",
  "fuente": "Open-Meteo (CC BY 4.0)",
  "zonas": {
   "amazonas": [
    {
     "fecha": "2026-10-24",
     "mm": 0.0,
-    "prob": 22
+    "prob": 64
    },
    {
     "fecha": "2026-10-25",
-    "mm": 0.7,
-    "prob": 43
+    "mm": 0.6,
+    "prob": 57
    },
    {
     "fecha": "2026-10-26",
-    "mm": 2.8,
+    "mm": 1.0,
     "prob": 68
    }
   ],
   "orinoco": [
    {
     "fecha": "2026-10-24",
-    "mm": 0.0,
-    "prob": 38
+    "mm": 0.1,
+    "prob": 27
    },
    {
     "fecha": "2026-10-25",
-    "mm": 0.4,
-    "prob": 41
+    "mm": 0.2,
+    "prob": 43
    },
    {
     "fecha": "2026-10-26",
-    "mm": 0.3,
-    "prob": 42
+    "mm": 0.2,
+    "prob": 45
    }
   ],
   "parana": [
    {
     "fecha": "2026-10-24",
     "mm": 0.0,
-    "prob": 14
+    "prob": 6
    },
    {
     "fecha": "2026-10-25",
     "mm": 1.5,
-    "prob": 33
+    "prob": 47
    },
    {
     "fecha": "2026-10-26",
-    "mm": 0.0,
-    "prob": 10
+    "mm": 0.1,
+    "prob": 18
    }
   ]
  },
  "estaciones": {
   "amazonas-manaus-model": {
-   "lluvia_48h_mm": 0.7,
+   "lluvia_48h_mm": 0.6,
    "caudal": null,
    "puede_llegar": null
   },
   "orinoco-ciudad-bolivar-model": {
-   "lluvia_48h_mm": 0.4,
+   "lluvia_48h_mm": 0.3,
    "caudal": null,
    "puede_llegar": null
   },
