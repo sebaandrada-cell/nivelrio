@@ -1,6 +1,6 @@
 {
  "ar": {
-  "generado_utc": "2026-10-24T09:58:12Z",
+  "generado_utc": "2026-10-24T10:34:42Z",
   "estaciones": 6,
   "por_nivel": [
    3,
@@ -16,7 +16,7 @@
   }
  },
  "es": {
-  "generado_utc": "2026-10-24T09:58:12Z",
+  "generado_utc": "2026-10-24T10:34:42Z",
   "estaciones": 32,
   "por_nivel": [
    32,
@@ -24,7 +24,7 @@
    0,
    0
   ],
-  "sd": 1,
+  "sd": 2,
   "fuentes_ok": {
    "aca": true,
    "chj": true,
@@ -33,7 +33,7 @@
   }
  },
  "us": {
-  "generado_utc": "2026-10-24T09:58:12Z",
+  "generado_utc": "2026-10-24T10:34:42Z",
   "estaciones": 5,
   "por_nivel": [
    5,
@@ -48,7 +48,7 @@
   }
  },
  "de": {
-  "generado_utc": "2026-10-24T09:58:12Z",
+  "generado_utc": "2026-10-24T10:34:42Z",
   "estaciones": 1,
   "por_nivel": [
    1,
@@ -63,7 +63,7 @@
   }
  },
  "fr": {
-  "generado_utc": "2026-10-24T09:58:12Z",
+  "generado_utc": "2026-10-24T10:34:42Z",
   "estaciones": 1,
   "por_nivel": [
    1,
@@ -71,14 +71,14 @@
    0,
    0
   ],
-  "sd": 0,
+  "sd": 1,
   "fuentes_ok": {
    "hubeau": true,
    "prevision": true
   }
  },
  "gb": {
-  "generado_utc": "2026-10-24T09:58:12Z",
+  "generado_utc": "2026-10-24T10:34:42Z",
   "estaciones": 1,
   "por_nivel": [
    1,
@@ -93,7 +93,7 @@
   }
  },
  "pl": {
-  "generado_utc": "2026-10-24T09:58:12Z",
+  "generado_utc": "2026-10-24T10:34:42Z",
   "estaciones": 1,
   "por_nivel": [
    1,

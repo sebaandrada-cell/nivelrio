@@ -1,5 +1,5 @@
 {
- "generado_utc": "2026-10-24T09:58:12Z",
+ "generado_utc": "2026-10-24T10:34:42Z",
  "estaciones": [
   {
    "id": "vistula-warsaw",
@@ -10,8 +10,8 @@
    "valor": 1.08,
    "unidad": "m",
    "pais": "pl",
-   "t_utc": "2026-10-24T09:20:00Z",
-   "edad_min": 38,
+   "t_utc": "2026-10-24T09:50:00Z",
+   "edad_min": 44,
    "nivel": 0,
    "sd": true,
    "umbrales": {

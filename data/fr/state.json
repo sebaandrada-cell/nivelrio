@@ -2,7 +2,7 @@
  "loire-orleans": {
   "nivel": 0,
   "nivel_propio": 0,
-  "sd": false,
+  "sd": true,
   "ultimo_valor": 39.1,
   "ultimo_t_utc": "2026-10-24T09:45:00Z",
   "cnt_sobre": 0,

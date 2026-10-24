@@ -1,5 +1,5 @@
 {
- "generado_utc": "2026-10-24T09:58:12Z",
+ "generado_utc": "2026-10-24T10:34:42Z",
  "estaciones": [
   {
    "id": "loire-orleans",
@@ -7,13 +7,13 @@
    "nombre": "Orléans",
    "cuenca": "Loire",
    "zona": "loire",
-   "valor": 39.1,
+   "valor": 39.2,
    "unidad": "m3s",
    "pais": "fr",
-   "t_utc": "2026-10-24T09:45:00Z",
-   "edad_min": 13,
+   "t_utc": "2026-10-24T10:15:00Z",
+   "edad_min": 19,
    "nivel": 0,
-   "sd": false,
+   "sd": true,
    "umbrales": {
     "bajo": null,
     "medio": null,

@@ -1,5 +1,5 @@
 {
- "generado_utc": "2026-10-24T09:58:12Z",
+ "generado_utc": "2026-10-24T10:34:42Z",
  "estaciones": [
   {
    "id": "mississippi-st-louis",
@@ -7,11 +7,11 @@
    "nombre": "St. Louis",
    "cuenca": "Mississippi",
    "zona": "mississippi",
-   "valor": 8.18,
+   "valor": 8.19,
    "unidad": "ft",
    "pais": "us",
-   "t_utc": "2026-10-24T09:30:00Z",
-   "edad_min": 28,
+   "t_utc": "2026-10-24T10:00:00Z",
+   "edad_min": 34,
    "nivel": 0,
    "sd": false,
    "umbrales": {
@@ -33,7 +33,7 @@
    "unidad": "ft",
    "pais": "us",
    "t_utc": "2026-10-24T09:30:00Z",
-   "edad_min": 28,
+   "edad_min": 64,
    "nivel": 0,
    "sd": false,
    "umbrales": {
@@ -51,11 +51,11 @@
    "nombre": "Cincinnati",
    "cuenca": "Ohio",
    "zona": "ohio",
-   "valor": 27.56,
+   "valor": 27.59,
    "unidad": "ft",
    "pais": "us",
-   "t_utc": "2026-10-24T09:00:00Z",
-   "edad_min": 58,
+   "t_utc": "2026-10-24T10:00:00Z",
+   "edad_min": 34,
    "nivel": 0,
    "sd": false,
    "umbrales": {
@@ -77,7 +77,7 @@
    "unidad": "ft",
    "pais": "us",
    "t_utc": "2026-10-24T09:45:00Z",
-   "edad_min": 13,
+   "edad_min": 49,
    "nivel": 0,
    "sd": false,
    "umbrales": {
@@ -95,11 +95,11 @@
    "nombre": "Albuquerque",
    "cuenca": "Rio Grande",
    "zona": "rio-grande",
-   "valor": 4.17,
+   "valor": 4.32,
    "unidad": "ft",
    "pais": "us",
-   "t_utc": "2026-10-24T09:15:00Z",
-   "edad_min": 43,
+   "t_utc": "2026-10-24T10:15:00Z",
+   "edad_min": 19,
    "nivel": 0,
    "sd": false,
    "umbrales": {

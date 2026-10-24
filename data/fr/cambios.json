@@ -3,7 +3,7 @@
   "estacion_id": "loire-orleans",
   "nivel_antes": 0,
   "nivel_despues": 0,
-  "sd": false,
+  "sd": true,
   "elevado_por_aviso": false
  }
 ]
