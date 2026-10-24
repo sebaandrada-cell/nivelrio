@@ -2,7 +2,7 @@
  "llobregat-sant-joan-despi": {
   "nivel": 0,
   "nivel_propio": 0,
-  "sd": false,
+  "sd": true,
   "ultimo_valor": 10.315,
   "ultimo_t_utc": "2026-10-24T10:30:00Z",
   "cnt_sobre": 0,
@@ -13,7 +13,7 @@
  "llobregat-sant-vicenc-dels-horts": {
   "nivel": 0,
   "nivel_propio": 0,
-  "sd": false,
+  "sd": true,
   "ultimo_valor": 6.72,
   "ultimo_t_utc": "2026-10-24T10:25:00Z",
   "cnt_sobre": 0,
@@ -24,7 +24,7 @@
  "llobregat-castellbisbal": {
   "nivel": 0,
   "nivel_propio": 0,
-  "sd": false,
+  "sd": true,
   "ultimo_valor": 8.775,
   "ultimo_t_utc": "2026-10-24T10:25:00Z",
   "cnt_sobre": 0,
@@ -35,7 +35,7 @@
  "llobregat-castellbell": {
   "nivel": 0,
   "nivel_propio": 0,
-  "sd": false,
+  "sd": true,
   "ultimo_valor": 10.68,
   "ultimo_t_utc": "2026-10-24T10:25:00Z",
   "cnt_sobre": 0,
@@ -46,7 +46,7 @@
  "llobregat-guardiola": {
   "nivel": 0,
   "nivel_propio": 0,
-  "sd": false,
+  "sd": true,
   "ultimo_valor": 7.67,
   "ultimo_t_utc": "2026-10-24T10:25:00Z",
   "cnt_sobre": 0,
@@ -58,8 +58,8 @@
   "nivel": 0,
   "nivel_propio": 0,
   "sd": false,
-  "ultimo_valor": 2.862,
-  "ultimo_t_utc": "2026-10-24T10:30:00Z",
+  "ultimo_valor": 2.854,
+  "ultimo_t_utc": "2026-10-24T11:45:00Z",
   "cnt_sobre": 0,
   "cnt_bajo": 0,
   "bajo_desde": null,
@@ -69,8 +69,8 @@
   "nivel": 0,
   "nivel_propio": 0,
   "sd": false,
-  "ultimo_valor": 2.384,
-  "ultimo_t_utc": "2026-10-24T10:30:00Z",
+  "ultimo_valor": 2.366,
+  "ultimo_t_utc": "2026-10-24T11:45:00Z",
   "cnt_sobre": 0,
   "cnt_bajo": 0,
   "bajo_desde": null,
@@ -79,7 +79,7 @@
  "anoia-sant-sadurni": {
   "nivel": 0,
   "nivel_propio": 0,
-  "sd": false,
+  "sd": true,
   "ultimo_valor": 0.877,
   "ultimo_t_utc": "2026-10-24T10:25:00Z",
   "cnt_sobre": 0,
@@ -90,7 +90,7 @@
  "anoia-martorell": {
   "nivel": 0,
   "nivel_propio": 0,
-  "sd": false,
+  "sd": true,
   "ultimo_valor": 0.968,
   "ultimo_t_utc": "2026-10-24T10:25:00Z",
   "cnt_sobre": 0,
@@ -101,7 +101,7 @@
  "besos-santa-coloma": {
   "nivel": 0,
   "nivel_propio": 0,
-  "sd": false,
+  "sd": true,
   "ultimo_valor": 4.548,
   "ultimo_t_utc": "2026-10-24T10:30:00Z",
   "cnt_sobre": 0,
@@ -112,7 +112,7 @@
  "ter-girona": {
   "nivel": 0,
   "nivel_propio": 0,
-  "sd": false,
+  "sd": true,
   "ultimo_valor": 3.677,
   "ultimo_t_utc": "2026-10-24T10:25:00Z",
   "cnt_sobre": 0,
@@ -123,7 +123,7 @@
  "ter-colomers": {
   "nivel": 0,
   "nivel_propio": 0,
-  "sd": false,
+  "sd": true,
   "ultimo_valor": 4.814,
   "ultimo_t_utc": "2026-10-24T10:25:00Z",
   "cnt_sobre": 0,
@@ -145,7 +145,7 @@
  "ter-torroella": {
   "nivel": 0,
   "nivel_propio": 0,
-  "sd": false,
+  "sd": true,
   "ultimo_valor": 6.007,
   "ultimo_t_utc": "2026-10-24T10:25:00Z",
   "cnt_sobre": 0,
@@ -156,7 +156,7 @@
  "fluvia-esponella": {
   "nivel": 0,
   "nivel_propio": 0,
-  "sd": false,
+  "sd": true,
   "ultimo_valor": 2.409,
   "ultimo_t_utc": "2026-10-24T10:30:00Z",
   "cnt_sobre": 0,
@@ -167,7 +167,7 @@
  "fluvia-olot": {
   "nivel": 0,
   "nivel_propio": 0,
-  "sd": false,
+  "sd": true,
   "ultimo_valor": 0.178,
   "ultimo_t_utc": "2026-10-24T10:25:00Z",
   "cnt_sobre": 0,
@@ -178,7 +178,7 @@
  "muga-pont-de-molins": {
   "nivel": 0,
   "nivel_propio": 0,
-  "sd": false,
+  "sd": true,
   "ultimo_valor": 0.207,
   "ultimo_t_utc": "2026-10-24T10:25:00Z",
   "cnt_sobre": 0,
@@ -189,7 +189,7 @@
  "muga-castello-d-empuries": {
   "nivel": 0,
   "nivel_propio": 0,
-  "sd": false,
+  "sd": true,
   "ultimo_valor": 0.507,
   "ultimo_t_utc": "2026-10-24T10:30:00Z",
   "cnt_sobre": 0,
@@ -200,7 +200,7 @@
  "muga-sant-llorenc": {
   "nivel": 0,
   "nivel_propio": 0,
-  "sd": false,
+  "sd": true,
   "ultimo_valor": 0.378,
   "ultimo_t_utc": "2026-10-24T10:30:00Z",
   "cnt_sobre": 0,
@@ -211,7 +211,7 @@
  "tordera-fogars-de-la-selva": {
   "nivel": 0,
   "nivel_propio": 0,
-  "sd": false,
+  "sd": true,
   "ultimo_valor": 3.08,
   "ultimo_t_utc": "2026-10-24T10:30:00Z",
   "cnt_sobre": 0,
@@ -222,7 +222,7 @@
  "tordera-sant-celoni": {
   "nivel": 0,
   "nivel_propio": 0,
-  "sd": false,
+  "sd": true,
   "ultimo_valor": 0.57,
   "ultimo_t_utc": "2026-10-24T10:25:00Z",
   "cnt_sobre": 0,
@@ -233,7 +233,7 @@
  "francoli-montblanc": {
   "nivel": 0,
   "nivel_propio": 0,
-  "sd": false,
+  "sd": true,
   "ultimo_valor": 0.149,
   "ultimo_t_utc": "2026-10-24T10:25:00Z",
   "cnt_sobre": 0,
@@ -255,7 +255,7 @@
  "gaia-vilabella": {
   "nivel": 0,
   "nivel_propio": 0,
-  "sd": false,
+  "sd": true,
   "ultimo_valor": 0.079,
   "ultimo_t_utc": "2026-10-24T10:30:00Z",
   "cnt_sobre": 0,
@@ -266,7 +266,7 @@
  "foix-castellet-i-la-gornal": {
   "nivel": 0,
   "nivel_propio": 0,
-  "sd": false,
+  "sd": true,
   "ultimo_valor": 0.183,
   "ultimo_t_utc": "2026-10-24T10:30:00Z",
   "cnt_sobre": 0,
@@ -277,7 +277,7 @@
  "turia-manises": {
   "nivel": 0,
   "nivel_propio": 0,
-  "sd": false,
+  "sd": true,
   "ultimo_valor": 2.8064688,
   "ultimo_t_utc": "2026-10-24T10:25:00Z",
   "cnt_sobre": 0,
@@ -288,7 +288,7 @@
  "turia-quart-de-poblet": {
   "nivel": 0,
   "nivel_propio": 0,
-  "sd": false,
+  "sd": true,
   "ultimo_valor": 0.0,
   "ultimo_t_utc": "2026-10-24T10:30:00Z",
   "cnt_sobre": 0,
@@ -299,7 +299,7 @@
  "turia-vilamarxant": {
   "nivel": 0,
   "nivel_propio": 0,
-  "sd": false,
+  "sd": true,
   "ultimo_valor": 5.076415999999999,
   "ultimo_t_utc": "2026-10-24T10:30:00Z",
   "cnt_sobre": 0,
@@ -310,7 +310,7 @@
  "turia-bugarra": {
   "nivel": 0,
   "nivel_propio": 0,
-  "sd": false,
+  "sd": true,
   "ultimo_valor": 3.7590470000000002,
   "ultimo_t_utc": "2026-10-24T10:30:00Z",
   "cnt_sobre": 0,
@@ -321,7 +321,7 @@
  "xuquer-algemesi": {
   "nivel": 0,
   "nivel_propio": 0,
-  "sd": false,
+  "sd": true,
   "ultimo_valor": 13.309675,
   "ultimo_t_utc": "2026-10-24T10:30:00Z",
   "cnt_sobre": 0,
@@ -332,7 +332,7 @@
  "xuquer-salida-de-tous": {
   "nivel": 0,
   "nivel_propio": 0,
-  "sd": false,
+  "sd": true,
   "ultimo_valor": 3.1137,
   "ultimo_t_utc": "2026-10-24T10:30:00Z",
   "cnt_sobre": 0,
@@ -343,7 +343,7 @@
  "poyo-n-iii": {
   "nivel": 0,
   "nivel_propio": 0,
-  "sd": false,
+  "sd": true,
   "ultimo_valor": 0.0,
   "ultimo_t_utc": "2026-10-24T10:25:00Z",
   "cnt_sobre": 0,

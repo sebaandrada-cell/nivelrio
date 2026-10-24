@@ -1,1 +1,198 @@
-[]
+[
+ {
+  "estacion_id": "llobregat-sant-joan-despi",
+  "nivel_antes": 0,
+  "nivel_despues": 0,
+  "sd": true,
+  "elevado_por_aviso": false
+ },
+ {
+  "estacion_id": "llobregat-sant-vicenc-dels-horts",
+  "nivel_antes": 0,
+  "nivel_despues": 0,
+  "sd": true,
+  "elevado_por_aviso": false
+ },
+ {
+  "estacion_id": "llobregat-castellbisbal",
+  "nivel_antes": 0,
+  "nivel_despues": 0,
+  "sd": true,
+  "elevado_por_aviso": false
+ },
+ {
+  "estacion_id": "llobregat-castellbell",
+  "nivel_antes": 0,
+  "nivel_despues": 0,
+  "sd": true,
+  "elevado_por_aviso": false
+ },
+ {
+  "estacion_id": "llobregat-guardiola",
+  "nivel_antes": 0,
+  "nivel_despues": 0,
+  "sd": true,
+  "elevado_por_aviso": false
+ },
+ {
+  "estacion_id": "anoia-sant-sadurni",
+  "nivel_antes": 0,
+  "nivel_despues": 0,
+  "sd": true,
+  "elevado_por_aviso": false
+ },
+ {
+  "estacion_id": "anoia-martorell",
+  "nivel_antes": 0,
+  "nivel_despues": 0,
+  "sd": true,
+  "elevado_por_aviso": false
+ },
+ {
+  "estacion_id": "besos-santa-coloma",
+  "nivel_antes": 0,
+  "nivel_despues": 0,
+  "sd": true,
+  "elevado_por_aviso": false
+ },
+ {
+  "estacion_id": "ter-girona",
+  "nivel_antes": 0,
+  "nivel_despues": 0,
+  "sd": true,
+  "elevado_por_aviso": false
+ },
+ {
+  "estacion_id": "ter-colomers",
+  "nivel_antes": 0,
+  "nivel_despues": 0,
+  "sd": true,
+  "elevado_por_aviso": false
+ },
+ {
+  "estacion_id": "ter-torroella",
+  "nivel_antes": 0,
+  "nivel_despues": 0,
+  "sd": true,
+  "elevado_por_aviso": false
+ },
+ {
+  "estacion_id": "fluvia-esponella",
+  "nivel_antes": 0,
+  "nivel_despues": 0,
+  "sd": true,
+  "elevado_por_aviso": false
+ },
+ {
+  "estacion_id": "fluvia-olot",
+  "nivel_antes": 0,
+  "nivel_despues": 0,
+  "sd": true,
+  "elevado_por_aviso": false
+ },
+ {
+  "estacion_id": "muga-pont-de-molins",
+  "nivel_antes": 0,
+  "nivel_despues": 0,
+  "sd": true,
+  "elevado_por_aviso": false
+ },
+ {
+  "estacion_id": "muga-castello-d-empuries",
+  "nivel_antes": 0,
+  "nivel_despues": 0,
+  "sd": true,
+  "elevado_por_aviso": false
+ },
+ {
+  "estacion_id": "muga-sant-llorenc",
+  "nivel_antes": 0,
+  "nivel_despues": 0,
+  "sd": true,
+  "elevado_por_aviso": false
+ },
+ {
+  "estacion_id": "tordera-fogars-de-la-selva",
+  "nivel_antes": 0,
+  "nivel_despues": 0,
+  "sd": true,
+  "elevado_por_aviso": false
+ },
+ {
+  "estacion_id": "tordera-sant-celoni",
+  "nivel_antes": 0,
+  "nivel_despues": 0,
+  "sd": true,
+  "elevado_por_aviso": false
+ },
+ {
+  "estacion_id": "francoli-montblanc",
+  "nivel_antes": 0,
+  "nivel_despues": 0,
+  "sd": true,
+  "elevado_por_aviso": false
+ },
+ {
+  "estacion_id": "gaia-vilabella",
+  "nivel_antes": 0,
+  "nivel_despues": 0,
+  "sd": true,
+  "elevado_por_aviso": false
+ },
+ {
+  "estacion_id": "foix-castellet-i-la-gornal",
+  "nivel_antes": 0,
+  "nivel_despues": 0,
+  "sd": true,
+  "elevado_por_aviso": false
+ },
+ {
+  "estacion_id": "turia-manises",
+  "nivel_antes": 0,
+  "nivel_despues": 0,
+  "sd": true,
+  "elevado_por_aviso": false
+ },
+ {
+  "estacion_id": "turia-quart-de-poblet",
+  "nivel_antes": 0,
+  "nivel_despues": 0,
+  "sd": true,
+  "elevado_por_aviso": false
+ },
+ {
+  "estacion_id": "turia-vilamarxant",
+  "nivel_antes": 0,
+  "nivel_despues": 0,
+  "sd": true,
+  "elevado_por_aviso": false
+ },
+ {
+  "estacion_id": "turia-bugarra",
+  "nivel_antes": 0,
+  "nivel_despues": 0,
+  "sd": true,
+  "elevado_por_aviso": false
+ },
+ {
+  "estacion_id": "xuquer-algemesi",
+  "nivel_antes": 0,
+  "nivel_despues": 0,
+  "sd": true,
+  "elevado_por_aviso": false
+ },
+ {
+  "estacion_id": "xuquer-salida-de-tous",
+  "nivel_antes": 0,
+  "nivel_despues": 0,
+  "sd": true,
+  "elevado_por_aviso": false
+ },
+ {
+  "estacion_id": "poyo-n-iii",
+  "nivel_antes": 0,
+  "nivel_despues": 0,
+  "sd": true,
+  "elevado_por_aviso": false
+ }
+]

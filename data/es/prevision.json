@@ -1,5 +1,5 @@
 {
- "generado_utc": "2026-10-24T09:53:20Z",
+ "generado_utc": "2026-10-24T11:53:00Z",
  "fuente": "Open-Meteo (CC BY 4.0)",
  "zonas": {
   "barcelona": [
@@ -33,13 +33,13 @@
    {
     "fecha": "2026-10-26",
     "mm": 0.0,
-    "prob": 0
+    "prob": 3
    }
   ],
   "girona": [
    {
     "fecha": "2026-10-24",
-    "mm": 4.2,
+    "mm": 4.1,
     "prob": 93
    },
    {
@@ -170,7 +170,7 @@
    "puede_llegar": null
   },
   "ter-girona": {
-   "lluvia_48h_mm": 4.2,
+   "lluvia_48h_mm": 4.1,
    "caudal": [
     0.0,
     0.0
@@ -178,7 +178,7 @@
    "puede_llegar": null
   },
   "ter-colomers": {
-   "lluvia_48h_mm": 0.6,
+   "lluvia_48h_mm": 0.7,
    "caudal": [
     9.16,
     13.66
@@ -194,7 +194,7 @@
    "puede_llegar": null
   },
   "ter-torroella": {
-   "lluvia_48h_mm": 1.0,
+   "lluvia_48h_mm": 0.9,
    "caudal": [
     0.09,
     0.45
@@ -226,7 +226,7 @@
    "puede_llegar": null
   },
   "muga-castello-d-empuries": {
-   "lluvia_48h_mm": 0.2,
+   "lluvia_48h_mm": 0.3,
    "caudal": [
     0.32,
     0.6
@@ -330,19 +330,13 @@
    "puede_llegar": null
   },
   "xuquer-salida-de-tous": {
-   "lluvia_48h_mm": 0.0,
-   "caudal": [
-    0.09,
-    0.1
-   ],
+   "lluvia_48h_mm": null,
+   "caudal": null,
    "puede_llegar": null
   },
   "poyo-n-iii": {
-   "lluvia_48h_mm": 0.1,
-   "caudal": [
-    0.21,
-    0.4
-   ],
+   "lluvia_48h_mm": null,
+   "caudal": null,
    "puede_llegar": null
   }
  }
