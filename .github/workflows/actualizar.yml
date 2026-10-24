@@ -1,0 +1,85 @@
+name: Actualizar datos multipaís
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+    inputs:
+      pais:
+        description: País cuyas estaciones se actualizarán (todos los ríos de ese país)
+        required: true
+        type: choice
+        default: todos
+        options:
+          - todos
+          - ar
+          - es
+          - us
+          - de
+          - fr
+          - gb
+          - pl
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: actualizar-datos-multipais
+  cancel-in-progress: false
+
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar código de multipaís
+        uses: actions/checkout@v4
+        with:
+          ref: multipais
+          fetch-depth: 0
+
+      - name: Preparar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Restaurar estado de actualización
+        uses: actions/cache/restore@v4
+        with:
+          path: data
+          key: datos-multipais-v2-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            datos-multipais-v2-
+            data-v2-
+
+      - name: Actualizar estaciones
+        id: actualizar
+        env:
+          PAIS: ${{ inputs.pais || 'todos' }}
+        run: python fuente/actualizar.py --pais "$PAIS"
+
+      - name: Guardar estado de actualización
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: data
+          key: datos-multipais-v2-${{ github.run_id }}-${{ github.run_attempt }}
+
+      - name: Publicar datos actualizados
+        if: steps.actualizar.outputs.publicar == 'true'
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add data
+          if git diff --cached --quiet; then
+            echo "No hay cambios de datos para publicar."
+            exit 0
+          fi
+          git commit -m "Actualizar datos hidrológicos"
+          git push origin HEAD:multipais
+
+      - name: Notificar cambios de nivel
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python fuente/notificar.py
