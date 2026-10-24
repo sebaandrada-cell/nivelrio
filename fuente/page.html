@@ -1727,7 +1727,7 @@ window.rpState = { range: 15, idx: null };
   window.addEventListener('resize', () => { const el = document.getElementById('corte'); if (el && el.clientWidth !== corteW) { corteW = el.clientWidth; drawCorte(); } });
 </script>
 
-<!-- Medición de visitas: Cloudflare Web Analytics y Microsoft Clarity.
+<!-- Medición de visitas: Cloudflare Web Analytics, Microsoft Clarity y Vercel Web Analytics.
      Solo se cargan en los dominios de apuratejose: una copia del proyecto en otro dominio no manda datos a estas cuentas,
      y la vista previa tampoco (así las pruebas no se mezclan con las visitas reales).
      Si copiás este proyecto, poné tus dominios y tus códigos acá. -->
@@ -1740,6 +1740,11 @@ window.rpState = { range: 15, idx: null };
   (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","yx6ja2m1y4");
 })();
 </script>
+<!-- Vercel Web Analytics -->
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
 <script>
 // ================= compartir =================
 // El texto sale de los mismos datos que muestra la página, así nunca dice algo distinto
